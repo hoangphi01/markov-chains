@@ -8,6 +8,12 @@ These notes cover discrete-time and continuous-time Markov chains at the graduat
 
 **Target audience:** PhD/Master students in Mathematics, Statistics, or related fields.
 
+## Read Online
+
+Browse the lessons at: **https://hoangphi01.github.io/markov-chains/**
+
+Static HTML pages with MathJax rendering -- no installation needed.
+
 ## Features
 
 - Bilingual format: Vietnamese explanations with English technical terms
@@ -15,6 +21,7 @@ These notes cover discrete-time and continuous-time Markov chains at the graduat
 - Color-coded theorem boxes (definitions, theorems, formulas, summaries)
 - Extensive worked examples with full computation steps
 - Exercises at the end of each chapter
+- Web version with 3-column layout (TOC, content, quick reference sidebar)
 
 ## Contents
 
@@ -51,17 +58,28 @@ Or upload to [Overleaf](https://www.overleaf.com) and set compiler to XeLaTeX.
 
 ```
 markov_chains_bilingual/
-├── main.tex                    # Master document
-├── main.pdf                    # Compiled output
-├── MARKOV_PLAN.md              # Detailed project plan & references
-├── README.md                   # This file
-└── chapters/
-    ├── ch4_discrete.tex        # Discrete-time Markov chains
-    ├── ch5_first_step.tex      # First step analysis
-    ├── ch6_classification.tex  # Classification of states
-    ├── ch7_limiting.tex        # Limiting & stationary distributions
-    ├── ch9_continuous.tex      # Continuous-time Markov chains
-    └── appendix_prob.tex       # Probability background
+├── main.tex                    # Master LaTeX document
+├── main.pdf                    # Compiled PDF (~77 pages)
+├── chapters/                   # LaTeX source chapters
+│   ├── ch4_discrete.tex
+│   ├── ch5_first_step.tex
+│   ├── ch6_classification.tex
+│   ├── ch7_limiting.tex
+│   ├── ch9_continuous.tex
+│   └── appendix_prob.tex
+├── docs/                       # Web lessons (GitHub Pages)
+│   ├── index.html              # Landing page
+│   ├── ch1.html - ch5.html     # Chapter pages
+│   ├── appendix.html           # Probability background
+│   ├── css/style.css           # 3-column layout
+│   ├── js/nav.js               # TOC navigation
+│   ├── _layouts/               # Jekyll layouts (for scaling)
+│   ├── _includes/              # Shared components (nav, sidebars)
+│   └── _chapter_template.html  # Template for new chapters
+├── CLAUDE.md                   # AI assistant context
+├── MARKOV_PLAN.md              # Project plan & references
+├── WEB_PLAN.md                 # Web conversion strategy
+└── README.md                   # This file
 ```
 
 ## References

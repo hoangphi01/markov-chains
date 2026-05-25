@@ -6,7 +6,7 @@ Bilingual Vietnamese-English rewrite of core Markov chain theory for PhD study a
 
 **Outputs:**
 - `main.pdf` (~90-100 pages target, compiled with XeLaTeX)
-- `web/` — static HTML lessons (3-column layout, MathJax)
+- `docs/` — static HTML lessons (3-column layout, MathJax)
 
 ---
 
@@ -27,14 +27,14 @@ Bilingual Vietnamese-English rewrite of core Markov chain theory for PhD study a
 
 | Chapter | HTML File | Status |
 |---------|-----------|--------|
-| Landing Page | `web/index.html` | DONE |
-| Ch 1: Discrete-Time MC | `web/ch1.html` | DONE |
-| Ch 2: First Step Analysis | `web/ch2.html` | DONE |
-| Ch 3: Classification | `web/ch3.html` | DONE |
-| Ch 4: Limiting Distributions | `web/ch4.html` | DONE |
-| Ch 5: Continuous-Time MC | `web/ch5.html` | DONE |
-| App A: Probability Background | `web/appendix.html` | DONE |
-| CSS + JS | `web/css/`, `web/js/` | DONE |
+| Landing Page | `docs/index.html` | DONE |
+| Ch 1: Discrete-Time MC | `docs/ch1.html` | DONE |
+| Ch 2: First Step Analysis | `docs/ch2.html` | DONE |
+| Ch 3: Classification | `docs/ch3.html` | DONE |
+| Ch 4: Limiting Distributions | `docs/ch4.html` | DONE |
+| Ch 5: Continuous-Time MC | `docs/ch5.html` | DONE |
+| App A: Probability Background | `docs/appendix.html` | DONE |
+| CSS + JS | `docs/css/`, `docs/js/` | DONE |
 
 **v2.0 Changes:**
 - Expanded from ~54 pages to ~90-100 pages

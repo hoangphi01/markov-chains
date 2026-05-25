@@ -26,7 +26,7 @@ On mobile (<768px): single column, TOC collapses to top nav, right sidebar moves
 ## File Structure
 
 ```
-web/
+docs/
   index.html          # Landing page with chapter list and overview
   ch1.html            # Discrete-Time Markov Chains (from ch4_discrete.tex)
   ch2.html            # First Step Analysis (from ch5_first_step.tex)
@@ -158,7 +158,7 @@ MathJax = {
 ## Jekyll Structure (for scaling)
 
 ```
-web/
+docs/
   _config.yml                 # Jekyll config, collections
   _layouts/
     default.html              # Base: <head>, MathJax, <body>
@@ -192,7 +192,7 @@ web/
 ### Local Development
 
 ```bash
-cd web/
+cd docs/
 gem install bundler
 bundle install
 bundle exec jekyll serve    # http://localhost:4000

@@ -7,7 +7,7 @@ Based on *Notes on Markov Chains* by Nicolas Privault (NTU, 2011).
 
 Two output workflows:
 1. **PDF** (primary): LaTeX source -> XeLaTeX -> `main.pdf` (~77 pages, 6 chapters)
-2. **Web** (secondary): LaTeX source -> static HTML lessons in `web/`
+2. **Web** (secondary): LaTeX source -> static HTML lessons in `docs/`
 
 ## File Structure
 
@@ -22,7 +22,7 @@ markov_chains_bilingual/
     ch7_limiting.tex          # Ch 4: Limiting and Stationary Distributions
     ch9_continuous.tex        # Ch 5: Continuous-Time Markov Chains
     appendix_prob.tex         # Appendix A: Probability Background
-  web/                        # Static HTML lessons (3-column layout, MathJax)
+  docs/                        # Static HTML lessons (3-column layout, MathJax)
     index.html                # Landing page
     ch1.html - ch5.html       # Chapter pages
     appendix.html             # Appendix page
