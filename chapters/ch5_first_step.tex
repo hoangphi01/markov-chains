@@ -1,0 +1,713 @@
+\chapter{Phân tích bước đầu tiên\\{\normalsize\textit{First Step Analysis}}}
+\label{ch:first-step}
+
+\textbf{Câu chuyện:} Hãy tưởng tượng bạn đang ở tầng 3 của một tòa nhà 5 tầng.
+Mỗi phút, bạn ngẫu nhiên đi lên hoặc xuống 1 tầng. Câu hỏi:
+``Xác suất bạn đến tầng trệt (tầng 0) trước khi lên mái nhà (tầng 5)?''
+và ``Trung bình mất bao lâu để bạn đến một trong hai?''
+
+Kỹ thuật \term{phân tích bước đầu tiên} trả lời cả hai câu hỏi bằng cách:
+``Nhìn bước đầu tiên --- bạn đi lên hay xuống? --- rồi từ vị trí mới, bài toán giống hệt nhưng nhỏ hơn.''
+
+\begin{tomtat}
+\textbf{Ý tưởng cốt lõi:} Điều kiện hóa theo bước đầu tiên $Z_1$, rồi dùng tính Markov
+để quy về bài toán cùng dạng. Kết quả: hệ phương trình tuyến tính --- giải là xong!
+\end{tomtat}
+
+% ============================================================================
+\section{Xác suất chạm (Hitting Probabilities)}
+\label{sec:hitting-prob}
+
+Cho chuỗi Markov $(Z_n)_{n \in \N}$ nhận giá trị trong không gian trạng thái hữu hạn
+$S = \{0, 1, \ldots, N\}$ với ma trận chuyển $P = [P_{k,l}]_{k,l \in S}$.
+
+\begin{dinhnghia}[(Thời gian chạm -- \en{Hitting time})]
+Cho $A \subseteq S$. \term{Thời gian chạm} (\en{hitting time}) tập $A$ được định nghĩa là:
+\[
+  T_A := \inf\{n \geq 0 : Z_n \in A\},
+\]
+tức là thời điểm đầu tiên chuỗi Markov rơi vào tập $A$.
+\end{dinhnghia}
+
+\begin{dinhnghia}[(Xác suất chạm -- \en{Hitting probability})]
+\term{Xác suất chạm} (\en{hitting probability}) trạng thái $l \in A$ xuất phát từ $k \in S$ là:
+\[
+  g_l(k) := \PP(Z_{T_A} = l \mid Z_0 = k), \qquad k \in S, \quad l \in A.
+\]
+Đây là xác suất mà chuỗi Markov sẽ đến trạng thái $l$ khi lần đầu tiên đi vào tập $A$,
+biết rằng ban đầu chuỗi ở trạng thái $k$.
+\end{dinhnghia}
+
+\begin{dinhnghia}[(Thời gian chạm trung bình -- \en{Mean hitting time})]
+\term{Thời gian chạm trung bình} (\en{mean hitting time}) tập $A$ xuất phát từ $k$ là:
+\[
+  h_A(k) := \E[T_A \mid Z_0 = k], \qquad k \in S.
+\]
+\end{dinhnghia}
+
+% --- First step analysis derivation ---
+\subsection{Phương pháp phân tích bước đầu tiên (First Step Analysis Method)}
+
+Ý tưởng chính của \term{phân tích bước đầu tiên} (\en{first step analysis}) là điều kiện hóa
+theo bước đầu tiên $Z_1$ của chuỗi Markov. Từ tính Markov và quy tắc xác suất toàn phần,
+ta có:
+\begin{align*}
+  g_l(k) &= \PP(Z_{T_A} = l \mid Z_0 = k)\\
+  &= \sum_{m \in S} \PP(Z_{T_A} = l \mid Z_1 = m,\; Z_0 = k)\,\PP(Z_1 = m \mid Z_0 = k)\\
+  &= \sum_{m \in S} P_{k,m}\, g_l(m), \qquad k \in S \setminus A.
+\end{align*}
+
+Với \term{điều kiện biên} (\en{boundary condition}): nếu $k \in A$ thì chuỗi đã ở trong $A$
+ngay tại $n = 0$, do đó:
+\[
+  g_l(k) = \ind_{\{k = l\}}, \qquad k \in A, \quad l \in A.
+\]
+
+\begin{congthuc}
+\textbf{Hệ phương trình phân tích bước đầu tiên cho xác suất chạm:}
+\[
+  \boxed{
+    g_l(k) = \sum_{m \in S} P_{k,m}\, g_l(m), \qquad k \in S \setminus A,
+  }
+\]
+với điều kiện biên $g_l(k) = \ind_{\{k = l\}}$ khi $k \in A$.
+\end{congthuc}
+
+\begin{tomtat}
+Phân tích bước đầu tiên biến bài toán tính xác suất chạm thành một hệ phương trình tuyến tính.
+Ta ``mở ra'' bước đầu tiên $Z_0 \to Z_1$, sau đó sử dụng tính Markov để quy bài toán
+về cùng dạng nhưng xuất phát từ trạng thái $Z_1$.
+\end{tomtat}
+
+% --- Absorbing set and matrix form ---
+\subsection{Tập hấp thụ và dạng ma trận (Absorbing Set and Matrix Form)}
+
+Ta nói $A$ là \term{tập hấp thụ} (\en{absorbing set}) nếu chuỗi Markov không thể rời khỏi $A$:
+\[
+  P_{k,l} = \ind_{\{k = l\}}, \qquad k, l \in A.
+\]
+Nghĩa là mọi trạng thái trong $A$ đều là \term{trạng thái hấp thụ} (\en{absorbing state}).
+
+Khi $A = \{r+1, r+2, \ldots, N\}$ là tập hấp thụ, ta có thể sắp xếp ma trận chuyển thành dạng khối:
+\begin{equation}\label{eq:block-matrix}
+  P = \begin{bmatrix} Q & R \\ \mathbf{0} & I \end{bmatrix},
+\end{equation}
+trong đó:
+\begin{itemize}[nosep]
+  \item $Q$ là ma trận $(r+1) \times (r+1)$ chứa xác suất chuyển giữa các trạng thái \emph{không hấp thụ}
+        (\en{transient states}) $S \setminus A = \{0, 1, \ldots, r\}$.
+  \item $R$ là ma trận $(r+1) \times (N-r)$ chứa xác suất chuyển từ trạng thái không hấp thụ sang trạng thái hấp thụ.
+  \item $I$ là ma trận đơn vị $(N-r) \times (N-r)$.
+  \item $\mathbf{0}$ là ma trận không $(N-r) \times (r+1)$.
+\end{itemize}
+
+Trong dạng ma trận, hệ phương trình cho xác suất chạm trở thành:
+
+\begin{congthuc}
+\textbf{Dạng ma trận:}
+\[
+  \mathbf{g}_l = Q\, \mathbf{g}_l + R\, \mathbf{e}_l,
+\]
+trong đó $\mathbf{g}_l = [g_l(0), g_l(1), \ldots, g_l(r)]^\top$ và $\mathbf{e}_l$ là vectơ đơn vị
+tương ứng với trạng thái $l$ trong $A$. Do đó:
+\[
+  \boxed{
+    \mathbf{g}_l = (I - Q)^{-1} R\, \mathbf{e}_l.
+  }
+\]
+\end{congthuc}
+
+Ngoài ra, tổng xác suất chạm tất cả các trạng thái trong $A$ thỏa mãn:
+\begin{equation}\label{eq:total-hitting}
+  1 = \PP(T_A = +\infty \mid Z_0 = k) + \sum_{l \in A} g_l(k), \qquad k \in S.
+\end{equation}
+Khi $A$ là tập hấp thụ và chuỗi chắc chắn bị hấp thụ, thì $\PP(T_A = +\infty \mid Z_0 = k) = 0$
+và $\sum_{l \in A} g_l(k) = 1$ với mọi $k \in S$.
+
+% --- Example 1: 4-state chain ---
+\begin{example}[Chuỗi 4 trạng thái -- \en{4-state chain}]
+\label{ex:4state-hitting}
+Xét chuỗi Markov trên $S = \{0, 1, 2, 3\}$ với các trạng thái hấp thụ $A = \{0, 3\}$.
+Ma trận chuyển có dạng:
+\[
+  P = \begin{bmatrix}
+    1 & 0 & 0 & 0 \\
+    P_{1,0} & P_{1,1} & P_{1,2} & P_{1,3} \\
+    P_{2,0} & P_{2,1} & P_{2,2} & P_{2,3} \\
+    0 & 0 & 0 & 1
+  \end{bmatrix}.
+\]
+
+Ta cần tính $g_0(1)$, $g_0(2)$: xác suất bị hấp thụ vào trạng thái $0$, xuất phát từ $1$ hoặc $2$.
+
+Áp dụng phân tích bước đầu tiên:
+\[
+  \begin{cases}
+    g_0(1) = P_{1,0} \cdot 1 + P_{1,1}\, g_0(1) + P_{1,2}\, g_0(2) + P_{1,3} \cdot 0,\\
+    g_0(2) = P_{2,0} \cdot 1 + P_{2,1}\, g_0(1) + P_{2,2}\, g_0(2) + P_{2,3} \cdot 0,
+  \end{cases}
+\]
+với điều kiện biên $g_0(0) = 1$ và $g_0(3) = 0$.
+
+Đây là hệ hai phương trình tuyến tính hai ẩn, có thể giải trực tiếp.
+
+Ví dụ cụ thể, nếu:
+\[
+  P = \begin{bmatrix}
+    1 & 0 & 0 & 0 \\
+    1/4 & 1/4 & 1/4 & 1/4 \\
+    1/4 & 1/4 & 1/4 & 1/4 \\
+    0 & 0 & 0 & 1
+  \end{bmatrix},
+\]
+thì hệ trở thành:
+\[
+  \begin{cases}
+    g_0(1) = \frac{1}{4} + \frac{1}{4}\, g_0(1) + \frac{1}{4}\, g_0(2),\\
+    g_0(2) = \frac{1}{4} + \frac{1}{4}\, g_0(1) + \frac{1}{4}\, g_0(2).
+  \end{cases}
+\]
+Từ tính đối xứng $g_0(1) = g_0(2)$, ta suy ra:
+\[
+  g_0(1) = \frac{1}{4} + \frac{1}{2}\, g_0(1)
+  \quad\Longrightarrow\quad
+  g_0(1) = g_0(2) = \frac{1}{2}.
+\]
+\end{example}
+
+% ============================================================================
+\section{Thời gian chạm và hấp thụ trung bình (Mean Hitting and Absorption Times)}
+\label{sec:mean-hitting}
+
+\begin{dinhnghia}[(Thời gian chạm trung bình -- \en{Mean hitting time})]
+Cho $A \subseteq S$. \term{Thời gian chạm trung bình} tập $A$ xuất phát từ $k$ là:
+\[
+  h_A(k) := \E[T_A \mid Z_0 = k], \qquad k \in S.
+\]
+\end{dinhnghia}
+
+Áp dụng phân tích bước đầu tiên tương tự như phần trước, nhưng lần này ta điều kiện hóa
+kỳ vọng thay vì xác suất:
+\begin{align*}
+  h_A(k) &= \E[T_A \mid Z_0 = k]\\
+  &= \E[1 + T_A \circ \theta_1 \mid Z_0 = k]\\
+  &= 1 + \sum_{l \in S} P_{k,l}\, h_A(l), \qquad k \in S \setminus A,
+\end{align*}
+trong đó $\theta_1$ là toán tử dịch chuyển thời gian (\en{time shift operator}).
+
+Điều kiện biên: $h_A(l) = 0$ với mọi $l \in A$ (nếu đã ở trong $A$ thì không cần thời gian nào).
+
+\begin{congthuc}
+\textbf{Hệ phương trình phân tích bước đầu tiên cho thời gian chạm trung bình:}
+\[
+  \boxed{
+    h_A(k) = 1 + \sum_{l \in S} P_{k,l}\, h_A(l), \qquad k \in S \setminus A,
+  }
+\]
+với điều kiện biên $h_A(l) = 0$ khi $l \in A$.
+\end{congthuc}
+
+Trong dạng ma trận, với $\mathbf{h}_A = [h_A(0), \ldots, h_A(r)]^\top$ chỉ chứa các trạng thái
+không hấp thụ:
+\begin{equation}\label{eq:mean-hitting-matrix}
+  \mathbf{h}_A = \mathbf{1} + Q\, \mathbf{h}_A
+  \quad\Longrightarrow\quad
+  \boxed{
+    \mathbf{h}_A = (I - Q)^{-1}\, \mathbf{1},
+  }
+\end{equation}
+trong đó $\mathbf{1}$ là vectơ toàn $1$.
+
+\begin{tomtat}
+Thời gian chạm trung bình thỏa mãn hệ phương trình tuyến tính tương tự xác suất chạm,
+chỉ khác ở vế phải: thêm $+1$ (đếm một bước) và điều kiện biên bằng $0$ tại $A$.
+Ma trận $(I - Q)^{-1}$ được gọi là \term{ma trận cơ bản} (\en{fundamental matrix}) của chuỗi Markov hấp thụ.
+\end{tomtat}
+
+% --- Two-state example ---
+\begin{example}[Chuỗi hai trạng thái -- \en{Two-state chain}]
+\label{ex:two-state-hitting}
+Xét chuỗi Markov hai trạng thái $S = \{0, 1\}$ với ma trận chuyển:
+\[
+  P = \begin{bmatrix} 1-a & a \\ b & 1-b \end{bmatrix}.
+\]
+
+\textbf{Tính $h_{\{0\}}(1)$:} Thời gian trung bình để đến trạng thái $0$ từ trạng thái $1$.
+
+Áp dụng phân tích bước đầu tiên với $A = \{0\}$:
+\[
+  h_{\{0\}}(1) = 1 + P_{1,0}\, h_{\{0\}}(0) + P_{1,1}\, h_{\{0\}}(1)
+  = 1 + b \cdot 0 + (1-b)\, h_{\{0\}}(1).
+\]
+Giải ra:
+\[
+  b\, h_{\{0\}}(1) = 1 \quad\Longrightarrow\quad h_{\{0\}}(1) = \frac{1}{b}.
+\]
+
+Tương tự, $h_{\{1\}}(0) = \dfrac{1}{a}$.
+\end{example}
+
+% --- Example 2: Chain with alpha, beta ---
+\begin{example}[Chuỗi với tham số $\alpha$, $\beta$ -- \en{Chain with parameters $\alpha$, $\beta$}]
+\label{ex:alpha-beta-hitting}
+Xét chuỗi Markov trên $S = \{0, 1, 2, 3\}$ với trạng thái hấp thụ $A = \{3\}$ và ma trận chuyển:
+\[
+  P = \begin{bmatrix}
+    1 - \beta & \beta & 0 & 0\\
+    0 & 1 - \beta & \beta & 0\\
+    0 & 0 & 1 - \beta & \beta\\
+    0 & 0 & 0 & 1
+  \end{bmatrix}.
+\]
+Ta cần tính thời gian trung bình để đến trạng thái $3$.
+
+Hệ phương trình phân tích bước đầu tiên:
+\[
+  \begin{cases}
+    h_3(0) = 1 + (1-\beta)\, h_3(0) + \beta\, h_3(1),\\
+    h_3(1) = 1 + (1-\beta)\, h_3(1) + \beta\, h_3(2),\\
+    h_3(2) = 1 + (1-\beta)\, h_3(2) + \beta \cdot 0.
+  \end{cases}
+\]
+
+Từ phương trình thứ ba: $\beta\, h_3(2) = 1$, suy ra $h_3(2) = \dfrac{1}{\beta}$.
+
+Thay vào phương trình thứ hai:
+$\beta\, h_3(1) = 1 + \beta \cdot \dfrac{1}{\beta} = 2$, suy ra $h_3(1) = \dfrac{2}{\beta}$.
+
+Thay vào phương trình thứ nhất:
+$\beta\, h_3(0) = 1 + \beta \cdot \dfrac{2}{\beta} = 3$, suy ra $h_3(0) = \dfrac{3}{\beta}$.
+
+Tổng quát hơn, với chuỗi ``sinh--tử'' (\en{birth chain}) tuyến tính đi từ $0$ đến $N$,
+ta có $h_{\{N\}}(k) = \dfrac{N - k}{\beta}$.
+\end{example}
+
+% --- Generalization ---
+\subsection{Tổng quát hóa (Generalization)}
+
+Phương pháp phân tích bước đầu tiên có thể mở rộng để tính:
+\[
+  h_A(k) = \E\!\left[\sum_{i=0}^{T_A - 1} f(X_i) \;\middle|\; X_0 = k\right],
+\]
+trong đó $f : S \to \R$ là một hàm cho trước. Khi $f \equiv 1$, ta thu được thời gian chạm trung bình.
+
+Hệ phương trình tương ứng:
+\begin{equation}\label{eq:generalized-hitting}
+  h_A(k) = f(k) + \sum_{l \in S} P_{k,l}\, h_A(l), \qquad k \in S \setminus A,
+\end{equation}
+với điều kiện biên $h_A(l) = 0$ khi $l \in A$.
+
+Trường hợp đặc biệt khi $A = \{m\}$ chỉ gồm một trạng thái:
+\[
+  h_{\{m\}}(k) = 1 + \sum_{l \neq m} P_{k,l}\, h_{\{m\}}(l), \qquad k \neq m.
+\]
+
+% ============================================================================
+\section{Thời gian quay lại lần đầu (First Return Times)}
+\label{sec:first-return}
+
+Có sự khác biệt quan trọng giữa \term{thời gian chạm} và \term{thời gian quay lại lần đầu}:
+thời gian chạm cho phép $n = 0$ (tức nếu đã ở $j$ thì $T_{\{j\}} = 0$),
+còn thời gian quay lại yêu cầu $n \geq 1$ (phải rời khỏi rồi quay lại).
+
+\begin{dinhnghia}[(Thời gian quay lại lần đầu -- \en{First return time})]
+\term{Thời gian quay lại lần đầu} trạng thái $j$ là:
+\[
+  \tau_j := \inf\{n \geq 1 : X_n = j\}.
+\]
+Lưu ý: $n \geq 1$, không phải $n \geq 0$.
+\end{dinhnghia}
+
+\begin{dinhnghia}[(Xác suất quay lại -- \en{Return probability})]
+\term{Xác suất quay lại} trạng thái $j$ từ trạng thái $i$ là:
+\[
+  p_{ij} := \PP(\tau_j < \infty \mid X_0 = i).
+\]
+Khi $i = j$, đại lượng $p_{jj}$ là xác suất quay lại chính trạng thái $j$.
+\end{dinhnghia}
+
+\begin{dinhnghia}[(Phân phối thời gian quay lại -- \en{First return distribution})]
+Xác suất quay lại trạng thái $j$ sau đúng $n$ bước là:
+\[
+  f_{ij}^{(n)} := \PP(\tau_j = n \mid X_0 = i), \qquad n \geq 1.
+\]
+\end{dinhnghia}
+
+Tổng xác suất quay lại: $p_{ij} = \sum_{n=1}^{\infty} f_{ij}^{(n)}$.
+
+\begin{dinhly}[(Quan hệ giữa $P_{i,i}^n$ và $f_{ii}^{(n)}$)]
+\label{thm:Pn-fn-relation}
+Xác suất chuyển $n$ bước quay lại trạng thái $i$ có thể phân tách theo thời gian quay lại lần đầu:
+\begin{equation}\label{eq:Pn-fn}
+  P_{i,i}^{(n)} = \sum_{k=1}^{n} f_{ii}^{(k)}\, P_{i,i}^{(n-k)}, \qquad n \geq 1,
+\end{equation}
+với quy ước $P_{i,i}^{(0)} = 1$.
+\end{dinhly}
+
+\textbf{Chứng minh.}
+Ta phân hoạch sự kiện $\{X_n = i\}$ theo thời điểm quay lại lần đầu $\tau_i = k$:
+\begin{align*}
+  \PP(X_n = i \mid X_0 = i)
+  &= \sum_{k=1}^{n} \PP(X_n = i \mid \tau_i = k,\; X_0 = i)\,\PP(\tau_i = k \mid X_0 = i)\\
+  &= \sum_{k=1}^{n} P_{i,i}^{(n-k)}\, f_{ii}^{(k)}.
+\end{align*}
+\hfill$\square$
+
+% --- Mean return time ---
+\subsection{Thời gian quay lại trung bình (Mean Return Time)}
+
+\begin{dinhnghia}[(Thời gian quay lại trung bình -- \en{Mean return time})]
+\[
+  \mu_j(i) := \E[\tau_j \mid X_0 = i].
+\]
+Khi $i = j$, ta ký hiệu $\mu_j := \mu_j(j) = \E[\tau_j \mid X_0 = j]$.
+\end{dinhnghia}
+
+Áp dụng phân tích bước đầu tiên:
+
+\begin{congthuc}
+\textbf{Thời gian quay lại trung bình:}
+\[
+  \boxed{
+    \mu_j(i) = 1 + \sum_{l \neq j} P_{i,l}\, \mu_j(l), \qquad i \in S.
+  }
+\]
+\end{congthuc}
+
+\begin{example}[Chuỗi hai trạng thái -- thời gian quay lại]
+\label{ex:two-state-return}
+Với chuỗi hai trạng thái $S = \{0,1\}$ và ma trận chuyển
+$P = \begin{bsmallmatrix} 1-a & a \\ b & 1-b \end{bsmallmatrix}$:
+
+\textbf{Tính $\mu_0(0)$:} Thời gian quay lại trung bình trạng thái $0$, xuất phát từ $0$.
+\[
+  \mu_0(0) = 1 + P_{0,1}\, \mu_0(1) = 1 + a\, \mu_0(1).
+\]
+Tiếp tục:
+\[
+  \mu_0(1) = 1 + P_{1,1}\, \mu_0(1) = 1 + (1-b)\, \mu_0(1)
+  \quad\Longrightarrow\quad
+  \mu_0(1) = \frac{1}{b}.
+\]
+Do đó:
+\[
+  \mu_0(0) = 1 + \frac{a}{b} = \frac{a + b}{b}.
+\]
+
+Tương tự:
+\[
+  \mu_1(1) = \frac{a + b}{a}, \qquad
+  \mu_1(0) = \frac{1}{a}, \qquad
+  \mu_0(1) = \frac{1}{b}.
+\]
+
+\begin{tomtat}
+Lưu ý mối liên hệ với phân phối giới hạn (Chương~\ref{ch:discrete}):
+\[
+  \pi_0 = \frac{b}{a+b} = \frac{1}{\mu_0(0)}, \qquad
+  \pi_1 = \frac{a}{a+b} = \frac{1}{\mu_1(1)}.
+\]
+Đây không phải sự trùng hợp! Với chuỗi Markov \term{ergodic}, phân phối dừng
+thỏa mãn $\pi_j = 1/\mu_j$ (\en{ergodic theorem}).
+\end{tomtat}
+\end{example}
+
+% ============================================================================
+\section{Số lần quay lại (Number of Returns)}
+\label{sec:number-returns}
+
+\begin{dinhnghia}[(Số lần thăm -- \en{Number of visits})]
+Số lần chuỗi Markov thăm trạng thái $i$ (không kể thời điểm $n=0$) là:
+\[
+  R_i := \sum_{n=1}^{\infty} \ind_{\{X_n = i\}}.
+\]
+\end{dinhnghia}
+
+\begin{dinhly}[(Phân phối số lần thăm)]
+\label{thm:num-visits}
+Với $m \geq 1$:
+\begin{equation}\label{eq:num-visits}
+  \PP(R_j = m \mid X_0 = i) = p_{ij}(1 - p_{jj})(p_{jj})^{m-1},
+\end{equation}
+và:
+\[
+  \PP(R_j = 0 \mid X_0 = i) = 1 - p_{ij}.
+\]
+\end{dinhly}
+
+\textbf{Chứng minh.}
+Để thăm trạng thái $j$ đúng $m$ lần:
+\begin{enumerate}[nosep]
+  \item Trước tiên, chuỗi phải đến $j$ lần đầu (xác suất $p_{ij}$).
+  \item Sau đó, quay lại $j$ thêm $m-1$ lần nữa (mỗi lần xác suất $p_{jj}$).
+  \item Cuối cùng, không quay lại $j$ nữa (xác suất $1 - p_{jj}$).
+\end{enumerate}
+Do tính Markov, các sự kiện này độc lập, nên:
+\[
+  \PP(R_j = m \mid X_0 = i) = p_{ij} \cdot (p_{jj})^{m-1} \cdot (1 - p_{jj}).
+\]
+\hfill$\square$
+
+Đây chính là \term{phân phối hình học} (\en{geometric distribution}) trên $\{0, 1, 2, \ldots\}$.
+
+\begin{dinhly}[(Trường hợp $p_{jj} = 1$)]
+Nếu $p_{jj} = 1$ (chuỗi chắc chắn quay lại $j$), thì:
+\[
+  \PP(R_j = \infty \mid X_0 = j) = 1.
+\]
+Ngược lại, nếu $p_{jj} < 1$, thì $\PP(R_j < \infty \mid X_0 = j) = 1$.
+\end{dinhly}
+
+\begin{congthuc}
+\textbf{Kỳ vọng số lần thăm:}
+\[
+  \boxed{
+    \E[R_j \mid X_0 = i] = \frac{p_{ij}}{1 - p_{jj}},
+  }
+\]
+khi $p_{jj} < 1$.
+\end{congthuc}
+
+\textbf{Chứng minh.}
+\begin{align*}
+  \E[R_j \mid X_0 = i]
+  &= \sum_{m=1}^{\infty} m\, p_{ij}(1-p_{jj})(p_{jj})^{m-1}
+  = p_{ij}(1-p_{jj}) \sum_{m=1}^{\infty} m\, (p_{jj})^{m-1}\\
+  &= p_{ij}(1-p_{jj}) \cdot \frac{1}{(1-p_{jj})^2}
+  = \frac{p_{ij}}{1 - p_{jj}}.
+\end{align*}
+\hfill$\square$
+
+\begin{tomtat}
+Nếu trạng thái $j$ là \term{thoáng qua} (\en{transient}), tức $p_{jj} < 1$, thì số lần thăm
+$R_j$ là hữu hạn hầu chắc chắn và có phân phối hình học.
+Nếu $j$ là \term{hồi quy} (\en{recurrent}), tức $p_{jj} = 1$, thì chuỗi quay lại $j$ vô hạn lần.
+\end{tomtat}
+
+% --- Maze problem ---
+\begin{example}[Bài toán mê cung: Cá trong bể 9 ngăn -- \en{Maze problem: Fish in 9-compartment aquarium}]
+\label{ex:fish-maze}
+Xét một con cá bơi trong bể có $9$ ngăn xếp thành lưới $3 \times 3$, đánh số từ $1$ đến $9$.
+Tại mỗi bước, cá di chuyển ngẫu nhiên đều sang một ngăn kề (chia sẻ cạnh chung).
+
+Đây là chuỗi Markov trên $S = \{1, 2, \ldots, 9\}$. Ta có thể áp dụng phân tích bước đầu tiên
+để tính:
+\begin{itemize}[nosep]
+  \item Xác suất cá đến ngăn thức ăn (ví dụ ngăn $9$) trước khi bị bắt (ví dụ ngăn $1$).
+  \item Thời gian trung bình để cá đến một ngăn cho trước.
+  \item Số lần trung bình cá thăm mỗi ngăn trước khi bị hấp thụ.
+\end{itemize}
+
+Ví dụ, nếu ngăn $1$ và ngăn $9$ là hấp thụ, ta đặt $A = \{1, 9\}$ và giải hệ phương trình
+tuyến tính $7 \times 7$ cho các trạng thái còn lại $\{2, 3, 4, 5, 6, 7, 8\}$.
+
+Ma trận chuyển được xây dựng từ cấu trúc kề của lưới: mỗi ngăn góc có $2$ ngăn kề,
+mỗi ngăn cạnh có $3$ ngăn kề, và ngăn trung tâm có $4$ ngăn kề.
+\end{example}
+
+% ============================================================================
+\section{Tổng kết chương (Chapter Summary)}
+\label{sec:ch5-summary}
+
+\begin{tomtat}
+\textbf{Phân tích bước đầu tiên} (\en{first step analysis}) là kỹ thuật quan trọng nhất
+để giải các bài toán về chuỗi Markov hữu hạn. Ý tưởng cốt lõi:
+\emph{điều kiện hóa theo bước đầu tiên $Z_1$, rồi dùng tính Markov để quy về bài toán cùng dạng.}
+
+\medskip
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Đại lượng} & \textbf{Phương trình} & \textbf{Điều kiện biên} \\
+\hline
+Xác suất chạm $g_l(k)$ &
+$g_l(k) = \displaystyle\sum_m P_{k,m}\, g_l(m)$ &
+$g_l(k) = \ind_{\{k=l\}}$, $k \in A$ \\
+\hline
+Thời gian chạm TB $h_A(k)$ &
+$h_A(k) = 1 + \displaystyle\sum_l P_{k,l}\, h_A(l)$ &
+$h_A(l) = 0$, $l \in A$ \\
+\hline
+Thời gian quay lại TB $\mu_j(i)$ &
+$\mu_j(i) = 1 + \displaystyle\sum_{l \neq j} P_{i,l}\, \mu_j(l)$ &
+--- \\
+\hline
+\end{tabular}
+\end{center}
+
+\medskip
+Dạng ma trận cho chuỗi hấp thụ $P = \begin{bsmallmatrix} Q & R \\ 0 & I \end{bsmallmatrix}$:
+\[
+  \mathbf{g}_l = (I-Q)^{-1} R\, \mathbf{e}_l, \qquad
+  \mathbf{h}_A = (I-Q)^{-1}\, \mathbf{1}.
+\]
+\end{tomtat}
+
+% ============================================================================
+\section{Bài toán con bạc -- Gambler's Ruin}
+\label{sec:gamblers-ruin}
+
+\textbf{Câu chuyện:} Một người chơi bắt đầu với $i$ đô la. Mỗi ván, anh ta thắng \$1 (xác suất $p$)
+hoặc thua \$1 (xác suất $q = 1-p$). Trò chơi dừng khi cháy túi ($0$ đô la) hoặc đạt mục tiêu ($N$ đô la).
+
+Đây là bài toán kinh điển nhất của phân tích bước đầu tiên.
+
+\subsection{Xác suất phá sản (Ruin Probability)}
+
+Đặt $g(i) = \PP(\text{đến } N \text{ trước } 0 \mid Z_0 = i)$ = xác suất thắng.
+
+Phân tích bước đầu tiên:
+\[
+  g(i) = p\, g(i+1) + q\, g(i-1), \qquad 1 \leq i \leq N-1,
+\]
+với $g(0) = 0$ (cháy túi = thua) và $g(N) = 1$ (đạt mục tiêu = thắng).
+
+\textbf{Giải phương trình:} Viết lại: $p[g(i+1) - g(i)] = q[g(i) - g(i-1)]$.
+
+Đặt $d_i = g(i) - g(i-1)$. Ta có $d_{i+1} = (q/p)\, d_i$, suy ra:
+\[
+  d_k = d_1 \left(\frac{q}{p}\right)^{k-1}, \qquad k \geq 1.
+\]
+
+Từ $g(N) - g(0) = \sum_{k=1}^{N} d_k = 1$:
+
+\begin{congthuc}
+\textbf{Xác suất thắng trong bài toán con bạc:}
+
+\textbf{Trường hợp $p \neq q$} (đặt $\rho = q/p$):
+\begin{equation}\label{eq:gambler-win}
+  g(i) = \frac{1 - \rho^i}{1 - \rho^N}, \qquad 0 \leq i \leq N.
+\end{equation}
+
+\textbf{Trường hợp $p = q = 1/2$} (trò chơi ``công bằng''):
+\begin{equation}\label{eq:gambler-fair}
+  g(i) = \frac{i}{N}.
+\end{equation}
+\end{congthuc}
+
+\begin{example}[Con bạc với \$3, mục tiêu \$5]
+$N = 5$, $i = 3$, $p = 0.4$ (bất lợi), $\rho = q/p = 0.6/0.4 = 1.5$.
+\[
+  g(3) = \frac{1 - 1.5^3}{1 - 1.5^5} = \frac{1 - 3.375}{1 - 7.594} = \frac{-2.375}{-6.594} \approx 0.360.
+\]
+Chỉ $36\%$ cơ hội thắng! So với trò chơi công bằng: $g(3) = 3/5 = 60\%$.
+\end{example}
+
+\subsection{Thời gian chơi trung bình (Expected Duration)}
+
+Đặt $h(i) = \E[T \mid Z_0 = i]$ = thời gian trung bình cho đến khi dừng.
+
+Phân tích bước đầu tiên:
+\[
+  h(i) = 1 + p\, h(i+1) + q\, h(i-1), \qquad 1 \leq i \leq N-1,
+\]
+với $h(0) = h(N) = 0$.
+
+\textbf{Nghiệm cho $p = q = 1/2$:}
+\begin{equation}\label{eq:gambler-time-fair}
+  h(i) = i(N - i).
+\end{equation}
+
+\textbf{Nghiệm cho $p \neq q$:}
+\begin{equation}\label{eq:gambler-time-biased}
+  h(i) = \frac{1}{q - p}\left[i - N \cdot \frac{1 - \rho^i}{1 - \rho^N}\right], \qquad \rho = q/p.
+\end{equation}
+
+\begin{example}[Thời gian chơi -- trò chơi công bằng]
+$N = 10$, $p = q = 1/2$, xuất phát $i = 5$:
+\[
+  h(5) = 5 \times (10 - 5) = 25 \text{ ván}.
+\]
+Xuất phát $i = 1$: $h(1) = 1 \times 9 = 9$ ván.
+Xuất phát $i = 9$: $h(9) = 9 \times 1 = 9$ ván.
+
+Trò chơi kéo dài nhất khi xuất phát ở giữa!
+\end{example}
+
+\begin{tomtat}
+Bài toán con bạc cho thấy sức mạnh của phân tích bước đầu tiên:
+\begin{itemize}[nosep]
+  \item Xác suất thắng phụ thuộc vào $\rho = q/p$ và vị trí ban đầu.
+  \item Nếu $p < 1/2$ (bất lợi), xác suất phá sản rất cao khi $N$ lớn: $g(i) \to 0$.
+  \item Trò chơi ``công bằng'' ($p = 1/2$): xác suất thắng tỷ lệ với vốn ban đầu.
+  \item Đây cũng là mô hình cho bước đi ngẫu nhiên với biên hấp thụ.
+\end{itemize}
+\end{tomtat}
+
+% ============================================================================
+\section{Bài tập (Exercises)}
+\label{sec:ch5-exercises}
+
+\begin{exercise}
+Xét chuỗi Markov trên $S = \{0, 1, 2, 3, 4\}$ với các trạng thái hấp thụ $A = \{0, 4\}$
+và ma trận chuyển:
+\[
+  P = \begin{bmatrix}
+    1 & 0 & 0 & 0 & 0\\
+    1/3 & 0 & 2/3 & 0 & 0\\
+    0 & 1/2 & 0 & 1/2 & 0\\
+    0 & 0 & 1/3 & 0 & 2/3\\
+    0 & 0 & 0 & 0 & 1
+  \end{bmatrix}.
+\]
+\begin{enumerate}[label=(\alph*)]
+  \item Tính xác suất bị hấp thụ vào trạng thái $0$, xuất phát từ mỗi trạng thái $k = 1, 2, 3$.
+  \item Tính thời gian hấp thụ trung bình $h_A(k)$ với $k = 1, 2, 3$.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+Cho chuỗi Markov hai trạng thái với ma trận chuyển
+$P = \begin{bsmallmatrix} 1-a & a \\ b & 1-b \end{bsmallmatrix}$,
+trong đó $a, b \in (0,1)$.
+\begin{enumerate}[label=(\alph*)]
+  \item Chứng minh rằng $\mu_0(0) = (a+b)/b$ và $\mu_1(1) = (a+b)/a$.
+  \item Xác minh rằng $\pi_j = 1/\mu_j(j)$ với phân phối dừng $\pi$ đã tìm ở Chương~\ref{ch:discrete}.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+Một con chuột ở trong mê cung gồm $5$ phòng $\{1, 2, 3, 4, 5\}$, xếp thành hàng ngang.
+Tại mỗi bước, chuột di chuyển sang phòng kề bên trái hoặc bên phải với xác suất bằng nhau.
+Phòng $1$ có phô mai và phòng $5$ có bẫy (cả hai đều là trạng thái hấp thụ).
+\begin{enumerate}[label=(\alph*)]
+  \item Viết ma trận chuyển.
+  \item Tính xác suất chuột đến phô mai trước bẫy, xuất phát từ phòng $k = 2, 3, 4$.
+  \item Tính thời gian trung bình để chuột bị hấp thụ, xuất phát từ phòng $3$.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+Cho chuỗi Markov trên $S = \{0, 1, 2\}$ với ma trận chuyển:
+\[
+  P = \begin{bmatrix}
+    0 & 1 & 0\\
+    1/4 & 1/2 & 1/4\\
+    0 & 1 & 0
+  \end{bmatrix}.
+\]
+\begin{enumerate}[label=(\alph*)]
+  \item Tính $p_{00}$, $p_{11}$, $p_{22}$ (xác suất quay lại).
+  \item Tính $\mu_0(0)$, $\mu_1(1)$, $\mu_2(2)$ (thời gian quay lại trung bình).
+  \item Tính $\E[R_1 \mid X_0 = 0]$ (kỳ vọng số lần thăm trạng thái $1$ xuất phát từ $0$).
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+Chứng minh công thức \eqref{eq:Pn-fn}:
+\[
+  P_{i,i}^{(n)} = \sum_{k=1}^{n} f_{ii}^{(k)}\, P_{i,i}^{(n-k)}, \qquad n \geq 1,
+\]
+bằng cách phân hoạch sự kiện $\{X_n = i\}$ theo giá trị của $\tau_i$.
+\end{exercise}
+
+\begin{exercise}
+Xét bể cá $9$ ngăn (Ví dụ~\ref{ex:fish-maze}). Giả sử cá xuất phát ở ngăn $5$ (trung tâm),
+ngăn $1$ có thức ăn (hấp thụ) và ngăn $9$ là bẫy (hấp thụ).
+\begin{enumerate}[label=(\alph*)]
+  \item Viết ma trận chuyển $9 \times 9$.
+  \item Xác định ma trận $Q$ (phần không hấp thụ) và $R$.
+  \item Tính (hoặc thiết lập hệ phương trình) xác suất cá đến thức ăn trước bẫy.
+\end{enumerate}
+\end{exercise}

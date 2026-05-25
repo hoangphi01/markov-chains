@@ -1,0 +1,446 @@
+\chapter{Chuỗi Markov thời gian rời rạc\\{\normalsize\textit{Discrete-Time Markov Chains}}}
+\label{ch:discrete}
+
+% ============================================================================
+\section{Tại sao chuỗi Markov quan trọng? (Why Markov Chains Matter)}
+\label{sec:why-markov}
+
+\textbf{Câu chuyện:} Hãy tưởng tượng bạn đang chơi cờ tỷ phú (Monopoly).
+Bạn đang ở ô ``Nhà ga''. Bạn sẽ đi đâu tiếp theo?
+Điều đó chỉ phụ thuộc vào ô hiện tại và kết quả gieo xúc xắc ---
+không quan trọng bạn đã đi qua những ô nào trước đó.
+Đây chính là ý tưởng cốt lõi của chuỗi Markov: \textbf{tương lai chỉ phụ thuộc hiện tại, không phụ thuộc quá khứ}.
+
+\textbf{Ứng dụng thực tế:}
+\begin{itemize}[nosep]
+  \item \textbf{Thời tiết:} Ngày mai mưa hay nắng chỉ phụ thuộc hôm nay, không phụ thuộc tuần trước.
+  \item \textbf{Xếp hạng Google (PageRank):} Người lướt web ``nhảy'' ngẫu nhiên giữa các trang.
+  \item \textbf{Tài chính:} Giá cổ phiếu ngày mai phụ thuộc giá hôm nay (mô hình đơn giản).
+  \item \textbf{Sinh học:} Kích thước quần thể thế hệ sau phụ thuộc thế hệ hiện tại.
+  \item \textbf{Truyền thông:} Xếp hạng tín dụng năm sau phụ thuộc xếp hạng năm nay.
+\end{itemize}
+
+% ============================================================================
+\section{Tính chất Markov (Markov Property)}
+\label{sec:markov-property}
+
+\textbf{Câu chuyện:} Hãy tưởng tượng một con kiến trên bàn cờ. Con kiến chỉ biết ô nó đang đứng.
+Nó không nhớ đã đi qua bao nhiêu ô, cũng không nhớ con đường đã đi.
+Quyết định bước tiếp theo chỉ dựa vào vị trí hiện tại --- đây là ``con kiến Markov''.
+
+\begin{dinhnghia}[(Tính chất Markov -- \en{Markov property})]
+Một \term{quá trình ngẫu nhiên} (\en{stochastic process}) $(Z_n)_{n\in\N}$ nhận giá trị trong $\Z$
+được gọi là \term{Markov}, hay có \term{tính chất Markov}, nếu với mọi $n \geq 1$,
+phân phối xác suất của $Z_{n+1}$ chỉ được xác định bởi trạng thái $Z_n$ tại thời điểm $n$,
+và không phụ thuộc vào các giá trị quá khứ $Z_k$ với $k \leq n-1$.
+
+Nói cách khác, với mọi $n \geq 1$ và mọi $j, i_n, \ldots, i_1 \in \Z$:
+\[
+  \PP(Z_{n+1} = j \mid Z_n = i_n,\; Z_{n-1} = i_{n-1},\; \ldots,\; Z_0 = i_0)
+  = \PP(Z_{n+1} = j \mid Z_n = i_n).
+\]
+\end{dinhnghia}
+
+\begin{tomtat}
+Nói đơn giản: nếu bạn biết trạng thái hiện tại $Z_n$,
+thì biết thêm quá khứ $(Z_0, Z_1, \ldots, Z_{n-1})$ cũng không giúp dự đoán tương lai $Z_{n+1}$ tốt hơn.
+Đây chính là tính chất ``không nhớ'' (\en{memoryless property}).
+
+Ví dụ con kiến: biết con kiến đang ở ô $A$ là đủ. Biết thêm ``nó đi từ $C \to B \to A$'' không thay đổi xác suất bước tiếp theo.
+\end{tomtat}
+
+Đặc biệt ta có:
+\[
+  \PP(Z_{n+1} = j \mid Z_n = i_n,\; Z_{n-1} = i_{n-1}) = \PP(Z_{n+1} = j \mid Z_n = i_n),
+\]
+và:
+\[
+  \PP(Z_2 = j \mid Z_1 = i_1,\; Z_0 = i_0) = \PP(Z_2 = j \mid Z_1 = i_1).
+\]
+
+Mặt khác, các \term{xác suất chuyển bậc một} (\en{first order transition probabilities})
+có thể dùng để tính toàn bộ phân phối của quá trình bằng quy nạp:
+\begin{align}
+  \PP(Z_n = i_n, Z_{n-1} = i_{n-1}, \ldots, Z_0 = i_0)
+  &= P_{i_{n-1}, i_n} \cdots P_{i_0, i_1} \, \PP(Z_0 = i_0),
+\end{align}
+với $i_0, i_1, \ldots, i_n \in \Z$.
+
+Theo \term{quy tắc xác suất toàn phần} (\en{law of total probability}):
+\begin{equation}\label{eq:total-prob}
+  \PP(Z_1 = i) = \sum_{j \in \Z} \PP(Z_1 = i \mid Z_0 = j)\,\PP(Z_0 = j), \qquad i \in \Z.
+\end{equation}
+
+% --- Example: Random walk ---
+\begin{example}[Bước đi ngẫu nhiên -- \en{Random walk}]
+Bước đi ngẫu nhiên (\en{random walk}):
+\begin{equation}\label{eq:random-walk}
+  S_n = X_1 + \cdots + X_n, \qquad n \in \N,
+\end{equation}
+trong đó $(X_n)_{n \geq 1}$ là dãy các biến ngẫu nhiên \term{độc lập} (\en{independent})
+nhận giá trị trong $\Z$, là một chuỗi Markov thời gian rời rạc.
+
+\textbf{Chứng minh:} Ta cần chỉ ra tính Markov. Với mọi $j, i_n, \ldots, i_1 \in \Z$:
+\begin{align*}
+  \PP(S_{n+1} = j \mid S_n = i_n,\; S_{n-1} = i_{n-1},\; \ldots,\; S_1 = i_1)
+  &= \PP(S_n + X_{n+1} = j \mid S_n = i_n, \ldots) \\
+  &= \PP(X_{n+1} = j - i_n \mid S_n = i_n, \ldots) \\
+  &= \PP(X_{n+1} = j - i_n) \\
+  &= \PP(S_{n+1} = j \mid S_n = i_n).
+\end{align*}
+Bước thứ ba dùng tính \term{độc lập} của $X_{n+1}$ với $S_1, \ldots, S_n$ (vì $X_{n+1}$ độc lập với $X_1, \ldots, X_n$).
+\end{example}
+
+Tổng quát hơn, mọi quá trình có \term{gia số độc lập} (\en{independent increments}) đều là chuỗi Markov. Tuy nhiên, không phải mọi chuỗi Markov đều có gia số độc lập.
+
+% ============================================================================
+\subsection{Ma trận chuyển (Transition Matrix)}
+\label{subsec:transition-matrix}
+
+\textbf{Câu chuyện:} Ma trận chuyển là ``bản đồ xác suất'': từ mỗi thành phố (trạng thái),
+bạn biết xác suất đi đến các thành phố khác. Hàng $i$ trong ma trận cho bạn biết:
+``Nếu đang ở thành phố $i$, xác suất đi đến mỗi thành phố khác là bao nhiêu?''
+
+Sự tiến hóa ngẫu nhiên của quá trình Markov $(Z_n)_{n\in\N}$ được xác định bởi dữ liệu:
+\[
+  P_{i,j} := \PP(Z_{n+1} = j \mid Z_n = i), \qquad i, j \in \Z,
+\]
+trong đó ta giả sử xác suất $\PP(Z_{n+1} = j \mid Z_n = i)$ không phụ thuộc vào $n \in \N$.
+Khi đó chuỗi Markov $(Z_n)_{n\in\N}$ được gọi là \term{đồng nhất theo thời gian} (\en{time homogeneous}).
+
+\begin{dinhnghia}[(Ma trận chuyển -- \en{Transition matrix})]
+Dữ liệu trên được mã hóa thành một ma trận, gọi là \term{ma trận chuyển} (\en{transition matrix}) của chuỗi Markov:
+\[
+  [P_{i,j}]_{i,j\in\Z} = [\PP(Z_{n+1} = j \mid Z_n = i)]_{i,j\in\Z}.
+\]
+\end{dinhnghia}
+
+\textbf{Lưu ý quan trọng:} Thứ tự các chỉ số $(i,j)$ trong $\PP(Z_{n+1} = j \mid Z_n = i)$ và $P_{i,j}$ bị đảo ngược. Cụ thể, trạng thái ban đầu $i$ là \emph{số hàng} trong ma trận, còn trạng thái đích $j$ là \emph{số cột}.
+
+\begin{dinhnghia}[(Trạng thái hấp thụ -- \en{Absorbing state})]
+Trạng thái $k \in \Z$ được gọi là \term{hấp thụ} (\en{absorbing}) nếu $P_{k,k} = 1$.
+\end{dinhnghia}
+
+Do quan hệ:
+\begin{equation}\label{eq:row-sum-1}
+  \sum_{j \in \Z} \PP(Z_{n+1} = j \mid Z_n = i) = 1, \qquad i \in \N,
+\end{equation}
+các \emph{hàng} của ma trận chuyển thỏa mãn: $\sum_{j} P_{i,j} = 1$ với mọi $i$.
+
+% --- Finite state space ---
+Trong trường hợp chuỗi Markov $(Z_k)_{k\in\N}$ nhận giá trị trong không gian trạng thái hữu hạn $\{0, \ldots, N\}$, ma trận chuyển có dạng:
+\[
+  [P_{i,j}]_{0 \leq i,j \leq N}
+  = \begin{bmatrix}
+    P_{0,0} & P_{0,1} & P_{0,2} & \cdots & P_{0,N} \\
+    P_{1,0} & P_{1,1} & P_{1,2} & \cdots & P_{1,N} \\
+    P_{2,0} & P_{2,1} & P_{2,2} & \cdots & P_{2,N} \\
+    \vdots  & \vdots  & \vdots  & \ddots & \vdots \\
+    P_{N,0} & P_{N,1} & P_{N,2} & \cdots & P_{N,N}
+  \end{bmatrix}.
+\]
+
+% --- Examples ---
+\begin{example}[Quá trình cờ bạc -- \en{Gambling process}]
+\label{ex:gambler}
+Một người chơi bắt đầu với $i$ đô la. Mỗi ván, anh ta thắng $1$ đô la (xác suất $p$)
+hoặc thua $1$ đô la (xác suất $q = 1-p$). Trò chơi dừng khi cháy túi ($0$ đô la) hoặc đạt mục tiêu ($N$ đô la).
+
+Ma trận chuyển trên $\{0, 1, \ldots, N\}$ với các trạng thái hấp thụ $0$ và $N$:
+\[
+  P = [P_{i,j}]_{0 \leq i,j \leq N}
+  = \begin{bmatrix}
+    1   & 0 & 0 & \cdots & 0 & 0 & 0 \\
+    q   & 0 & p & \cdots & 0 & 0 & 0 \\
+    \vdots & \vdots & \vdots & \ddots & \vdots & \vdots & \vdots \\
+    0   & 0 & 0 & \cdots & q & 0 & p \\
+    0   & 0 & 0 & \cdots & 0 & 0 & 1
+  \end{bmatrix}.
+\]
+\end{example}
+
+\begin{example}[Chuỗi Ehrenfest -- \en{Ehrenfest chain}]
+\label{ex:ehrenfest}
+Hai bình khí (trái và phải) nối với nhau bằng một lỗ, chứa tổng cộng $N$ viên bi.
+Tại mỗi bước, ta chọn ngẫu nhiên một viên bi và chuyển nó sang bình kia.
+Gọi $X_n \in \{0,\ldots,N\}$ là số bi bên trái tại thời điểm $n$.
+Xác suất chuyển:
+\[
+  \PP(X_{n+1} = k+1 \mid X_n = k) = \frac{N-k}{N}, \qquad
+  \PP(X_{n+1} = k-1 \mid X_n = k) = \frac{k}{N}.
+\]
+
+\textbf{Ý nghĩa vật lý:} Mô hình này mô phỏng sự khuếch tán khí giữa hai ngăn.
+Nếu bên trái có nhiều bi hơn ($k > N/2$), xác suất giảm ($k/N$) lớn hơn xác suất tăng ($(N-k)/N$)
+--- hệ thống ``kéo'' về trạng thái cân bằng $k = N/2$.
+\end{example}
+
+\begin{example}[Ehrenfest $N = 4$ -- ma trận cụ thể]
+\label{ex:ehrenfest-N4}
+Với $N = 4$ viên bi, ma trận chuyển $5 \times 5$:
+\[
+  P = \begin{bmatrix}
+    0 & 1 & 0 & 0 & 0 \\
+    1/4 & 0 & 3/4 & 0 & 0 \\
+    0 & 2/4 & 0 & 2/4 & 0 \\
+    0 & 0 & 3/4 & 0 & 1/4 \\
+    0 & 0 & 0 & 1 & 0
+  \end{bmatrix}.
+\]
+
+\textbf{Đọc ma trận:}
+\begin{itemize}[nosep]
+  \item Hàng 0: nếu bên trái có 0 bi, chắc chắn tăng lên 1 (chọn bi nào cũng từ bên phải).
+  \item Hàng 2: nếu bên trái có 2 bi, xác suất giảm = $2/4$, xác suất tăng = $2/4$ (cân bằng!).
+  \item Hàng 4: nếu bên trái có 4 bi (tất cả), chắc chắn giảm xuống 3.
+\end{itemize}
+\end{example}
+
+\begin{example}[Xếp hạng tín dụng -- \en{Credit rating}]
+Trong tài chính, xếp hạng tín dụng (AAA, AA, A, BBB, \ldots, D) có thể được mô hình hóa
+bằng chuỗi Markov. Ma trận chuyển ghi lại xác suất thay đổi hạng tín dụng sau mỗi năm.
+Các hạng cao hơn có hệ số đường chéo lớn hơn (ổn định hơn).
+\end{example}
+
+% ============================================================================
+\subsection{Xác suất chuyển nhiều bước (Multi-step Transition Probabilities)}
+
+Ta muốn tính \term{xác suất chuyển hai bước} (\en{two-step transition probability})
+$\PP(Z_{n+2} = j \mid Z_n = i)$, không có trực tiếp trong ma trận chuyển.
+
+Bằng \term{phân tích bước đầu tiên} (\en{first step analysis}), ký hiệu $S$ là không gian trạng thái:
+\begin{align*}
+  \PP(Z_{n+2} = j \mid Z_n = i)
+  &= \sum_{l \in S} \PP(Z_{n+1} = l \mid Z_n = i)\,\PP(Z_{n+2} = j \mid Z_{n+1} = l)\\
+  &= \sum_{l \in S} P_{i,l}\,P_{l,j}
+  = P^2_{i,j}, \qquad i, j \in S.
+\end{align*}
+
+Tổng quát hơn, với mọi $k \in \N$:
+
+\begin{congthuc}
+\textbf{Xác suất chuyển $k$ bước:}
+\[
+  [\PP(Z_{n+k} = j \mid Z_n = i)]_{i,j\in S} = [P^k_{i,j}]_{i,j\in S} = P^k.
+\]
+Nghĩa là: xác suất chuyển $k$ bước chính là phần tử tương ứng của lũy thừa bậc $k$ của ma trận chuyển.
+\end{congthuc}
+
+Quan hệ $P^{m+n} = P^m P^n$ chính là \term{phương trình Chapman--Kolmogorov} (\en{Chapman--Kolmogorov equation}):
+\[
+  P^{m+n}_{i,j} = \sum_{l \in S} P^m_{i,l}\,P^n_{l,j}, \qquad i,j \in S, \quad m, n \in \N.
+\]
+
+\begin{example}[Tính $P^2$ cho chuỗi 3 trạng thái]
+\label{ex:P2-three-state}
+Xét ma trận chuyển trên $S = \{0, 1, 2\}$:
+\[
+  P = \begin{bmatrix}
+    0 & 1/2 & 1/2 \\
+    1/3 & 1/3 & 1/3 \\
+    1/2 & 0 & 1/2
+  \end{bmatrix}.
+\]
+
+Tính $P^2 = P \cdot P$:
+\begin{align*}
+  P^2_{0,0} &= 0 \cdot 0 + \frac{1}{2} \cdot \frac{1}{3} + \frac{1}{2} \cdot \frac{1}{2} = \frac{1}{6} + \frac{1}{4} = \frac{5}{12}, \\
+  P^2_{0,1} &= 0 \cdot \frac{1}{2} + \frac{1}{2} \cdot \frac{1}{3} + \frac{1}{2} \cdot 0 = \frac{1}{6}, \\
+  P^2_{0,2} &= 0 \cdot \frac{1}{2} + \frac{1}{2} \cdot \frac{1}{3} + \frac{1}{2} \cdot \frac{1}{2} = \frac{5}{12}.
+\end{align*}
+
+Kiểm tra: $P^2_{0,0} + P^2_{0,1} + P^2_{0,2} = 5/12 + 1/6 + 5/12 = 5/12 + 2/12 + 5/12 = 12/12 = 1$. Đúng!
+
+\textbf{Ý nghĩa:} Xuất phát từ trạng thái 0, sau 2 bước, xác suất ở trạng thái 0 là $5/12 \approx 0.42$.
+\end{example}
+
+\begin{example}[Tính $P^n$ cho chuỗi Ehrenfest $N = 4$]
+\label{ex:Pn-ehrenfest}
+Với ma trận $P$ ở Ví dụ~\ref{ex:ehrenfest-N4}, ta tính $P^2$:
+\[
+  P^2_{0,0} = 0 \cdot 0 + 1 \cdot \frac{1}{4} + 0 + 0 + 0 = \frac{1}{4}.
+\]
+Nghĩa là: nếu bên trái có 0 bi, sau 2 bước xác suất trở về 0 bi là $1/4$.
+
+Thật vậy: từ 0 phải đi lên 1 (chắc chắn), rồi từ 1 quay về 0 (xác suất $1/4$).
+\end{example}
+
+\begin{tomtat}
+Các xác suất chuyển $k$ bước được tính bằng cách lũy thừa ma trận chuyển: $P^k$.
+Phương trình Chapman--Kolmogorov cho phép phân rã quá trình chuyển thành hai giai đoạn.
+
+\textbf{Mẹo tính toán:} Đối với ma trận $n \times n$ lớn, dùng chéo hóa $P = M D M^{-1}$
+sẽ cho $P^k = M D^k M^{-1}$ --- dễ tính hơn nhiều so với nhân ma trận $k$ lần.
+\end{tomtat}
+
+% ============================================================================
+\section{Chuỗi Markov hai trạng thái (The Two-State Markov Chain)}
+\label{sec:two-state}
+
+\textbf{Câu chuyện:} Mô hình đơn giản nhất: thời tiết ngày mai chỉ có ``Nắng'' (0) hoặc ``Mưa'' (1).
+Nếu hôm nay nắng, ngày mai mưa với xác suất $a$; nếu hôm nay mưa, ngày mai nắng với xác suất $b$.
+Sau nhiều ngày, tỷ lệ ngày nắng/mưa sẽ ổn định --- đây là phân phối giới hạn.
+
+Việc tính ma trận chuyển bậc $n$, tức $P^n$, nói chung là khó. Tuy nhiên, khi số trạng thái bằng 2, tức $S = \{0, 1\}$, ta có thể tính chính xác.
+
+Ma trận chuyển có dạng:
+\begin{equation}\label{eq:two-state}
+  P = \begin{bmatrix} 1-a & a \\ b & 1-b \end{bmatrix},
+\end{equation}
+với $a \in [0,1]$ và $b \in [0,1]$.
+
+\textbf{Ý nghĩa:}
+\begin{itemize}[nosep]
+  \item $\PP(Z_{n+1} = 1 \mid Z_n = 0) = a$: xác suất chuyển từ $0$ sang $1$.
+  \item $\PP(Z_{n+1} = 0 \mid Z_n = 0) = 1-a$: xác suất ở lại trạng thái $0$.
+  \item $\PP(Z_{n+1} = 0 \mid Z_n = 1) = b$: xác suất chuyển từ $1$ sang $0$.
+  \item $\PP(Z_{n+1} = 1 \mid Z_n = 1) = 1-b$: xác suất ở lại trạng thái $1$.
+\end{itemize}
+
+Ta loại trừ trường hợp $a = b = 0$ (ma trận đơn vị, chuỗi hằng).
+
+\subsection{Chéo hóa ma trận (Matrix Diagonalization)}
+
+Ma trận $P$ có hai \term{trị riêng} (\en{eigenvalues}):
+\[
+  \lambda_1 = 1 \qquad \text{và} \qquad \lambda_2 = 1 - a - b,
+\]
+với các \term{vectơ riêng} (\en{eigenvectors}) tương ứng:
+\[
+  \begin{bmatrix} 1 \\ 1 \end{bmatrix}
+  \qquad \text{và} \qquad
+  \begin{bmatrix} -a \\ b \end{bmatrix}.
+\]
+
+Do đó $P$ có thể \term{chéo hóa} (\en{diagonalize}): $P = M D M^{-1}$, và:
+\begin{equation}\label{eq:Pn-two-state}
+  P^n = M D^n M^{-1}
+  = \frac{1}{a+b}
+  \begin{bmatrix}
+    b + a\lambda_2^n & a(1 - \lambda_2^n) \\
+    b(1-\lambda_2^n) & a + b\lambda_2^n
+  \end{bmatrix}.
+\end{equation}
+
+\textbf{Chi tiết tính toán:}
+\[
+  M = \begin{bmatrix} 1 & -a \\ 1 & b \end{bmatrix}, \quad
+  D = \begin{bmatrix} 1 & 0 \\ 0 & 1-a-b \end{bmatrix}, \quad
+  M^{-1} = \frac{1}{a+b}\begin{bmatrix} b & a \\ -1 & 1 \end{bmatrix}.
+\]
+
+\subsection{Phân phối giới hạn (Limiting Distribution)}
+
+Cho $n \to \infty$ trong \eqref{eq:Pn-two-state}, vì $|\lambda_2| = |1-a-b| < 1$ khi $(a,b) \neq (1,1)$:
+
+\begin{dinhly}[(Phân phối giới hạn của chuỗi hai trạng thái)]
+\[
+  \lim_{n\to\infty} P^n = \frac{1}{a+b}
+  \begin{bmatrix} b & a \\ b & a \end{bmatrix},
+\]
+do đó:
+\begin{align}
+  \lim_{n\to\infty} \PP(Z_n = 1 \mid Z_0 = 0) &= \lim_{n\to\infty} \PP(Z_n = 1 \mid Z_0 = 1) = \frac{a}{a+b}, \label{eq:limit-1}\\
+  \lim_{n\to\infty} \PP(Z_n = 0 \mid Z_0 = 0) &= \lim_{n\to\infty} \PP(Z_n = 0 \mid Z_0 = 1) = \frac{b}{a+b}. \label{eq:limit-0}
+\end{align}
+\end{dinhly}
+
+\term{Phân phối giới hạn} (\en{limiting distribution}):
+\begin{equation}\label{eq:pi-two-state}
+  \pi = [\pi_0, \pi_1] = \left[\frac{b}{a+b},\; \frac{a}{a+b}\right].
+\end{equation}
+
+\begin{tomtat}
+Phân phối giới hạn $\pi$ \textbf{không phụ thuộc vào trạng thái ban đầu} $Z_0$.
+Sau thời gian đủ lớn, xác suất ở trạng thái $1$ xấp xỉ $a/(a+b)$,
+và ở trạng thái $0$ xấp xỉ $b/(a+b)$.
+
+Phân phối $\pi$ là \term{bất biến} (\en{invariant}) theo $P$, tức $\pi P = \pi$.
+
+\textbf{Ví dụ thời tiết:} Nếu $a = 0.3$ (nắng$\to$mưa) và $b = 0.4$ (mưa$\to$nắng),
+thì dài hạn: $\pi_{\text{nắng}} = 0.4/0.7 \approx 57\%$, $\pi_{\text{mưa}} = 0.3/0.7 \approx 43\%$.
+\end{tomtat}
+
+\textbf{Trường hợp đặc biệt:} Khi $a + b = 1$ (hay $a = 1-b$):
+\[
+  P^n = \begin{bmatrix} b & a \\ b & a \end{bmatrix} = P, \qquad n \in \N,
+\]
+và $\PP(Z_n = 1 \mid Z_0 = 0) = \PP(Z_n = 1 \mid Z_0 = 1) = a$ với mọi $n \geq 1$.
+
+\textbf{Trường hợp $a = b = 1$:} Giới hạn $\lim_{n\to\infty} P^n$ không tồn tại vì:
+\[
+  P^n = \begin{cases}
+    \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}, & n = 2k, \\[6pt]
+    \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}, & n = 2k+1.
+  \end{cases}
+\]
+Chuỗi ``dao động'' mãi mãi --- đây là chuỗi \term{tuần hoàn} với chu kỳ $d = 2$.
+
+\subsection{Tốc độ hội tụ (Rate of Convergence)}
+
+Từ \eqref{eq:Pn-two-state}, sai số giữa $P^n_{i,j}$ và $\pi_j$ là:
+\[
+  |P^n_{i,j} - \pi_j| \leq C \cdot |\lambda_2|^n = C \cdot |1 - a - b|^n.
+\]
+
+Sai số giảm theo cấp số nhân. Hội tụ nhanh khi $|1-a-b|$ nhỏ, tức $a + b$ gần $1$.
+
+\begin{example}[So sánh tốc độ hội tụ]
+\begin{itemize}[nosep]
+  \item $a = 0.5, b = 0.5$: $|\lambda_2| = |1-1| = 0$. Hội tụ ngay sau 1 bước!
+  \item $a = 0.1, b = 0.1$: $|\lambda_2| = 0.8$. Hội tụ chậm (cần $\sim 30$ bước).
+  \item $a = 0.01, b = 0.01$: $|\lambda_2| = 0.98$. Rất chậm (cần $\sim 300$ bước).
+\end{itemize}
+Trực quan: khi $a, b$ nhỏ, chuỗi ``dính'' ở mỗi trạng thái lâu, nên mất nhiều thời gian mới ``quên'' trạng thái ban đầu.
+\end{example}
+
+% ============================================================================
+\section{Bài tập (Exercises)}
+\label{sec:ch4-exercises}
+
+\begin{exercise}
+Trong mô hình đơn giản hóa của một chương trình truyền hình, người chơi đã thắng $k$ đô la,
+sẽ có $k+1$ đô la ở lượt tiếp theo với xác suất $q$, hoặc bị loại (về $0$) với xác suất $p = 1-q$.
+Giả sử người chơi bắt đầu với $1$ đô la. Hãy mô hình hóa tiền thắng sau $n$ lượt chơi
+bằng chuỗi Markov và viết ma trận chuyển tương ứng.
+\end{exercise}
+
+\begin{exercise}
+Xét chuỗi Markov trên $S = \{0, 1, 2\}$ với ma trận chuyển:
+\[
+  P = \begin{bmatrix}
+    1/2 & 1/4 & 1/4 \\
+    1/3 & 1/3 & 1/3 \\
+    1/4 & 1/4 & 1/2
+  \end{bmatrix}.
+\]
+\begin{enumerate}[label=(\alph*)]
+  \item Tính $P^2$ (nhân ma trận).
+  \item Tính $\PP(Z_2 = 0 \mid Z_0 = 1)$.
+  \item Tính $\PP(Z_3 = 2 \mid Z_0 = 0)$ (gợi ý: dùng $P^3 = P^2 \cdot P$).
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+Cho chuỗi Ehrenfest với $N = 4$ viên bi (Ví dụ~\ref{ex:ehrenfest-N4}).
+\begin{enumerate}[label=(\alph*)]
+  \item Bắt đầu với 4 bi bên trái. Tính xác suất có 2 bi bên trái sau 2 bước.
+  \item Chuỗi này có trạng thái hấp thụ không? Giải thích.
+  \item Tìm phân phối dừng $\pi$ (gợi ý: so sánh với phân phối nhị thức $B(4, 1/2)$).
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[Chapman--Kolmogorov trực tiếp]
+Xét chuỗi Markov hai trạng thái với $a = 0.4$, $b = 0.6$.
+\begin{enumerate}[label=(\alph*)]
+  \item Tính $P^2$ trực tiếp bằng nhân ma trận.
+  \item Tính $P^2$ bằng công thức \eqref{eq:Pn-two-state} với $n = 2$. Xác minh kết quả trùng nhau.
+  \item Tìm $n$ nhỏ nhất sao cho $|P^n_{0,1} - \pi_1| < 0.01$.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+Chứng minh rằng nếu $(S_n)_{n\geq 0}$ là bước đi ngẫu nhiên với $S_n = X_1 + \cdots + X_n$
+và $(X_k)$ độc lập cùng phân phối, thì $(S_n)$ thỏa mãn tính chất Markov.
+(Gợi ý: sử dụng tính độc lập của $X_{n+1}$ với $(X_1, \ldots, X_n)$.)
+\end{exercise}

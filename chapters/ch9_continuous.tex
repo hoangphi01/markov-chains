@@ -1,0 +1,864 @@
+\chapter{Chuỗi Markov thời gian liên tục\\{\normalsize\textit{Continuous-Time Markov Chains}}}
+\label{ch:continuous}
+
+% ============================================================================
+\section{Quá trình Poisson (The Poisson Process)}
+\label{sec:poisson}
+
+\textbf{Câu chuyện:} Hãy tưởng tượng bạn ngồi ở quán café quan sát xe buýt đến trạm.
+Trung bình cứ 10 phút có một chuyến, nhưng chính xác khi nào thì xe đến --- bạn không biết trước.
+Có khi 5 phút đã có xe, có khi phải đợi 15 phút. Đây chính là bản chất của \term{quá trình Poisson}:
+sự kiện xảy ra ``ngẫu nhiên'' theo thời gian, với một tốc độ trung bình cố định.
+
+Trong chương này ta bắt đầu nghiên cứu các \term{quá trình thời gian liên tục} (\en{continuous-time processes}),
+là các họ $(X_t)_{t\in\R_+}$ gồm các biến ngẫu nhiên được đánh chỉ số bởi $\R_+$.
+Khác với chuỗi Markov rời rạc (thời gian nhảy tại $n = 0, 1, 2, \ldots$),
+ở đây thời gian chạy liên tục và quá trình có thể ``nhảy'' vào bất kỳ lúc nào.
+
+\begin{tomtat}
+\textbf{Ý tưởng chính:} Quá trình Poisson đếm số sự kiện xảy ra theo thời gian.
+Nó là ``viên gạch nền tảng'' cho mọi chuỗi Markov liên tục,
+giống như bước đi ngẫu nhiên là nền tảng cho chuỗi Markov rời rạc.
+\end{tomtat}
+
+\begin{dinhnghia}[(Quá trình Poisson chuẩn -- \en{Standard Poisson process})]
+\term{Quá trình Poisson chuẩn} (\en{standard Poisson process}) là quá trình ngẫu nhiên $(N_t)_{t\in\R_+}$ chỉ có bước nhảy $+1$, và đường đi (\en{paths}) không đổi giữa các bước nhảy. Tại thời điểm $t$:
+\[
+  N_t = \sum_{k=1}^{\infty} \ind_{(T_k, \infty)}(t), \qquad t \in \R_+,
+\]
+trong đó $(T_k)_{k\geq 1}$ là dãy tăng các thời điểm nhảy với $\lim_{k\to\infty} T_k = +\infty$.
+
+$(N_t)_{t\in\R_+}$ thỏa mãn:
+\begin{enumerate}[nosep]
+  \item \textbf{Gia số độc lập} (\en{independence of increments}): với mọi $0 \leq t_0 < t_1 < \cdots < t_n$, các biến $N_{t_1} - N_{t_0}, \ldots, N_{t_n} - N_{t_{n-1}}$ là độc lập.
+  \item \textbf{Gia số dừng} (\en{stationarity of increments}): $N_{t+h} - N_{s+h}$ có cùng phân phối với $N_t - N_s$ với mọi $h > 0$ và $0 \leq s \leq t$.
+\end{enumerate}
+\end{dinhnghia}
+
+\textbf{Ví dụ đời thường:}
+\begin{itemize}[nosep]
+  \item Số cuộc gọi đến tổng đài trong khoảng thời gian $[0, t]$.
+  \item Số khách hàng vào cửa hàng từ 8h sáng đến giờ $t$.
+  \item Số hạt phóng xạ phát ra bởi một mẫu chất trong thời gian $t$.
+\end{itemize}
+
+\begin{dinhly}[(Định lý 9 -- Phân phối Poisson)]
+Giả sử quá trình đếm $(N_t)_{t\in\R_+}$ thỏa mãn các điều kiện (1) và (2). Khi đó:
+\[
+  \PP(N_t - N_s = k) = e^{-\lambda(t-s)} \frac{(\lambda(t-s))^k}{k!}, \qquad k \in \N, \quad 0 \leq s \leq t,
+\]
+với hằng số $\lambda > 0$.
+\end{dinhly}
+
+Tham số $\lambda > 0$ được gọi là \term{cường độ} (\en{intensity}) của quá trình:
+\begin{equation}\label{eq:intensity}
+  \lambda := \lim_{h \to 0} \frac{1}{h} \PP(N_h = 1).
+\end{equation}
+
+Đặc biệt, $N_t$ có \term{phân phối Poisson} (\en{Poisson distribution}) với tham số $\lambda t$:
+\[
+  \PP(N_t = k) = \frac{(\lambda t)^k}{k!}\, e^{-\lambda t}, \qquad t > 0.
+\]
+
+\textbf{Xác suất chuyển vi mô} (\en{infinitesimal transition probabilities}):
+\begin{align}
+  \PP(N_{t+h} - N_t = 1) &\simeq \lambda h, \qquad h \to 0, \label{eq:poisson-inf-1}\\
+  \PP(N_{t+h} - N_t = 0) &\simeq 1 - \lambda h, \qquad h \to 0. \label{eq:poisson-inf-0}
+\end{align}
+
+Điều này có nghĩa: trong khoảng thời gian ``ngắn'' $[t, t+h]$, gia số $N_{t+h} - N_t$ xử sự như biến ngẫu nhiên Bernoulli với tham số $\lambda h$.
+
+\begin{proposition}[(Phân phối thời gian nhảy)]
+Luật của $T_n$ có mật độ $t \mapsto \lambda^n e^{-\lambda t} \frac{t^{n-1}}{(n-1)!}$ trên $\R_+$, $n \geq 1$.
+\end{proposition}
+
+Thời gian $\tau_k := T_{k+1} - T_k$ giữa các bước nhảy tạo thành dãy các biến ngẫu nhiên \term{độc lập cùng phân phối} (\en{i.i.d.}) có phân phối mũ với tham số $\lambda > 0$:
+\[
+  \PP(\tau_0 > t_0, \ldots, \tau_n > t_n) = e^{-\lambda(t_0 + \cdots + t_n)} = \prod_{k=0}^n e^{-\lambda t_k},
+\]
+và $\E[\tau_k] = 1/\lambda$.
+
+\begin{example}[Xe buýt đến trạm]
+Giả sử xe buýt đến trạm theo quá trình Poisson với cường độ $\lambda = 6$ chuyến/giờ (trung bình 10 phút/chuyến).
+
+\textbf{Câu hỏi 1:} Xác suất không có xe nào trong 15 phút?
+\[
+  \PP(N_{0.25} = 0) = e^{-6 \times 0.25} = e^{-1.5} \approx 0.223.
+\]
+
+\textbf{Câu hỏi 2:} Xác suất có đúng 2 xe trong 20 phút?
+\[
+  \PP(N_{1/3} = 2) = e^{-2} \frac{2^2}{2!} = 2e^{-2} \approx 0.271.
+\]
+
+\textbf{Câu hỏi 3:} Thời gian đợi trung bình cho xe tiếp theo?
+\[
+  \E[\tau] = \frac{1}{\lambda} = \frac{1}{6} \text{ giờ} = 10 \text{ phút}.
+\]
+\end{example}
+
+\begin{tomtat}
+Quá trình Poisson: gia số độc lập và dừng, $N_t \sim \text{Poisson}(\lambda t)$.
+Cường độ $\lambda$ cao hơn $\Rightarrow$ nhảy thường xuyên hơn $\Rightarrow$ thời gian ở mỗi trạng thái ngắn hơn ($\E[\tau_k] = 1/\lambda$).
+
+Tính chất ``không nhớ'' (\en{memoryless}): dù bạn đã đợi 5 phút rồi, thời gian đợi thêm vẫn có phân phối mũ --- quá khứ không ảnh hưởng tương lai.
+\end{tomtat}
+
+% ============================================================================
+\section{Quá trình sinh-tử (Birth and Death Processes)}
+\label{sec:birth-death}
+
+\textbf{Câu chuyện:} Hãy tưởng tượng một quán café. Khách đến (``sinh'') và khách đi (``tử'').
+Nếu quán đang có $i$ khách:
+\begin{itemize}[nosep]
+  \item Khách mới đến với tốc độ $\lambda_i$ (số khách tăng lên 1).
+  \item Một khách hiện tại rời đi với tốc độ $\mu_i$ (số khách giảm đi 1).
+\end{itemize}
+Số khách trong quán thay đổi liên tục theo thời gian --- đây là \term{quá trình sinh-tử}.
+
+\begin{dinhnghia}[(Quá trình sinh thuần túy -- \en{Pure birth process})]
+Chuỗi Markov thời gian liên tục $(X_t)_{t\in\R_+}$ thỏa mãn:
+\[
+  \PP(X_{t+h} - X_t = 1 \mid X_t = i) \simeq \lambda_i h, \qquad h \to 0,\; i \in S,
+\]
+\[
+  \PP(X_{t+h} - X_t = 0 \mid X_t = i) \simeq 1 - \lambda_i h, \qquad h \to 0,\; i \in S,
+\]
+được gọi là \term{quá trình sinh thuần túy} (\en{pure birth process}) với tốc độ sinh $\lambda_i \geq 0$.
+Quá trình Poisson là trường hợp đặc biệt với $\lambda_n = \lambda$ không phụ thuộc trạng thái.
+\end{dinhnghia}
+
+\begin{dinhnghia}[(Quá trình tử thuần túy -- \en{Pure death process})]
+Tương tự, $(X_t)_{t\in\R_+}$ với:
+\[
+  \PP(X_{t+h} - X_t = -1 \mid X_t = i) \simeq \mu_i h, \quad
+  \PP(X_{t+h} - X_t = 0 \mid X_t = i) \simeq 1 - \mu_i h,
+\]
+là \term{quá trình tử thuần túy} (\en{pure death process}) với tốc độ tử $\mu_i \geq 0$.
+\end{dinhnghia}
+
+\begin{dinhnghia}[(Quá trình sinh-tử -- \en{Birth and death process})]
+Chuỗi Markov thời gian liên tục $(X_t)_{t\in\R_+}$ với:
+\begin{align*}
+  \PP(X_{t+h} - X_t = 1 \mid X_t = i)  &\simeq \lambda_i h, \\
+  \PP(X_{t+h} - X_t = -1 \mid X_t = i) &\simeq \mu_i h, \\
+  \PP(X_{t+h} - X_t = 0 \mid X_t = i)  &\simeq 1 - (\lambda_i + \mu_i)h,
+\end{align*}
+khi $h \to 0$, được gọi là \term{quá trình sinh-tử} (\en{birth and death process}) với tốc độ sinh $\lambda_i \geq 0$ và tốc độ tử $\mu_i \geq 0$, $i \in S$.
+\end{dinhnghia}
+
+Thời gian $\tau_i$ ở trạng thái $i$ trước khi chuyển sang trạng thái khác là biến ngẫu nhiên có phân phối mũ:
+\[
+  \tau_i = \min(\tau_{i,i+1},\; \tau_{i,i-1}),
+\]
+với tham số $\lambda_i + \mu_i$, và $\E[\tau_i] = \frac{1}{\lambda_i + \mu_i}$.
+
+\begin{example}[Quán café có sức chứa $N = 4$]
+Xét quán café có tối đa $4$ chỗ ngồi. Khách đến với tốc độ $\lambda = 2$ người/giờ,
+khách rời đi với tốc độ $\mu = 3$ người/giờ (mỗi khách ngồi trung bình 20 phút).
+
+Khi quán có $i$ khách ($0 \leq i \leq 4$):
+\begin{itemize}[nosep]
+  \item Tốc độ sinh: $\lambda_i = \lambda = 2$ (nếu $i < 4$), $\lambda_4 = 0$ (quán đầy).
+  \item Tốc độ tử: $\mu_i = i \cdot \mu = 3i$ (mỗi khách rời đi độc lập với tốc độ $\mu$).
+\end{itemize}
+
+Thời gian trung bình ở trạng thái $i = 2$:
+\[
+  \E[\tau_2] = \frac{1}{\lambda_2 + \mu_2} = \frac{1}{2 + 6} = \frac{1}{8} \text{ giờ} = 7.5 \text{ phút}.
+\]
+\end{example}
+
+% ============================================================================
+\section{Chuỗi Markov thời gian liên tục (Continuous-Time Markov Chains)}
+\label{sec:ctmc-definition}
+
+\textbf{Câu chuyện:} Giống như con kiến trên bàn cờ (Chương~\ref{ch:discrete}) chỉ quan tâm ô hiện tại,
+chuỗi Markov liên tục cũng ``không nhớ'' --- nhưng bây giờ con kiến di chuyển trong thời gian liên tục.
+Nó ở một ô trong thời gian ngẫu nhiên (phân phối mũ), rồi nhảy sang ô khác.
+
+\begin{dinhnghia}[(Tính chất Markov liên tục -- \en{Continuous-time Markov property})]
+Quá trình ngẫu nhiên $(X_t)_{t\in\R_+}$ nhận giá trị trong $\Z$ có \term{tính chất Markov} nếu với mọi
+$0 < s_1 < \cdots < s_{n-1} < s < t$:
+\[
+  \PP(X_t = j \mid X_s = i_n,\; X_{s_{n-1}} = i_{n-1},\; \ldots,\; X_{s_1} = i_0) = \PP(X_t = j \mid X_s = i_n).
+\]
+\end{dinhnghia}
+
+\textbf{Ví dụ:} Quá trình Poisson là chuỗi Markov thời gian liên tục vì nó có gia số độc lập.
+Tổng quát hơn, mọi quá trình có gia số độc lập đều là chuỗi Markov.
+
+\subsection{Nửa nhóm chuyển (Transition Semigroup)}
+
+Xác suất chuyển phụ thuộc thời gian:
+\[
+  P_{i,j}(t) := \PP(X_{t+s} = j \mid X_s = i), \qquad i,j \in \Z,\; t \in \R_+,
+\]
+trong đó ta giả sử quá trình là \term{đồng nhất theo thời gian} (\en{time homogeneous}): $\PP(X_{t+s} = j \mid X_s = i)$ không phụ thuộc $s$. Lưu ý $P(0) = I_d$.
+
+Ma trận $P(t) = [P_{i,j}(t)]_{i,j\in S}$ được gọi là \term{nửa nhóm chuyển} (\en{transition semigroup}).
+
+\begin{congthuc}
+\textbf{Tính chất nửa nhóm} (\en{semigroup property}):
+\begin{equation}\label{eq:semigroup}
+  P(s+t) = P(s)\,P(t) = P(t)\,P(s), \qquad s, t \in \R_+.
+\end{equation}
+Đây chính là phương trình \term{Chapman--Kolmogorov} phiên bản thời gian liên tục.
+\end{congthuc}
+
+% ============================================================================
+\section{Ma trận sinh vô cùng bé (Infinitesimal Generator)}
+\label{sec:generator}
+
+\textbf{Câu chuyện:} Trong trường hợp rời rạc, ma trận chuyển $P$ cho bạn biết ``xác suất đi đâu sau 1 bước''.
+Nhưng trong thời gian liên tục, không có ``1 bước'' --- thời gian chạy liên tục!
+Thay vào đó, ta cần biết hệ thống thay đổi \textbf{nhanh thế nào} --- đây là vai trò của ma trận sinh $Q$.
+
+Hãy nghĩ $Q$ như ``tốc độ'' thay vì ``xác suất'':
+\begin{itemize}[nosep]
+  \item $\lambda_{i,j} > 0$ (ngoài đường chéo): tốc độ chuyển từ $i$ sang $j$. Càng lớn $\Rightarrow$ càng nhanh.
+  \item $\lambda_{i,i} < 0$ (đường chéo): tốc độ rời khỏi $i$. $|\lambda_{i,i}|$ lớn $\Rightarrow$ ở $i$ rất ngắn.
+\end{itemize}
+
+Bằng cách lấy đạo hàm quan hệ nửa nhóm \eqref{eq:semigroup} theo $t$ rồi cho $t = 0$:
+\[
+  P'(t) = \lim_{s \to 0} \frac{P(t+s) - P(t)}{s} = P(t) \lim_{s \to 0} \frac{P(s) - P(0)}{s} = P(t)\,Q,
+\]
+trong đó:
+
+\begin{dinhnghia}[(Ma trận sinh -- \en{Infinitesimal generator})]
+\[
+  Q := P'(0) = \lim_{s \to 0} \frac{P(s) - P(0)}{s}
+\]
+được gọi là \term{ma trận sinh vô cùng bé} (\en{infinitesimal generator}) của $(X_t)_{t\in\R_+}$.
+\end{dinhnghia}
+
+Ký hiệu $Q = [\lambda_{i,j}]_{i,j\in S}$. Các hàng của $Q$ luôn có tổng bằng 0:
+\[
+  \sum_{j \in S} \lambda_{i,j} = 0, \qquad i \in S.
+\]
+Do đó: $\lambda_{i,i} = -\sum_{l \neq i} \lambda_{i,l}$ (phần tử đường chéo luôn âm hoặc bằng 0).
+
+\begin{congthuc}
+\textbf{Phương trình Kolmogorov tiến} (\en{forward Kolmogorov equation}):
+\begin{equation}\label{eq:forward-kolmogorov}
+  P'(t) = P(t)\,Q, \qquad t > 0.
+\end{equation}
+\textbf{Phương trình Kolmogorov lùi} (\en{backward Kolmogorov equation}):
+\begin{equation}\label{eq:backward-kolmogorov}
+  P'(t) = Q\,P(t), \qquad t > 0.
+\end{equation}
+\textbf{Nghiệm} (dùng \term{hàm mũ ma trận} -- \en{matrix exponential}):
+\[
+  P(t) = P(0)\,e^{tQ} = e^{tQ}, \qquad \text{trong đó } e^{tQ} = I_d + \sum_{n=1}^{\infty} \frac{t^n}{n!} Q^n.
+\]
+\end{congthuc}
+
+\textbf{Xấp xỉ bậc nhất} khi $h \to 0$:
+\[
+  P(h) \simeq I_d + hQ + o(h), \qquad h \to 0.
+\]
+
+Xác suất chuyển vi mô:
+\[
+  P_{i,j}(h) = \PP(X_{t+h} = j \mid X_t = i) \simeq
+  \begin{cases}
+    \lambda_{i,j} h, & i \neq j, \\[3pt]
+    1 + \lambda_{i,i} h, & i = j,
+  \end{cases}
+  \qquad h \to 0.
+\]
+
+\textbf{Ý nghĩa vật lý:} Quá trình chuyển từ trạng thái $i$ sang $j \neq i$ giống như quá trình Poisson với cường độ $\lambda_{i,j}$. Thời gian $\tau_{i,j}$ trước khi chuyển từ $i$ sang $j$ có phân phối mũ:
+\begin{equation}\label{eq:sojourn-exp}
+  \PP(\tau_{i,j} > t) = e^{-\lambda_{i,j} t}, \qquad t \in \R_+, \quad i \neq j.
+\end{equation}
+và $\E[\tau_{i,j}] = 1/\lambda_{i,j}$.
+
+Thời gian ở trạng thái $i$ (trước khi rời đi bất kỳ đâu):
+\[
+  \tau_i = \min_{j \in S,\, j \neq i} \tau_{i,j},
+\]
+là biến mũ với tham số $\sum_{j \neq i} \lambda_{i,j} = -\lambda_{i,i}$, nên $\E[\tau_i] = -1/\lambda_{i,i}$.
+
+\subsection{Ví dụ các ma trận sinh}
+
+\begin{example}[Quá trình Poisson]
+Ma trận sinh:
+\[
+  Q = [\lambda_{i,j}]_{i,j\in\N} = \begin{bmatrix}
+    -\lambda & \lambda & 0 & \cdots \\
+    0 & -\lambda & \lambda & \cdots \\
+    0 & 0 & -\lambda & \cdots \\
+    \vdots & \vdots & \vdots & \ddots
+  \end{bmatrix}.
+\]
+Thời gian ở mỗi trạng thái: $\E[\tau_i] = 1/\lambda$ (không phụ thuộc $i$).
+\end{example}
+
+\begin{example}[Quá trình sinh-tử trên $\{0,1,\ldots,N\}$]
+Ma trận sinh (với $\mu_0 = \lambda_N = 0$):
+\[
+  Q = \begin{bmatrix}
+    -\lambda_0 & \lambda_0 & 0 & \cdots & 0 \\
+    \mu_1 & -\lambda_1-\mu_1 & \lambda_1 & \cdots & 0 \\
+    \vdots & \ddots & \ddots & \ddots & \vdots \\
+    0 & \cdots & \mu_{N-1} & -\lambda_{N-1}-\mu_{N-1} & \lambda_{N-1} \\
+    0 & \cdots & 0 & \mu_N & -\mu_N
+  \end{bmatrix}.
+\]
+\end{example}
+
+\begin{example}[Ma trận sinh 5 trạng thái -- tính toán chi tiết]
+\label{ex:5state-generator}
+Xét quá trình Markov liên tục trên $S = \{0, 1, 2, 3, 4\}$ với ma trận sinh:
+\[
+  Q = \begin{bmatrix}
+    -3 & 2 & 1 & 0 & 0 \\
+    1 & -4 & 2 & 1 & 0 \\
+    0 & 1 & -3 & 1 & 1 \\
+    0 & 0 & 2 & -5 & 3 \\
+    0 & 0 & 0 & 4 & -4
+  \end{bmatrix}.
+\]
+
+\textbf{Đọc thông tin từ $Q$:}
+\begin{itemize}[nosep]
+  \item Từ trạng thái $0$: chuyển sang $1$ với tốc độ $2$, sang $2$ với tốc độ $1$. Tổng tốc độ rời = $3$.
+  \item Thời gian trung bình ở trạng thái $0$: $\E[\tau_0] = 1/3$ (đơn vị thời gian).
+  \item Thời gian trung bình ở trạng thái $3$: $\E[\tau_3] = 1/5$ (trạng thái ``bận rộn'' nhất).
+  \item Từ trạng thái $4$: chỉ có thể quay lại $3$ (tốc độ $4$), $\E[\tau_4] = 1/4$.
+\end{itemize}
+\end{example}
+
+\begin{tomtat}
+Ma trận sinh $Q$ đóng vai trò tương tự ma trận chuyển $P$ trong trường hợp rời rạc.
+Quan hệ: $P(h) \approx I_d + hQ$ cho $h$ nhỏ --- ``rời rạc hóa'' chuỗi liên tục.
+Khác biệt chính: phần tử ngoài đường chéo $\lambda_{i,j} \geq 0$ (tốc độ), phần tử đường chéo $\lambda_{i,i} \leq 0$.
+
+\medskip
+\textbf{So sánh $P$ (rời rạc) vs $Q$ (liên tục):}
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{lcc}
+\hline
+ & \textbf{Ma trận $P$} & \textbf{Ma trận $Q$} \\
+\hline
+Phần tử ngoài đường chéo & $\geq 0$ (xác suất) & $\geq 0$ (tốc độ) \\
+Phần tử đường chéo & $\geq 0$ & $\leq 0$ \\
+Tổng mỗi hàng & $= 1$ & $= 0$ \\
+Ý nghĩa & ``đi đâu'' & ``đi nhanh thế nào'' \\
+\hline
+\end{tabular}
+\end{center}
+\end{tomtat}
+
+% ============================================================================
+\section{Chuỗi Markov hai trạng thái liên tục (Two-State Continuous-Time Chain)}
+\label{sec:two-state-continuous}
+
+Xét quá trình Markov liên tục trên $S = \{0, 1\}$ với ma trận sinh:
+\[
+  Q = \begin{bmatrix} -\alpha & \alpha \\ \beta & -\beta \end{bmatrix}, \qquad \alpha, \beta \geq 0.
+\]
+
+\textbf{Ví dụ:} Một máy tính có thể ở trạng thái ``hoạt động'' (0) hoặc ``hỏng'' (1).
+Máy hỏng với tốc độ $\alpha$ và được sửa với tốc độ $\beta$.
+
+Phương trình Kolmogorov tiến $P'(t) = P(t) Q$ cho hệ phương trình vi phân:
+\[
+  \begin{cases}
+    P'_{0,0}(t) = -\alpha P_{0,0}(t) + \beta P_{0,1}(t), \\
+    P'_{0,1}(t) = \alpha P_{0,0}(t) - \beta P_{0,1}(t),
+  \end{cases}
+\]
+với điều kiện đầu $P(0) = I_d$.
+
+\textbf{Nghiệm bằng hàm mũ ma trận:}
+
+Ma trận $Q$ có trị riêng $\lambda_1 = 0$ và $\lambda_2 = -(\alpha + \beta)$.
+
+Chéo hóa và tính $e^{tQ}$:
+\begin{equation}\label{eq:Pt-two-state}
+  P(t) = e^{tQ} = \frac{1}{\alpha+\beta}
+  \begin{bmatrix}
+    \beta + \alpha e^{-t(\alpha+\beta)} & \alpha - \alpha e^{-t(\alpha+\beta)} \\
+    \beta - \beta e^{-t(\alpha+\beta)} & \alpha + \beta e^{-t(\alpha+\beta)}
+  \end{bmatrix}, \quad t > 0.
+\end{equation}
+
+\textbf{So sánh với trường hợp rời rạc:} Biểu thức \eqref{eq:Pt-two-state} tương tự công thức rời rạc (Chương~\ref{ch:discrete}), nhưng thay $\lambda_2^n = (1-a-b)^n$ bằng $e^{-t(\alpha+\beta)}$. Sự hội tụ theo hàm mũ thay vì lũy thừa.
+
+\subsection{Phân phối giới hạn}
+
+Khi $t \to \infty$ (với $\alpha > 0$ hoặc $\beta > 0$):
+\begin{align}
+  \lim_{t\to\infty} \PP(X_t = 1 \mid X_0 = 0) &= \lim_{t\to\infty} \PP(X_t = 1 \mid X_0 = 1) = \frac{\alpha}{\alpha+\beta}, \label{eq:ct-limit-1}\\
+  \lim_{t\to\infty} \PP(X_t = 0 \mid X_0 = 0) &= \lim_{t\to\infty} \PP(X_t = 0 \mid X_0 = 1) = \frac{\beta}{\alpha+\beta}. \label{eq:ct-limit-0}
+\end{align}
+
+Phân phối giới hạn:
+\begin{equation}\label{eq:ct-pi}
+  \pi = (\pi_0, \pi_1) = \left(\frac{\beta}{\alpha+\beta},\; \frac{\alpha}{\alpha+\beta}\right).
+\end{equation}
+
+\begin{tomtat}
+Chuỗi hai trạng thái liên tục có cùng phân phối giới hạn $\pi = (\beta/(\alpha+\beta),\; \alpha/(\alpha+\beta))$ như trường hợp rời rạc (thay $a \to \alpha$, $b \to \beta$).
+Sự hội tụ luôn xảy ra trong thời gian liên tục (trừ $\alpha = \beta = 0$), và nhanh hơn khi $\alpha + \beta$ lớn hơn.
+\end{tomtat}
+
+% ============================================================================
+\section{Phân phối giới hạn và dừng (Limiting and Stationary Distributions)}
+\label{sec:ct-stationary}
+
+\textbf{Câu chuyện:} Quay lại ví dụ quán café. Sau nhiều giờ hoạt động, tỷ lệ thời gian quán có $0, 1, 2, \ldots$ khách
+sẽ ổn định --- không phụ thuộc vào lúc mở cửa có bao nhiêu khách.
+Đây chính là phân phối dừng: ``dân số ổn định'' sau thời gian dài.
+
+\begin{dinhnghia}[(Phân phối dừng liên tục -- \en{Stationary distribution, continuous-time})]
+Phân phối $\pi = (\pi_i)_{i\in S}$ được gọi là \term{dừng} (\en{stationary}) nếu $\pi P(t) = \pi$ với mọi $t \in \R_+$.
+\end{dinhnghia}
+
+\begin{proposition}[(Mệnh đề 4)]
+Phân phối $\pi = (\pi_i)_{i\in S}$ là dừng khi và chỉ khi:
+\begin{equation}\label{eq:pi-Q}
+  \pi Q = 0.
+\end{equation}
+\end{proposition}
+
+\textit{Chứng minh.} Nếu $\pi Q = 0$, thì $\pi P(t) = \pi e^{tQ} = \pi \sum_{n=0}^{\infty} \frac{t^n}{n!} Q^n = \pi$.
+Ngược lại, lấy đạo hàm $\pi = \pi P(t)$ tại $t = 0$: $0 = \pi P'(0) = \pi Q P(0) = \pi Q$. \qed
+
+\begin{proposition}[(Mệnh đề 5)]
+Nếu chuỗi Markov liên tục $(X_t)_{t\in\R_+}$ có phân phối giới hạn
+\[
+  \pi_j := \lim_{t\to\infty} \PP(X_t = j \mid X_0 = i) = \lim_{t\to\infty} P_{i,j}(t), \qquad j \in S,
+\]
+không phụ thuộc vào trạng thái ban đầu $i \in S$, thì $\pi Q = 0$, tức $\pi$ là phân phối dừng.
+\end{proposition}
+
+\begin{congthuc}
+\textbf{Tìm phân phối dừng:} Giải hệ $\pi Q = 0$ kết hợp $\sum_i \pi_i = 1$.
+
+Tương đương: $\sum_{i \in S} \pi_i \lambda_{i,j} = 0$ với mọi $j \in S$.
+
+Lưu ý: điều kiện $\pi Q = 0$ tương đương với $\pi = \pi(I_d + hQ)$ cho mọi $h > 0$, chính là phân phối dừng của chuỗi rời rạc có ma trận chuyển $P(h) \simeq I_d + hQ$.
+\end{congthuc}
+
+\subsection{Phân phối dừng của quá trình sinh-tử}
+
+Với quá trình sinh-tử trên $\N$ có ma trận sinh $Q = [\lambda_{i,j}]$, hệ $\pi Q = 0$ cho:
+\[
+  \begin{cases}
+    0 = -\lambda_0 \pi_0 + \mu_1 \pi_1 \\
+    0 = \lambda_{j-1}\pi_{j-1} - (\lambda_j + \mu_j)\pi_j + \mu_{j+1}\pi_{j+1}, \quad j \geq 1
+  \end{cases}
+\]
+Giải đệ quy:
+\[
+  \pi_1 = \frac{\lambda_0}{\mu_1}\pi_0, \qquad
+  \pi_{j+1} = \frac{\lambda_j \cdots \lambda_0}{\mu_{j+1} \cdots \mu_1} \pi_0, \qquad j \geq 0,
+\]
+với $\pi_0$ được xác định bởi $\sum_{i=0}^{\infty} \pi_i = 1$:
+\[
+  \pi_0 = \frac{1}{\displaystyle\sum_{i=0}^{\infty} \frac{\lambda_{i-1} \cdots \lambda_0}{\mu_i \cdots \mu_1}}.
+\]
+
+\textbf{Trường hợp đặc biệt:} Khi $\lambda_i = \lambda$ và $\mu_i = \mu$ với mọi $i \geq 1$:
+\[
+  \pi_j = \left(1 - \frac{\lambda}{\mu}\right) \left(\frac{\lambda}{\mu}\right)^j, \qquad j \in \N,
+\]
+với điều kiện $\lambda < \mu$ (phân phối hình học với tham số $\lambda/\mu$).
+
+\begin{example}[Hàng đợi M/M/1]
+\label{ex:mm1-queue}
+Một quầy phục vụ có khách đến theo Poisson với tốc độ $\lambda$ và thời gian phục vụ mũ với tốc độ $\mu$.
+Đây là quá trình sinh-tử với $\lambda_i = \lambda$ và $\mu_i = \mu$ cho mọi $i \geq 1$, $\mu_0 = 0$.
+
+Nếu $\rho = \lambda/\mu < 1$ (hệ thống ổn định):
+\[
+  \pi_j = (1 - \rho)\rho^j, \qquad j \in \N.
+\]
+
+Số khách trung bình trong hệ thống:
+\[
+  \E[X] = \sum_{j=0}^{\infty} j\, \pi_j = \frac{\rho}{1-\rho} = \frac{\lambda}{\mu - \lambda}.
+\]
+
+Ví dụ: nếu $\lambda = 4$ khách/giờ, $\mu = 5$ khách/giờ, thì $\rho = 0.8$ và $\E[X] = 4$ khách.
+\end{example}
+
+% ============================================================================
+\section{Chuỗi nhúng (The Embedded Chain)}
+\label{sec:embedded}
+
+\textbf{Câu chuyện:} Hãy tưởng tượng bạn quay video quán café cả ngày. Chuỗi Markov liên tục là toàn bộ video.
+Nhưng nếu bạn chỉ chụp ảnh mỗi khi có sự thay đổi (khách đến hoặc đi),
+bạn thu được một ``bộ ảnh'' --- đây chính là \term{chuỗi nhúng}.
+
+Chuỗi nhúng ``bỏ qua thời gian'', chỉ ghi lại \emph{trạng thái nào} xuất hiện, không quan tâm \emph{bao lâu} ở mỗi trạng thái.
+
+\begin{dinhnghia}[(Chuỗi nhúng -- \en{Embedded chain})]
+Xét dãy $(T_n)_{n\in\N}$ các thời điểm nhảy của quá trình Markov liên tục $(X_t)_{t\in\R_+}$:
+\[
+  T_1 = \inf\{t > 0 : X_t \neq X_0\}, \qquad
+  T_{n+1} = \inf\{t > T_n : X_t \neq X_{T_n}\}, \quad n \in \N.
+\]
+\term{Chuỗi Markov nhúng} (\en{embedded Markov chain}) là chuỗi rời rạc $(Z_n)_{n\in\N}$ với:
+\[
+  Z_0 = X_0, \qquad Z_n = X_{T_n}, \quad n \in \N.
+\]
+\end{dinhnghia}
+
+\subsection{Ma trận chuyển của chuỗi nhúng}
+
+Với quá trình sinh-tử, ma trận chuyển của chuỗi nhúng:
+\[
+  P_{i,i+1} = \frac{\lambda_i}{\lambda_i + \mu_i}, \qquad
+  P_{i,i-1} = \frac{\mu_i}{\lambda_i + \mu_i}, \qquad i \in \N.
+\]
+
+Điều này là do:
+\[
+  \PP(\tau_{i,i+1} < \tau_{i,i-1}) = \frac{\lambda_i}{\lambda_i + \mu_i},
+\]
+theo tính chất cạnh tranh giữa hai biến mũ độc lập.
+
+\textbf{Tổng quát:} Với chuỗi Markov liên tục có ma trận sinh $Q = [\lambda_{i,j}]$,
+ma trận chuyển của chuỗi nhúng là:
+\begin{equation}\label{eq:embedded-general}
+  \hat{P}_{i,j} = \frac{\lambda_{i,j}}{-\lambda_{i,i}} = \frac{\lambda_{i,j}}{\sum_{l \neq i} \lambda_{i,l}}, \qquad i \neq j.
+\end{equation}
+
+\begin{example}[Từ ma trận $Q$ đến chuỗi nhúng -- 5 trạng thái]
+Xét quá trình ở Ví dụ~\ref{ex:5state-generator} với ma trận sinh:
+\[
+  Q = \begin{bmatrix}
+    -3 & 2 & 1 & 0 & 0 \\
+    1 & -4 & 2 & 1 & 0 \\
+    0 & 1 & -3 & 1 & 1 \\
+    0 & 0 & 2 & -5 & 3 \\
+    0 & 0 & 0 & 4 & -4
+  \end{bmatrix}.
+\]
+
+Ma trận chuyển của chuỗi nhúng $\hat{P}$:
+\[
+  \hat{P} = \begin{bmatrix}
+    0 & 2/3 & 1/3 & 0 & 0 \\
+    1/4 & 0 & 2/4 & 1/4 & 0 \\
+    0 & 1/3 & 0 & 1/3 & 1/3 \\
+    0 & 0 & 2/5 & 0 & 3/5 \\
+    0 & 0 & 0 & 1 & 0
+  \end{bmatrix}.
+\]
+
+\textbf{Cách tính:} Hàng $i$ của $\hat{P}$ = hàng $i$ của $Q$ (bỏ phần tử đường chéo), chia cho $|\lambda_{i,i}|$.
+
+Ví dụ hàng 1 (trạng thái 1): $\lambda_{1,0} = 1$, $\lambda_{1,2} = 2$, $\lambda_{1,3} = 1$, $|\lambda_{1,1}| = 4$.
+\[
+  \hat{P}_{1,0} = \frac{1}{4}, \quad \hat{P}_{1,2} = \frac{2}{4}, \quad \hat{P}_{1,3} = \frac{1}{4}.
+\]
+\end{example}
+
+\begin{tomtat}
+Chuỗi nhúng ``rời rạc hóa'' quá trình liên tục bằng cách chỉ ghi lại các trạng thái tại thời điểm nhảy.
+Ma trận chuyển của chuỗi nhúng chỉ phụ thuộc vào \emph{tỷ lệ} các tốc độ, không phụ thuộc vào tốc độ tuyệt đối.
+
+Để phục hồi quá trình liên tục từ chuỗi nhúng, cần thêm thông tin về \emph{thời gian ở mỗi trạng thái}
+$\tau_i \sim \text{Exp}(-\lambda_{i,i})$.
+\end{tomtat}
+
+% ============================================================================
+\section{Xác suất hấp thụ (Absorption Probabilities)}
+\label{sec:absorption-prob}
+
+\textbf{Câu chuyện:} Hãy tưởng tượng một con kiến bắt đầu ở vị trí $i$ trên một thanh gỗ.
+Hai đầu thanh gỗ ($0$ và $N$) là ``tường'' --- khi chạm tường, kiến dừng lại vĩnh viễn.
+Câu hỏi: ``Con kiến sẽ chạm tường nào? Với xác suất bao nhiêu?''
+
+Đây là bài toán \term{xác suất hấp thụ} cho quá trình sinh-tử liên tục.
+Vì chuỗi nhúng quyết định ``đi đâu'' (không quan tâm ``bao lâu''),
+xác suất hấp thụ của quá trình liên tục \emph{bằng} xác suất hấp thụ của chuỗi nhúng.
+
+\subsection{Thiết lập bài toán}
+
+Xét quá trình sinh-tử trên $S = \{0, 1, \ldots, N\}$ với:
+\begin{itemize}[nosep]
+  \item Trạng thái $0$ và $N$ là hấp thụ: $\lambda_0 = 0$ (không sinh khi ở 0) và $\mu_N = 0$ (không tử khi ở $N$).
+  \item Khi ở trạng thái $i$ ($1 \leq i \leq N-1$): sinh với tốc độ $\lambda_i$, tử với tốc độ $\mu_i$.
+\end{itemize}
+
+Đặt $g_0(i) = \PP(\text{bị hấp thụ vào trạng thái } 0 \mid X_0 = i)$.
+
+\subsection{Phương trình cho xác suất hấp thụ}
+
+Vì xác suất hấp thụ chỉ phụ thuộc chuỗi nhúng, ta áp dụng phân tích bước đầu tiên trên chuỗi nhúng:
+\begin{equation}\label{eq:absorption-fsa}
+  g_0(i) = \hat{P}_{i,i-1}\, g_0(i-1) + \hat{P}_{i,i+1}\, g_0(i+1),
+  \qquad 1 \leq i \leq N-1,
+\end{equation}
+với điều kiện biên $g_0(0) = 1$ và $g_0(N) = 0$.
+
+Thay $\hat{P}_{i,i-1} = \frac{\mu_i}{\lambda_i + \mu_i}$ và $\hat{P}_{i,i+1} = \frac{\lambda_i}{\lambda_i + \mu_i}$:
+\begin{equation}\label{eq:absorption-bd}
+  g_0(i) = \frac{\mu_i}{\lambda_i + \mu_i}\, g_0(i-1) + \frac{\lambda_i}{\lambda_i + \mu_i}\, g_0(i+1).
+\end{equation}
+
+Đây là phương trình ``con bạc'' (\en{gambler's equation}) ở dạng liên tục.
+
+\subsection{Nghiệm tường minh}
+
+Đặt $\rho_i = \mu_i / \lambda_i$ (tỷ số tử/sinh). Viết lại \eqref{eq:absorption-bd}:
+\[
+  g_0(i) - g_0(i-1) = \frac{\lambda_i}{\mu_i}\left[g_0(i+1) - g_0(i)\right],
+\]
+hay:
+\[
+  g_0(i+1) - g_0(i) = \rho_i \left[g_0(i) - g_0(i-1)\right].
+\]
+
+Đặt $d_i = g_0(i) - g_0(i-1)$. Ta có $d_{i+1} = \rho_i\, d_i$, suy ra:
+\[
+  d_k = d_1 \prod_{j=1}^{k-1} \rho_j = d_1 \prod_{j=1}^{k-1} \frac{\mu_j}{\lambda_j}, \qquad k \geq 2.
+\]
+
+Từ $g_0(0) = 1$ và $g_0(N) = 0$:
+\[
+  g_0(N) - g_0(0) = \sum_{k=1}^{N} d_k = -1.
+\]
+
+Đặt $R_k = \prod_{j=1}^{k-1} \frac{\mu_j}{\lambda_j}$ (với $R_1 = 1$). Ta được $d_1 \sum_{k=1}^{N} R_k = -1$, nên:
+
+\begin{congthuc}
+\textbf{Xác suất hấp thụ vào trạng thái $0$:}
+\begin{equation}\label{eq:absorption-formula}
+  g_0(i) = \frac{\displaystyle\sum_{k=i+1}^{N} R_k}{\displaystyle\sum_{k=1}^{N} R_k},
+  \qquad \text{với } R_k = \prod_{j=1}^{k-1} \frac{\mu_j}{\lambda_j},\; R_1 = 1.
+\end{equation}
+\end{congthuc}
+
+\textbf{Trường hợp đặc biệt} $\lambda_i = \lambda$, $\mu_i = \mu$ (tốc độ không đổi):
+
+Nếu $\rho = \mu/\lambda \neq 1$: $R_k = \rho^{k-1}$, suy ra:
+\begin{equation}\label{eq:absorption-constant}
+  g_0(i) = \frac{\rho^i - \rho^N}{1 - \rho^N}.
+\end{equation}
+
+Nếu $\rho = 1$ (tức $\lambda = \mu$):
+\[
+  g_0(i) = 1 - \frac{i}{N}.
+\]
+
+\begin{example}[Xác suất hấp thụ với $N = 4$]
+\label{ex:absorption-N4}
+Xét quá trình sinh-tử trên $\{0, 1, 2, 3, 4\}$ với $\lambda_i = 2$, $\mu_i = 3$ cho $1 \leq i \leq 3$.
+
+Ta có $\rho = \mu/\lambda = 3/2$. Áp dụng \eqref{eq:absorption-constant}:
+\[
+  g_0(i) = \frac{(3/2)^i - (3/2)^4}{1 - (3/2)^4}
+  = \frac{(3/2)^i - 81/16}{1 - 81/16}
+  = \frac{(3/2)^i - 81/16}{-65/16}.
+\]
+
+Tính cụ thể:
+\begin{align*}
+  g_0(1) &= \frac{3/2 - 81/16}{-65/16} = \frac{24/16 - 81/16}{-65/16} = \frac{-57/16}{-65/16} = \frac{57}{65} \approx 0.877, \\
+  g_0(2) &= \frac{9/4 - 81/16}{-65/16} = \frac{36/16 - 81/16}{-65/16} = \frac{45}{65} = \frac{9}{13} \approx 0.692, \\
+  g_0(3) &= \frac{27/8 - 81/16}{-65/16} = \frac{54/16 - 81/16}{-65/16} = \frac{27}{65} \approx 0.415.
+\end{align*}
+
+\textbf{Nhận xét:} Vì $\mu > \lambda$ (tốc độ tử $>$ tốc độ sinh), quá trình ``kéo về 0'' mạnh hơn,
+nên xác suất chạm 0 khá cao ngay cả từ trạng thái 3.
+\end{example}
+
+% ============================================================================
+\section{Thời gian hấp thụ trung bình (Mean Absorption Times)}
+\label{sec:absorption-time}
+
+\textbf{Câu chuyện:} Ta đã biết con kiến sẽ chạm tường. Nhưng \textbf{mất bao lâu}?
+Trong thời gian liên tục, đây là câu hỏi quan trọng vì thời gian có ý nghĩa thực tế
+(ví dụ: ``Trung bình bao lâu thì hệ thống tắt?'').
+
+Khác với chuỗi rời rạc (đếm số bước), ở đây ta cần cộng các \emph{thời gian lưu trú} (\en{sojourn times})
+tại mỗi trạng thái.
+
+\subsection{Thiết lập}
+
+Đặt $\eta(i) = \E[T_{\text{abs}} \mid X_0 = i]$, trong đó $T_{\text{abs}}$ là thời gian đến khi bị hấp thụ
+(chạm $0$ hoặc $N$).
+
+Với quá trình sinh-tử, phân tích bước đầu tiên \emph{trên chuỗi nhúng} cho:
+\begin{equation}\label{eq:mean-abs-embedded}
+  \eta(i) = \E[\tau_i] + \hat{P}_{i,i-1}\, \eta(i-1) + \hat{P}_{i,i+1}\, \eta(i+1),
+  \qquad 1 \leq i \leq N-1,
+\end{equation}
+với điều kiện biên $\eta(0) = \eta(N) = 0$.
+
+Ở đây $\E[\tau_i] = \frac{1}{\lambda_i + \mu_i}$ là thời gian trung bình ở trạng thái $i$ trước khi nhảy.
+
+\textbf{Sự khác biệt so với rời rạc:} Trong trường hợp rời rạc, ta có ``$+1$'' (mỗi bước mất 1 đơn vị thời gian).
+Ở đây, ta thay bằng ``$+\E[\tau_i]$'' --- mỗi bước mất thời gian $\text{Exp}(\lambda_i + \mu_i)$.
+
+\subsection{Nghiệm}
+
+Thay $\hat{P}_{i,i\pm 1}$ và $\E[\tau_i]$ vào \eqref{eq:mean-abs-embedded}:
+\[
+  \eta(i) = \frac{1}{\lambda_i + \mu_i} + \frac{\mu_i}{\lambda_i + \mu_i}\, \eta(i-1) + \frac{\lambda_i}{\lambda_i + \mu_i}\, \eta(i+1).
+\]
+
+Nhân cả hai vế với $(\lambda_i + \mu_i)$:
+\[
+  (\lambda_i + \mu_i)\eta(i) = 1 + \mu_i\, \eta(i-1) + \lambda_i\, \eta(i+1).
+\]
+
+Viết lại:
+\begin{equation}\label{eq:mean-abs-recurrence}
+  \lambda_i[\eta(i) - \eta(i+1)] = 1 + \mu_i[\eta(i-1) - \eta(i)].
+\end{equation}
+
+Đặt $\Delta_i = \eta(i) - \eta(i+1)$. Ta có quan hệ đệ quy:
+\[
+  \lambda_i \Delta_i = 1 - \mu_i \Delta_{i-1},
+\]
+hay:
+\[
+  \Delta_i = \frac{1}{\lambda_i} - \frac{\mu_i}{\lambda_i} \Delta_{i-1}
+  = \frac{1}{\lambda_i} + \rho_i \Delta_{i-1}.
+\]
+
+\begin{example}[Thời gian hấp thụ trung bình với $N = 4$]
+Tiếp tục Ví dụ~\ref{ex:absorption-N4} với $\lambda_i = 2$, $\mu_i = 3$.
+
+Thời gian trung bình ở mỗi trạng thái: $\E[\tau_i] = 1/(\lambda_i + \mu_i) = 1/5$ giờ = 12 phút.
+
+Hệ phương trình (nhân cả hai vế với 5):
+\[
+  \begin{cases}
+    5\eta(1) = 1 + 3\eta(0) + 2\eta(2) = 1 + 2\eta(2), \\
+    5\eta(2) = 1 + 3\eta(1) + 2\eta(3), \\
+    5\eta(3) = 1 + 3\eta(2) + 2\eta(4) = 1 + 3\eta(2).
+  \end{cases}
+\]
+
+Từ PT3: $\eta(3) = \frac{1 + 3\eta(2)}{5}$.
+
+Thay vào PT2: $5\eta(2) = 1 + 3\eta(1) + 2 \cdot \frac{1 + 3\eta(2)}{5}$
+$\Rightarrow 25\eta(2) = 5 + 15\eta(1) + 2 + 6\eta(2)$
+$\Rightarrow 19\eta(2) = 7 + 15\eta(1)$.
+
+Từ PT1: $\eta(1) = \frac{1 + 2\eta(2)}{5}$.
+
+Thay: $19\eta(2) = 7 + 15 \cdot \frac{1 + 2\eta(2)}{5} = 7 + 3(1 + 2\eta(2)) = 10 + 6\eta(2)$.
+
+Suy ra: $13\eta(2) = 10$, $\eta(2) = 10/13$.
+
+Khi đó: $\eta(1) = \frac{1 + 20/13}{5} = \frac{33/13}{5} = \frac{33}{65}$,
+$\eta(3) = \frac{1 + 30/13}{5} = \frac{43/13}{5} = \frac{43}{65}$.
+
+\textbf{Kết quả:}
+\[
+  \eta(1) = \frac{33}{65} \approx 0.508, \quad
+  \eta(2) = \frac{10}{13} \approx 0.769, \quad
+  \eta(3) = \frac{43}{65} \approx 0.662.
+\]
+
+(Đơn vị: giờ, nếu $\lambda, \mu$ tính theo giờ.)
+
+\textbf{Nhận xét:} $\eta(2) > \eta(3) > \eta(1)$. Trạng thái $2$ (ở giữa) mất lâu nhất
+vì nó xa cả hai biên hấp thụ.
+\end{example}
+
+% ============================================================================
+\section{Quan hệ giữa phân phối dừng liên tục và rời rạc}
+\label{sec:continuous-vs-discrete}
+
+Một câu hỏi tự nhiên: phân phối dừng $\pi$ của quá trình liên tục
+và phân phối dừng $\hat{\pi}$ của chuỗi nhúng có quan hệ gì?
+
+\begin{dinhly}[(Quan hệ $\pi$ và $\hat{\pi}$)]
+Nếu $\pi$ là phân phối dừng của quá trình Markov liên tục (tức $\pi Q = 0$),
+và $\hat{\pi}$ là phân phối dừng của chuỗi nhúng (tức $\hat{\pi} \hat{P} = \hat{\pi}$), thì:
+\begin{equation}\label{eq:pi-hat-relation}
+  \pi_i \propto \frac{\hat{\pi}_i}{-\lambda_{i,i}}, \qquad i \in S.
+\end{equation}
+Tức là: $\pi_i = \frac{\hat{\pi}_i / (-\lambda_{i,i})}{\sum_j \hat{\pi}_j / (-\lambda_{j,j})}$.
+\end{dinhly}
+
+\textbf{Ý nghĩa trực quan:} Phân phối dừng liên tục $\pi_i$ tỷ lệ với cả hai yếu tố:
+\begin{enumerate}[nosep]
+  \item Tần suất ``ghé thăm'' trạng thái $i$ (đo bằng $\hat{\pi}_i$).
+  \item Thời gian ở lại trạng thái $i$ mỗi lần ghé (đo bằng $1/(-\lambda_{i,i})$).
+\end{enumerate}
+Trạng thái được ghé thăm thường xuyên VÀ giữ chân lâu sẽ có $\pi_i$ lớn.
+
+% ============================================================================
+\section{Bài tập (Exercises)}
+\label{sec:ch9-exercises}
+
+\begin{exercise}
+Xét quá trình sinh-tử trên $\{0, 1, 2, 3\}$ với tốc độ sinh $\lambda_i = 2$ và tốc độ tử $\mu_i = 3$ cho $1 \leq i \leq 2$, $\lambda_0 = 2$, $\mu_3 = 3$, $\lambda_3 = \mu_0 = 0$.
+\begin{enumerate}[nosep]
+  \item Viết ma trận sinh $Q$.
+  \item Tìm phân phối dừng $\pi$.
+  \item Viết ma trận chuyển của chuỗi nhúng.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+Cho chuỗi Markov liên tục hai trạng thái với $\alpha = 3$ và $\beta = 6$.
+\begin{enumerate}[nosep]
+  \item Tính $P(t)$ cho mọi $t > 0$.
+  \item Tính thời gian trung bình ở mỗi trạng thái.
+  \item Tìm phân phối giới hạn.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[Hàng đợi M/M/1]
+Khách đến quầy theo Poisson với tốc độ $\lambda = 3$ khách/giờ.
+Thời gian phục vụ mỗi khách là biến mũ với tốc độ $\mu = 5$ phục vụ/giờ.
+\begin{enumerate}[nosep]
+  \item Viết ma trận sinh $Q$ (vô hạn chiều).
+  \item Tìm phân phối dừng. Hệ thống có ổn định không?
+  \item Tính số khách trung bình trong hệ thống.
+  \item Tính xác suất hệ thống rỗng (không có khách nào).
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[Quá trình điện tín -- \en{Telegraph process}]
+Tín hiệu điện tín chuyển giữa ``bật'' và ``tắt'' theo chuỗi Markov liên tục hai trạng thái
+với tốc độ bật$\to$tắt là $\alpha = 2$ và tắt$\to$bật là $\beta = 3$.
+\begin{enumerate}[nosep]
+  \item Tìm xác suất tín hiệu đang ``bật'' tại thời điểm $t$, biết ban đầu ``bật''.
+  \item Tìm phân phối giới hạn. Bao nhiêu phần trăm thời gian tín hiệu ``bật''?
+  \item Thời gian trung bình một chu kỳ ``bật'' kéo dài bao lâu?
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[Xác suất hấp thụ]
+Xét quá trình sinh-tử trên $\{0, 1, 2, 3, 4, 5\}$ với $\lambda_i = 1$ và $\mu_i = 2$ cho $1 \leq i \leq 4$,
+trạng thái $0$ và $5$ hấp thụ.
+\begin{enumerate}[nosep]
+  \item Tính xác suất bị hấp thụ vào trạng thái $0$ xuất phát từ $i = 1, 2, 3, 4$.
+  \item So sánh với trường hợp $\lambda_i = \mu_i = 1$ (tốc độ bằng nhau).
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[Quá trình Yule -- \en{Yule process}]
+Quá trình Yule là quá trình sinh thuần túy với $\lambda_i = i\lambda$ (tốc độ sinh tỷ lệ với số cá thể hiện tại).
+Bắt đầu với $X_0 = 1$.
+\begin{enumerate}[nosep]
+  \item Tính thời gian trung bình ở trạng thái $i$ (tức $\E[\tau_i]$).
+  \item Tính thời gian trung bình để quần thể tăng từ $1$ lên $n$ cá thể.
+  \item Giải thích tại sao quá trình Yule mô hình hóa sự tăng trưởng dân số.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[Thời gian hấp thụ trung bình]
+Xét quá trình sinh-tử trên $\{0, 1, 2, 3\}$ với $\lambda_i = 1$, $\mu_i = 1$ cho $i = 1, 2$,
+trạng thái $0$ và $3$ hấp thụ.
+\begin{enumerate}[nosep]
+  \item Tính thời gian hấp thụ trung bình $\eta(1)$ và $\eta(2)$.
+  \item So sánh với thời gian hấp thụ trong chuỗi rời rạc tương ứng (gambler's ruin với $p = q = 1/2$, $N = 3$).
+\end{enumerate}
+\end{exercise}

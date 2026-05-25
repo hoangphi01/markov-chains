@@ -1,0 +1,593 @@
+\chapter{Phân phối giới hạn và dừng\\{\normalsize\textit{Limiting and Stationary Distributions}}}
+\label{ch:limiting}
+
+\textbf{Câu chuyện:} Hãy tưởng tượng một thành phố với nhiều khu dân cư. Mỗi năm, người dân di cư giữa các khu.
+Ban đầu có thể khu A đông, khu B vắng. Nhưng sau nhiều năm, tỷ lệ dân ở mỗi khu sẽ \textbf{ổn định} ---
+không phụ thuộc vào phân bố ban đầu. Đây chính là \term{phân phối giới hạn}: trạng thái ``cân bằng dài hạn'' của hệ thống.
+
+% ============================================================================
+\section{Phân phối giới hạn (Limiting Distributions)}
+\label{sec:limiting-dist}
+
+\begin{dinhnghia}[(Phân phối giới hạn -- \en{Limiting distribution})]
+Một chuỗi Markov $(X_n)_{n\in\N}$ với ma trận chuyển $P$ trên không gian trạng thái $S$
+được gọi là có \term{phân phối giới hạn} (\en{limiting distribution}) nếu giới hạn
+\[
+  \pi_j := \lim_{n\to\infty} \PP(X_n = j \mid X_0 = i)
+\]
+tồn tại với mọi $i, j \in S$, và \emph{không phụ thuộc} vào trạng thái ban đầu $i$.
+\end{dinhnghia}
+
+\begin{tomtat}
+Phân phối giới hạn $\pi = (\pi_j)_{j\in S}$ mô tả xác suất ``dài hạn'' của chuỗi Markov:
+sau thời gian đủ lớn, xác suất ở trạng thái $j$ tiến tới $\pi_j$,
+bất kể chuỗi xuất phát từ đâu.
+
+Ví dụ: sau nhiều năm di cư, dù ban đầu tất cả sống ở khu A, tỷ lệ dân vẫn tiến tới $\pi$.
+\end{tomtat}
+
+% --- Regular matrices ---
+\subsection{Ma trận chính quy (Regular Matrices)}
+\label{subsec:regular-matrix}
+
+\begin{dinhnghia}[(Ma trận chính quy -- \en{Regular matrix})]
+Ma trận chuyển $P$ được gọi là \term{chính quy} (\en{regular}) nếu tồn tại
+lũy thừa $P^n$ (với $n$ nào đó) mà tất cả các phần tử đều dương.
+\end{dinhnghia}
+
+Nếu $P$ là chính quy, thì chuỗi Markov tương ứng có phân phối giới hạn
+$\pi_j = \lim_{n\to\infty} \PP(X_n = j \mid X_0 = i)$, và giới hạn này \emph{không phụ thuộc} vào $i$.
+
+% --- Two-state example ---
+\subsection{Ví dụ: Chuỗi hai trạng thái (Two-State Chain Example)}
+
+Xét chuỗi Markov hai trạng thái $S = \{0, 1\}$ với ma trận chuyển:
+\[
+  P = \begin{bmatrix} 1-a & a \\ b & 1-b \end{bmatrix},
+  \qquad a, b \in (0,1].
+\]
+
+Từ Chương~\ref{ch:discrete}, ta đã biết phân phối giới hạn là:
+\begin{equation}\label{eq:ch7-pi-two-state}
+  (\pi_0, \pi_1) = \left(\frac{b}{a+b},\; \frac{a}{a+b}\right).
+\end{equation}
+
+\textbf{Thời gian quay lại trung bình} (\en{mean return times}).
+Với chuỗi hai trạng thái, thời gian quay lại trung bình của các trạng thái là:
+\begin{equation}\label{eq:mean-return-two-state}
+  \mu_0(0) = \frac{a+b}{b}, \qquad
+  \mu_1(1) = \frac{a+b}{a}.
+\end{equation}
+
+\begin{tomtat}
+\textbf{Quan sát quan trọng:}
+So sánh \eqref{eq:ch7-pi-two-state} và \eqref{eq:mean-return-two-state}, ta thấy:
+\[
+  \pi_0 = \frac{b}{a+b} = \frac{1}{\mu_0(0)}, \qquad
+  \pi_1 = \frac{a}{a+b} = \frac{1}{\mu_1(1)}.
+\]
+Xác suất giới hạn của trạng thái $j$ bằng \emph{nghịch đảo} của thời gian quay lại trung bình $\mu_j(j)$.
+Đây là kết quả tổng quát, không chỉ đúng cho chuỗi hai trạng thái.
+
+Trực quan: nếu trung bình cứ 5 bước bạn quay lại quán quen, thì ``tỷ lệ thời gian'' ở quán là $1/5 = 20\%$.
+\end{tomtat}
+
+% --- Main theorem ---
+\subsection{Định lý chính về phân phối giới hạn}
+
+\begin{dinhly}[{Định lý 6 -- Phân phối giới hạn (\en{Theorem IV.4.1 in Feller})}]
+\label{thm:limiting-dist}
+Cho chuỗi Markov $(X_n)_{n\in\N}$ \term{bất khả quy} (\en{irreducible}),
+\term{hồi quy} (\en{recurrent}), và \term{không tuần hoàn} (\en{aperiodic})
+trên không gian trạng thái $S$. Khi đó:
+\begin{equation}\label{eq:limiting-thm}
+  \lim_{n\to\infty} \PP(X_n = i \mid X_0 = j)
+  = \frac{1}{\mu_i(i)}, \qquad \text{với mọi } i, j \in S,
+\end{equation}
+trong đó $\mu_i(i) = \E[\tau_i \mid X_0 = i]$ là \term{thời gian hồi quy trung bình}
+(\en{mean recurrence time}) của trạng thái $i$, và
+$\tau_i = \inf\{n \geq 1 : X_n = i\}$ là \term{thời điểm quay lại} (\en{return time}).
+\end{dinhly}
+
+\begin{congthuc}
+\textbf{Phân phối giới hạn và thời gian hồi quy:}
+\[
+  \boxed{\pi_j = \frac{1}{\mu_j(j)}}
+\]
+Xác suất dài hạn ở trạng thái $j$ tỷ lệ nghịch với thời gian trung bình để quay lại $j$.
+Trạng thái có thời gian hồi quy ngắn sẽ được ``ghé thăm'' thường xuyên hơn.
+\end{congthuc}
+
+\textbf{Giải thích trực quan:} Nếu trung bình cứ $\mu_j(j)$ bước ta quay lại trạng thái $j$ một lần,
+thì tỷ lệ thời gian ở trạng thái $j$ xấp xỉ $1/\mu_j(j)$.
+
+\textbf{Các điều kiện cần thiết:}
+\begin{itemize}[nosep]
+  \item \textbf{Bất khả quy} (\en{irreducible}): mọi trạng thái đều liên thông với nhau.
+  \item \textbf{Hồi quy} (\en{recurrent}): chuỗi chắc chắn quay lại mỗi trạng thái.
+  \item \textbf{Không tuần hoàn} (\en{aperiodic}): chu kỳ $d(i) = 1$ với mọi $i$.
+\end{itemize}
+
+Nếu chuỗi có \term{chu kỳ} (\en{periodic}) $d > 1$, thì giới hạn
+$\lim_{n\to\infty} \PP(X_n = j \mid X_0 = i)$ \emph{không tồn tại} (xem ví dụ ở Mục~\ref{subsec:periodic-no-limit}).
+
+% ============================================================================
+\section{Phân phối dừng (Stationary Distributions)}
+\label{sec:stationary-dist}
+
+\textbf{Câu chuyện:} Hãy tưởng tượng bạn đổ nước vào các bình thông nhau.
+Sau một lúc, mực nước ổn định --- đó là trạng thái ``dừng''.
+Phân phối dừng $\pi$ giống vậy: nếu ban đầu phân phối đã là $\pi$,
+thì sau bao nhiêu bước đi nữa, phân phối vẫn là $\pi$. Hệ thống ``đứng yên''.
+
+\begin{dinhnghia}[(Phân phối dừng -- \en{Stationary distribution})]
+\label{def:stationary}
+Vectơ xác suất $\pi = (\pi_i)_{i\in S}$ với $\pi_i \geq 0$ và $\sum_{i\in S} \pi_i = 1$
+được gọi là \term{phân phối dừng} (\en{stationary distribution}) (hay \term{phân phối bất biến}
+-- \en{invariant distribution}) của chuỗi Markov nếu:
+khi $X_0$ có phân phối $\pi$ (tức $\PP(X_0 = i) = \pi_i$),
+thì $X_1$ cũng có phân phối $\pi$.
+\end{dinhnghia}
+
+Điều kiện trên tương đương với:
+\begin{equation}\label{eq:stationary-condition}
+  \pi_j = \sum_{i \in S} \pi_i \, P_{i,j}, \qquad \text{với mọi } j \in S,
+\end{equation}
+hay viết dưới dạng ma trận:
+\begin{equation}\label{eq:pi-P}
+  \boxed{\pi = \pi P.}
+\end{equation}
+
+\begin{tomtat}
+$\pi$ là phân phối dừng nếu và chỉ nếu $\pi P = \pi$:
+$\pi$ là \term{vectơ riêng trái} (\en{left eigenvector}) của $P$ ứng với trị riêng $\lambda = 1$.
+
+Vì quá trình Markov là \term{đồng nhất theo thời gian} (\en{time homogeneous}),
+nếu $X_0 \sim \pi$ thì $X_k \sim \pi$ với \emph{mọi} $k \geq 1$.
+Do đó, phân phối $\pi$ được ``bảo toàn'' qua thời gian -- vì vậy gọi là ``dừng'' hay ``bất biến''.
+\end{tomtat}
+
+% --- Proposition 1 ---
+\begin{proposition}[Phân phối giới hạn là phân phối dừng]
+\label{prop:limiting-is-stationary}
+Cho chuỗi Markov trên $S = \{0, \ldots, N\}$ hữu hạn. Nếu phân phối giới hạn
+\[
+  \pi_j = \lim_{n\to\infty} \PP(X_n = j \mid X_0 = i)
+\]
+tồn tại và không phụ thuộc vào $i$, thì $\pi = (\pi_j)_{j\in S}$ là phân phối dừng: $\pi = \pi P$.
+\end{proposition}
+
+\begin{proof}
+Với mọi $j \in S$, bằng tính chất Markov:
+\begin{align*}
+  \pi_j
+  &= \lim_{n\to\infty} \PP(X_{n+1} = j \mid X_0 = i) \\
+  &= \lim_{n\to\infty} \sum_{l \in S} \PP(X_{n+1} = j \mid X_n = l) \, \PP(X_n = l \mid X_0 = i) \\
+  &= \sum_{l \in S} P_{l,j} \lim_{n\to\infty} \PP(X_n = l \mid X_0 = i) \\
+  &= \sum_{l \in S} P_{l,j} \, \pi_l.
+\end{align*}
+Đây chính là $\pi_j = \sum_{l} \pi_l P_{l,j}$, hay $\pi = \pi P$.
+\end{proof}
+
+% --- Important remarks ---
+\subsection{Lưu ý quan trọng}
+\label{subsec:periodic-no-limit}
+
+\textbf{1. Phân phối dừng có thể tồn tại mà không có phân phối giới hạn.}
+
+\begin{example}[Chuỗi tuần hoàn -- \en{Periodic chain}]
+Xét chuỗi Markov hai trạng thái với $a = b = 1$:
+\[
+  P = \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}.
+\]
+Chuỗi này có chu kỳ $d = 2$: từ trạng thái $0$ luôn chuyển sang $1$ và ngược lại.
+Do đó $\lim_{n\to\infty} P^n$ \emph{không tồn tại}.
+
+Tuy nhiên, $\pi = (1/2, 1/2)$ là phân phối dừng vì:
+\[
+  \begin{bmatrix} 1/2 & 1/2 \end{bmatrix}
+  \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}
+  = \begin{bmatrix} 1/2 & 1/2 \end{bmatrix}.
+\]
+\end{example}
+
+\textbf{2. Phân phối giới hạn (khi tồn tại và không phụ thuộc $i$) luôn là phân phối dừng}
+(theo Mệnh đề~\ref{prop:limiting-is-stationary}).
+
+\begin{tomtat}
+\begin{center}
+\begin{tabular}{ll}
+  \textbf{Phân phối giới hạn tồn tại} & $\Rightarrow$ \textbf{Phân phối dừng tồn tại} \\
+  \textbf{Phân phối dừng tồn tại} & $\not\Rightarrow$ \textbf{Phân phối giới hạn tồn tại}
+\end{tabular}
+\end{center}
+Chuỗi tuần hoàn có phân phối dừng nhưng không có phân phối giới hạn.
+\end{tomtat}
+
+% ============================================================================
+\section{Tính phân phối dừng (Computing Stationary Distributions)}
+\label{sec:computing-stationary}
+
+Để tìm phân phối dừng $\pi = (\pi_i)_{i\in S}$, ta giải hệ phương trình tuyến tính:
+
+\begin{congthuc}
+\textbf{Hệ phương trình cho phân phối dừng:}
+\[
+  \begin{cases}
+    \pi = \pi P & \text{(phương trình bất biến)}, \\
+    \displaystyle\sum_{i\in S} \pi_i = 1 & \text{(điều kiện chuẩn hóa)}.
+  \end{cases}
+\]
+Phương trình $\pi = \pi P$ tương đương với $\pi (P - I) = 0$, hay $\pi$ nằm trong
+\term{không gian riêng trái} (\en{left eigenspace}) ứng với trị riêng $1$ của $P$.
+\end{congthuc}
+
+% --- Example 1: Two-state ---
+\begin{example}[Chuỗi hai trạng thái]
+\label{ex:stationary-two-state}
+Với $P = \begin{bmatrix} 1-a & a \\ b & 1-b \end{bmatrix}$,
+hệ $\pi = \pi P$ cho:
+\begin{align*}
+  \pi_0 &= (1-a)\pi_0 + b\pi_1, \\
+  \pi_1 &= a\pi_0 + (1-b)\pi_1.
+\end{align*}
+Cả hai phương trình đều cho $a\pi_0 = b\pi_1$.
+Kết hợp với $\pi_0 + \pi_1 = 1$:
+\[
+  \pi_0 = \frac{b}{a+b}, \qquad \pi_1 = \frac{a}{a+b}.
+\]
+Kiểm tra: $\pi P = \pi$. Đúng! Kết quả trùng với phân phối giới hạn đã tìm trước đó.
+\end{example}
+
+% --- Example 2: Three-state ---
+\begin{example}[Chuỗi ba trạng thái -- chi tiết]
+\label{ex:stationary-three-state}
+Xét chuỗi Markov trên $S = \{0, 1, 2\}$ với ma trận chuyển:
+\[
+  P = \begin{bmatrix}
+    0 & 1/2 & 1/2 \\
+    1/4 & 1/2 & 1/4 \\
+    1/4 & 1/4 & 1/2
+  \end{bmatrix}.
+\]
+Hệ phương trình $\pi = \pi P$:
+\begin{align*}
+  \pi_0 &= \tfrac{1}{4}\pi_1 + \tfrac{1}{4}\pi_2, \\
+  \pi_1 &= \tfrac{1}{2}\pi_0 + \tfrac{1}{2}\pi_1 + \tfrac{1}{4}\pi_2, \\
+  \pi_2 &= \tfrac{1}{2}\pi_0 + \tfrac{1}{4}\pi_1 + \tfrac{1}{2}\pi_2.
+\end{align*}
+Từ phương trình thứ nhất: $4\pi_0 = \pi_1 + \pi_2 = 1 - \pi_0$, suy ra $\pi_0 = 1/5$.
+Từ phương trình thứ hai: $\pi_1 = \pi_0 + \tfrac{1}{2}\pi_2$, kết hợp $\pi_1 + \pi_2 = 4/5$:
+\[
+  \pi_1 = \frac{2}{5}, \qquad \pi_2 = \frac{2}{5}.
+\]
+Vậy $\pi = (1/5,\; 2/5,\; 2/5)$.
+
+\textbf{Thời gian hồi quy:} $\mu_0(0) = 1/\pi_0 = 5$, $\mu_1(1) = 1/\pi_1 = 5/2$, $\mu_2(2) = 5/2$.
+
+Trạng thái 0 được ghé thăm ít nhất (cứ 5 bước quay lại 1 lần).
+\end{example}
+
+% --- Example 3: Cover graph (5 states) ---
+\begin{example}[Đồ thị bìa sách -- \en{Cover graph chain}]
+\label{ex:cover-graph}
+Xét chuỗi Markov trên $S = \{1, 2, 3, 4, 5\}$ với ma trận chuyển:
+\[
+  P = \begin{bmatrix}
+    0 & 1/2 & 0 & 1/2 & 0 \\
+    1/3 & 0 & 1/3 & 0 & 1/3 \\
+    0 & 1/2 & 0 & 0 & 1/2 \\
+    1/2 & 0 & 0 & 0 & 1/2 \\
+    0 & 1/3 & 1/3 & 1/3 & 0
+  \end{bmatrix}.
+\]
+Trong đồ thị này, mỗi đỉnh chuyển sang các đỉnh kề với xác suất bằng nhau.
+
+Đối với \term{bước đi ngẫu nhiên trên đồ thị} (\en{random walk on a graph}),
+phân phối dừng tỷ lệ với \term{bậc} (\en{degree}) của mỗi đỉnh:
+\[
+  \pi_i = \frac{d_i}{2|E|},
+\]
+trong đó $d_i$ là bậc của đỉnh $i$ và $|E|$ là số cạnh.
+
+Ở đây, các bậc là $d_1 = 2$, $d_2 = 3$, $d_3 = 2$, $d_4 = 2$, $d_5 = 3$,
+với tổng $\sum d_i = 12$, tức $|E| = 6$. Do đó:
+\[
+  \pi = \left(\frac{2}{12},\; \frac{3}{12},\; \frac{2}{12},\; \frac{2}{12},\; \frac{3}{12}\right)
+  = \left(\frac{1}{6},\; \frac{1}{4},\; \frac{1}{6},\; \frac{1}{6},\; \frac{1}{4}\right).
+\]
+
+Trực quan: đỉnh có nhiều ``đường vào'' (bậc cao) được ghé thăm thường xuyên hơn.
+\end{example}
+
+% ============================================================================
+\section{Điều kiện cân bằng chi tiết (Detailed Balance)}
+\label{sec:detailed-balance}
+
+\textbf{Câu chuyện:} Ở trạng thái cân bằng, ``dòng người'' từ khu $i$ sang khu $j$
+bằng ``dòng người'' từ khu $j$ sang khu $i$.
+Giống như ở một ngã tư lúc giờ cao điểm: số xe chạy từ Đông sang Tây bằng số xe từ Tây sang Đông
+--- đó là ``cân bằng chi tiết''. Nếu không bằng nhau, sẽ có kẹt xe (hệ thống chưa cân bằng).
+
+\begin{dinhnghia}[(Điều kiện cân bằng chi tiết -- \en{Detailed balance condition})]
+\label{def:detailed-balance}
+Phân phối $\pi = (\pi_i)_{i\in S}$ thỏa mãn \term{điều kiện cân bằng chi tiết}
+(\en{detailed balance condition}) với ma trận chuyển $P$ nếu:
+\begin{equation}\label{eq:detailed-balance}
+  \boxed{\pi_i P_{i,j} = \pi_j P_{j,i}, \qquad \text{với mọi } i, j \in S.}
+\end{equation}
+\end{dinhnghia}
+
+\textbf{Ý nghĩa:} $\pi_i P_{i,j}$ = ``dòng xác suất'' (\en{probability flow}) từ $i$ sang $j$ ở trạng thái cân bằng.
+Điều kiện này nói: dòng từ $i \to j$ bằng dòng từ $j \to i$, với mọi cặp $(i, j)$.
+
+\begin{proposition}[(Cân bằng chi tiết $\Rightarrow$ phân phối dừng)]
+\label{prop:db-implies-stationary}
+Nếu $\pi$ thỏa mãn điều kiện cân bằng chi tiết \eqref{eq:detailed-balance} và $\sum_i \pi_i = 1$,
+thì $\pi$ là phân phối dừng ($\pi P = \pi$).
+\end{proposition}
+
+\begin{proof}
+Lấy tổng \eqref{eq:detailed-balance} theo $i$:
+\[
+  \sum_{i \in S} \pi_i P_{i,j} = \sum_{i \in S} \pi_j P_{j,i} = \pi_j \sum_{i \in S} P_{j,i} = \pi_j \cdot 1 = \pi_j.
+\]
+Đây chính là $(\pi P)_j = \pi_j$, tức $\pi P = \pi$.
+\end{proof}
+
+\textbf{Lưu ý:} Chiều ngược lại KHÔNG đúng. Có phân phối dừng không thỏa cân bằng chi tiết.
+Chuỗi thỏa mãn cân bằng chi tiết được gọi là \term{thuận nghịch} (\en{reversible}).
+
+\begin{example}[Kiểm tra cân bằng chi tiết]
+Với chuỗi hai trạng thái $P = \begin{bmatrix} 1-a & a \\ b & 1-b \end{bmatrix}$ và $\pi = (b/(a+b), a/(a+b))$:
+\[
+  \pi_0 P_{0,1} = \frac{b}{a+b} \cdot a = \frac{ab}{a+b}, \qquad
+  \pi_1 P_{1,0} = \frac{a}{a+b} \cdot b = \frac{ab}{a+b}.
+\]
+Bằng nhau! Chuỗi hai trạng thái luôn thỏa cân bằng chi tiết.
+\end{example}
+
+\begin{example}[Bước đi ngẫu nhiên trên đồ thị -- thuận nghịch]
+\label{ex:rw-graph-reversible}
+Bước đi ngẫu nhiên trên đồ thị (nhảy đều sang đỉnh kề) luôn thỏa cân bằng chi tiết với $\pi_i = d_i/(2|E|)$.
+
+Kiểm tra: $\pi_i P_{i,j} = \frac{d_i}{2|E|} \cdot \frac{1}{d_i} = \frac{1}{2|E|}$ (nếu $i \sim j$).
+Và $\pi_j P_{j,i} = \frac{d_j}{2|E|} \cdot \frac{1}{d_j} = \frac{1}{2|E|}$. Bằng nhau!
+\end{example}
+
+\begin{congthuc}
+\textbf{Tìm phân phối dừng bằng cân bằng chi tiết:}
+
+Nếu chuỗi là thuận nghịch, ta có thể tìm $\pi$ nhanh hơn bằng cách giải \eqref{eq:detailed-balance}:
+\[
+  \frac{\pi_j}{\pi_i} = \frac{P_{i,j}}{P_{j,i}}, \qquad \text{với mọi } i \sim j.
+\]
+Chọn một trạng thái tham chiếu (ví dụ $\pi_0$), tính tất cả $\pi_j$ theo $\pi_0$, rồi chuẩn hóa.
+\end{congthuc}
+
+% ============================================================================
+\section{Định lý hội tụ (Convergence Theorem)}
+\label{sec:convergence}
+
+Định lý sau tổng hợp các kết quả chính về phân phối giới hạn và phân phối dừng.
+
+\begin{dinhly}[(Hội tụ -- \en{Convergence theorem})]
+\label{thm:convergence}
+Cho chuỗi Markov $(X_n)_{n\in\N}$ \term{bất khả quy} (\en{irreducible}),
+\term{không tuần hoàn} (\en{aperiodic}), và \term{hồi quy dương} (\en{positive recurrent})
+trên không gian trạng thái $S$. Khi đó:
+\begin{enumerate}[label=(\roman*)]
+  \item Tồn tại \emph{duy nhất} một phân phối dừng $\pi = (\pi_j)_{j\in S}$
+    thỏa mãn $\pi = \pi P$ và $\sum_{j} \pi_j = 1$.
+  \item Phân phối dừng \emph{trùng} với phân phối giới hạn:
+    \[
+      \lim_{n\to\infty} \PP(X_n = j \mid X_0 = i) = \pi_j, \qquad \text{với mọi } i, j \in S.
+    \]
+  \item Phân phối dừng liên hệ với thời gian hồi quy trung bình:
+    \[
+      \pi_j = \frac{1}{\mu_j(j)}, \qquad \text{với mọi } j \in S.
+    \]
+\end{enumerate}
+\end{dinhly}
+
+\begin{tomtat}
+Với chuỗi Markov bất khả quy, không tuần hoàn, hồi quy dương:
+\[
+  \underbrace{\text{Phân phối dừng}}_{\pi = \pi P}
+  = \underbrace{\text{Phân phối giới hạn}}_{\lim P^n_{i,j}}
+  = \underbrace{\text{Nghịch đảo thời gian hồi quy}}_{1/\mu_j(j)}.
+\]
+Ba khái niệm này \emph{trùng nhau} trong trường hợp tốt nhất.
+\end{tomtat}
+
+\textbf{Lưu ý về không gian trạng thái hữu hạn:}
+Nếu $S$ hữu hạn và chuỗi bất khả quy, thì chuỗi \emph{tự động} hồi quy dương.
+Do đó, với chuỗi Markov hữu hạn bất khả quy và không tuần hoàn,
+phân phối dừng tồn tại, duy nhất, và bằng phân phối giới hạn.
+
+% ============================================================================
+\section{Tốc độ hội tụ (Rate of Convergence)}
+\label{sec:convergence-rate}
+
+\textbf{Câu chuyện:} Ta biết $P^n_{i,j} \to \pi_j$ khi $n \to \infty$.
+Nhưng ``nhanh'' thế nào? Cần bao nhiêu bước để ``quên'' trạng thái ban đầu?
+
+\begin{dinhly}[(Tốc độ hội tụ hình học)]
+\label{thm:convergence-rate}
+Cho chuỗi Markov hữu hạn bất khả quy và không tuần hoàn với ma trận chuyển $P$ có
+các trị riêng $1 = \lambda_1 > |\lambda_2| \geq |\lambda_3| \geq \cdots \geq |\lambda_N|$.
+Khi đó tồn tại hằng số $C > 0$ sao cho:
+\begin{equation}\label{eq:convergence-rate}
+  |P^n_{i,j} - \pi_j| \leq C\, |\lambda_2|^n, \qquad \text{với mọi } i, j \in S, \; n \geq 0.
+\end{equation}
+\end{dinhly}
+
+\textbf{Ý nghĩa:} Tốc độ hội tụ được quyết định bởi $|\lambda_2|$ --- trị riêng lớn thứ hai (về giá trị tuyệt đối).
+\begin{itemize}[nosep]
+  \item $|\lambda_2|$ gần 0: hội tụ rất nhanh (vài bước).
+  \item $|\lambda_2|$ gần 1: hội tụ chậm (nhiều bước).
+\end{itemize}
+
+\textbf{Khoảng cách phổ} (\en{spectral gap}): $\gamma = 1 - |\lambda_2|$.
+$\gamma$ lớn $\Rightarrow$ hội tụ nhanh. Số bước cần thiết xấp xỉ $\sim 1/\gamma$.
+
+\begin{example}[Tốc độ hội tụ chuỗi hai trạng thái]
+Với $P = \begin{bmatrix} 1-a & a \\ b & 1-b \end{bmatrix}$:
+$\lambda_2 = 1 - a - b$, nên $|\lambda_2| = |1-a-b|$.
+
+\begin{itemize}[nosep]
+  \item $a = b = 0.5$: $|\lambda_2| = 0$, $\gamma = 1$. Hội tụ trong 1 bước!
+  \item $a = b = 0.1$: $|\lambda_2| = 0.8$, $\gamma = 0.2$. Cần $\sim 5$ bước.
+  \item $a = b = 0.01$: $|\lambda_2| = 0.98$, $\gamma = 0.02$. Cần $\sim 50$ bước.
+\end{itemize}
+\end{example}
+
+% ============================================================================
+\section{Bảng tổng hợp phương pháp (Summary of Methods)}
+\label{sec:summary-methods}
+
+\begin{congthuc}
+\textbf{Bảng tổng hợp các phương pháp tính toán cho chuỗi Markov:}
+
+\medskip
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|l|l|}
+  \hline
+  \textbf{Đại lượng cần tính} & \textbf{Phương pháp} \\
+  \hline
+  Kỳ vọng $\E[X]$ &
+    $\displaystyle\sum_{x} x \cdot \PP(X = x)$ \\
+  \hline
+  Xác suất chạm (\en{hitting prob.}) $g(k)$ &
+    Giải $g = Pg$ trên trạng thái không hấp thụ \\
+    & với điều kiện biên $g = 0$ hoặc $g = 1$ \\
+  \hline
+  Thời gian chạm trung bình $h(k)$ &
+    Giải $h = 1 + Ph$ trên trạng thái không hấp thụ \\
+    & với điều kiện biên $h = 0$ \\
+  \hline
+  Phân phối dừng $\pi$ &
+    Giải $\pi = \pi P$ với $\displaystyle\sum_i \pi_i = 1$ \\
+  \hline
+  Phân phối dừng (thuận nghịch) &
+    Dùng $\pi_i P_{i,j} = \pi_j P_{j,i}$ \\
+  \hline
+\end{tabular}
+\end{center}
+\end{congthuc}
+
+\begin{tomtat}
+Tất cả các bài toán trên đều quy về \textbf{hệ phương trình tuyến tính}.
+\begin{itemize}[nosep]
+  \item Xác suất chạm và thời gian chạm: giải hệ với điều kiện biên tại trạng thái hấp thụ.
+  \item Phân phối dừng: giải hệ thuần nhất $\pi(P - I) = 0$ với ràng buộc chuẩn hóa $\sum \pi_i = 1$.
+  \item Nếu chuỗi thuận nghịch: dùng cân bằng chi tiết --- đơn giản hơn, không cần giải hệ.
+\end{itemize}
+\end{tomtat}
+
+% ============================================================================
+\section{Bài tập (Exercises)}
+\label{sec:ch7-exercises}
+
+\begin{exercise}
+\label{ex:ch7-1}
+Cho chuỗi Markov trên $S = \{0, 1, 2\}$ với ma trận chuyển:
+\[
+  P = \begin{bmatrix}
+    1/2 & 1/4 & 1/4 \\
+    1/3 & 1/3 & 1/3 \\
+    1/4 & 1/4 & 1/2
+  \end{bmatrix}.
+\]
+\begin{enumerate}[label=(\alph*)]
+  \item Kiểm tra rằng $P$ là ma trận chính quy.
+  \item Tìm phân phối dừng $\pi$.
+  \item Tính thời gian hồi quy trung bình $\mu_i(i)$ với mỗi $i \in S$.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+\label{ex:ch7-2}
+Xét chuỗi Markov hai trạng thái với ma trận chuyển:
+\[
+  P = \begin{bmatrix} 0.7 & 0.3 \\ 0.4 & 0.6 \end{bmatrix}.
+\]
+\begin{enumerate}[label=(\alph*)]
+  \item Tính $P^n$ bằng phương pháp chéo hóa.
+  \item Tìm $\lim_{n\to\infty} P^n$ và xác định phân phối giới hạn.
+  \item Xác minh rằng phân phối giới hạn thỏa mãn $\pi = \pi P$.
+  \item Xác minh điều kiện cân bằng chi tiết.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+\label{ex:ch7-3}
+Cho chuỗi Markov trên $S = \{0, 1\}$ với $P = \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}$.
+\begin{enumerate}[label=(\alph*)]
+  \item Tìm phân phối dừng $\pi$.
+  \item Chuỗi có phân phối giới hạn không? Giải thích.
+  \item Tính $P^n$ cho $n$ chẵn và $n$ lẻ. Chu kỳ của chuỗi bằng bao nhiêu?
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+\label{ex:ch7-4}
+Chuỗi Ehrenfest với $N = 3$ viên bi có ma trận chuyển:
+\[
+  P = \begin{bmatrix}
+    0 & 1 & 0 & 0 \\
+    1/3 & 0 & 2/3 & 0 \\
+    0 & 2/3 & 0 & 1/3 \\
+    0 & 0 & 1 & 0
+  \end{bmatrix}.
+\]
+\begin{enumerate}[label=(\alph*)]
+  \item Chuỗi này có bất khả quy không? Có tuần hoàn không?
+  \item Tìm phân phối dừng $\pi$.
+  \item So sánh $\pi$ với phân phối nhị thức $\mathrm{Bin}(3, 1/2)$. Nhận xét?
+  \item Kiểm tra điều kiện cân bằng chi tiết.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+\label{ex:ch7-5}
+Cho chuỗi Markov trên $S = \{1, 2, 3, 4\}$ với ma trận chuyển:
+\[
+  P = \begin{bmatrix}
+    0 & 1/2 & 1/2 & 0 \\
+    1/2 & 0 & 0 & 1/2 \\
+    1/3 & 0 & 1/3 & 1/3 \\
+    0 & 1/2 & 1/2 & 0
+  \end{bmatrix}.
+\]
+\begin{enumerate}[label=(\alph*)]
+  \item Tìm phân phối dừng $\pi$ bằng cách giải hệ $\pi = \pi P$.
+  \item Sử dụng kết quả $\pi_j = 1/\mu_j(j)$ để tính thời gian hồi quy trung bình
+    của mỗi trạng thái.
+  \item Trạng thái nào được ``ghé thăm'' nhiều nhất trong dài hạn?
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+\label{ex:ch7-6}
+Cho chuỗi Markov trên $S = \{0, 1, 2\}$ với ma trận chuyển:
+\[
+  P = \begin{bmatrix}
+    0 & 2/3 & 1/3 \\
+    1/2 & 0 & 1/2 \\
+    1/3 & 2/3 & 0
+  \end{bmatrix}.
+\]
+\begin{enumerate}[label=(\alph*)]
+  \item Tìm phân phối dừng $\pi$.
+  \item Kiểm tra xem chuỗi có thỏa mãn điều kiện cân bằng chi tiết không.
+  \item Tìm trị riêng thứ hai $\lambda_2$ của $P$ và ước lượng tốc độ hội tụ.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+\label{ex:ch7-7}
+Chứng minh rằng bước đi ngẫu nhiên trên đồ thị vô hướng liên thông (nhảy đều sang đỉnh kề)
+luôn thỏa mãn điều kiện cân bằng chi tiết với $\pi_i = d_i / (2|E|)$.
+\end{exercise}

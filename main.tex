@@ -1,0 +1,157 @@
+% =============================================================================
+% Chuỗi Markov - Tài liệu Song ngữ Việt-Anh
+% Dựa trên: "Notes on Markov Chains" - Nicolas Privault (2011)
+% Biên soạn cho nghiên cứu sinh PhD - Đại học Debrecen
+% Biên dịch và trình bày lại bằng XeLaTeX
+% =============================================================================
+\documentclass[12pt,a4paper]{book}
+
+% --- Font & Vietnamese support (XeLaTeX) ---
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{vietnamese}
+\setotherlanguage{english}
+
+% --- Math packages ---
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+
+% --- Layout for iPad reading ---
+\usepackage[margin=2cm]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+
+% --- Colors and boxes ---
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{theorems,breakable,skins}
+
+% --- Other ---
+\usepackage{enumitem}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=MidnightBlue,
+  urlcolor=RoyalBlue,
+  citecolor=ForestGreen
+}
+\usepackage{bookmark}
+
+% =============================================================================
+% Custom theorem environments
+% =============================================================================
+\newtheoremstyle{vndef}
+  {10pt}{10pt}{\itshape}{}{\bfseries}{.}{.5em}{}
+\newtheoremstyle{vnthm}
+  {10pt}{10pt}{\itshape}{}{\bfseries}{.}{.5em}{}
+\newtheoremstyle{vnplain}
+  {10pt}{10pt}{}{}{\bfseries}{.}{.5em}{}
+
+\theoremstyle{vnthm}
+\newtheorem{theorem}{Định lý}[chapter]
+\newtheorem{proposition}[theorem]{Mệnh đề}
+\newtheorem{corollary}[theorem]{Hệ quả}
+\newtheorem{lemma}[theorem]{Bổ đề}
+
+\theoremstyle{vndef}
+\newtheorem{definition}[theorem]{Định nghĩa}
+
+\theoremstyle{vnplain}
+\newtheorem{example}[theorem]{Ví dụ}
+\newtheorem{exercise}[theorem]{Bài tập}
+\newtheorem{remark}[theorem]{Nhận xét}
+
+% =============================================================================
+% Custom tcolorbox environments
+% =============================================================================
+
+% Summary box (Tóm tắt)
+\newtcolorbox{tomtat}{
+  colback=blue!5!white,
+  colframe=MidnightBlue,
+  title={\textbf{Tóm tắt}},
+  fonttitle=\bfseries,
+  breakable,
+  arc=2mm,
+  boxrule=0.8pt
+}
+
+% Definition box
+\newtcolorbox{dinhnghia}[1][]{
+  colback=green!3!white,
+  colframe=ForestGreen,
+  title={\textbf{Định nghĩa} #1},
+  fonttitle=\bfseries,
+  breakable,
+  arc=2mm,
+  boxrule=0.8pt
+}
+
+% Theorem box
+\newtcolorbox{dinhly}[1][]{
+  colback=red!3!white,
+  colframe=BrickRed,
+  title={\textbf{Định lý} #1},
+  fonttitle=\bfseries,
+  breakable,
+  arc=2mm,
+  boxrule=0.8pt
+}
+
+% Key formula box
+\newtcolorbox{congthuc}{
+  colback=yellow!5!white,
+  colframe=Goldenrod,
+  breakable,
+  arc=2mm,
+  boxrule=0.8pt
+}
+
+% =============================================================================
+% Shortcut commands
+% =============================================================================
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\ind}{\mathbf{1}}
+\newcommand{\en}[1]{\textit{#1}}  % English term in italics
+\newcommand{\term}[1]{\textbf{#1}}  % Key Vietnamese term in bold
+
+% =============================================================================
+% Document
+% =============================================================================
+\begin{document}
+
+% --- Title page ---
+\begin{titlepage}
+\centering
+\vspace*{3cm}
+{\Huge\bfseries Chuỗi Markov\\[0.5cm]}
+{\Large\itshape Tài liệu Song ngữ Việt--Anh\\[0.3cm]}
+{\large Bilingual Vietnamese--English Notes\\[2cm]}
+{\large Dựa trên \textit{Notes on Markov Chains} của Nicolas Privault\\[0.5cm]}
+{\normalsize MAS328 -- Nanyang Technological University, 2011\\[3cm]}
+{\normalsize Biên soạn phục vụ nghiên cứu PhD\\
+Đại học Debrecen (\textit{University of Debrecen})\\[1cm]}
+\today
+\end{titlepage}
+
+% --- Table of contents ---
+\tableofcontents
+\newpage
+
+% --- Chapters ---
+\include{chapters/ch4_discrete}
+\include{chapters/ch5_first_step}
+\include{chapters/ch6_classification}
+\include{chapters/ch7_limiting}
+\include{chapters/ch9_continuous}
+
+% --- Appendix ---
+\appendix
+\include{chapters/appendix_prob}
+
+\end{document}

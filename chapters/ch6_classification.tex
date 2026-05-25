@@ -1,0 +1,519 @@
+\chapter{Phân loại trạng thái\\{\normalsize\textit{Classification of States}}}
+\label{ch:classification}
+
+\textbf{Câu chuyện:} Hãy tưởng tượng bạn đi du lịch giữa các thành phố.
+Có những thành phố bạn chắc chắn sẽ quay lại (quán café quen --- ``hồi quy''),
+và có những thành phố bạn chỉ ghé qua một lần rồi không bao giờ quay lại (``tạm thời'').
+Chương này giúp phân loại: trạng thái nào ``quen'' (hồi quy), trạng thái nào ``lạ'' (tạm thời)?
+
+% ============================================================================
+\section{Trạng thái liên thông (Communicating States)}
+\label{sec:communicating-states}
+
+\textbf{Câu chuyện:} Hãy tưởng tượng bạn đang ở thành phố $i$. Câu hỏi đặt ra:
+``Liệu bạn có thể đi đến thành phố $j$ được không?''
+Nếu có một con đường (dù phải đi qua nhiều thành phố trung gian),
+tức là tồn tại số bước $n$ sao cho $P_{i,j}^{(n)} > 0$,
+thì ta nói $j$ \textbf{có thể đạt đến} từ $i$.
+
+Ví dụ đời thường: Từ Hà Nội bạn có thể bay đến Tokyo (qua Seoul chuyển tiếp)
+--- vậy Tokyo ``có thể đạt đến'' từ Hà Nội.
+
+\begin{dinhnghia}[(Trạng thái có thể đạt đến -- \en{Accessible state})]
+\label{def:accessible}
+Cho chuỗi Markov $(X_n)_{n \in \N}$ với không gian trạng thái $S$ và ma trận chuyển $P$.
+Trạng thái $j$ được gọi là \term{có thể đạt đến} (\en{accessible}) từ trạng thái $i$,
+ký hiệu $i \to j$, nếu tồn tại $n \geq 0$ sao cho:
+\[
+  P_{i,j}^{(n)} := \PP(X_n = j \mid X_0 = i) > 0.
+\]
+Nói cách khác, xuất phát từ $i$, chuỗi Markov có xác suất dương để đến được $j$
+sau một số bước hữu hạn nào đó.
+\end{dinhnghia}
+
+\begin{dinhnghia}[(Trạng thái liên thông -- \en{Communicating states})]
+\label{def:communicating}
+Hai trạng thái $i$ và $j$ được gọi là \term{liên thông} (\en{communicate}),
+ký hiệu $i \leftrightarrow j$, nếu $i \to j$ và $j \to i$, tức là:
+\[
+  \exists\, a \geq 0: \; P_{i,j}^{(a)} > 0
+  \qquad \text{và} \qquad
+  \exists\, b \geq 0: \; P_{j,i}^{(b)} > 0.
+\]
+\end{dinhnghia}
+
+Ví dụ: Hà Nội và Tokyo ``liên thông'' vì bạn có thể bay đi lẫn bay về.
+Nhưng nếu đảo $X$ chỉ có chuyến bay đến mà không có chuyến bay đi,
+thì $X$ ``có thể đạt đến'' nhưng không ``liên thông'' với các thành phố khác.
+
+Quan hệ ``liên thông'' $\leftrightarrow$ là một \term{quan hệ tương đương} (\en{equivalence relation})
+trên $S$, vì nó thỏa mãn ba tính chất:
+
+\begin{itemize}[nosep]
+  \item \textbf{Phản xạ} (\en{Reflexive}): $i \leftrightarrow i$ vì $P_{i,i}^{(0)} = 1 > 0$.
+  \item \textbf{Đối xứng} (\en{Symmetric}): $i \leftrightarrow j \Rightarrow j \leftrightarrow i$ (theo định nghĩa).
+  \item \textbf{Bắc cầu} (\en{Transitive}): Nếu $i \leftrightarrow j$ và $j \leftrightarrow k$ thì $i \leftrightarrow k$.
+        Thật vậy, nếu $P_{i,j}^{(a)} > 0$ và $P_{j,k}^{(b)} > 0$ thì theo phương trình Chapman--Kolmogorov:
+        \[
+          P_{i,k}^{(a+b)} = \sum_{l \in S} P_{i,l}^{(a)} P_{l,k}^{(b)}
+          \geq P_{i,j}^{(a)} P_{j,k}^{(b)} > 0.
+        \]
+\end{itemize}
+
+Vì $\leftrightarrow$ là quan hệ tương đương, nó \term{phân hoạch} (\en{partition}) không gian trạng thái
+$S$ thành các \term{lớp tương đương} (\en{equivalence classes}), gọi là \term{lớp liên thông}
+(\en{communicating classes}):
+\begin{equation}\label{eq:partition}
+  S = A_1 \cup A_2 \cup \cdots \cup A_M,
+  \qquad A_k \cap A_l = \emptyset \;\text{với}\; k \neq l.
+\end{equation}
+
+\begin{tomtat}
+Quan hệ $\leftrightarrow$ phân chia không gian trạng thái $S$ thành các lớp liên thông rời nhau.
+Bên trong mỗi lớp, mọi cặp trạng thái đều có thể đạt đến nhau.
+Giữa các lớp khác nhau, việc chuyển đổi có thể chỉ xảy ra theo một chiều hoặc không xảy ra.
+
+Ví dụ: trong mạng lưới giao thông, các thành phố trong cùng khu vực đều liên thông.
+Nhưng ``vùng hấp thụ'' (ví dụ: hố đen) chỉ có đường vào mà không có đường ra.
+\end{tomtat}
+
+% ============================================================================
+\section{Lớp liên thông (Communicating Class)}
+\label{sec:communicating-class}
+
+\begin{dinhnghia}[(Chuỗi bất khả quy -- \en{Irreducible chain})]
+\label{def:irreducible}
+Một chuỗi Markov được gọi là \term{bất khả quy} (\en{irreducible}) nếu toàn bộ không gian
+trạng thái $S$ chỉ gồm duy nhất một lớp liên thông, tức là mọi cặp trạng thái $i, j \in S$
+đều liên thông: $i \leftrightarrow j$.
+
+Ngược lại, nếu $S$ có ít nhất hai lớp liên thông thì chuỗi được gọi là
+\term{khả quy} (\en{reducible}).
+\end{dinhnghia}
+
+\textbf{Ví dụ trực quan:}
+\begin{itemize}[nosep]
+  \item \textbf{Bất khả quy:} Bạn có thể đi từ bất kỳ thành phố nào đến bất kỳ thành phố nào (dù qua trung chuyển).
+  \item \textbf{Khả quy:} Có ``vùng cấm'' --- một khi vào rồi, không ra được.
+\end{itemize}
+
+\begin{example}[Chuỗi khả quy -- \en{Reducible chain}]
+\label{ex:reducible-chain}
+Xét chuỗi Markov trên $S = \{0, 1, 2, 3\}$ với ma trận chuyển:
+\begin{equation}\label{eq:reducible-matrix}
+  P = \begin{bmatrix}
+    0   & 0.2 & 0.8 & 0   \\
+    0.3 & 0.1 & 0   & 0.6 \\
+    0.5 & 0   & 0   & 0.5 \\
+    0   & 0   & 0   & 1
+  \end{bmatrix}.
+\end{equation}
+
+\textbf{Phân tích:}
+\begin{itemize}[nosep]
+  \item Từ trạng thái $0$: có thể đi đến $1$ (qua $P_{0,1} = 0.2$) và đến $2$ (qua $P_{0,2} = 0.8$).
+  \item Từ trạng thái $1$: có thể đi đến $0$ (qua $P_{1,0} = 0.3$) và đến $3$ (qua $P_{1,3} = 0.6$).
+  \item Từ trạng thái $2$: có thể đi đến $0$ (qua $P_{2,0} = 0.5$) và đến $3$ (qua $P_{2,3} = 0.5$).
+  \item Từ trạng thái $3$: $P_{3,3} = 1$, trạng thái $3$ là \term{hấp thụ} (\en{absorbing}).
+\end{itemize}
+
+Các trạng thái $0, 1, 2$ liên thông với nhau, nhưng từ $3$ không thể quay lại $0, 1, 2$.
+Do đó chuỗi có hai lớp liên thông:
+\[
+  A_1 = \{0, 1, 2\}, \qquad A_2 = \{3\}.
+\]
+Chuỗi này là \term{khả quy} (\en{reducible}).
+\end{example}
+
+\begin{tomtat}
+Chuỗi \term{bất khả quy}: chỉ có một lớp liên thông, mọi trạng thái đều đạt đến được từ bất kỳ
+trạng thái nào khác.
+
+Chuỗi \term{khả quy}: có nhiều lớp liên thông; một khi vào một lớp ``đóng'' (\en{closed class}),
+chuỗi không thể thoát ra.
+\end{tomtat}
+
+% ============================================================================
+\section{Trạng thái hồi quy (Recurrent States)}
+\label{sec:recurrent-states}
+
+\textbf{Câu chuyện:} Quán café quen là ``hồi quy'' --- dù bạn đi đâu, chắc chắn một ngày sẽ quay lại.
+Quán ghé qua lần đầu ở thành phố lạ là ``tạm thời'' --- có thể bạn không bao giờ quay lại nữa.
+
+Nhớ lại từ Chương~\ref{ch:first-step}, \term{thời gian quay lại lần đầu} (\en{first return time}) trạng thái $i$
+được định nghĩa là:
+\[
+  \tau_i := \inf\{n \geq 1 : X_n = i\},
+\]
+và \term{xác suất quay lại} (\en{return probability}):
+\[
+  p_{ii} := \PP(\tau_i < \infty \mid X_0 = i).
+\]
+
+\begin{dinhnghia}[(Trạng thái hồi quy -- \en{Recurrent state})]
+\label{def:recurrent}
+Trạng thái $i \in S$ được gọi là \term{hồi quy} (\en{recurrent}) nếu:
+\begin{equation}\label{eq:recurrent-def}
+  p_{ii} = \PP(\tau_i < \infty \mid X_0 = i) = 1.
+\end{equation}
+Tức là, xuất phát từ $i$, chuỗi Markov \emph{chắc chắn} sẽ quay lại $i$.
+\end{dinhnghia}
+
+Tính hồi quy có thể được đặc trưng bằng các điều kiện tương đương sau.
+
+\begin{dinhly}[(Đặc trưng của trạng thái hồi quy)]
+\label{thm:recurrent-equiv}
+Các mệnh đề sau là tương đương:
+\begin{enumerate}[label=(\roman*)]
+  \item $i$ là trạng thái hồi quy, tức $p_{ii} = 1$.
+  \item \term{Số lần quay lại trung bình} (\en{expected number of returns}) là vô hạn:
+        \begin{equation}\label{eq:recurrent-Ri}
+          \E[R_i \mid X_0 = i] = +\infty,
+        \end{equation}
+        trong đó $R_i = \sum_{n=1}^{\infty} \ind_{\{X_n = i\}}$ là tổng số lần chuỗi thăm $i$.
+  \item $\PP(R_i = +\infty \mid X_0 = i) = 1$, tức chuỗi quay lại $i$ \emph{vô hạn lần} với xác suất~$1$.
+  \item Chuỗi các xác suất quay lại phân kỳ:
+        \begin{equation}\label{eq:recurrent-series}
+          \sum_{n=0}^{\infty} P_{i,i}^{(n)} = +\infty.
+        \end{equation}
+\end{enumerate}
+\end{dinhly}
+
+\begin{congthuc}
+\textbf{Tiêu chuẩn hồi quy (bằng chuỗi):}
+\[
+  i \text{ hồi quy} \quad\Longleftrightarrow\quad
+  \sum_{n=0}^{\infty} P_{i,i}^{(n)} = +\infty.
+\]
+Trực quan: nếu ``tổng xác suất quay lại'' phân kỳ, thì chuỗi quay lại vô hạn lần.
+\end{congthuc}
+
+% ============================================================================
+\section{Trạng thái tạm thời (Transient States)}
+\label{sec:transient-states}
+
+\begin{dinhnghia}[(Trạng thái tạm thời -- \en{Transient state})]
+\label{def:transient}
+Trạng thái $i \in S$ được gọi là \term{tạm thời} (\en{transient}) nếu:
+\begin{equation}\label{eq:transient-def}
+  \PP(R_i = +\infty \mid X_0 = i) < 1,
+\end{equation}
+hay tương đương, $p_{ii} < 1$.
+\end{dinhnghia}
+
+Đối với trạng thái tạm thời:
+\begin{itemize}[nosep]
+  \item $\E[R_i \mid X_0 = i] = \dfrac{p_{ii}}{1 - p_{ii}} < +\infty$: số lần quay lại trung bình là hữu hạn.
+  \item $\displaystyle\sum_{n=0}^{\infty} P_{i,i}^{(n)} < +\infty$: chuỗi các xác suất quay lại hội tụ.
+  \item Với xác suất $1 - p_{ii} > 0$, chuỗi sẽ \emph{rời khỏi} $i$ và không bao giờ quay lại.
+\end{itemize}
+
+\begin{tomtat}
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{lcc}
+\hline
+\textbf{Tính chất} & \textbf{Hồi quy} (\en{Recurrent}) & \textbf{Tạm thời} (\en{Transient}) \\
+\hline
+$p_{ii}$ & $= 1$ & $< 1$ \\
+$\E[R_i \mid X_0 = i]$ & $= +\infty$ & $< +\infty$ \\
+$\sum_n P_{i,i}^{(n)}$ & $= +\infty$ & $< +\infty$ \\
+Số lần thăm $i$ & Vô hạn lần (h.c.c.) & Hữu hạn lần (h.c.c.) \\
+Ví dụ đời thường & Quán café quen & Quán ghé qua khi du lịch \\
+\hline
+\end{tabular}
+\end{center}
+\end{tomtat}
+
+% --- Corollary: recurrence is a class property ---
+
+\begin{corollary}[(Hồi quy là tính chất lớp -- \en{Recurrence is a class property})]
+\label{cor:recurrence-class}
+Nếu trạng thái $i$ là hồi quy và $j$ liên thông với $i$ (tức $i \leftrightarrow j$),
+thì $j$ cũng là hồi quy.
+\end{corollary}
+
+\begin{proof}
+Vì $i \leftrightarrow j$, tồn tại $a, b \geq 0$ sao cho $P_{j,i}^{(a)} > 0$ và $P_{i,j}^{(b)} > 0$.
+Theo phương trình Chapman--Kolmogorov, với mọi $n \geq 0$:
+\[
+  P_{j,j}^{(a+n+b)} \geq P_{j,i}^{(a)} \, P_{i,i}^{(n)} \, P_{i,j}^{(b)}.
+\]
+Do đó:
+\[
+  \sum_{m=0}^{\infty} P_{j,j}^{(m)}
+  \geq P_{j,i}^{(a)} \, P_{i,j}^{(b)} \sum_{n=0}^{\infty} P_{i,i}^{(n)}
+  = +\infty,
+\]
+vì $i$ là hồi quy nên $\sum_n P_{i,i}^{(n)} = +\infty$, và $P_{j,i}^{(a)} P_{i,j}^{(b)} > 0$.
+Vậy $j$ cũng là hồi quy.
+\end{proof}
+
+\textbf{Hệ quả:} Tạm thời cũng là tính chất lớp. Nếu $i$ là tạm thời và $i \leftrightarrow j$,
+thì $j$ cũng là tạm thời.
+
+% --- Example: Simple random walk ---
+
+\begin{example}[Bước đi ngẫu nhiên đơn giản trên $\Z$ -- \en{Simple random walk on $\Z$}]
+\label{ex:random-walk-recurrence}
+Xét bước đi ngẫu nhiên $(S_n)_{n \geq 0}$ trên $\Z$ với $S_0 = 0$,
+$\PP(X_k = +1) = p$ và $\PP(X_k = -1) = q = 1-p$.
+
+Xác suất trở về gốc tại thời điểm chẵn $n = 2k$:
+\[
+  P_{0,0}^{(2k)} = \binom{2k}{k} p^k q^k, \qquad P_{0,0}^{(2k+1)} = 0.
+\]
+
+\textbf{Trường hợp $p = q = 1/2$:} $4pq = 1$, suy ra $P_{0,0}^{(2k)} \sim \frac{1}{\sqrt{\pi k}}$ và:
+\[
+  \sum_{k=0}^{\infty} P_{0,0}^{(2k)} = +\infty
+  \qquad \Longrightarrow \qquad
+  \text{trạng thái $0$ là \textbf{hồi quy}.}
+\]
+
+\textbf{Trường hợp $p \neq q$:} $4pq < 1$, suy ra chuỗi hội tụ:
+\[
+  \sum_{k=0}^{\infty} P_{0,0}^{(2k)} < +\infty
+  \qquad \Longrightarrow \qquad
+  \text{trạng thái $0$ là \textbf{tạm thời}.}
+\]
+
+Trực quan: với $p \neq q$, bước đi ngẫu nhiên có ``xu hướng'' đi về một phía,
+nên càng lúc càng xa gốc và khó quay lại.
+\end{example}
+
+\begin{congthuc}
+\textbf{Bước đi ngẫu nhiên đơn giản trên $\Z$:}
+\[
+  \text{Hồi quy} \;\Longleftrightarrow\; p = q = \frac{1}{2}.
+\]
+\end{congthuc}
+
+% --- Polya's theorem ---
+\begin{dinhly}[(Định lý Polya về hồi quy -- \en{Polya's recurrence theorem})]
+\label{thm:polya}
+Bước đi ngẫu nhiên đơn giản đối xứng ($p = 1/2$ mỗi chiều) trên mạng lưới $\Z^d$:
+\begin{itemize}[nosep]
+  \item $d = 1$: \textbf{hồi quy} (chắc chắn quay lại gốc).
+  \item $d = 2$: \textbf{hồi quy} (``A drunk man will find his way home'' --- Polya).
+  \item $d \geq 3$: \textbf{tạm thời} (``A drunk bird will NOT find its way home'').
+\end{itemize}
+\end{dinhly}
+
+Trực quan: trong không gian 1D và 2D, ``không có đủ chỗ để trốn'' nên bước đi phải quay lại.
+Trong 3D trở lên, không gian quá rộng, bước đi ``lạc'' mãi mãi với xác suất dương.
+
+% --- Theorem 4: Finite chain has at least one recurrent state ---
+
+\begin{dinhly}[(Tồn tại trạng thái hồi quy trong chuỗi hữu hạn)]
+\label{thm:finite-recurrent}
+Mọi chuỗi Markov với không gian trạng thái hữu hạn $S$ có ít nhất một trạng thái hồi quy.
+\end{dinhly}
+
+\begin{proof}
+Giả sử bằng phản chứng rằng \emph{tất cả} trạng thái đều tạm thời.
+Khi đó, với mọi $j \in S$:
+\[
+  \sum_{n=0}^{\infty} P_{i,j}^{(n)} < +\infty
+  \qquad \Longrightarrow \qquad
+  \lim_{n \to \infty} P_{i,j}^{(n)} = 0.
+\]
+Lấy tổng theo $j$ trên $S$ hữu hạn:
+\[
+  \lim_{n \to \infty} \sum_{j \in S} P_{i,j}^{(n)}
+  = \sum_{j \in S} \lim_{n \to \infty} P_{i,j}^{(n)} = 0.
+\]
+Nhưng $\sum_{j \in S} P_{i,j}^{(n)} = 1$ với mọi $n$, nên giới hạn phải bằng $1 \neq 0$.
+Mâu thuẫn. Vậy phải tồn tại ít nhất một trạng thái hồi quy.
+\end{proof}
+
+% ============================================================================
+\section{Hồi quy dương và hồi quy không (Positive and Null Recurrence)}
+\label{sec:pos-null-recurrence}
+
+\textbf{Câu chuyện:} Biết rằng bạn chắc chắn quay lại quán café quen --- nhưng MẤT BAO LÂU?
+\begin{itemize}[nosep]
+  \item \textbf{Hồi quy dương:} Thời gian quay lại trung bình hữu hạn (ví dụ: trung bình 5 ngày quay lại quán).
+  \item \textbf{Hồi quy không:} Chắc chắn quay lại, nhưng thời gian trung bình vô hạn (``chờ mãi mãi'').
+\end{itemize}
+
+\begin{dinhnghia}[(Thời gian quay lại trung bình -- \en{Mean recurrence time})]
+\[
+  \mu_i(i) := \E[\tau_i \mid X_0 = i].
+\]
+\end{dinhnghia}
+
+\begin{dinhnghia}[(Hồi quy dương và hồi quy không)]
+Cho trạng thái $i$ là hồi quy ($p_{ii} = 1$).
+\begin{itemize}[nosep]
+  \item $i$ là \term{hồi quy dương} (\en{positive recurrent}) nếu $\mu_i(i) < +\infty$.
+  \item $i$ là \term{hồi quy không} (\en{null recurrent}) nếu $\mu_i(i) = +\infty$.
+\end{itemize}
+\end{dinhnghia}
+
+\begin{example}[Bước đi ngẫu nhiên đối xứng là hồi quy không]
+Bước đi ngẫu nhiên đơn giản trên $\Z$ với $p = q = 1/2$ là \term{hồi quy không}.
+Thời gian quay lại trung bình $\mu_0(0) = +\infty$.
+
+Trực quan: bạn \emph{chắc chắn} quay lại gốc, nhưng không ai biết ``trung bình bao lâu'' ---
+có thể mất 2 bước, có thể mất 2 triệu bước.
+\end{example}
+
+\begin{dinhly}[(Chuỗi hữu hạn và hồi quy dương)]
+\label{thm:finite-positive-recurrent}
+Trong chuỗi Markov với không gian trạng thái hữu hạn, mọi trạng thái hồi quy đều là
+\term{hồi quy dương}.
+\end{dinhly}
+
+\begin{corollary}[(Chuỗi bất khả quy hữu hạn)]
+\label{cor:finite-irreducible}
+Nếu chuỗi Markov là \term{bất khả quy} và có không gian trạng thái hữu hạn,
+thì \emph{tất cả} các trạng thái đều là \term{hồi quy dương}.
+\end{corollary}
+
+\begin{tomtat}
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{lccc}
+\hline
+\textbf{Tính chất} & \textbf{Tạm thời} & \textbf{Hồi quy không} & \textbf{Hồi quy dương} \\
+\hline
+$p_{ii}$ & $< 1$ & $= 1$ & $= 1$ \\
+Quay lại? & Không chắc & Chắc chắn & Chắc chắn \\
+$\mu_i(i)$ & --- & $= +\infty$ & $< +\infty$ \\
+Ví dụ & RW trên $\Z$, $p \neq q$ & RW trên $\Z$, $p = 1/2$ & Chuỗi hữu hạn \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Quy tắc nhớ:} Chuỗi Markov hữu hạn bất khả quy $\Rightarrow$ mọi trạng thái hồi quy dương.
+Hồi quy không chỉ xảy ra khi không gian trạng thái vô hạn.
+\end{tomtat}
+
+% ============================================================================
+\section{Tính tuần hoàn và phi tuần hoàn (Periodicity and Aperiodicity)}
+\label{sec:periodicity}
+
+\textbf{Câu chuyện:} Một số chuỗi Markov ``dao động'' có quy luật. Ví dụ: nếu bạn ở ô trắng trên bàn cờ,
+sau 1 bước chắc chắn ở ô đen, sau 2 bước lại ở ô trắng. Chuỗi này có ``nhịp'' (chu kỳ) = 2.
+Chuỗi tuần hoàn không hội tụ vì nó cứ ``dao động'' mãi.
+
+\begin{dinhnghia}[(Chu kỳ của trạng thái -- \en{Period of a state})]
+\term{Chu kỳ} (\en{period}) của trạng thái $i$ được định nghĩa là:
+\begin{equation}\label{eq:period}
+  d(i) := \gcd\{n \geq 1 : P_{i,i}^{(n)} > 0\}.
+\end{equation}
+\end{dinhnghia}
+
+\begin{dinhnghia}[(Phi tuần hoàn -- \en{Aperiodic})]
+Trạng thái $i$ được gọi là \term{phi tuần hoàn} (\en{aperiodic}) nếu $d(i) = 1$.
+
+Một chuỗi Markov được gọi là \term{phi tuần hoàn} nếu \emph{tất cả} các trạng thái đều phi tuần hoàn.
+\end{dinhnghia}
+
+\textbf{Nhận xét:}
+\begin{itemize}[nosep]
+  \item Nếu $P_{i,i} > 0$ thì $d(i) = 1$, tức trạng thái $i$ phi tuần hoàn.
+        (Mẹo: thêm ``vòng lặp'' tại $i$ là phá vỡ tuần hoàn!)
+  \item \term{Trạng thái hấp thụ} ($P_{k,k} = 1$) là đồng thời phi tuần hoàn và hồi quy.
+  \item Chu kỳ là tính chất lớp: nếu $i \leftrightarrow j$ thì $d(i) = d(j)$.
+\end{itemize}
+
+\begin{example}[Chuỗi có chu kỳ $2$]
+Chuỗi Markov trên $S = \{0, 1\}$ với $P = \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}$
+có $d(0) = d(1) = 2$: chuỗi ``dao động'' giữa $0$ và $1$.
+
+$P_{0,0}^{(n)} > 0$ chỉ khi $n$ chẵn, nên $\gcd\{2, 4, 6, \ldots\} = 2$.
+\end{example}
+
+\begin{example}[Chuỗi có chu kỳ $3$]
+Trên $S = \{0, 1, 2\}$ với $P = \begin{bmatrix} 0 & 1 & 0 \\ 0 & 0 & 1 \\ 1 & 0 & 0 \end{bmatrix}$.
+Chuỗi quay vòng: $0 \to 1 \to 2 \to 0 \to \cdots$, chu kỳ $d = 3$.
+\end{example}
+
+% --- Ergodic definition ---
+
+\begin{dinhnghia}[(Trạng thái ergodic -- \en{Ergodic state})]
+Trạng thái $i$ được gọi là \term{ergodic} nếu nó đồng thời:
+\begin{enumerate}[label=(\roman*)]
+  \item \term{Hồi quy dương}: $p_{ii} = 1$ và $\mu_i(i) < +\infty$.
+  \item \term{Phi tuần hoàn}: $d(i) = 1$.
+\end{enumerate}
+\end{dinhnghia}
+
+\begin{tomtat}
+Tính ergodic là điều kiện then chốt để chuỗi Markov hội tụ đến phân phối dừng (Chương~\ref{ch:limiting}).
+\[
+  \boxed{\text{Ergodic} = \text{Hồi quy dương} + \text{Phi tuần hoàn}}
+\]
+Chuỗi Markov bất khả quy, hữu hạn và phi tuần hoàn luôn là ergodic.
+
+\medskip
+\textbf{Checklist để kiểm tra hội tụ:}
+\begin{enumerate}[nosep]
+  \item Bất khả quy? (Mọi trạng thái liên thông?)
+  \item Phi tuần hoàn? (Có $P_{i,i} > 0$ cho trạng thái nào đó?)
+  \item Hữu hạn? (Nếu có $\Rightarrow$ tự động hồi quy dương.)
+\end{enumerate}
+Nếu cả 3: phân phối dừng tồn tại, duy nhất, và bằng phân phối giới hạn.
+\end{tomtat}
+
+% ============================================================================
+\section{Bài tập (Exercises)}
+\label{sec:ch6-exercises}
+
+\begin{exercise}
+\label{ex:ch6-1}
+Xét chuỗi Markov trên $S = \{0, 1, 2, 3\}$ với ma trận chuyển:
+\[
+  P = \begin{bmatrix}
+    1/3 & 1/3 & 1/3 & 0 \\
+    0   & 0   & 0   & 1 \\
+    0   & 1   & 0   & 0 \\
+    0   & 0   & 1   & 0
+  \end{bmatrix}.
+\]
+\begin{enumerate}[label=(\alph*)]
+  \item Tìm các lớp liên thông.
+  \item Tìm chu kỳ của mỗi trạng thái.
+  \item Xác định trạng thái nào hồi quy, tạm thời, hấp thụ.
+  \item Chuỗi có bất khả quy không?
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+\label{ex:ch6-2}
+Chứng minh rằng chu kỳ là tính chất lớp: nếu $i \leftrightarrow j$ thì $d(i) = d(j)$.
+
+(Gợi ý: nếu $P_{i,j}^{(a)} > 0$ và $P_{j,i}^{(b)} > 0$, thì $P_{i,i}^{(a+b)} > 0$,
+nên $d(i)$ chia hết $a + b$. Dùng điều này để chỉ $d(i) \mid d(j)$ và ngược lại.)
+\end{exercise}
+
+\begin{exercise}
+\label{ex:ch6-3}
+Xét chuỗi Markov trên $S = \{0, 1, 2, 3, 4\}$ với ma trận chuyển:
+\[
+  P = \begin{bmatrix}
+    0 & 1 & 0 & 0 & 0 \\
+    0 & 0 & 1 & 0 & 0 \\
+    1/2 & 0 & 0 & 1/2 & 0 \\
+    0 & 0 & 0 & 0 & 1 \\
+    0 & 0 & 0 & 1 & 0
+  \end{bmatrix}.
+\]
+\begin{enumerate}[label=(\alph*)]
+  \item Tìm các lớp liên thông và xác định lớp nào đóng.
+  \item Phân loại mỗi trạng thái (hồi quy/tạm thời, tuần hoàn/phi tuần hoàn).
+  \item Từ trạng thái 0, chuỗi sẽ kết thúc ở lớp nào?
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+\label{ex:ch6-4}
+Cho chuỗi Markov bất khả quy trên không gian trạng thái hữu hạn $S$ với $|S| = N$.
+\begin{enumerate}[label=(\alph*)]
+  \item Chứng minh rằng mọi trạng thái đều hồi quy.
+  \item Chứng minh rằng mọi trạng thái đều hồi quy dương. (Gợi ý: dùng Định lý~\ref{thm:finite-positive-recurrent}.)
+  \item Nếu thêm điều kiện phi tuần hoàn, kết luận gì về sự tồn tại phân phối giới hạn?
+\end{enumerate}
+\end{exercise}

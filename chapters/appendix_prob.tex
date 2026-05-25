@@ -1,0 +1,301 @@
+\chapter{Nền tảng Xác suất\\{\normalsize\textit{Probability Background}}}
+\label{ch:probability}
+
+Phụ lục này tóm tắt các kiến thức xác suất cần thiết cho việc nghiên cứu chuỗi Markov.
+
+% ============================================================================
+\section{Không gian xác suất (Probability Spaces)}
+
+\begin{dinhnghia}[(Không gian xác suất -- \en{Probability space})]
+\term{Không gian xác suất} là bộ ba $(\Omega, \mathcal{F}, \PP)$ trong đó:
+\begin{itemize}[nosep]
+  \item $\Omega$: \term{không gian mẫu} (\en{sample space}) --- tập hợp tất cả các kết quả có thể.
+  \item $\mathcal{F}$: \term{sigma-đại số} (\en{$\sigma$-algebra}) --- tập các \term{biến cố} (\en{events}).
+  \item $\PP$: \term{độ đo xác suất} (\en{probability measure}) --- ánh xạ $\PP: \mathcal{F} \to [0,1]$.
+\end{itemize}
+\end{dinhnghia}
+
+\textbf{Ví dụ:}
+\begin{itemize}[nosep]
+  \item Tung đồng xu: $\Omega = \{H, T\}$.
+  \item Gieo xúc xắc: $\Omega = \{1, 2, 3, 4, 5, 6\}$.
+  \item Kết quả nguyên: $\Omega = \N$.
+  \item Kết quả thực không âm: $\Omega = \R_+$.
+\end{itemize}
+
+\term{Độ đo xác suất} $\PP: \mathcal{F} \to [0,1]$ thỏa mãn:
+\begin{enumerate}[nosep]
+  \item $\PP(\Omega) = 1$.
+  \item $\PP\!\left(\bigcup_{n=1}^{\infty} A_n\right) = \sum_{n=1}^{\infty} \PP(A_n)$ khi $A_k \cap A_l = \emptyset$ với $k \neq l$ (\term{tính cộng đếm được} -- \en{countable additivity}).
+\end{enumerate}
+
+Tính chất quan trọng:
+\[
+  \PP(A \cup B) = \PP(A) + \PP(B) - \PP(A \cap B).
+\]
+
+% ============================================================================
+\section{Xác suất có điều kiện và tính độc lập (Conditional Probability and Independence)}
+
+\begin{dinhnghia}[(Xác suất có điều kiện -- \en{Conditional probability})]
+Với hai biến cố $A, B \subset \Omega$ và $\PP(B) \neq 0$:
+\[
+  \PP(A \mid B) := \frac{\PP(A \cap B)}{\PP(B)}.
+\]
+\end{dinhnghia}
+
+\textbf{Quy tắc xác suất toàn phần} (\en{law of total probability}): Nếu $\{A_n\}_{n\geq 1}$ là phân hoạch của $\Omega$ với $\PP(A_n) > 0$:
+\[
+  \PP(B) = \sum_{n=1}^{\infty} \PP(B \mid A_n)\,\PP(A_n) = \sum_{n=1}^{\infty} \PP(B \cap A_n).
+\]
+
+\textbf{Công thức Bayes} (\en{Bayes' theorem}):
+\[
+  \PP(A_k \mid B) = \frac{\PP(B \mid A_k)\,\PP(A_k)}{\sum_{n} \PP(B \mid A_n)\,\PP(A_n)}.
+\]
+
+\begin{dinhnghia}[(Tính độc lập -- \en{Independence})]
+Hai biến cố $A$ và $B$ được gọi là \term{độc lập} (\en{independent}) nếu:
+\[
+  \PP(A \cap B) = \PP(A)\,\PP(B).
+\]
+Tương đương: $\PP(A \mid B) = \PP(A)$ (biết $B$ không ảnh hưởng đến $A$).
+\end{dinhnghia}
+
+\textbf{Độc lập nhiều biến cố:} $A_1, \ldots, A_n$ \term{độc lập tương hỗ} (\en{mutually independent}) nếu
+với mọi tập con $I \subseteq \{1, \ldots, n\}$:
+\[
+  \PP\!\left(\bigcap_{i \in I} A_i\right) = \prod_{i \in I} \PP(A_i).
+\]
+
+% ============================================================================
+\section{Biến ngẫu nhiên (Random Variables)}
+
+\begin{dinhnghia}[(Biến ngẫu nhiên -- \en{Random variable})]
+\term{Biến ngẫu nhiên} là ánh xạ $X: \Omega \to \R$ xác định trên không gian xác suất $(\Omega, \mathcal{F}, \PP)$.
+\end{dinhnghia}
+
+\term{Hàm chỉ báo} (\en{indicator function}) của biến cố $A$:
+\[
+  \ind_A(\omega) = \begin{cases} 1 & \text{nếu } \omega \in A, \\ 0 & \text{nếu } \omega \notin A. \end{cases}
+\]
+
+Hai biến ngẫu nhiên $X$ và $Y$ được gọi là \term{độc lập} nếu:
+\[
+  \PP(X \in A,\; Y \in B) = \PP(X \in A)\,\PP(Y \in B)
+\]
+với mọi tập đo được $A, B \subset \R$.
+
+% ============================================================================
+\section{Phân phối xác suất (Probability Distributions)}
+
+\subsection{Phân phối rời rạc (Discrete Distributions)}
+
+Biến ngẫu nhiên \term{rời rạc} (\en{discrete}) nhận giá trị đếm được.
+Phân phối được xác định bởi $\PP(X = k)$ với mọi $k$.
+
+\textbf{Các phân phối rời rạc quan trọng:}
+\begin{itemize}[nosep]
+  \item \textbf{Bernoulli}$(p)$: $\PP(X = 1) = p$, $\PP(X = 0) = 1-p$. $\E[X] = p$, $\text{Var}(X) = p(1-p)$.
+  \item \textbf{Nhị thức} (\en{Binomial}) $B(n,p)$: $\PP(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$.
+    $\E[X] = np$, $\text{Var}(X) = np(1-p)$.
+  \item \textbf{Hình học} (\en{Geometric}) $\text{Geo}(p)$: $\PP(X = k) = (1-p)^k p$, $k \in \N$.
+    $\E[X] = (1-p)/p$, $\text{Var}(X) = (1-p)/p^2$.
+  \item \textbf{Poisson}$(\lambda)$: $\PP(X = k) = e^{-\lambda} \frac{\lambda^k}{k!}$, $k \in \N$.
+    $\E[X] = \lambda$, $\text{Var}(X) = \lambda$.
+\end{itemize}
+
+\subsection{Phân phối liên tục (Continuous Distributions)}
+
+Biến ngẫu nhiên \term{liên tục} (\en{continuous}) có \term{hàm mật độ} (\en{density function}) $f: \R \to \R_+$ sao cho:
+\[
+  \PP(a \leq X \leq b) = \int_a^b f(x)\,dx, \qquad \int_{-\infty}^{\infty} f(x)\,dx = 1.
+\]
+
+\textbf{Các phân phối liên tục quan trọng:}
+\begin{itemize}[nosep]
+  \item \textbf{Đều} (\en{Uniform}) $U(a,b)$:
+    $f(x) = \frac{1}{b-a}$ với $x \in [a,b]$. $\E[X] = (a+b)/2$.
+  \item \textbf{Chuẩn} (\en{Gaussian/Normal}) $\mathcal{N}(\mu, \sigma^2)$:
+    $f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-(x-\mu)^2/(2\sigma^2)}$.
+  \item \textbf{Mũ} (\en{Exponential}) $\text{Exp}(\lambda)$:
+    $f(x) = \lambda e^{-\lambda x}$ với $x \geq 0$, và $\PP(X > t) = e^{-\lambda t}$.
+    $\E[X] = 1/\lambda$, $\text{Var}(X) = 1/\lambda^2$.
+  \item \textbf{Gamma} $\Gamma(n, \lambda)$:
+    $f(x) = \frac{\lambda^n}{(n-1)!} x^{n-1} e^{-\lambda x}$ với $x \geq 0$, $n \in \N^*$.
+    $\E[X] = n/\lambda$.
+\end{itemize}
+
+\begin{congthuc}
+\textbf{Tính chất quan trọng của phân phối mũ:}
+
+Nếu $X_1, \ldots, X_n$ độc lập với $X_i \sim \text{Exp}(\lambda_i)$, thì:
+\begin{equation}\label{eq:min-exp}
+  \min(X_1, \ldots, X_n) \sim \text{Exp}(\lambda_1 + \cdots + \lambda_n),
+\end{equation}
+và:
+\begin{equation}\label{eq:compete-exp}
+  \PP(X_1 < X_2) = \frac{\lambda_1}{\lambda_1 + \lambda_2}.
+\end{equation}
+Hai tính chất này rất quan trọng trong chuỗi Markov thời gian liên tục (Chương~\ref{ch:continuous}).
+
+\textbf{Tính ``không nhớ''} (\en{memoryless property}): nếu $X \sim \text{Exp}(\lambda)$:
+\[
+  \PP(X > s + t \mid X > s) = \PP(X > t), \qquad s, t \geq 0.
+\]
+Đã đợi $s$ rồi, thời gian đợi thêm vẫn có cùng phân phối --- không ``nhớ'' đã đợi bao lâu.
+\end{congthuc}
+
+% ============================================================================
+\section{Kỳ vọng toán học (Mathematical Expectation)}
+
+\begin{dinhnghia}[(Kỳ vọng -- \en{Expectation})]
+\term{Kỳ vọng} (\en{expected value}) của biến ngẫu nhiên $X$:
+\begin{itemize}[nosep]
+  \item Trường hợp rời rạc: $\E[X] = \sum_{k} k \cdot \PP(X = k)$.
+  \item Trường hợp liên tục: $\E[X] = \int_{-\infty}^{\infty} x\, f(x)\,dx$.
+\end{itemize}
+\end{dinhnghia}
+
+\textbf{Tính chất:}
+\begin{itemize}[nosep]
+  \item \term{Tuyến tính} (\en{linearity}): $\E[aX + bY] = a\E[X] + b\E[Y]$ (luôn đúng, kể cả khi không độc lập).
+  \item Nếu $X, Y$ độc lập: $\E[XY] = \E[X]\,\E[Y]$.
+  \item $\E[g(X)] = \sum_k g(k)\,\PP(X = k)$ (rời rạc) hoặc $\int g(x) f(x)\,dx$ (liên tục).
+  \item \term{Đơn điệu} (\en{monotonicity}): nếu $X \leq Y$ h.c.c., thì $\E[X] \leq \E[Y]$.
+\end{itemize}
+
+\term{Phương sai} (\en{variance}):
+\[
+  \text{Var}(X) = \E[(X - \E[X])^2] = \E[X^2] - (\E[X])^2.
+\]
+
+Nếu $X, Y$ độc lập: $\text{Var}(X + Y) = \text{Var}(X) + \text{Var}(Y)$.
+
+% ============================================================================
+\section{Bất đẳng thức quan trọng (Important Inequalities)}
+
+\begin{dinhly}[(Bất đẳng thức Markov -- \en{Markov's inequality})]
+Nếu $X \geq 0$ và $a > 0$:
+\[
+  \PP(X \geq a) \leq \frac{\E[X]}{a}.
+\]
+\end{dinhly}
+
+\begin{dinhly}[(Bất đẳng thức Chebyshev -- \en{Chebyshev's inequality})]
+Với mọi $k > 0$:
+\[
+  \PP(|X - \E[X]| \geq k) \leq \frac{\text{Var}(X)}{k^2}.
+\]
+\end{dinhly}
+
+\textbf{Ứng dụng:} Bất đẳng thức Chebyshev cho ước lượng ``nhanh'' về xác suất
+biến ngẫu nhiên lệch xa kỳ vọng, mà không cần biết phân phối chính xác.
+
+% ============================================================================
+\section{Hàm sinh xác suất (Probability Generating Functions)}
+\label{sec:pgf}
+
+\begin{dinhnghia}[(Hàm sinh xác suất -- \en{Probability generating function})]
+Cho biến ngẫu nhiên $X$ nhận giá trị trong $\N$. \term{Hàm sinh xác suất} (\en{p.g.f.}) của $X$ là:
+\[
+  G_X(s) = \E[s^X] = \sum_{k=0}^{\infty} \PP(X = k)\, s^k, \qquad |s| \leq 1.
+\]
+\end{dinhnghia}
+
+\textbf{Tính chất:}
+\begin{itemize}[nosep]
+  \item $G_X(1) = 1$ (vì tổng xác suất bằng 1).
+  \item $G_X'(1) = \E[X]$.
+  \item $G_X''(1) = \E[X(X-1)]$, nên $\text{Var}(X) = G_X''(1) + G_X'(1) - [G_X'(1)]^2$.
+  \item Nếu $X, Y$ độc lập: $G_{X+Y}(s) = G_X(s) \cdot G_Y(s)$.
+  \item $\PP(X = k) = \frac{G_X^{(k)}(0)}{k!}$ (khôi phục phân phối từ hàm sinh).
+\end{itemize}
+
+\textbf{Ứng dụng trong chuỗi Markov:} Hàm sinh rất hữu ích để phân tích:
+\begin{itemize}[nosep]
+  \item Phân phối thời gian quay lại (Chương~\ref{ch:first-step}): $F(s) = \sum_{n=1}^{\infty} f_{ii}^{(n)} s^n$.
+  \item Quan hệ $P(s) = F(s) \cdot P(s) + 1$ giữa hàm sinh của $P_{ii}^{(n)}$ và $f_{ii}^{(n)}$.
+  \item Số lần thăm trạng thái: phân phối hình học có $G(s) = \frac{p\, s}{1 - (1-p)s}$.
+\end{itemize}
+
+\begin{example}[Hàm sinh của phân phối hình học]
+Nếu $X \sim \text{Geo}(p)$ (tức $\PP(X = k) = (1-p)^k p$, $k \geq 0$):
+\[
+  G_X(s) = \sum_{k=0}^{\infty} (1-p)^k p\, s^k = \frac{p}{1 - (1-p)s}.
+\]
+Kiểm tra: $G_X'(1) = \frac{p(1-p)}{[1-(1-p)]^2} = \frac{1-p}{p} = \E[X]$. Đúng!
+\end{example}
+
+% ============================================================================
+\section{Kỳ vọng có điều kiện (Conditional Expectation)}
+
+\begin{dinhnghia}[(Kỳ vọng có điều kiện -- \en{Conditional expectation})]
+\[
+  \E[X \mid B] = \sum_k k\,\PP(X = k \mid B), \qquad \text{khi } \PP(B) > 0.
+\]
+\end{dinhnghia}
+
+\textbf{Quy tắc kỳ vọng lặp} (\en{law of iterated expectations}/\en{tower property}):
+\[
+  \E[X] = \sum_{n} \E[X \mid A_n]\,\PP(A_n),
+\]
+khi $\{A_n\}$ là phân hoạch của $\Omega$.
+
+Tổng quát hơn, với hai biến ngẫu nhiên:
+\[
+  \E[X] = \E[\E[X \mid Y]] = \sum_y \E[X \mid Y = y]\,\PP(Y = y).
+\]
+
+\textbf{Ứng dụng quan trọng --- Phân tích bước đầu tiên:}
+
+Đặt $h(i) = \E[T \mid X_0 = i]$ (thời gian chạm). Điều kiện hóa theo $X_1$:
+\[
+  h(i) = \E[T \mid X_0 = i] = 1 + \sum_j P_{i,j}\, h(j).
+\]
+Đây chính là kỹ thuật cốt lõi của Chương~\ref{ch:first-step}.
+
+% ============================================================================
+\section{Phân phối đồng thời và mật độ có điều kiện}
+
+\begin{dinhnghia}[(Phân phối đồng thời -- \en{Joint distribution})]
+\term{Phân phối đồng thời} của $(X, Y)$ rời rạc:
+\[
+  p_{X,Y}(x, y) = \PP(X = x,\; Y = y).
+\]
+\term{Phân phối biên} (\en{marginal}):
+\[
+  \PP(X = x) = \sum_y p_{X,Y}(x, y), \qquad
+  \PP(Y = y) = \sum_x p_{X,Y}(x, y).
+\]
+\end{dinhnghia}
+
+Trong trường hợp liên tục, \term{mật độ đồng thời} (\en{joint density}) $f_{X,Y}(x,y)$ thỏa mãn:
+\[
+  \PP(X \in A,\; Y \in B) = \int_A \int_B f_{X,Y}(x,y)\,dy\,dx.
+\]
+
+\term{Mật độ có điều kiện} (\en{conditional density}):
+\[
+  f_{X|Y}(x \mid y) = \frac{f_{X,Y}(x,y)}{f_Y(y)}, \qquad f_Y(y) > 0.
+\]
+
+\textbf{Kỳ vọng có điều kiện} (trường hợp liên tục):
+\[
+  \E[X \mid Y = y] = \int_{-\infty}^{\infty} x\, f_{X|Y}(x \mid y)\,dx.
+\]
+
+% ============================================================================
+\section{Tổng kết (Summary)}
+
+\begin{tomtat}
+Các công cụ xác suất chính dùng trong tài liệu:
+\begin{itemize}[nosep]
+  \item \textbf{Xác suất có điều kiện} và \textbf{quy tắc xác suất toàn phần}: nền tảng cho phân tích bước đầu tiên (Chương~\ref{ch:first-step}).
+  \item \textbf{Tính độc lập}: cần cho bước đi ngẫu nhiên và quá trình Poisson.
+  \item \textbf{Phân phối mũ} và tính chất min/cạnh tranh: then chốt cho chuỗi Markov liên tục (Chương~\ref{ch:continuous}).
+  \item \textbf{Kỳ vọng có điều kiện}: dùng để tính thời gian chạm và xác suất hấp thụ.
+  \item \textbf{Hàm sinh xác suất}: công cụ đại số để phân tích phân phối thời gian quay lại.
+  \item \textbf{Bất đẳng thức Markov/Chebyshev}: ước lượng xác suất không cần biết phân phối chính xác.
+\end{itemize}
+\end{tomtat}
