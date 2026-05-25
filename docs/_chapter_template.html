@@ -1,84 +1,84 @@
 ---
 layout: chapter
-title: "Ch N: Vietnamese Title"
+title: "Ch N: Tiêu đề tiếng Việt"
 chapter_num: N
-heading: "Chuong N: Vietnamese Title"
+heading: "Chương N: Tiêu đề tiếng Việt"
 heading_en: "English Title"
 prev_url: /chN-1.html
-prev_title: "Chuong N-1"
+prev_title: "Chương N-1"
 next_url: /chN+1.html
-next_title: "Chuong N+1"
+next_title: "Chương N+1"
 sections:
   - id: section-1
-    title: "1. Section Title"
+    title: "1. Tên mục"
   - id: section-2
-    title: "2. Section Title"
-  - id: exercises
-    title: "Bai tap"
+    title: "2. Tên mục"
+  - id: bai-tap
+    title: "Bài tập"
 ---
 
 <!--
-  TEMPLATE FOR NEW CHAPTERS
+  MẪU CHO CHƯƠNG MỚI (CHAPTER TEMPLATE)
 
-  Copy this file as chN.html (e.g., ch6.html, ch7.html)
-  Fill in the front matter above, then write content below.
+  Sao chép file này thành chN.html (ví dụ: ch6.html, ch7.html)
+  Điền front matter ở trên, rồi viết nội dung bên dưới.
 
-  The layout handles:
-  - <head> with MathJax config (from _includes/mathjax.html)
-  - Left TOC nav (from _includes/nav.html -- add new entry there)
-  - Section list (from front matter "sections")
-  - Right sidebar (add _includes/sidebars/chN.html, update _layouts/chapter.html case)
-  - Chapter prev/next navigation
+  Layout tự động xử lý:
+  - <head> với MathJax config (từ _includes/mathjax.html)
+  - Thanh điều hướng trái (từ _includes/nav.html -- thêm entry mới ở đó)
+  - Danh sách mục (từ front matter "sections")
+  - Sidebar phải (thêm _includes/sidebars/chN.html, cập nhật _layouts/chapter.html)
+  - Điều hướng chương trước/sau
 
-  You just write the content -- no boilerplate needed.
+  Bạn chỉ viết nội dung -- không cần boilerplate.
 
-  Available CSS classes for content:
-    <div class="box definition">   -- green border (Dinh nghia)
-    <div class="box theorem">      -- red border (Dinh ly)
-    <div class="box formula">      -- yellow border (Cong thuc)
-    <div class="box summary">      -- blue border (Tom tat)
-    <div class="example">          -- example block
-    <div class="exercise">         -- exercise block (purple left border)
-    <div class="proof">            -- proof block (auto "Chung minh." prefix + QED)
+  Các CSS class có sẵn:
+    <div class="box definition">   -- viền xanh lá (Định nghĩa)
+    <div class="box theorem">      -- viền đỏ (Định lý)
+    <div class="box formula">      -- viền vàng (Công thức)
+    <div class="box summary">      -- viền xanh dương (Tóm tắt)
+    <div class="example">          -- khối ví dụ
+    <div class="exercise">         -- khối bài tập (viền tím bên trái)
+    <div class="proof">            -- khối chứng minh (tự thêm "Chứng minh." + QED)
 
-  Math: use \(...\) for inline, \[...\] for display.
-  MathJax macros available: \PP, \E, \N, \Z, \R, \ind
+  Toán: dùng \(...\) cho inline, \[...\] cho display.
+  MathJax macros: \PP, \E, \N, \Z, \R, \ind
 -->
 
-<h2 id="section-1">1. Section Title <small>(English)</small></h2>
+<h2 id="section-1">1. Tên mục <small>(English)</small></h2>
 
-<p>Content here...</p>
+<p>Nội dung ở đây...</p>
 
 <div class="box definition">
-  <p class="box-title">Dinh nghia (Name -- <em>English name</em>)</p>
-  <p>Definition content with math: \(\PP(X = k)\).</p>
+  <p class="box-title">Định nghĩa (Tên -- <em>English name</em>)</p>
+  <p>Nội dung định nghĩa với toán: \(\PP(X = k)\).</p>
 </div>
 
 <div class="box theorem">
-  <p class="box-title">Dinh ly (Name)</p>
-  <p>Theorem statement.</p>
+  <p class="box-title">Định lý (Tên)</p>
+  <p>Phát biểu định lý.</p>
 </div>
 
 <div class="box formula">
-  <p><strong>Formula name:</strong>
+  <p><strong>Tên công thức:</strong>
   \[
-    \text{formula here}
+    \text{công thức ở đây}
   \]</p>
 </div>
 
 <div class="box summary">
-  <p class="box-title">Tom tat</p>
-  <p>Summary content.</p>
+  <p class="box-title">Tóm tắt</p>
+  <p>Nội dung tóm tắt.</p>
 </div>
 
 <div class="example">
-  <p class="example-title">Vi du: Example name</p>
-  <p>Example content.</p>
+  <p class="example-title">Ví dụ: Tên ví dụ</p>
+  <p>Nội dung ví dụ.</p>
 </div>
 
-<h2 id="exercises">Bai tap <small>(Exercises)</small></h2>
+<h2 id="bai-tap">Bài tập <small>(Exercises)</small></h2>
 
 <div class="exercise">
-  <p class="exercise-title">Bai tap 1</p>
-  <p>Exercise text.</p>
+  <p class="exercise-title">Bài tập 1</p>
+  <p>Nội dung bài tập.</p>
 </div>
