@@ -4,7 +4,37 @@
 
 Bilingual Vietnamese-English rewrite of core Markov chain theory for PhD study at University of Debrecen.
 
-**Output:** `main.pdf` (~90-100 pages target, compiled with XeLaTeX)
+**Outputs:**
+- `main.pdf` (~90-100 pages target, compiled with XeLaTeX)
+- `web/` — static HTML lessons (3-column layout, MathJax)
+
+---
+
+## Progress Tracker
+
+### Workflow 1: PDF (Source PDF -> .tex -> Compiled PDF)
+
+| Chapter | .tex File | Status | Pages |
+|---------|-----------|--------|-------|
+| Ch 1: Discrete-Time MC | `ch4_discrete.tex` | DONE | ~12 |
+| Ch 2: First Step Analysis | `ch5_first_step.tex` | DONE | ~18 |
+| Ch 3: Classification | `ch6_classification.tex` | DONE | ~12 |
+| Ch 4: Limiting Distributions | `ch7_limiting.tex` | DONE | ~16 |
+| Ch 5: Continuous-Time MC | `ch9_continuous.tex` | DONE | ~26 |
+| App A: Probability Background | `appendix_prob.tex` | DONE | ~10 |
+
+### Workflow 2: Web (.tex -> Static HTML Lessons)
+
+| Chapter | HTML File | Status |
+|---------|-----------|--------|
+| Landing Page | `web/index.html` | DONE |
+| Ch 1: Discrete-Time MC | `web/ch1.html` | DONE |
+| Ch 2: First Step Analysis | `web/ch2.html` | DONE |
+| Ch 3: Classification | `web/ch3.html` | DONE |
+| Ch 4: Limiting Distributions | `web/ch4.html` | DONE |
+| Ch 5: Continuous-Time MC | `web/ch5.html` | DONE |
+| App A: Probability Background | `web/appendix.html` | DONE |
+| CSS + JS | `web/css/`, `web/js/` | DONE |
 
 **v2.0 Changes:**
 - Expanded from ~54 pages to ~90-100 pages

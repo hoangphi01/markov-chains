@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chuoi Markov - Tai lieu Song ngu Viet-Anh</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+  MathJax = {
+    tex: {
+      macros: {
+        PP: "\\mathbb{P}",
+        E: "\\mathbb{E}",
+        N: "\\mathbb{N}",
+        Z: "\\mathbb{Z}",
+        R: "\\mathbb{R}",
+        ind: "\\mathbf{1}"
+      },
+      tags: 'ams'
+    }
+  };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body>
+  <div class="page-wrapper" style="grid-template-columns: 1fr;">
+    <div class="content" style="max-width: 900px;">
+
+      <div class="index-hero">
+        <h1>Chuoi Markov</h1>
+        <p class="subtitle">Tai lieu Song ngu Viet--Anh / Bilingual Vietnamese--English Notes</p>
+        <p style="margin-top: 15px; font-size: 15px; color: #888;">
+          Dua tren <em>Notes on Markov Chains</em> cua Nicolas Privault (NTU, 2011)<br>
+          Bien soan phuc vu nghien cuu PhD -- Dai hoc Debrecen
+        </p>
+      </div>
+
+      <h2>Muc luc / Table of Contents</h2>
+
+      <div class="chapter-grid">
+
+        <div class="chapter-card">
+          <h3><a href="ch1.html">Chuong 1: Chuoi Markov thoi gian roi rac</a></h3>
+          <p class="card-subtitle">Discrete-Time Markov Chains</p>
+          <p>Tinh chat Markov, ma tran chuyen, Chapman--Kolmogorov, chuoi hai trang thai, cheo hoa, phan phoi gioi han, toc do hoi tu.</p>
+        </div>
+
+        <div class="chapter-card">
+          <h3><a href="ch2.html">Chuong 2: Phan tich buoc dau tien</a></h3>
+          <p class="card-subtitle">First Step Analysis</p>
+          <p>Xac suat cham, thoi gian cham trung binh, thoi gian quay lai, so lan quay lai, bai toan con bac (Gambler's Ruin).</p>
+        </div>
+
+        <div class="chapter-card">
+          <h3><a href="ch3.html">Chuong 3: Phan loai trang thai</a></h3>
+          <p class="card-subtitle">Classification of States</p>
+          <p>Trang thai lien thong, bat kha quy, hoi quy vs tam thoi, dinh ly Polya, tinh tuan hoan, trang thai ergodic.</p>
+        </div>
+
+        <div class="chapter-card">
+          <h3><a href="ch4.html">Chuong 4: Phan phoi gioi han va dung</a></h3>
+          <p class="card-subtitle">Limiting and Stationary Distributions</p>
+          <p>\(\pi = \pi P\), dinh ly hoi tu, can bang chi tiet, toc do hoi tu (spectral gap), bang tong hop phuong phap.</p>
+        </div>
+
+        <div class="chapter-card">
+          <h3><a href="ch5.html">Chuong 5: Chuoi Markov thoi gian lien tuc</a></h3>
+          <p class="card-subtitle">Continuous-Time Markov Chains</p>
+          <p>Qua trinh Poisson, sinh-tu, ma tran sinh Q, phuong trinh Kolmogorov, M/M/1 queue, chuoi nhung, xac suat hap thu.</p>
+        </div>
+
+        <div class="chapter-card">
+          <h3><a href="appendix.html">Phu luc A: Nen tang Xac suat</a></h3>
+          <p class="card-subtitle">Probability Background</p>
+          <p>Khong gian xac suat, phan phoi roi rac va lien tuc, phan phoi mu, ky vong co dieu kien, ham sinh, bat dang thuc.</p>
+        </div>
+
+      </div>
+
+      <h2>Gioi thieu / About</h2>
+      <p>
+        Tai lieu nay trinh bay ly thuyet chuoi Markov bang song ngu Viet--Anh,
+        duoc bien soan tu sach <em>Notes on Markov Chains</em> cua Nicolas Privault (NTU, 2011).
+        Noi dung bao gom 5 chuong chinh va 1 phu luc, voi cac vi du chi tiet, bai tap,
+        va phuong phap su pham giup hieu truc quan cac khai niem toan hoc.
+      </p>
+      <p>
+        Cac cong thuc toan hoc duoc render bang <strong>MathJax</strong>.
+        Layout 3 cot (khi xem tren desktop): muc luc ben trai, noi dung chinh o giua, sidebar ben phai voi cac ky hieu va tham chieu nhanh.
+      </p>
+
+      <div class="box summary">
+        <p class="box-title">Cac ky hieu chinh / Key Symbols</p>
+        <ul>
+          <li>\(\PP\) -- Xac suat <em>(Probability)</em></li>
+          <li>\(\E\) -- Ky vong <em>(Expectation)</em></li>
+          <li>\(P = [P_{i,j}]\) -- Ma tran chuyen <em>(Transition matrix)</em></li>
+          <li>\(\pi\) -- Phan phoi dung <em>(Stationary distribution)</em></li>
+          <li>\(Q = [\lambda_{i,j}]\) -- Ma tran sinh <em>(Generator matrix)</em></li>
+          <li>\(\lambda, \mu\) -- Toc do sinh/tu <em>(Birth/death rates)</em></li>
+          <li>\(\tau_j\) -- Thoi gian cham/quay lai <em>(Hitting/return time)</em></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

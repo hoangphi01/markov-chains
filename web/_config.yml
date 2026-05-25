@@ -1,0 +1,24 @@
+title: "Chuoi Markov - Tai lieu Song ngu"
+description: "Bilingual Vietnamese-English Markov Chains notes for PhD study"
+baseurl: ""
+url: ""
+
+# Collections for chapters (future scaling)
+collections:
+  chapters:
+    output: true
+    permalink: /:path/
+
+# Default front matter
+defaults:
+  - scope:
+      path: ""
+      type: "chapters"
+    values:
+      layout: "chapter"
+
+# Exclude from build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
