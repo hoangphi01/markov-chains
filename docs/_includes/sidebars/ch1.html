@@ -1,24 +1,24 @@
 <div class="sidebar-section">
-  <h4>Ký hiệu chính</h4>
-  <dl>
-    <dt>\(P_{i,j}\)</dt>
-    <dd>Xác suất chuyển từ \(i\) (hàng) sang \(j\) (cột)</dd>
-    <dt>Tổng hàng</dt>
-    <dd>\(\sum_{j} P_{i,j} = 1\)</dd>
-    <dt>Trị riêng (2 trạng thái)</dt>
-    <dd>\(\lambda_1 = 1\), \(\lambda_2 = 1 - a - b\)</dd>
-    <dt>Phân phối giới hạn</dt>
-    <dd>\(\pi_0 = \frac{b}{a+b}\), \(\pi_1 = \frac{a}{a+b}\)</dd>
-    <dt>Chapman--Kolmogorov</dt>
-    <dd>\(P^{m+n}_{i,j} = \sum_{l} P^m_{i,l} P^n_{l,j}\)</dd>
-  </dl>
+  <h4>Công thức nhanh</h4>
+  <p><strong>Ma trận chuyển:</strong><br>
+  \(P_{i,j} = \PP(Z_{n+1}=j \mid Z_n=i)\)<br>
+  <small>hàng \(i\) = xuất phát, cột \(j\) = đích</small></p>
+
+  <p><strong>Tổng hàng = 1:</strong><br>
+  \(\sum_{j} P_{i,j} = 1\)</p>
+
+  <p><strong>Lũy thừa ma trận:</strong><br>
+  \(P^k_{i,j} = \PP(Z_{n+k}=j \mid Z_n=i)\)</p>
+
+  <p><strong>Chapman--Kolmogorov:</strong><br>
+  \(P^{m+n} = P^m \cdot P^n\)</p>
 </div>
 <div class="sidebar-section">
-  <h4>Ghi nhớ nhanh</h4>
-  <ul>
-    <li>Hàng = xuất phát, cột = đích đến</li>
-    <li>\(P^k\) cho xác suất sau \(k\) bước</li>
-    <li>Hội tụ nhanh khi \(|1-a-b|\) nhỏ</li>
-    <li>Trạng thái hấp thụ: \(P_{k,k} = 1\)</li>
-  </ul>
+  <h4>Chuỗi 2 trạng thái</h4>
+  <p>\(P = \begin{bmatrix} 1-a & a \\ b & 1-b \end{bmatrix}\)</p>
+  <p>Trị riêng: \(\lambda_1=1\), \(\lambda_2=1-a-b\)</p>
+  <p>Phân phối giới hạn:<br>
+  \(\pi_0 = \dfrac{b}{a+b}\), \(\pi_1 = \dfrac{a}{a+b}\)</p>
+  <p>Tốc độ hội tụ \(\sim |\lambda_2|^n\)<br>
+  <small>\(|1-a-b|\) nhỏ → hội tụ nhanh</small></p>
 </div>

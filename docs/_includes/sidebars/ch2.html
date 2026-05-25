@@ -1,23 +1,26 @@
 <div class="sidebar-section">
-  <h4>Công thức FSA</h4>
-  <dl>
-    <dt>Xác suất chạm</dt>
-    <dd>\(g_l(k) = \sum_m P_{k,m} g_l(m)\)</dd>
-    <dt>Thời gian chạm TB</dt>
-    <dd>\(h_A(k) = 1 + \sum_l P_{k,l} h_A(l)\)</dd>
-    <dt>Dạng ma trận</dt>
-    <dd>\(\mathbf{g}_l = (I-Q)^{-1} R \mathbf{e}_l\)</dd>
-    <dd>\(\mathbf{h}_A = (I-Q)^{-1} \mathbf{1}\)</dd>
-  </dl>
+  <h4>Phân tích bước đầu tiên</h4>
+  <p><strong>Xác suất chạm:</strong><br>
+  \(g_l(k) = \sum_m P_{k,m}\, g_l(m)\)<br>
+  <small>Biên: \(g_l(k) = \ind_{\{k=l\}}\) khi \(k \in A\)</small></p>
+
+  <p><strong>Thời gian chạm TB:</strong><br>
+  \(h_A(k) = 1 + \sum_l P_{k,l}\, h_A(l)\)<br>
+  <small>Biên: \(h_A(l) = 0\) khi \(l \in A\)</small></p>
+
+  <p><strong>Dạng ma trận:</strong><br>
+  \(\mathbf{g}_l = (I-Q)^{-1} R\, \mathbf{e}_l\)<br>
+  \(\mathbf{h}_A = (I-Q)^{-1} \mathbf{1}\)</p>
 </div>
 <div class="sidebar-section">
   <h4>Bài toán con bạc</h4>
-  <dl>
-    <dt>\(p \neq q\)</dt>
-    <dd>\(g(i) = \frac{1-\rho^i}{1-\rho^N}\), \(\rho = q/p\)</dd>
-    <dt>\(p = q = 1/2\)</dt>
-    <dd>\(g(i) = i/N\)</dd>
-    <dt>Định lý ergodic</dt>
-    <dd>\(\pi_j = 1/\mu_j(j)\)</dd>
-  </dl>
+  <p>Khi \(p \neq q\), đặt \(\rho = q/p\):<br>
+  \(g(i) = \dfrac{1-\rho^i}{1-\rho^N}\)</p>
+  <p>Khi \(p = q = 1/2\):<br>
+  \(g(i) = i/N\)</p>
+</div>
+<div class="sidebar-section">
+  <h4>Liên hệ quan trọng</h4>
+  <p>\(\pi_j = \dfrac{1}{\mu_j(j)}\)<br>
+  <small>Phân phối dừng = nghịch đảo thời gian hồi quy</small></p>
 </div>

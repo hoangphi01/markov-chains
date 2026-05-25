@@ -1,22 +1,31 @@
 <div class="sidebar-section">
   <h4>Bảng phân phối</h4>
   <table class="symbol-table">
-    <tr><td><strong>Tên</strong></td><td><strong>E</strong></td><td><strong>Var</strong></td></tr>
-    <tr><td>Bern(\(p\))</td><td>\(p\)</td><td>\(p(1-p)\)</td></tr>
-    <tr><td>Bin(\(n,p\))</td><td>\(np\)</td><td>\(np(1-p)\)</td></tr>
-    <tr><td>Geo(\(p\))</td><td>\(\frac{1-p}{p}\)</td><td>\(\frac{1-p}{p^2}\)</td></tr>
+    <tr><td><strong>Tên</strong></td><td><strong>\(\E\)</strong></td><td><strong>Var</strong></td></tr>
+    <tr><td>Bern(\(p\))</td><td>\(p\)</td><td>\(pq\)</td></tr>
+    <tr><td>Bin(\(n,p\))</td><td>\(np\)</td><td>\(npq\)</td></tr>
+    <tr><td>Geo(\(p\))</td><td>\(\frac{q}{p}\)</td><td>\(\frac{q}{p^2}\)</td></tr>
     <tr><td>Poi(\(\lambda\))</td><td>\(\lambda\)</td><td>\(\lambda\)</td></tr>
     <tr><td>Exp(\(\lambda\))</td><td>\(\frac{1}{\lambda}\)</td><td>\(\frac{1}{\lambda^2}\)</td></tr>
     <tr><td>\(\mathcal{N}(\mu,\sigma^2)\)</td><td>\(\mu\)</td><td>\(\sigma^2\)</td></tr>
   </table>
+  <p><small>\(q = 1-p\)</small></p>
 </div>
 <div class="sidebar-section">
-  <h4>Tính chất quan trọng</h4>
+  <h4>Tính chất then chốt</h4>
+  <p><strong>Phân phối mũ:</strong></p>
   <ul>
-    <li>Min Exp: \(\text{Exp}(\sum \lambda_i)\)</li>
-    <li>Không nhớ: \(\PP(X>s+t|X>s)=\PP(X>t)\)</li>
+    <li>Min Exp → \(\text{Exp}(\sum \lambda_i)\)</li>
+    <li>Không nhớ: biết đã đợi \(s\) không giúp gì</li>
+  </ul>
+  <p><strong>Kỳ vọng:</strong></p>
+  <ul>
     <li>Tower: \(\E[X] = \E[\E[X|Y]]\)</li>
-    <li>Markov: \(\PP(X \geq a) \leq \E[X]/a\)</li>
-    <li>Chebyshev: \(\PP(|X-\mu| \geq k) \leq \text{Var}/k^2\)</li>
+    <li>Tuyến tính: luôn đúng, kể cả phụ thuộc</li>
+  </ul>
+  <p><strong>Bất đẳng thức:</strong></p>
+  <ul>
+    <li>Markov: \(\PP(X \geq a) \leq \frac{\E[X]}{a}\)</li>
+    <li>Chebyshev: \(\PP(|X-\mu| \geq k) \leq \frac{\sigma^2}{k^2}\)</li>
   </ul>
 </div>

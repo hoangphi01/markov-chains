@@ -3,23 +3,25 @@
   <table class="symbol-table">
     <tr><td></td><td><strong>Hồi quy</strong></td><td><strong>Tạm thời</strong></td></tr>
     <tr><td>\(p_{ii}\)</td><td>\(= 1\)</td><td>\(< 1\)</td></tr>
-    <tr><td>\(\sum P_{i,i}^{(n)}\)</td><td>\(= +\infty\)</td><td>\(< +\infty\)</td></tr>
-    <tr><td>Số lần thăm</td><td>Vô hạn</td><td>Hữu hạn</td></tr>
+    <tr><td>\(\sum P_{ii}^{(n)}\)</td><td>\(\infty\)</td><td>\(< \infty\)</td></tr>
+    <tr><td>Thăm \(i\)</td><td>\(\infty\) lần</td><td>hữu hạn</td></tr>
   </table>
 </div>
 <div class="sidebar-section">
   <h4>Định lý Polya</h4>
+  <p>Bước đi ngẫu nhiên trên \(\mathbb{Z}^d\):</p>
   <ul>
-    <li>\(d=1\): hồi quy</li>
-    <li>\(d=2\): hồi quy</li>
-    <li>\(d \geq 3\): tạm thời</li>
+    <li>\(d=1, 2\): <strong>hồi quy</strong></li>
+    <li>\(d \geq 3\): <strong>tạm thời</strong></li>
   </ul>
 </div>
 <div class="sidebar-section">
-  <h4>Checklist Ergodic</h4>
-  <ul>
-    <li>Bất khả quy?</li>
-    <li>Phi tuần hoàn? (\(d=1\))</li>
-    <li>Hồi quy dương? (\(\mu_i < \infty\))</li>
-  </ul>
+  <h4>Checklist hội tụ</h4>
+  <ol>
+    <li>Bất khả quy? <small>(mọi trạng thái liên thông)</small></li>
+    <li>Phi tuần hoàn? <small>(\(d(i)=1\))</small></li>
+    <li>Hồi quy dương? <small>(\(\mu_i < \infty\))</small></li>
+  </ol>
+  <p><small>Chuỗi hữu hạn bất khả quy → tự động hồi quy dương</small></p>
+  <p><strong>Ergodic</strong> = hồi quy dương + phi tuần hoàn</p>
 </div>

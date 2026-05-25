@@ -1,32 +1,27 @@
 <div class="sidebar-section">
-  <h4>Q vs P</h4>
+  <h4>So sánh P và Q</h4>
   <table class="symbol-table">
-    <tr><td></td><td><strong>P</strong></td><td><strong>Q</strong></td></tr>
+    <tr><td></td><td><strong>\(P\)</strong></td><td><strong>\(Q\)</strong></td></tr>
     <tr><td>Ngoài chéo</td><td>\(\geq 0\)</td><td>\(\geq 0\)</td></tr>
     <tr><td>Đường chéo</td><td>\(\geq 0\)</td><td>\(\leq 0\)</td></tr>
     <tr><td>Tổng hàng</td><td>\(= 1\)</td><td>\(= 0\)</td></tr>
-    <tr><td>Ý nghĩa</td><td>xác suất</td><td>tốc độ</td></tr>
   </table>
+  <p><small>\(P\) = "đi đâu", \(Q\) = "đi nhanh thế nào"</small></p>
 </div>
 <div class="sidebar-section">
   <h4>Phân phối mũ</h4>
-  <dl>
-    <dt>Không nhớ</dt>
-    <dd>\(\PP(X > s+t | X > s) = \PP(X > t)\)</dd>
-    <dt>Min của Exp</dt>
-    <dd>\(\min(X_1,...,X_n) \sim \text{Exp}(\sum \lambda_i)\)</dd>
-    <dt>Cạnh tranh</dt>
-    <dd>\(\PP(X_1 < X_2) = \frac{\lambda_1}{\lambda_1+\lambda_2}\)</dd>
-  </dl>
+  <p>\(\PP(X > t) = e^{-\lambda t}\), \(\E[X] = 1/\lambda\)</p>
+  <p><strong>Không nhớ:</strong><br>
+  \(\PP(X > s+t \mid X > s) = \PP(X > t)\)</p>
+  <p><strong>Min:</strong> \(\min(X_1,...,X_n) \sim \text{Exp}(\sum \lambda_i)\)</p>
+  <p><strong>Cạnh tranh:</strong><br>
+  \(\PP(X_1 < X_2) = \frac{\lambda_1}{\lambda_1+\lambda_2}\)</p>
 </div>
 <div class="sidebar-section">
   <h4>Công thức chính</h4>
-  <dl>
-    <dt>Dừng</dt>
-    <dd>\(\pi Q = 0\)</dd>
-    <dt>P(t)</dt>
-    <dd>\(P(t) = e^{tQ}\)</dd>
-    <dt>Chuỗi nhúng</dt>
-    <dd>\(\hat{P}_{i,j} = \lambda_{i,j}/(-\lambda_{i,i})\)</dd>
-  </dl>
+  <p>\(P(t) = e^{tQ}\)<br>
+  <small>Kolmogorov: \(P'(t) = P(t)Q = QP(t)\)</small></p>
+  <p>Phân phối dừng: \(\pi Q = 0\)</p>
+  <p>Chuỗi nhúng:<br>
+  \(\hat{P}_{i,j} = \dfrac{\lambda_{i,j}}{-\lambda_{i,i}}\)</p>
 </div>
