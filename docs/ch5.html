@@ -1,58 +1,37 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ch 5: Chuỗi Markov thời gian liên tục</title>
-  <link rel="stylesheet" href="css/style.css">
-  <script>
-  MathJax = {
-    tex: {
-      macros: {
-        PP: "\\mathbb{P}",
-        E: "\\mathbb{E}",
-        N: "\\mathbb{N}",
-        Z: "\\mathbb{Z}",
-        R: "\\mathbb{R}",
-        ind: "\\mathbf{1}"
-      },
-      tags: 'ams'
-    }
-  };
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
-</head>
-<body>
-  <div class="page-wrapper">
-    <nav class="toc">
-      <h3>Chuỗi Markov</h3>
-      <ul class="chapter-list">
-        <li><a href="index.html">Trang chủ</a></li>
-        <li><a href="ch1.html">Ch 1: Rời rạc</a></li>
-        <li><a href="ch2.html">Ch 2: Bước đầu tiên</a></li>
-        <li><a href="ch3.html">Ch 3: Phân loại</a></li>
-        <li><a href="ch4.html">Ch 4: Giới hạn</a></li>
-        <li><a href="ch5.html" class="current">Ch 5: Liên tục</a></li>
-        <li><a href="appendix.html">Phụ lục A</a></li>
-      </ul>
-      <h3>Mục này</h3>
-      <ul class="section-list">
-        <li><a href="#sec-poisson">1. Quá trình Poisson</a></li>
-        <li><a href="#sec-birth-death">2. Quá trình sinh-tử</a></li>
-        <li><a href="#sec-ctmc-definition">3. Định nghĩa CTMC</a></li>
-        <li><a href="#sec-generator">4. Ma trận sinh</a></li>
-        <li><a href="#sec-two-state">5. Hai trạng thái</a></li>
-        <li><a href="#sec-ct-stationary">6. Phân phối dừng</a></li>
-        <li><a href="#sec-embedded">7. Chuỗi nhúng</a></li>
-        <li><a href="#sec-absorption-prob">8. Xác suất hấp thu</a></li>
-        <li><a href="#sec-absorption-time">9. Thời gian hấp thu</a></li>
-        <li><a href="#sec-continuous-vs-discrete">10. Liên tục vs Rời rạc</a></li>
-        <li><a href="#sec-exercises">11. Bài tập</a></li>
-      </ul>
-    </nav>
-
-    <main class="content">
-      <h1>Chuong 5: Chuoi Markov thoi gian lien tuc<br><small>Continuous-Time Markov Chains</small></h1>
+---
+layout: chapter
+title: "Ch 5: Chuỗi Markov thời gian liên tục"
+chapter_num: 5
+heading: "Chương 5: Chuỗi Markov thời gian liên tục"
+heading_en: "Continuous-Time Markov Chains"
+prev_url: /ch4.html
+prev_title: "Chương 4"
+next_url: /appendix.html
+next_title: "Phụ lục A: Nền tảng Xác suất"
+sections:
+  - id: sec-poisson
+    title: "1. Quá trình Poisson"
+  - id: sec-birth-death
+    title: "2. Quá trình sinh-tử"
+  - id: sec-ctmc-definition
+    title: "3. Định nghĩa CTMC"
+  - id: sec-generator
+    title: "4. Ma trận sinh"
+  - id: sec-two-state
+    title: "5. Hai trạng thái"
+  - id: sec-ct-stationary
+    title: "6. Phân phối dừng"
+  - id: sec-embedded
+    title: "7. Chuỗi nhúng"
+  - id: sec-absorption-prob
+    title: "8. Xác suất hấp thu"
+  - id: sec-absorption-time
+    title: "9. Thời gian hấp thu"
+  - id: sec-continuous-vs-discrete
+    title: "10. Liên tục vs Rời rạc"
+  - id: sec-exercises
+    title: "11. Bài tập"
+---
 
       <!-- ================================================================ -->
       <h2 id="sec-poisson">1. Qua trinh Poisson <em>(The Poisson Process)</em></h2>
@@ -945,69 +924,3 @@
           <li>So sanh voi thoi gian hap thu trong chuoi roi rac tuong ung (gambler's ruin voi \(p = q = 1/2\), \(N = 3\)).</li>
         </ol>
       </div>
-
-      <div class="chapter-nav">
-        <a href="ch4.html">&larr; Chuong 4</a>
-        <a href="appendix.html">Phu luc A &rarr;</a>
-      </div>
-    </main>
-
-    <aside class="sidebar">
-      <div class="sidebar-section">
-        <h4>Q vs P</h4>
-        <table>
-          <thead>
-            <tr><th></th><th>\(P\)</th><th>\(Q\)</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Ngoai duong cheo</td><td>\(\geq 0\)</td><td>\(\geq 0\)</td></tr>
-            <tr><td>Duong cheo</td><td>\(\geq 0\)</td><td>\(\leq 0\)</td></tr>
-            <tr><td>Tong hang</td><td>\(= 1\)</td><td>\(= 0\)</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="sidebar-section">
-        <h4>Phan phoi mu \(\text{Exp}(\lambda)\)</h4>
-        <p>\(\mathbb{P}(X &gt; t) = e^{-\lambda t}\)</p>
-        <p>\(\mathbb{E}[X] = 1/\lambda\)</p>
-        <p><strong>Min doc lap:</strong><br>
-          \(\min(X_1, X_2) \sim \text{Exp}(\lambda_1 + \lambda_2)\)
-        </p>
-        <p><strong>Canh tranh:</strong><br>
-          \(\mathbb{P}(X_1 &lt; X_2) = \dfrac{\lambda_1}{\lambda_1 + \lambda_2}\)
-        </p>
-      </div>
-
-      <div class="sidebar-section">
-        <h4>Cong thuc chinh</h4>
-        <p><strong>Phan phoi dung:</strong><br>\(\pi Q = 0\)<br><em>(vs \(\pi P = \pi\))</em></p>
-        <p><strong>Ham mu ma tran:</strong><br>\(P(t) = e^{tQ}\)</p>
-        <p><strong>Chuoi nhung:</strong><br>\(\hat{P}_{i,j} = \dfrac{\lambda_{i,j}}{-\lambda_{i,i}}\)</p>
-        <p><strong>Quan he \(\pi\) va \(\hat{\pi}\):</strong><br>
-          \(\pi_i \propto \dfrac{\hat{\pi}_i}{-\lambda_{i,i}}\)
-        </p>
-      </div>
-
-      <div class="sidebar-section">
-        <h4>Thoi gian luu tru</h4>
-        <p>O trang thai \(i\):<br>
-          \(\tau_i \sim \text{Exp}(-\lambda_{i,i})\)<br>
-          \(\mathbb{E}[\tau_i] = \dfrac{1}{-\lambda_{i,i}}\)
-        </p>
-        <p>Sinh-tu:<br>
-          \(\mathbb{E}[\tau_i] = \dfrac{1}{\lambda_i + \mu_i}\)
-        </p>
-      </div>
-
-      <div class="sidebar-section">
-        <h4>Hang doi M/M/1</h4>
-        <p>\(\rho = \lambda/\mu &lt; 1\)</p>
-        <p>\(\pi_j = (1-\rho)\rho^j\)</p>
-        <p>\(\mathbb{E}[X] = \dfrac{\rho}{1-\rho}\)</p>
-      </div>
-    </aside>
-  </div>
-  <script src="js/nav.js"></script>
-</body>
-</html>

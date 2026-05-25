@@ -1,60 +1,41 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ch 2: Phân tích bước đầu tiên</title>
-  <link rel="stylesheet" href="css/style.css">
-  <script>
-  MathJax = {
-    tex: {
-      macros: {
-        PP: "\\mathbb{P}",
-        E: "\\mathbb{E}",
-        N: "\\mathbb{N}",
-        Z: "\\mathbb{Z}",
-        R: "\\mathbb{R}",
-        ind: "\\mathbf{1}"
-      },
-      tags: 'ams'
-    }
-  };
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
-</head>
-<body>
-  <div class="page-wrapper">
-    <nav class="toc">
-      <h3>Chuỗi Markov</h3>
-      <ul class="chapter-list">
-        <li><a href="index.html">Trang chủ</a></li>
-        <li><a href="ch1.html">Ch 1: Rời rạc</a></li>
-        <li><a href="ch2.html" class="current">Ch 2: Bước đầu tiên</a></li>
-        <li><a href="ch3.html">Ch 3: Phân loại</a></li>
-        <li><a href="ch4.html">Ch 4: Giới hạn</a></li>
-        <li><a href="ch5.html">Ch 5: Liên tục</a></li>
-        <li><a href="appendix.html">Phụ lục A</a></li>
-      </ul>
-      <h3>Mục này</h3>
-      <ul class="section-list">
-        <li><a href="#sec-hitting-prob">1. Xác suất chạm</a></li>
-        <li><a href="#sec-fsa-method">1.1 Phương pháp FSA</a></li>
-        <li><a href="#sec-absorbing-matrix">1.2 Tập hấp thu &amp; ma trận</a></li>
-        <li><a href="#sec-mean-hitting">2. Thời gian chạm TB</a></li>
-        <li><a href="#sec-generalization">2.1 Tổng quát hóa</a></li>
-        <li><a href="#sec-first-return">3. Thời gian quay lại</a></li>
-        <li><a href="#sec-mean-return">3.1 Thời gian quay lại TB</a></li>
-        <li><a href="#sec-number-returns">4. Số lần quay lại</a></li>
-        <li><a href="#sec-summary">5. Tổng kết chương</a></li>
-        <li><a href="#sec-gamblers-ruin">6. Con bạc (Gambler's Ruin)</a></li>
-        <li><a href="#sec-ruin-prob">6.1 Xác suất phá sản</a></li>
-        <li><a href="#sec-expected-duration">6.2 Thời gian chơi TB</a></li>
-        <li><a href="#sec-exercises">7. Bài tập</a></li>
-      </ul>
-    </nav>
-
-    <main class="content">
-      <h1>Chuong 2: Phân tích bước đầu tiên<br><small>First Step Analysis</small></h1>
+---
+layout: chapter
+title: "Ch 2: Phân tích bước đầu tiên"
+chapter_num: 2
+heading: "Chương 2: Phân tích bước đầu tiên"
+heading_en: "First Step Analysis"
+prev_url: /ch1.html
+prev_title: "Chương 1"
+next_url: /ch3.html
+next_title: "Chương 3: Phân loại trạng thái"
+sections:
+  - id: sec-hitting-prob
+    title: "1. Xác suất chạm"
+  - id: sec-fsa-method
+    title: "1.1 Phương pháp FSA"
+  - id: sec-absorbing-matrix
+    title: "1.2 Tập hấp thu & ma trận"
+  - id: sec-mean-hitting
+    title: "2. Thời gian chạm TB"
+  - id: sec-generalization
+    title: "2.1 Tổng quát hóa"
+  - id: sec-first-return
+    title: "3. Thời gian quay lại"
+  - id: sec-mean-return
+    title: "3.1 Thời gian quay lại TB"
+  - id: sec-number-returns
+    title: "4. Số lần quay lại"
+  - id: sec-summary
+    title: "5. Tổng kết chương"
+  - id: sec-gamblers-ruin
+    title: "6. Con bạc (Gambler's Ruin)"
+  - id: sec-ruin-prob
+    title: "6.1 Xác suất phá sản"
+  - id: sec-expected-duration
+    title: "6.2 Thời gian chơi TB"
+  - id: sec-exercises
+    title: "7. Bài tập"
+---
 
       <p><strong>Câu chuyện:</strong> Hãy tưởng tượng bạn đang ở tầng 3 của một tòa nhà 5 tầng.
       Mỗi phút, bạn ngẫu nhiên đi lên hoặc xuống 1 tầng. Câu hỏi:
@@ -765,66 +746,3 @@
           <li>Tính (hoặc thiết lập hệ phương trình) xác suất cá đến thức ăn trước bẫy.</li>
         </ol>
       </div>
-
-      <div class="chapter-nav">
-        <a href="ch1.html">&larr; Chuong 1</a>
-        <a href="ch3.html">Chuong 3 &rarr;</a>
-      </div>
-    </main>
-
-    <aside class="sidebar">
-      <div class="sidebar-section">
-        <h4>Ky hieu chinh</h4>
-        <ul>
-          <li>\(T_A = \inf\{n \geq 0 : Z_n \in A\}\) -- Thoi gian cham</li>
-          <li>\(\tau_j = \inf\{n \geq 1 : X_n = j\}\) -- Thoi gian quay lai</li>
-          <li>\(g_l(k) = \PP(Z_{T_A}=l \mid Z_0=k)\) -- Xac suat cham</li>
-          <li>\(h_A(k) = \E[T_A \mid Z_0=k]\) -- Thoi gian cham TB</li>
-          <li>\(\mu_j = \E[\tau_j \mid X_0=j]\) -- Thoi gian quay lai TB</li>
-          <li>\(p_{ij} = \PP(\tau_j &lt; \infty \mid X_0=i)\) -- Xac suat quay lai</li>
-          <li>\(R_j = \sum_{n \geq 1} \ind_{\{X_n=j\}}\) -- So lan tham</li>
-        </ul>
-      </div>
-
-      <div class="sidebar-section">
-        <h4>Cong thuc FSA</h4>
-        <p><strong>Xac suat cham:</strong></p>
-        \[g_l(k) = \sum_m P_{k,m}\, g_l(m)\]
-        <p>Bien: \(g_l(k) = \ind_{\{k=l\}}\) khi \(k \in A\)</p>
-
-        <p style="margin-top:0.8em;"><strong>Thoi gian cham TB:</strong></p>
-        \[h_A(k) = 1 + \sum_l P_{k,l}\, h_A(l)\]
-        <p>Bien: \(h_A(l) = 0\) khi \(l \in A\)</p>
-
-        <p style="margin-top:0.8em;"><strong>Thoi gian quay lai TB:</strong></p>
-        \[\mu_j(i) = 1 + \sum_{l \neq j} P_{i,l}\, \mu_j(l)\]
-      </div>
-
-      <div class="sidebar-section">
-        <h4>Dang ma tran</h4>
-        <p>Chuoi hap thu \(P = \begin{bmatrix}Q & R \\ 0 & I\end{bmatrix}\):</p>
-        \[\mathbf{g}_l = (I-Q)^{-1} R\, \mathbf{e}_l\]
-        \[\mathbf{h}_A = (I-Q)^{-1}\, \mathbf{1}\]
-        <p>\((I-Q)^{-1}\): <em>fundamental matrix</em></p>
-      </div>
-
-      <div class="sidebar-section">
-        <h4>Con bac (Gambler's Ruin)</h4>
-        <p>\(p \neq q\), \(\rho = q/p\):</p>
-        \[g(i) = \frac{1-\rho^i}{1-\rho^N}\]
-        <p>\(p = q = 1/2\):</p>
-        \[g(i) = \frac{i}{N}, \quad h(i) = i(N-i)\]
-      </div>
-
-      <div class="sidebar-section">
-        <h4>Ergodic</h4>
-        \[\pi_j = \frac{1}{\mu_j}\]
-        <p>Phan phoi dung = nghich dao thoi gian quay lai TB</p>
-        <p>So lan tham (geometric dist.):</p>
-        \[\E[R_j \mid X_0=i] = \frac{p_{ij}}{1-p_{jj}}\]
-      </div>
-    </aside>
-  </div>
-  <script src="js/nav.js"></script>
-</body>
-</html>

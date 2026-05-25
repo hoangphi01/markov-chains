@@ -1,58 +1,33 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ch 1: Chuoi Markov thoi gian roi rac</title>
-  <link rel="stylesheet" href="css/style.css">
-  <script>
-  MathJax = {
-    tex: {
-      macros: {
-        PP: "\\mathbb{P}",
-        E: "\\mathbb{E}",
-        N: "\\mathbb{N}",
-        Z: "\\mathbb{Z}",
-        R: "\\mathbb{R}",
-        ind: "\\mathbf{1}"
-      },
-      tags: 'ams'
-    }
-  };
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
-</head>
-<body>
-  <div class="page-wrapper">
-    <!-- LEFT: TOC -->
-    <nav class="toc">
-      <h3>Chuỗi Markov</h3>
-      <ul class="chapter-list">
-        <li><a href="index.html">Trang chủ</a></li>
-        <li><a href="ch1.html" class="current">Ch 1: Rời rạc</a></li>
-        <li><a href="ch2.html">Ch 2: Bước đầu tiên</a></li>
-        <li><a href="ch3.html">Ch 3: Phân loại</a></li>
-        <li><a href="ch4.html">Ch 4: Giới hạn</a></li>
-        <li><a href="ch5.html">Ch 5: Liên tục</a></li>
-        <li><a href="appendix.html">Phụ lục A</a></li>
-      </ul>
-      <h3>Mục này</h3>
-      <ul class="section-list">
-        <li><a href="#tai-sao-markov">1. Tại sao chuỗi Markov quan trọng?</a></li>
-        <li><a href="#tinh-chat-markov">2. Tính chất Markov</a></li>
-        <li><a href="#ma-tran-chuyen">2.1. Ma trận chuyển</a></li>
-        <li><a href="#xac-suat-nhieu-buoc">2.2. Xác suất chuyển nhiều bước</a></li>
-        <li><a href="#chuoi-hai-trang-thai">3. Chuỗi Markov hai trạng thái</a></li>
-        <li><a href="#cheo-hoa">3.1. Chéo hóa ma trận</a></li>
-        <li><a href="#phan-phoi-gioi-han">3.2. Phân phối giới hạn</a></li>
-        <li><a href="#toc-do-hoi-tu">3.3. Tốc độ hội tụ</a></li>
-        <li><a href="#bai-tap">4. Bài tập</a></li>
-      </ul>
-    </nav>
-
-    <!-- CENTER: Content -->
-    <main class="content">
-      <h1>Chương 1: Chuỗi Markov thời gian rời rạc<br><small>Discrete-Time Markov Chains</small></h1>
+---
+layout: chapter
+title: "Ch 1: Chuỗi Markov thời gian rời rạc"
+chapter_num: 1
+heading: "Chương 1: Chuỗi Markov thời gian rời rạc"
+heading_en: "Discrete-Time Markov Chains"
+prev_url: null
+prev_title: null
+next_url: /ch2.html
+next_title: "Chương 2: Phân tích bước đầu tiên"
+sections:
+  - id: tai-sao-markov
+    title: "1. Tại sao chuỗi Markov quan trọng?"
+  - id: tinh-chat-markov
+    title: "2. Tính chất Markov"
+  - id: ma-tran-chuyen
+    title: "2.1. Ma trận chuyển"
+  - id: xac-suat-nhieu-buoc
+    title: "2.2. Xác suất chuyển nhiều bước"
+  - id: chuoi-hai-trang-thai
+    title: "3. Chuỗi Markov hai trạng thái"
+  - id: cheo-hoa
+    title: "3.1. Chéo hóa ma trận"
+  - id: phan-phoi-gioi-han
+    title: "3.2. Phân phối giới hạn"
+  - id: toc-do-hoi-tu
+    title: "3.3. Tốc độ hội tụ"
+  - id: bai-tap
+    title: "4. Bài tập"
+---
 
       <!-- ================================================================ -->
       <h2 id="tai-sao-markov">1. Tại sao chuỗi Markov quan trọng? <small>(Why Markov Chains Matter)</small></h2>
@@ -494,45 +469,3 @@
         và \((X_k)\) độc lập cùng phân phối, thì \((S_n)\) thỏa mãn tính chất Markov.
         (Gợi ý: sử dụng tính độc lập của \(X_{n+1}\) với \((X_1, \ldots, X_n)\).)</p>
       </div>
-
-      <div class="chapter-nav">
-        <span></span>
-        <a href="ch2.html">Chương 2: Phân tích bước đầu tiên &rarr;</a>
-      </div>
-    </main>
-
-    <!-- RIGHT: Sidebar -->
-    <aside class="sidebar">
-      <div class="sidebar-section">
-        <h4>Ký hiệu chính</h4>
-        <dl>
-          <dt>\(P_{i,j}\)</dt>
-          <dd>Xác suất chuyển từ trạng thái \(i\) (hàng) sang trạng thái \(j\) (cột)</dd>
-
-          <dt>Quy tắc tổng hàng</dt>
-          <dd>\(\displaystyle\sum_{j} P_{i,j} = 1\) với mọi \(i\)<br>(mỗi hàng tổng bằng 1)</dd>
-
-          <dt>Trị riêng (2 trạng thái)</dt>
-          <dd>\(\lambda_1 = 1\)<br>\(\lambda_2 = 1 - a - b\)</dd>
-
-          <dt>Phân phối giới hạn</dt>
-          <dd>\(\pi_0 = \dfrac{b}{a+b}\), \(\quad\pi_1 = \dfrac{a}{a+b}\)</dd>
-
-          <dt>Chapman&ndash;Kolmogorov</dt>
-          <dd>\(\displaystyle P^{m+n}_{i,j} = \sum_{l \in S} P^m_{i,l}\,P^n_{l,j}\)</dd>
-        </dl>
-      </div>
-      <div class="sidebar-section">
-        <h4>Ghi nhớ nhanh</h4>
-        <ul>
-          <li>Ma trận chuyển: hàng = xuất phát, cột = đích đến</li>
-          <li>\(P^k\) cho xác suất sau \(k\) bước</li>
-          <li>Hội tụ nhanh khi \(|1-a-b|\) nhỏ</li>
-          <li>Trạng thái hấp thụ: \(P_{k,k} = 1\)</li>
-        </ul>
-      </div>
-    </aside>
-  </div>
-  <script src="js/nav.js"></script>
-</body>
-</html>

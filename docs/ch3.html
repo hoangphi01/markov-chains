@@ -1,54 +1,29 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ch 3: Phân loại trạng thái</title>
-  <link rel="stylesheet" href="css/style.css">
-  <script>
-  MathJax = {
-    tex: {
-      macros: {
-        PP: "\\mathbb{P}",
-        E: "\\mathbb{E}",
-        N: "\\mathbb{N}",
-        Z: "\\mathbb{Z}",
-        R: "\\mathbb{R}",
-        ind: "\\mathbf{1}"
-      },
-      tags: 'ams'
-    }
-  };
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
-</head>
-<body>
-  <div class="page-wrapper">
-    <nav class="toc">
-      <h3>Chuỗi Markov</h3>
-      <ul class="chapter-list">
-        <li><a href="index.html">Trang chủ</a></li>
-        <li><a href="ch1.html">Ch 1: Rời rạc</a></li>
-        <li><a href="ch2.html">Ch 2: Bước đầu tiên</a></li>
-        <li><a href="ch3.html" class="current">Ch 3: Phân loại</a></li>
-        <li><a href="ch4.html">Ch 4: Giới hạn</a></li>
-        <li><a href="ch5.html">Ch 5: Liên tục</a></li>
-        <li><a href="appendix.html">Phụ lục A</a></li>
-      </ul>
-      <h3>Mục này</h3>
-      <ul class="section-list">
-        <li><a href="#communicating-states">1. Trạng thái liên thông</a></li>
-        <li><a href="#communicating-class">2. Lớp liên thông</a></li>
-        <li><a href="#recurrent-states">3. Trạng thái hồi quy</a></li>
-        <li><a href="#transient-states">4. Trạng thái tạm thời</a></li>
-        <li><a href="#pos-null-recurrence">5. Hồi quy dương/không</a></li>
-        <li><a href="#periodicity">6. Tính tuần hoàn</a></li>
-        <li><a href="#ch6-exercises">7. Bài tập</a></li>
-      </ul>
-    </nav>
-
-    <main class="content">
-      <h1>Chuong 3: Phân loại trạng thái<br><small>Classification of States</small></h1>
+---
+layout: chapter
+title: "Ch 3: Phân loại trạng thái"
+chapter_num: 3
+heading: "Chương 3: Phân loại trạng thái"
+heading_en: "Classification of States"
+prev_url: /ch2.html
+prev_title: "Chương 2"
+next_url: /ch4.html
+next_title: "Chương 4: Phân phối giới hạn và dừng"
+sections:
+  - id: communicating-states
+    title: "1. Trạng thái liên thông"
+  - id: communicating-class
+    title: "2. Lớp liên thông"
+  - id: recurrent-states
+    title: "3. Trạng thái hồi quy"
+  - id: transient-states
+    title: "4. Trạng thái tạm thời"
+  - id: pos-null-recurrence
+    title: "5. Hồi quy dương/không"
+  - id: periodicity
+    title: "6. Tính tuần hoàn"
+  - id: ch6-exercises
+    title: "7. Bài tập"
+---
 
       <p><strong>Câu chuyện:</strong> Hãy tưởng tượng bạn đi du lịch giữa các thành phố.
       Có những thành phố bạn chắc chắn sẽ quay lại (quán café quen &mdash; &ldquo;hồi quy&rdquo;),
@@ -595,95 +570,3 @@
           <li>Nếu thêm điều kiện phi tuần hoàn, kết luận gì về sự tồn tại phân phối giới hạn?</li>
         </ol>
       </div>
-
-      <div class="chapter-nav">
-        <a href="ch2.html">&larr; Chuong 2</a>
-        <a href="ch4.html">Chuong 4 &rarr;</a>
-      </div>
-    </main>
-
-    <aside class="sidebar">
-      <div class="sidebar-section">
-        <h4>Recurrent vs Transient</h4>
-        <table class="symbol-table">
-          <tr>
-            <td></td>
-            <td><strong>Recurrent</strong></td>
-            <td><strong>Transient</strong></td>
-          </tr>
-          <tr>
-            <td>\(p_{ii}\)</td>
-            <td>\(= 1\)</td>
-            <td>\(< 1\)</td>
-          </tr>
-          <tr>
-            <td>\(\E[R_i]\)</td>
-            <td>\(+\infty\)</td>
-            <td>\(< \infty\)</td>
-          </tr>
-          <tr>
-            <td>\(\sum_n P^n_{ii}\)</td>
-            <td>\(= +\infty\)</td>
-            <td>\(< +\infty\)</td>
-          </tr>
-        </table>
-      </div>
-
-      <div class="sidebar-section">
-        <h4>Chu ky (Period)</h4>
-        <p style="font-size:12px;">\(d(i) = \gcd\{n \geq 1 : P^n_{i,i} > 0\}\)</p>
-        <ul>
-          <li>\(d(i) = 1\): phi tuan hoan</li>
-          <li>\(d(i) = 2\): ban co (2-periodic)</li>
-          <li>\(P_{ii} > 0 \Rightarrow d(i)=1\)</li>
-          <li>Chu ky la tinh chat lop</li>
-        </ul>
-      </div>
-
-      <div class="sidebar-section">
-        <h4>Ergodic</h4>
-        <p style="font-size:12px;">Ergodic = Hoi quy duong + Phi tuan hoan</p>
-        <ul>
-          <li>Bat kha quy?</li>
-          <li>Phi tuan hoan?</li>
-          <li>Huu han? \(\Rightarrow\) auto hoi quy duong</li>
-        </ul>
-      </div>
-
-      <div class="sidebar-section">
-        <h4>Dinh ly Polya</h4>
-        <ul>
-          <li>\(d=1\): hoi quy</li>
-          <li>\(d=2\): hoi quy</li>
-          <li>\(d \geq 3\): tam thoi</li>
-        </ul>
-        <p style="font-size:11px; color:#888;">&ldquo;A drunk man finds home; a drunk bird does not.&rdquo;</p>
-      </div>
-
-      <div class="sidebar-section">
-        <h4>Checklist hoi tu</h4>
-        <ol style="padding-left:16px; font-size:12px;">
-          <li>Bat kha quy? (1 lop lien thong)</li>
-          <li>Phi tuan hoan? (\(P_{ii}>0\) cho mot i nao do)</li>
-          <li>Huu han? (tu dong hoi quy duong)</li>
-        </ol>
-        <p style="font-size:12px; margin-top:6px;">Ca 3 &rArr; phan phoi dung ton tai, duy nhat, = phan phoi gioi han.</p>
-      </div>
-
-      <div class="sidebar-section">
-        <h4>Ky hieu chinh</h4>
-        <table class="symbol-table">
-          <tr><td>\(\tau_i\)</td><td>tg quay lai lan dau</td></tr>
-          <tr><td>\(p_{ii}\)</td><td>xac suat quay lai</td></tr>
-          <tr><td>\(\mu_i(i)\)</td><td>tg quay lai TB</td></tr>
-          <tr><td>\(R_i\)</td><td>so lan quay lai</td></tr>
-          <tr><td>\(d(i)\)</td><td>chu ky</td></tr>
-          <tr><td>\(i \to j\)</td><td>\(j\) dat duoc tu \(i\)</td></tr>
-          <tr><td>\(i \leftrightarrow j\)</td><td>lien thong</td></tr>
-        </table>
-      </div>
-    </aside>
-  </div>
-  <script src="js/nav.js"></script>
-</body>
-</html>

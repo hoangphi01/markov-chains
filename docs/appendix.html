@@ -1,57 +1,35 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Phụ lục A: Nền tảng Xác suất</title>
-  <link rel="stylesheet" href="css/style.css">
-  <script>
-  MathJax = {
-    tex: {
-      macros: {
-        PP: "\\mathbb{P}",
-        E: "\\mathbb{E}",
-        N: "\\mathbb{N}",
-        Z: "\\mathbb{Z}",
-        R: "\\mathbb{R}",
-        ind: "\\mathbf{1}"
-      },
-      tags: 'ams'
-    }
-  };
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
-</head>
-<body>
-  <div class="page-wrapper">
-    <nav class="toc">
-      <h3>Chuỗi Markov</h3>
-      <ul class="chapter-list">
-        <li><a href="index.html">Trang chủ</a></li>
-        <li><a href="ch1.html">Ch 1: Rời rạc</a></li>
-        <li><a href="ch2.html">Ch 2: Bước đầu tiên</a></li>
-        <li><a href="ch3.html">Ch 3: Phân loại</a></li>
-        <li><a href="ch4.html">Ch 4: Giới hạn</a></li>
-        <li><a href="ch5.html">Ch 5: Liên tục</a></li>
-        <li><a href="appendix.html" class="current">Phụ lục A</a></li>
-      </ul>
-      <h3>Mục này</h3>
-      <ul class="section-list">
-        <li><a href="#prob-spaces">A.1 Không gian xác suất</a></li>
-        <li><a href="#conditional">A.2 Xác suất có điều kiện</a></li>
-        <li><a href="#random-variables">A.3 Biến ngẫu nhiên</a></li>
-        <li><a href="#distributions">A.4 Phân phối xác suất</a></li>
-        <li><a href="#expectation">A.5 Kỳ vọng toán học</a></li>
-        <li><a href="#inequalities">A.6 Bất đẳng thức</a></li>
-        <li><a href="#pgf">A.7 Hàm sinh xác suất</a></li>
-        <li><a href="#cond-expectation">A.8 Kỳ vọng có điều kiện</a></li>
-        <li><a href="#joint">A.9 Phân phối đồng thời</a></li>
-        <li><a href="#summary">A.10 Tổng kết</a></li>
-      </ul>
-    </nav>
-
-    <main class="content">
-      <h1>Phụ lục A: Nền tảng Xác suất<br><small>Probability Background</small></h1>
+---
+layout: chapter
+title: "Phụ lục A: Nền tảng Xác suất"
+chapter_num: "A"
+heading: "Phụ lục A: Nền tảng Xác suất"
+heading_en: "Probability Background"
+prev_url: /ch5.html
+prev_title: "Chương 5"
+next_url: /index.html
+next_title: "Trang chủ"
+sections:
+  - id: prob-spaces
+    title: "A.1 Không gian xác suất"
+  - id: conditional
+    title: "A.2 Xác suất có điều kiện"
+  - id: random-variables
+    title: "A.3 Biến ngẫu nhiên"
+  - id: distributions
+    title: "A.4 Phân phối xác suất"
+  - id: expectation
+    title: "A.5 Kỳ vọng toán học"
+  - id: inequalities
+    title: "A.6 Bất đẳng thức"
+  - id: pgf
+    title: "A.7 Hàm sinh xác suất"
+  - id: cond-expectation
+    title: "A.8 Kỳ vọng có điều kiện"
+  - id: joint
+    title: "A.9 Phân phối đồng thời"
+  - id: summary
+    title: "A.10 Tổng kết"
+---
 
       <p>Phụ lục này tóm tắt các kiến thức xác suất cần thiết cho việc nghiên cứu chuỗi Markov.</p>
 
@@ -347,111 +325,3 @@
           <li><strong>Bất đẳng thức Markov/Chebyshev</strong>: ước lượng xác suất không cần biết phân phối chính xác.</li>
         </ul>
       </div>
-
-      <div class="chapter-nav">
-        <a href="ch5.html">&larr; Chương 5</a>
-        <a href="index.html">Trang chủ &rarr;</a>
-      </div>
-    </main>
-
-    <aside class="sidebar">
-      <div class="sidebar-section">
-        <h4>Bảng phân phối</h4>
-        <table class="dist-table">
-          <thead>
-            <tr>
-              <th>Phân phối</th>
-              <th>PMF / PDF</th>
-              <th>\(\mathbb{E}\)</th>
-              <th>Var</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Bernoulli</strong>\((p)\)</td>
-              <td>\(\mathbb{P}(X{=}1)=p\)</td>
-              <td>\(p\)</td>
-              <td>\(p(1-p)\)</td>
-            </tr>
-            <tr>
-              <td><strong>Binomial</strong>\((n,p)\)</td>
-              <td>\(\binom{n}{k}p^k(1-p)^{n-k}\)</td>
-              <td>\(np\)</td>
-              <td>\(np(1-p)\)</td>
-            </tr>
-            <tr>
-              <td><strong>Geometric</strong>\((p)\)</td>
-              <td>\((1-p)^k p\)</td>
-              <td>\(\frac{1-p}{p}\)</td>
-              <td>\(\frac{1-p}{p^2}\)</td>
-            </tr>
-            <tr>
-              <td><strong>Poisson</strong>\((\lambda)\)</td>
-              <td>\(e^{-\lambda}\frac{\lambda^k}{k!}\)</td>
-              <td>\(\lambda\)</td>
-              <td>\(\lambda\)</td>
-            </tr>
-            <tr>
-              <td><strong>Exp</strong>\((\lambda)\)</td>
-              <td>\(\lambda e^{-\lambda x}\)</td>
-              <td>\(\frac{1}{\lambda}\)</td>
-              <td>\(\frac{1}{\lambda^2}\)</td>
-            </tr>
-            <tr>
-              <td><strong>Normal</strong>\((\mu,\sigma^2)\)</td>
-              <td>\(\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}\)</td>
-              <td>\(\mu\)</td>
-              <td>\(\sigma^2\)</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="sidebar-section">
-        <h4>Tính chất phân phối Mũ</h4>
-        <p><strong>Min của Exp độc lập:</strong></p>
-        \[
-          \min(X_1,\ldots,X_n) \sim \text{Exp}\!\left(\sum_i \lambda_i\right)
-        \]
-        <p><strong>Xác suất cạnh tranh:</strong></p>
-        \[
-          \mathbb{P}(X_1 < X_2) = \frac{\lambda_1}{\lambda_1 + \lambda_2}
-        \]
-        <p><strong>Tính không nhớ:</strong></p>
-        \[
-          \mathbb{P}(X > s+t \mid X > s) = \mathbb{P}(X > t)
-        \]
-      </div>
-
-      <div class="sidebar-section">
-        <h4>Tính chất kỳ vọng</h4>
-        <p><strong>Tuyến tính:</strong></p>
-        \[
-          \mathbb{E}[aX + bY] = a\mathbb{E}[X] + b\mathbb{E}[Y]
-        \]
-        <p><strong>Tower property:</strong></p>
-        \[
-          \mathbb{E}[X] = \mathbb{E}[\mathbb{E}[X \mid Y]]
-        \]
-        <p><strong>Phương sai:</strong></p>
-        \[
-          \text{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2
-        \]
-      </div>
-
-      <div class="sidebar-section">
-        <h4>Bất đẳng thức</h4>
-        <p><strong>Markov</strong> (\(X \geq 0\)):</p>
-        \[
-          \mathbb{P}(X \geq a) \leq \frac{\mathbb{E}[X]}{a}
-        \]
-        <p><strong>Chebyshev:</strong></p>
-        \[
-          \mathbb{P}(|X - \mathbb{E}[X]| \geq k) \leq \frac{\text{Var}(X)}{k^2}
-        \]
-      </div>
-    </aside>
-  </div>
-  <script src="js/nav.js"></script>
-</body>
-</html>

@@ -1,55 +1,31 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ch 4: Phân phối giới hạn và dừng</title>
-  <link rel="stylesheet" href="css/style.css">
-  <script>
-  MathJax = {
-    tex: {
-      macros: {
-        PP: "\\mathbb{P}",
-        E: "\\mathbb{E}",
-        N: "\\mathbb{N}",
-        Z: "\\mathbb{Z}",
-        R: "\\mathbb{R}",
-        ind: "\\mathbf{1}"
-      },
-      tags: 'ams'
-    }
-  };
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
-</head>
-<body>
-  <div class="page-wrapper">
-    <nav class="toc">
-      <h3>Chuỗi Markov</h3>
-      <ul class="chapter-list">
-        <li><a href="index.html">Trang chủ</a></li>
-        <li><a href="ch1.html">Ch 1: Rời rạc</a></li>
-        <li><a href="ch2.html">Ch 2: Bước đầu tiên</a></li>
-        <li><a href="ch3.html">Ch 3: Phân loại</a></li>
-        <li><a href="ch4.html" class="current">Ch 4: Giới hạn</a></li>
-        <li><a href="ch5.html">Ch 5: Liên tục</a></li>
-        <li><a href="appendix.html">Phụ lục A</a></li>
-      </ul>
-      <h3>Mục này</h3>
-      <ul class="section-list">
-        <li><a href="#sec-limiting-dist">1. Phân phối giới hạn</a></li>
-        <li><a href="#sec-stationary-dist">2. Phân phối dừng</a></li>
-        <li><a href="#sec-computing-stationary">3. Tính phân phối dừng</a></li>
-        <li><a href="#sec-detailed-balance">4. Cân bằng chi tiết</a></li>
-        <li><a href="#sec-convergence">5. Định lý hội tụ</a></li>
-        <li><a href="#sec-convergence-rate">6. Tốc độ hội tụ</a></li>
-        <li><a href="#sec-summary-methods">7. Bảng tổng hợp</a></li>
-        <li><a href="#sec-ch7-exercises">8. Bài tập</a></li>
-      </ul>
-    </nav>
-
-    <main class="content">
-      <h1>Chương 4: Phân phối giới hạn và dừng<br><small>Limiting and Stationary Distributions</small></h1>
+---
+layout: chapter
+title: "Ch 4: Phân phối giới hạn và dừng"
+chapter_num: 4
+heading: "Chương 4: Phân phối giới hạn và dừng"
+heading_en: "Limiting and Stationary Distributions"
+prev_url: /ch3.html
+prev_title: "Chương 3"
+next_url: /ch5.html
+next_title: "Chương 5: Chuỗi Markov thời gian liên tục"
+sections:
+  - id: sec-limiting-dist
+    title: "1. Phân phối giới hạn"
+  - id: sec-stationary-dist
+    title: "2. Phân phối dừng"
+  - id: sec-computing-stationary
+    title: "3. Tính phân phối dừng"
+  - id: sec-detailed-balance
+    title: "4. Cân bằng chi tiết"
+  - id: sec-convergence
+    title: "5. Định lý hội tụ"
+  - id: sec-convergence-rate
+    title: "6. Tốc độ hội tụ"
+  - id: sec-summary-methods
+    title: "7. Bảng tổng hợp"
+  - id: sec-ch7-exercises
+    title: "8. Bài tập"
+---
 
       <p><strong>Câu chuyện:</strong> Hãy tưởng tượng một thành phố với nhiều khu dân cư. Mỗi năm, người dân di cư giữa các khu.
       Ban đầu có thể khu A đông, khu B vắng. Nhưng sau nhiều năm, tỷ lệ dân ở mỗi khu sẽ <strong>ổn định</strong> ---
@@ -631,44 +607,3 @@
         <p>Chứng minh rằng bước đi ngẫu nhiên trên đồ thị vô hướng liên thông (nhảy đều sang đỉnh kề)
         luôn thỏa mãn điều kiện cân bằng chi tiết với \(\pi_i = d_i / (2|E|)\).</p>
       </div>
-
-      <div class="chapter-nav">
-        <a href="ch3.html">&larr; Chương 3</a>
-        <a href="ch5.html">Chương 5 &rarr;</a>
-      </div>
-    </main>
-
-    <aside class="sidebar">
-      <div class="sidebar-section">
-        <h4>Công thức chính</h4>
-        <p><strong>Phân phối dừng:</strong><br>
-        \(\pi = \pi P\)</p>
-        <p><strong>Liên hệ hồi quy:</strong><br>
-        \(\pi_j = \dfrac{1}{\mu_j(j)}\)</p>
-        <p><strong>Cân bằng chi tiết:</strong><br>
-        \(\pi_i P_{i,j} = \pi_j P_{j,i}\)</p>
-        <p><strong>Tốc độ hội tụ:</strong><br>
-        \(|P^n_{i,j} - \pi_j| \leq C\,|\lambda_2|^n\)</p>
-        <p><strong>Khoảng cách phổ:</strong><br>
-        \(\gamma = 1 - |\lambda_2|\)</p>
-      </div>
-      <div class="sidebar-section">
-        <h4>Điều kiện hội tụ</h4>
-        <ul>
-          <li>Bất khả quy <em>(irreducible)</em></li>
-          <li>Không tuần hoàn <em>(aperiodic)</em></li>
-          <li>Hồi quy dương <em>(positive recurrent)</em></li>
-        </ul>
-        <p><em>Lưu ý:</em> Nếu \(S\) hữu hạn và bất khả quy thì tự động hồi quy dương.</p>
-      </div>
-      <div class="sidebar-section">
-        <h4>Giới hạn vs. Dừng</h4>
-        <p>Giới hạn tồn tại \(\Rightarrow\) Dừng tồn tại</p>
-        <p>Dừng tồn tại \(\not\Rightarrow\) Giới hạn tồn tại</p>
-        <p><em>Ví dụ:</em> Chuỗi tuần hoàn có phân phối dừng nhưng không có phân phối giới hạn.</p>
-      </div>
-    </aside>
-  </div>
-  <script src="js/nav.js"></script>
-</body>
-</html>
