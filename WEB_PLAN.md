@@ -155,39 +155,140 @@ MathJax = {
 
 ---
 
-## Jekyll Structure (for scaling)
+## Jekyll Structure
+
+All chapters use Jekyll front matter + shared layouts. No boilerplate duplication.
 
 ```
 docs/
-  _config.yml                 # Jekyll config, collections
+  _config.yml                 # Jekyll config
   _layouts/
     default.html              # Base: <head>, MathJax, <body>
     chapter.html              # 3-column: nav + content + sidebar
   _includes/
-    mathjax.html              # MathJax v3 config + macros
+    mathjax.html              # MathJax v3 config + custom macros (\PP, \E, etc.)
     nav.html                  # Shared chapter list (edit once, updates all pages)
     sidebars/
       default.html            # Fallback sidebar (key symbols)
       ch1.html - ch5.html     # Per-chapter sidebar content
       appendix.html           # Appendix sidebar
   _chapter_template.html      # Copy this to create new chapters
-  Gemfile                     # Ruby dependencies
+  Gemfile                     # Ruby dependencies (jekyll ~> 4.3)
   .gitignore                  # Exclude _site/, .jekyll-cache/
-  css/style.css               # Shared styles (same file)
-  js/nav.js                   # Shared JS (same file)
-  index.html                  # Landing page
-  ch1.html - ch5.html         # Chapter pages (standalone or Jekyll)
-  appendix.html               # Appendix page
+  css/style.css               # Shared styles (3-column grid, boxes, typography)
+  js/nav.js                   # TOC active state tracking, smooth scroll
+  index.html                  # Landing page (standalone, no layout)
+  ch1.html - ch5.html         # Chapter pages (Jekyll front matter + layout)
+  appendix.html               # Appendix page (Jekyll front matter + layout)
 ```
 
-### Adding a New Chapter
+### IMPORTANT: Use .html, NOT .md
 
-1. Copy `_chapter_template.html` to `chN.html`
-2. Fill in front matter (title, sections, prev/next links)
-3. Write content using CSS classes (definition, theorem, formula, etc.)
-4. Create `_includes/sidebars/chN.html` for the right sidebar
-5. Add entry in `_includes/nav.html`
-6. Add case in `_layouts/chapter.html` for sidebar routing
+Chapter files **must** be `.html`, not `.md`. Reason:
+- `.md` files go through Markdown processing, which **corrupts** raw HTML tags and MathJax
+- `.html` files with front matter get the same Jekyll layout/include benefits but **skip** Markdown conversion
+- The content is already HTML -- no Markdown conversion needed
+
+### How a Chapter File Looks
+
+```html
+---
+layout: chapter
+title: "Ch N: Vietnamese Title"
+chapter_num: N
+heading: "Chuong N: Vietnamese Title"
+heading_en: "English Title"
+prev_url: /chN-1.html
+prev_title: "Chuong N-1"
+next_url: /chN+1.html
+next_title: "Chuong N+1"
+sections:
+  - id: section-id
+    title: "Section Title"
+---
+
+<!-- Only content here -- no <html>, <head>, <nav>, <sidebar>, <script> -->
+
+<h2 id="section-id">Section Title</h2>
+<p>Content with math: \(\PP(X = k)\)</p>
+
+<div class="box definition">
+  <p class="box-title">Dinh nghia</p>
+  <p>Definition text...</p>
+</div>
+```
+
+The layout (`_layouts/chapter.html`) automatically adds:
+- `<head>` with MathJax config and CSS
+- Left nav with chapter list + section list (from front matter)
+- Right sidebar (from `_includes/sidebars/chN.html`)
+- Prev/next chapter navigation
+- `nav.js` script
+
+### Adding a New Chapter (Step by Step)
+
+**Step 1:** Copy the template
+```bash
+cp docs/_chapter_template.html docs/ch6.html
+```
+
+**Step 2:** Fill in front matter
+```yaml
+---
+layout: chapter
+title: "Ch 6: Vietnamese Title"
+chapter_num: 6
+heading: "Chuong 6: Vietnamese Title"
+heading_en: "English Title"
+prev_url: /ch5.html
+prev_title: "Chuong 5"
+next_url: /ch7.html
+next_title: "Chuong 7"
+sections:
+  - id: section-1-id
+    title: "1. Section Title"
+  - id: exercises
+    title: "Bai tap"
+---
+```
+
+**Step 3:** Write content using these CSS classes
+
+| Class | Use for | Border |
+|-------|---------|--------|
+| `<div class="box definition">` | Dinh nghia | Green |
+| `<div class="box theorem">` | Dinh ly, Menh de, He qua | Red |
+| `<div class="box formula">` | Cong thuc quan trong | Gold |
+| `<div class="box summary">` | Tom tat | Blue |
+| `<div class="example">` | Vi du | Gray border |
+| `<div class="exercise">` | Bai tap | Purple left border |
+| `<div class="proof">` | Chung minh (auto prefix + QED) | None |
+
+Each box should have: `<p class="box-title">Title</p>` as the first child.
+
+Math: `\(...\)` for inline, `\[...\]` for display. MathJax macros available: `\PP`, `\E`, `\N`, `\Z`, `\R`, `\ind`.
+
+**Step 4:** Create sidebar include
+```bash
+# Create docs/_includes/sidebars/ch6.html with key formulas and references
+```
+
+**Step 5:** Register the new chapter in 3 places
+
+1. **`_includes/nav.html`** -- add a new `<li>` entry:
+```html
+<li><a href="{{ '/ch6.html' | relative_url }}" {% if page.chapter_num == 6 %}class="current"{% endif %}>Ch 6: Short Name</a></li>
+```
+
+2. **`_layouts/chapter.html`** -- add a case for the sidebar:
+```liquid
+{% when 6 %}{% include sidebars/ch6.html %}
+```
+
+3. **`index.html`** -- add a chapter card in the grid.
+
+**Step 6:** Update prev/next links
+- Update the **previous chapter's** `next_url` and `next_title` in its front matter.
 
 ### Local Development
 
@@ -198,17 +299,21 @@ bundle install
 bundle exec jekyll serve    # http://localhost:4000
 ```
 
-### Migrating Existing Chapters to Jekyll
-
-To convert a standalone `chN.html` to use Jekyll layouts:
-
-1. Add YAML front matter at top of file
-2. Remove everything outside `<main class="content">...</main>` (layout handles it)
-3. Remove the `<h1>` tag (layout generates it from front matter)
-4. Remove `<div class="chapter-nav">` block (layout handles it)
-
-The content between `<main>` tags stays exactly the same.
-
 ### GitHub Pages Deployment
 
-Push to GitHub, enable Pages in repo settings. GitHub Pages has built-in Jekyll support -- no CI needed.
+Automatic via GitHub Actions (`.github/workflows/pages.yml`).
+Push to `main` branch -- Jekyll builds and deploys automatically.
+
+### .tex to HTML Conversion Workflow
+
+When converting a new `.tex` chapter to HTML:
+
+1. Read the `.tex` file and identify all sections, environments, examples, exercises
+2. Create the `.html` file with front matter
+3. Convert environments using the mapping table (see top of this document)
+4. Keep all LaTeX math as-is (MathJax renders it)
+5. Replace `\term{X}` with `<strong>X</strong>`, `\en{X}` with `<em>(X)</em>`
+6. Convert `$...$` to `\(...\)` for inline math
+7. Convert `\begin{itemize}` to `<ul>`, `\begin{enumerate}` to `<ol>`
+8. Convert `\begin{tabular}` to HTML `<table>`
+9. Keep `\begin{align*}`, `\begin{equation}`, `\begin{bmatrix}` as-is for MathJax
