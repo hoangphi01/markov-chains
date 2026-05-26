@@ -22,11 +22,13 @@ Static HTML pages with MathJax rendering -- no installation needed.
 - Extensive worked examples with full computation steps
 - Exercises at the end of each chapter
 - Web version with 3-column layout (TOC, content, quick reference sidebar)
+- Apple Books-style reading settings: 7 themes (Original, Quiet, Paper, Bold, Calm, Focus, Dark) and adjustable font size with localStorage persistence
 
 ## Contents
 
 | Chapter | Topic | Pages |
 |---------|-------|-------|
+| 0 | Introduction: Stochastic Processes & Random Walks | ~8 |
 | 1 | Discrete-Time Markov Chains | ~12 |
 | 2 | First Step Analysis | ~18 |
 | 3 | Classification of States | ~12 |
@@ -61,21 +63,26 @@ markov_chains_bilingual/
 ├── main.tex                    # Master LaTeX document
 ├── main.pdf                    # Compiled PDF (~77 pages)
 ├── chapters/                   # LaTeX source chapters
+│   ├── ch0_intro.tex
 │   ├── ch4_discrete.tex
 │   ├── ch5_first_step.tex
 │   ├── ch6_classification.tex
 │   ├── ch7_limiting.tex
 │   ├── ch9_continuous.tex
 │   └── appendix_prob.tex
-├── docs/                       # Web lessons (GitHub Pages)
+├── docs/                       # Web lessons (GitHub Pages / Jekyll)
+│   ├── _data/chapters.yml      # Single source of truth for navigation
+│   ├── _layouts/               # Jekyll layouts (default, chapter)
+│   ├── _includes/              # Shared components (nav, sidebars, mathjax)
 │   ├── index.html              # Landing page
+│   ├── intro.html              # Ch 0: Introduction
 │   ├── ch1.html - ch5.html     # Chapter pages
 │   ├── appendix.html           # Probability background
-│   ├── css/style.css           # 3-column layout
-│   ├── js/nav.js               # TOC navigation
-│   ├── _layouts/               # Jekyll layouts (for scaling)
-│   ├── _includes/              # Shared components (nav, sidebars)
-│   └── _chapter_template.html  # Template for new chapters
+│   ├── css/framework.css       # Reusable grid & box structure
+│   ├── css/book.css            # Theme palette (CSS variable driven)
+│   ├── css/themes.css          # 7 reading themes + settings panel styles
+│   ├── js/nav.js               # TOC active state tracking
+│   └── js/settings.js          # Theme & font size settings panel
 ├── CLAUDE.md                   # AI assistant context
 ├── MARKOV_PLAN.md              # Project plan & references
 ├── WEB_PLAN.md                 # Web conversion strategy

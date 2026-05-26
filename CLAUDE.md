@@ -16,6 +16,7 @@ markov_chains_bilingual/
   main.tex                    # Master LaTeX file (XeLaTeX, Vietnamese via polyglossia)
   main.pdf                    # Compiled output
   chapters/
+    ch0_intro.tex             # Ch 0: Introduction - Stochastic Processes & Random Walks
     ch4_discrete.tex          # Ch 1: Discrete-Time Markov Chains
     ch5_first_step.tex        # Ch 2: First Step Analysis
     ch6_classification.tex    # Ch 3: Classification of States
@@ -35,7 +36,7 @@ markov_chains_bilingual/
     css/book.css              # Literata font, sepia palette, box colors (this book)
     js/nav.js                 # TOC active state tracking
     index.html                # Landing page (standalone)
-    ch1-ch5.html, appendix.html  # Chapter pages (layout + slug + sections)
+    intro.html, ch1-ch5.html, appendix.html  # Chapter pages (layout + slug + sections)
   MARKOV_PLAN.md              # Project plan with progress tracker
   WEB_PLAN.md                 # Web conversion strategy
   README.md                   # GitHub README
@@ -72,6 +73,7 @@ xelatex main.tex && xelatex main.tex  # 2 passes for TOC
 
 | Our Ch | Source Ch | Topic |
 |--------|----------|-------|
+| 0 | Intro + Ch 3 | Introduction: Stochastic Processes & Random Walks |
 | 1 | Ch 4 | Discrete-Time Markov Chains |
 | 2 | Ch 5 | First Step Analysis |
 | 3 | Ch 6 | Classification of States |

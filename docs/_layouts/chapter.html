@@ -58,6 +58,7 @@ layout: default
   <!-- RIGHT: Sidebar -->
   <aside class="sidebar">
     {% case page.slug %}
+      {% when 'intro' %}{% include sidebars/intro.html %}
       {% when 'ch1' %}{% include sidebars/ch1.html %}
       {% when 'ch2' %}{% include sidebars/ch2.html %}
       {% when 'ch3' %}{% include sidebars/ch3.html %}

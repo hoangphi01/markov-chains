@@ -2,6 +2,12 @@
   url: /
   nav_title: "Trang chủ"
 
+- slug: intro
+  url: /intro.html
+  nav_title: "Giới thiệu"
+  heading: "Giới thiệu: Quá trình ngẫu nhiên & Bước đi ngẫu nhiên"
+  heading_en: "Introduction: Stochastic Processes & Random Walks"
+
 - slug: ch1
   url: /ch1.html
   nav_title: "Ch 1: Rời rạc"

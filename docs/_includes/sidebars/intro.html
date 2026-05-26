@@ -1,0 +1,35 @@
+<div class="sidebar-section">
+  <h4>Ký hiệu chính</h4>
+  <p><strong>Quá trình ngẫu nhiên:</strong><br>
+  \(\{X_t : t \in T\}\)<br>
+  <small>\(T\) = thời gian, \(S\) = không gian trạng thái</small></p>
+
+  <p><strong>Bước đi ngẫu nhiên:</strong><br>
+  \(S_n = X_1 + \cdots + X_n\)<br>
+  <small>\(X_k\) i.i.d., \(S_0 = 0\)</small></p>
+
+  <p><strong>Bước đi Bernoulli:</strong><br>
+  \(\PP(X_k = +1) = p\)<br>
+  \(\PP(X_k = -1) = q = 1-p\)</p>
+</div>
+<div class="sidebar-section">
+  <h4>Công thức nhanh</h4>
+  <p><strong>Trung bình:</strong><br>
+  \(\E[S_n] = n(p-q)\)</p>
+
+  <p><strong>Phương sai:</strong><br>
+  \(\operatorname{Var}[S_n] = 4npq\)</p>
+
+  <p><strong>Phân phối:</strong><br>
+  \(\PP(S_{2n}=2k) = \binom{2n}{n+k}p^{n+k}q^{n-k}\)</p>
+
+  <p><strong>Xấp xỉ Stirling:</strong><br>
+  \(\PP(S_{2n}=0) \approx \dfrac{1}{\sqrt{\pi n}}\)<br>
+  <small>(đối xứng, \(n \to \infty\))</small></p>
+</div>
+<div class="sidebar-section">
+  <h4>Quay lại gốc</h4>
+  <p>\(\PP(\tau_0 < \infty) = 2\min(p,q)\)</p>
+  <p>\(p = q = 1/2\): chắc chắn quay lại<br>
+  nhưng \(\E[\tau_0] = +\infty\)!</p>
+</div>

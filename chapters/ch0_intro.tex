@@ -1,0 +1,350 @@
+\chapter{Giới thiệu: Quá trình ngẫu nhiên \& Bước đi ngẫu nhiên\\{\normalsize\textit{Introduction: Stochastic Processes \& Random Walks}}}
+\label{ch:intro}
+
+% ============================================================================
+\section{Quá trình ngẫu nhiên là gì? (What is a Stochastic Process?)}
+\label{sec:what-is-sp}
+
+\textbf{Câu chuyện:} Hãy tưởng tượng bạn đang đứng trên cầu nhìn xuống một chiếc lá trôi trên dòng sông.
+Vị trí chiếc lá thay đổi theo thời gian, nhưng bạn không thể dự đoán chính xác nó sẽ ở đâu ---
+dòng nước, gió, và xoáy nước đều tạo ra sự ngẫu nhiên.
+Nếu ta ghi lại vị trí chiếc lá tại mỗi thời điểm, ta có một \term{quá trình ngẫu nhiên} (\en{stochastic process}).
+
+\begin{dinhnghia}[(Quá trình ngẫu nhiên -- \en{Stochastic process})]
+\label{def:stochastic-process}
+Một \term{quá trình ngẫu nhiên} (\en{stochastic process}) là một họ các biến ngẫu nhiên
+\[
+  \{X_t : t \in T\}
+\]
+được định nghĩa trên cùng một không gian xác suất $(\Omega, \mathcal{F}, \PP)$,
+trong đó $T$ là \term{tập chỉ số thời gian} (\en{index set}) và mỗi $X_t$ nhận giá trị trong
+một \term{không gian trạng thái} (\en{state space}) $S$.
+\end{dinhnghia}
+
+\begin{tomtat}
+Nói đơn giản: một quá trình ngẫu nhiên là một ``đại lượng thay đổi theo thời gian một cách ngẫu nhiên''.
+Tại mỗi thời điểm $t$, ta có một biến ngẫu nhiên $X_t$ --- và tập hợp tất cả chúng tạo thành quá trình.
+\end{tomtat}
+
+\textbf{Hai loại thời gian:}
+\begin{itemize}[nosep]
+  \item \textbf{Thời gian rời rạc} (\en{discrete-time}): $T = \{0, 1, 2, \ldots\} = \N$.
+    Ví dụ: giá cổ phiếu đóng cửa mỗi ngày, số khách hàng mỗi giờ.
+  \item \textbf{Thời gian liên tục} (\en{continuous-time}): $T = [0, +\infty)$.
+    Ví dụ: nhiệt độ tại một địa điểm, mực nước sông theo thời gian thực.
+\end{itemize}
+
+\textbf{Ba loại không gian trạng thái:}
+\begin{itemize}[nosep]
+  \item \textbf{Hữu hạn} (\en{finite}): $S = \{1, 2, \ldots, N\}$.
+    Ví dụ: thời tiết $\in \{\text{nắng, mưa, mây}\}$.
+  \item \textbf{Đếm được} (\en{countable}): $S = \Z$ hoặc $S = \N$.
+    Ví dụ: số khách trong hàng đợi, vị trí bước đi ngẫu nhiên.
+  \item \textbf{Không đếm được} (\en{uncountable}): $S = \R$ hoặc $S = \R^d$.
+    Ví dụ: giá cổ phiếu, nhiệt độ.
+\end{itemize}
+
+\begin{dinhnghia}[(Đường mẫu -- \en{Sample path})]
+\label{def:sample-path}
+Cho một kết quả cố định $\omega \in \Omega$, ánh xạ
+\[
+  t \mapsto X_t(\omega)
+\]
+được gọi là một \term{đường mẫu} (\en{sample path}) hay \term{quỹ đạo} (\en{trajectory}) của quá trình.
+Mỗi đường mẫu là một ``kịch bản'' cụ thể --- một lần ``chạy'' của quá trình.
+\end{dinhnghia}
+
+\begin{example}[Các ví dụ thực tế]
+\label{ex:real-world-sp}
+\begin{enumerate}[nosep]
+  \item \textbf{Giá cổ phiếu:} $X_n$ = giá đóng cửa ngày thứ $n$. Thời gian rời rạc, không gian trạng thái liên tục.
+  \item \textbf{Thời tiết:} $X_n \in \{\text{nắng, mưa}\}$. Thời gian rời rạc, không gian trạng thái hữu hạn.
+  \item \textbf{Hàng đợi:} $X_t$ = số khách hàng trong hệ thống tại thời điểm $t$. Thời gian liên tục, không gian trạng thái đếm được.
+  \item \textbf{DNA:} Dãy nucleotide $X_1, X_2, \ldots \in \{A, T, G, C\}$. Chỉ số là vị trí, không gian trạng thái hữu hạn.
+\end{enumerate}
+\end{example}
+
+% ============================================================================
+\section{Hai họ lớn: Markov và Martingale (Two Big Families)}
+\label{sec:two-families}
+
+Trong thế giới các quá trình ngẫu nhiên, hai họ quan trọng nhất là:
+
+\textbf{1. Quá trình Markov} (\en{Markov process}): Tương lai chỉ phụ thuộc hiện tại, không phụ thuộc quá khứ.
+\[
+  \PP(X_{n+1} = j \mid X_n = i, X_{n-1}, \ldots, X_0) = \PP(X_{n+1} = j \mid X_n = i).
+\]
+Đây là tính chất ``không nhớ'' (\en{memoryless}). Khi không gian trạng thái là rời rạc,
+ta gọi đây là \term{chuỗi Markov} (\en{Markov chain}) --- chủ đề chính của tài liệu này.
+Ta sẽ nghiên cứu chi tiết từ Chương~1.
+
+\textbf{2. Martingale}: Quá trình ``trò chơi công bằng'' --- kỳ vọng của giá trị tương lai,
+khi biết quá khứ, đúng bằng giá trị hiện tại:
+\[
+  \E[X_{n+1} \mid X_n, X_{n-1}, \ldots, X_0] = X_n.
+\]
+Ý nghĩa: không có lợi thế hay bất lợi trong dài hạn. Ví dụ: tổng tiền thắng/thua trong một trò chơi công bằng.
+
+\begin{tomtat}
+\begin{center}
+\begin{tabular}{lll}
+\textbf{Họ} & \textbf{Ý tưởng chính} & \textbf{Ứng dụng} \\
+\hline
+Markov & ``Không nhớ'' & Chuỗi DNA, PageRank, hàng đợi \\
+Martingale & ``Trò chơi công bằng'' & Tài chính, lý thuyết cờ bạc \\
+\end{tabular}
+\end{center}
+Tài liệu này tập trung vào \textbf{chuỗi Markov}. Martingale chỉ xuất hiện ngắn gọn khi cần.
+\end{tomtat}
+
+% ============================================================================
+\section{Bước đi ngẫu nhiên (Random Walks)}
+\label{sec:random-walks}
+
+Bước đi ngẫu nhiên là ví dụ đơn giản nhất --- và quan trọng nhất --- của cả quá trình Markov lẫn martingale.
+Nó là ``Hello World'' của quá trình ngẫu nhiên.
+
+\begin{dinhnghia}[(Bước đi ngẫu nhiên -- \en{Random walk})]
+\label{def:random-walk}
+Cho $(X_k)_{k \geq 1}$ là dãy các biến ngẫu nhiên \term{độc lập và cùng phân phối} (\en{i.i.d.}).
+\term{Bước đi ngẫu nhiên} (\en{random walk}) được định nghĩa bởi $S_0 = 0$ và
+\begin{equation}\label{eq:rw-def}
+  S_n = X_1 + X_2 + \cdots + X_n, \qquad n \geq 1.
+\end{equation}
+\end{dinhnghia}
+
+\begin{dinhnghia}[(Bước đi Bernoulli -- \en{Bernoulli random walk})]
+\label{def:bernoulli-walk}
+Khi mỗi bước $X_k$ chỉ nhận hai giá trị $\{+1, -1\}$ với
+\[
+  \PP(X_k = +1) = p, \qquad \PP(X_k = -1) = q = 1 - p,
+\]
+ta gọi $(S_n)_{n \geq 0}$ là \term{bước đi Bernoulli} (\en{Bernoulli random walk}).
+
+Khi $p = q = 1/2$, ta gọi đây là bước đi \term{đối xứng} (\en{symmetric random walk}).
+\end{dinhnghia}
+
+\begin{example}[Người say rượu -- \en{Drunkard's walk}]
+\label{ex:drunkard}
+Một người say rượu đứng tại gốc tọa độ trên một con đường thẳng.
+Mỗi bước, anh ta bước sang phải ($+1$) hoặc sang trái ($-1$) với xác suất bằng nhau $p = q = 1/2$.
+Sau $n$ bước, vị trí của anh ta là $S_n$.
+
+Câu hỏi tự nhiên: anh ta có quay lại gốc không? Đi xa bao nhiêu? Ta sẽ trả lời trong các mục tiếp theo.
+\end{example}
+
+% --- 3.1 Mean and Variance ---
+\subsection{Trung bình và phương sai (Mean and Variance)}
+\label{subsec:mean-var}
+
+Ta tính kỳ vọng và phương sai của $S_n$ cho bước đi Bernoulli.
+
+Kỳ vọng của mỗi bước:
+\[
+  \E[X_k] = (+1) \cdot p + (-1) \cdot q = p - q.
+\]
+
+Do đó, bằng tính tuyến tính của kỳ vọng:
+\begin{equation}\label{eq:mean-Sn}
+  \E[S_n] = n\,\E[X_1] = n(p - q).
+\end{equation}
+
+Phương sai của mỗi bước:
+\begin{align*}
+  \operatorname{Var}[X_k] &= \E[X_k^2] - (\E[X_k])^2 \\
+  &= 1 \cdot q + 1 \cdot p - (p-q)^2 \\
+  &= 1 - (2p-1)^2 = 4pq = 4p(1-p).
+\end{align*}
+
+Do các $X_k$ độc lập:
+\begin{equation}\label{eq:var-Sn}
+  \operatorname{Var}[S_n] = n\,\operatorname{Var}[X_1] = 4npq.
+\end{equation}
+
+\begin{congthuc}
+\textbf{Trung bình và phương sai của bước đi Bernoulli:}
+\[
+  \E[S_n] = n(p - q), \qquad \operatorname{Var}[S_n] = 4npq.
+\]
+\begin{itemize}[nosep]
+  \item Khi $p > q$: bước đi ``lệch phải'' (\en{positive drift}), $\E[S_n] > 0$.
+  \item Khi $p < q$: bước đi ``lệch trái'' (\en{negative drift}), $\E[S_n] < 0$.
+  \item Khi $p = q = 1/2$: bước đi đối xứng, $\E[S_n] = 0$, $\operatorname{Var}[S_n] = n$.
+    Trung bình bằng $0$ nhưng phương sai tăng tuyến tính --- bước đi ``lang thang'' ngày càng xa gốc.
+\end{itemize}
+\end{congthuc}
+
+% --- 3.2 Distribution ---
+\subsection{Phân phối (Distribution)}
+\label{subsec:distribution}
+
+Ta muốn tính $\PP(S_n = k)$ cho bước đi Bernoulli.
+
+Nhận xét quan trọng: $S_n$ chỉ có thể nhận các giá trị cùng tính chẵn lẻ với $n$.
+Cụ thể, $S_{2n}$ chỉ có thể nhận giá trị chẵn, và $S_{2n+1}$ chỉ nhận giá trị lẻ.
+
+Nếu $S_{2n} = 2k$, tức là trong $2n$ bước có $l = n+k$ bước đi lên và $2n - l = n - k$ bước đi xuống
+(vì $l - (2n-l) = 2l - 2n = 2k$).
+
+Xác suất của một đường đi cụ thể có $n+k$ bước lên và $n-k$ bước xuống là $p^{n+k}q^{n-k}$.
+Số cách chọn vị trí cho $n+k$ bước lên trong $2n$ bước là $\binom{2n}{n+k}$.
+
+\begin{dinhly}[(Phân phối của $S_{2n}$)]
+\label{thm:dist-S2n}
+\begin{equation}\label{eq:dist-S2n}
+  \PP(S_{2n} = 2k) = \binom{2n}{n+k} p^{n+k}\,q^{n-k}, \qquad -n \leq k \leq n.
+\end{equation}
+\end{dinhly}
+
+Đặc biệt, xác suất quay lại gốc tại thời điểm $2n$ là:
+\begin{equation}\label{eq:return-origin}
+  \PP(S_{2n} = 0) = \binom{2n}{n} p^n\,q^n = \binom{2n}{n}(pq)^n.
+\end{equation}
+
+\begin{example}[Bước đi đối xứng $p = q = 1/2$]
+\label{ex:symmetric-dist}
+Khi $p = q = 1/2$:
+\[
+  \PP(S_{2n} = 0) = \binom{2n}{n}\frac{1}{2^{2n}} = \binom{2n}{n}\frac{1}{4^n}.
+\]
+Sử dụng \term{xấp xỉ Stirling} (\en{Stirling's approximation}) $n! \approx \sqrt{2\pi n}\,(n/e)^n$:
+\begin{equation}\label{eq:stirling-return}
+  \PP(S_{2n} = 0) \approx \frac{1}{\sqrt{\pi n}}, \qquad n \to \infty.
+\end{equation}
+Xác suất này tiến về $0$ khi $n \to \infty$, nhưng rất chậm (tỉ lệ $1/\sqrt{n}$).
+\end{example}
+
+% --- 3.3 First Returns to Zero ---
+\subsection{Quay lại gốc lần đầu (First Returns to Zero)}
+\label{subsec:first-return}
+
+Đặt
+\begin{equation}\label{eq:tau0}
+  \tau_0 = \inf\{n \geq 1 : S_n = 0\}
+\end{equation}
+là \term{thời gian quay lại gốc lần đầu} (\en{first return time to zero}).
+
+\begin{dinhly}[(Xác suất quay lại gốc -- Privault, Mệnh đề 3.11)]
+\label{thm:first-return}
+Xác suất mà bước đi quay lại gốc trong thời gian hữu hạn là:
+\begin{equation}\label{eq:prob-return}
+  \PP(\tau_0 < \infty) = 2\min(p, q).
+\end{equation}
+Đặc biệt:
+\begin{itemize}[nosep]
+  \item Khi $p = q = 1/2$ (đối xứng): $\PP(\tau_0 < \infty) = 1$.
+    Bước đi \textbf{chắc chắn} quay lại gốc.
+  \item Khi $p \neq q$: $\PP(\tau_0 < \infty) < 1$.
+    Có xác suất dương rằng bước đi \textbf{không bao giờ} quay lại gốc.
+\end{itemize}
+\end{dinhly}
+
+\begin{tomtat}
+Đây là một kết quả bất ngờ: bước đi đối xứng luôn quay lại gốc (xác suất 1),
+nhưng \textbf{thời gian chờ trung bình} là vô hạn!
+\[
+  p = q = 1/2 \implies \PP(\tau_0 < \infty) = 1, \quad \text{nhưng} \quad \E[\tau_0] = +\infty.
+\]
+Kết quả này liên quan trực tiếp đến \textbf{tính hồi quy} (\en{recurrence}) của bước đi ngẫu nhiên 1 chiều,
+mà ta sẽ gặp lại dưới dạng Định lý Polya trong Chương~3.
+\end{tomtat}
+
+% ============================================================================
+\section{Từ bước đi ngẫu nhiên đến chuỗi Markov (From Random Walks to Markov Chains)}
+\label{sec:rw-to-mc}
+
+Bước đi ngẫu nhiên là một chuỗi Markov! Ta kiểm tra tính chất Markov:
+do các $X_k$ độc lập, giá trị $S_{n+1} = S_n + X_{n+1}$ chỉ phụ thuộc vào $S_n$ và $X_{n+1}$,
+không phụ thuộc vào $S_0, S_1, \ldots, S_{n-1}$:
+\[
+  \PP(S_{n+1} = j \mid S_n = i, S_{n-1}, \ldots, S_0) = \PP(S_{n+1} = j \mid S_n = i).
+\]
+
+Tuy nhiên, chuỗi Markov tổng quát hơn nhiều: xác suất chuyển $\PP(X_{n+1} = j \mid X_n = i)$
+có thể là \textbf{bất kỳ giá trị nào} trong $[0,1]$ (miễn là tổng hàng bằng $1$),
+không nhất thiết phải đối xứng hay đồng nhất.
+
+\begin{congthuc}
+\textbf{Bản đồ các chương:}
+\begin{center}
+\begin{tabular}{cl}
+\textbf{Chương} & \textbf{Nội dung} \\
+\hline
+0 (đây) & Quá trình ngẫu nhiên, bước đi ngẫu nhiên \\
+1 & Chuỗi Markov thời gian rời rạc, ma trận chuyển \\
+2 & Phân tích bước đầu tiên: xác suất chạm, thời gian chạm \\
+3 & Phân loại trạng thái: hồi quy, tạm thời, tuần hoàn \\
+4 & Phân phối dừng và giới hạn \\
+5 & Chuỗi Markov thời gian liên tục \\
+A & Phụ lục: nền tảng xác suất \\
+\end{tabular}
+\end{center}
+\end{congthuc}
+
+\textbf{Câu chuyện cầu nối:} Hãy tưởng tượng một con kiến trên bàn cờ $3 \times 3$.
+Mỗi bước, con kiến chọn ngẫu nhiên một ô kề cạnh để di chuyển.
+Nếu bàn cờ chỉ có 1 chiều (một đường thẳng), con kiến thực hiện \emph{bước đi ngẫu nhiên}.
+Nhưng trên bàn cờ 2 chiều, xác suất chuyển phụ thuộc vào vị trí
+(ô góc có 2 hàng xóm, ô cạnh có 3, ô giữa có 4) --- đây là chuỗi Markov tổng quát.
+Chương~1 sẽ khám phá thế giới này.
+
+% ============================================================================
+\section{Bài tập (Exercises)}
+\label{sec:exercises-intro}
+
+\begin{exercise}[Đường mẫu]
+\label{ex:sample-paths}
+Xét bước đi Bernoulli đối xứng ($p = q = 1/2$) với $n = 6$ bước.
+\begin{enumerate}[nosep]
+  \item Có bao nhiêu đường mẫu có thể? (Gợi ý: mỗi bước có 2 lựa chọn.)
+  \item Liệt kê tất cả các đường mẫu kết thúc tại $S_6 = 2$.
+  \item Tính $\PP(S_6 = 2)$ bằng hai cách: đếm trực tiếp và dùng công thức~\eqref{eq:dist-S2n}.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[Phân phối $S_4$]
+\label{ex:dist-S4}
+Xét bước đi Bernoulli $(S_n)_{n \in \N}$ với $S_0 = 0$, xác suất tiến $p$ và xác suất lùi $1-p$.
+\begin{enumerate}[nosep]
+  \item Liệt kê tất cả các đường đi có thể dẫn đến $S_4 = 2$.
+  \item Chứng minh rằng $\PP(S_4 = 2) = \binom{4}{3}p^3(1-p)$.
+  \item Chứng minh công thức tổng quát: nếu $n+k$ chẵn và $|k| \leq n$,
+    \[
+      \PP(S_n = k) = \binom{n}{(n+k)/2} p^{(n+k)/2}\,(1-p)^{(n-k)/2}.
+    \]
+\end{enumerate}
+\en{(Adapted from Privault, Exercise 3.1)}
+\end{exercise}
+
+\begin{exercise}[Trung bình và phương sai]
+\label{ex:mean-var-calc}
+Xét bước đi ngẫu nhiên $S_n = X_1 + \cdots + X_n$ với $\PP(X_k = +1) = 0.6$, $\PP(X_k = -1) = 0.4$.
+\begin{enumerate}[nosep]
+  \item Tính $\E[S_{100}]$ và $\operatorname{Var}[S_{100}]$.
+  \item Sử dụng bất đẳng thức Chebyshev, tìm cận trên cho $\PP(|S_{100} - 20| \geq 30)$.
+  \item Giải thích trực quan tại sao phương sai tăng theo $n$.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[Quay lại gốc]
+\label{ex:return-to-zero}
+Cho bước đi Bernoulli đối xứng ($p = q = 1/2$).
+\begin{enumerate}[nosep]
+  \item Tính $\PP(S_2 = 0)$, $\PP(S_4 = 0)$, $\PP(S_6 = 0)$ bằng công thức~\eqref{eq:return-origin}.
+  \item Kiểm tra rằng các giá trị trên phù hợp với xấp xỉ Stirling~\eqref{eq:stirling-return}.
+  \item Giải thích tại sao $\PP(S_{2n+1} = 0) = 0$ cho mọi $n$.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[Tính chất Markov của bước đi ngẫu nhiên]
+\label{ex:rw-markov}
+Cho bước đi Bernoulli $S_n = X_1 + \cdots + X_n$ với các $X_k$ i.i.d.
+\begin{enumerate}[nosep]
+  \item Chứng minh rằng $(S_n)_{n \geq 0}$ có tính chất Markov.
+
+    \emph{Gợi ý:} Sử dụng tính độc lập của $X_{n+1}$ với $(X_1, \ldots, X_n)$.
+  \item Viết ma trận chuyển $P$ cho bước đi Bernoulli trên không gian trạng thái $\Z$.
+    Hàng $i$, cột $j$: $P_{i,j} = ?$
+  \item Bước đi đối xứng ($p = 1/2$) có phải martingale không? Kiểm tra $\E[S_{n+1} \mid S_n] = S_n$.
+\end{enumerate}
+\end{exercise}

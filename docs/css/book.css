@@ -4,61 +4,61 @@ body {
   font-family: 'Literata', Georgia, 'Times New Roman', serif;
   font-size: 18px;
   line-height: 1.8;
-  color: #3b3530;
-  background: #f4ecd8;
+  color: var(--text-body, #3b3530);
+  background: var(--bg-body, #f4ecd8);
 }
 
-/* === Sepia palette === */
+/* === Palette (driven by CSS variables from themes.css) === */
 .toc {
-  background: #ede5d0;
-  border-right: 1px solid #d8cdb5;
-  color: #4a4540;
+  background: var(--bg-toc, #ede5d0);
+  border-right: 1px solid var(--border-color, #d8cdb5);
+  color: var(--text-toc, #4a4540);
 }
 
-.toc a { color: #5a5550; }
+.toc a { color: var(--text-toc-link, #5a5550); }
 
 .toc a:hover,
 .toc a.active {
-  color: #1a4a6e;
+  color: var(--text-heading, #1a4a6e);
   font-weight: bold;
 }
 
 .toc .chapter-list a:hover {
-  background: #e5dcc6;
+  background: var(--toc-hover-bg, #e5dcc6);
 }
 
 .toc .chapter-list a.current {
-  background: #ddd5be;
-  color: #1a4a6e;
+  background: var(--toc-current-bg, #ddd5be);
+  color: var(--text-heading, #1a4a6e);
   font-weight: bold;
 }
 
-.toc .section-list a { color: #777; }
+.toc .section-list a { color: var(--section-link-color, #777); }
 
 .sidebar {
-  background: #efe7d3;
-  border-left: 1px solid #d8cdb5;
-  color: #555;
+  background: var(--bg-sidebar, #efe7d3);
+  border-left: 1px solid var(--border-color, #d8cdb5);
+  color: var(--text-sidebar, #555);
 }
 
 .sidebar h4 {
-  color: #888;
-  border-bottom: 1px solid #ddd;
+  color: var(--text-muted, #888);
+  border-bottom: 1px solid var(--sidebar-heading-border, #ddd);
 }
 
 .sidebar .symbol-table td {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--sidebar-cell-border, #eee);
 }
 
-h1 { color: #1a4a6e; }
-h1 small { color: #888; }
+h1 { color: var(--text-heading, #1a4a6e); }
+h1 small { color: var(--text-muted, #888); }
 h2 {
-  color: #1a4a6e;
-  border-bottom: 2px solid #d4e2ed;
+  color: var(--text-heading, #1a4a6e);
+  border-bottom: 2px solid var(--border-heading, #d4e2ed);
 }
-h3 { color: #34495e; }
+h3 { color: var(--text-h3, #34495e); }
 
-.index-hero .subtitle { color: #888; }
+.index-hero .subtitle { color: var(--text-muted, #888); }
 
 /* === Box types via CSS custom properties === */
 .box.definition { --box-header: #2e7d32; --box-bg: #f6fbf4; --box-border: #a5d6a7; }
@@ -69,8 +69,8 @@ h3 { color: #34495e; }
 /* Fallback: boxes without .box-body wrapper (legacy) */
 .box:not(:has(.box-body)) {
   padding: 16px 20px;
-  border: 1px solid #d8cdb5;
-  background: #faf6ed;
+  border: 1px solid var(--border-color, #d8cdb5);
+  background: var(--bg-card, #faf6ed);
 }
 .box:not(:has(.box-body)) .box-title {
   background: none;
@@ -81,13 +81,13 @@ h3 { color: #34495e; }
 
 /* Examples & Exercises */
 .example, .exercise {
-  background: #faf6ed;
-  border: 1px solid #d8cdb5;
+  background: var(--example-bg, #faf6ed);
+  border: 1px solid var(--example-border, #d8cdb5);
 }
 
 .example .example-title,
 .exercise .exercise-title {
-  color: #666;
+  color: var(--example-title-color, #666);
 }
 
 .exercise {
@@ -96,37 +96,37 @@ h3 { color: #34495e; }
 
 /* Proof */
 .proof {
-  color: #555;
-  border-left: 2px solid #ccc;
+  color: var(--proof-color, #555);
+  border-left: 2px solid var(--proof-border, #ccc);
 }
 
 /* Tables */
 th {
-  background: #ebe4d2;
+  background: var(--table-header-bg, #ebe4d2);
   font-weight: bold;
 }
 
 /* Chapter nav */
-.chapter-nav { border-top: 1px solid #d8cdb5; }
-.chapter-nav a { color: #5a4a32; }
+.chapter-nav { border-top: 1px solid var(--border-color, #d8cdb5); }
+.chapter-nav a { color: var(--nav-link-color, #5a4a32); }
 
 /* Chapter cards */
 .chapter-card {
-  border: 1px solid #d8cdb5;
-  background: #faf6ed;
+  border: 1px solid var(--border-color, #d8cdb5);
+  background: var(--bg-card, #faf6ed);
 }
-.chapter-card h3 a { color: #1a4a6e; }
-.chapter-card .card-subtitle { color: #999; }
-.chapter-card p { color: #666; }
+.chapter-card h3 a { color: var(--text-heading, #1a4a6e); }
+.chapter-card .card-subtitle { color: var(--card-subtitle, #999); }
+.chapter-card p { color: var(--card-text, #666); }
 
 /* Responsive overrides */
 @media (max-width: 900px) {
   .toc {
     border-right: none;
-    border-bottom: 1px solid #e0dbd4;
+    border-bottom: 1px solid var(--responsive-border, #e0dbd4);
   }
   .sidebar {
     border-left: none;
-    border-top: 1px solid #e0dbd4;
+    border-top: 1px solid var(--responsive-border, #e0dbd4);
   }
 }
