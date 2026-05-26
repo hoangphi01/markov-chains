@@ -163,6 +163,15 @@ li { margin-bottom: 5px; }
   border-radius: var(--box-radius) var(--box-radius) 0 0;
   background: var(--box-header);
   color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.box-icon {
+  font-size: 20px;
+  opacity: 0.9;
+  flex-shrink: 0;
 }
 
 .box .box-body {
@@ -186,6 +195,9 @@ li { margin-bottom: 5px; }
   font-weight: bold;
   margin-bottom: 10px;
   font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 /* === Proof === */
