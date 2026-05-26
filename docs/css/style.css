@@ -178,7 +178,7 @@ li { margin-bottom: 4px; }
   margin: 20px 0;
   padding: 15px 18px;
   border-left: 4px solid;
-  border-radius: 3px;
+  border-radius: 20px;
 }
 
 .box .box-title {
@@ -219,7 +219,7 @@ li { margin-bottom: 4px; }
   padding: 12px 18px;
   background: #fff;
   border: 1px solid #ddd;
-  border-radius: 3px;
+  border-radius: 20px;
 }
 
 .example .example-title,
@@ -313,7 +313,7 @@ th {
 
 .chapter-card {
   border: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 20px;
   padding: 18px;
   background: #fff;
 }
