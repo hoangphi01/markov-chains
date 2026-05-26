@@ -7,8 +7,8 @@ body {
   font-family: 'Literata', Georgia, 'Times New Roman', serif;
   font-size: 18px;
   line-height: 1.8;
-  color: #2c2c2c;
-  background: #faf8f5;
+  color: #3b3530;
+  background: #f4ecd8;
 }
 
 /* === 3-Column Layout === */
@@ -25,8 +25,8 @@ body {
   height: 100vh;
   overflow-y: auto;
   padding: 24px 16px;
-  background: #f3f0eb;
-  border-right: 1px solid #e0dbd4;
+  background: #ede5d0;
+  border-right: 1px solid #d8cdb5;
   font-size: 14px;
 }
 
@@ -63,11 +63,11 @@ body {
 }
 
 .toc .chapter-list a:hover {
-  background: #e8e4de;
+  background: #e5dcc6;
 }
 
 .toc .chapter-list a.current {
-  background: #d4e2ed;
+  background: #ddd5be;
   color: #1a4a6e;
   font-weight: bold;
 }
@@ -98,8 +98,8 @@ body {
   height: 100vh;
   overflow-y: auto;
   padding: 24px 16px;
-  background: #f5f3ef;
-  border-left: 1px solid #e0dbd4;
+  background: #efe7d3;
+  border-left: 1px solid #d8cdb5;
   font-size: 13px;
   color: #555;
 }
@@ -201,41 +201,41 @@ li { margin-bottom: 5px; }
 }
 
 .box.definition {
-  background: #f0faf4;
-  border-color: #a3d9b1;
-  border-top-color: #27ae60;
+  background: #f2f5ec;
+  border-color: #b8ccaa;
+  border-top-color: #5a8a42;
 }
 
-.box.definition .box-title { color: #1e8449; }
+.box.definition .box-title { color: #3d6e2c; }
 
 .box.theorem {
-  background: #fdf2f1;
-  border-color: #e8b4b0;
-  border-top-color: #c0392b;
+  background: #f8f0eb;
+  border-color: #d4b5a8;
+  border-top-color: #a0432e;
 }
 
-.box.theorem .box-title { color: #a93226; }
+.box.theorem .box-title { color: #8b3622; }
 
 .box.formula {
-  background: #fefbf0;
-  border-color: #e8dba8;
-  border-top-color: #d4ac0d;
+  background: #f8f3e4;
+  border-color: #ddd0a8;
+  border-top-color: #b8960d;
 }
 
 .box.summary {
-  background: #eef6fb;
-  border-color: #b0cfe0;
-  border-top-color: #2980b9;
+  background: #eef2f0;
+  border-color: #b0c8c0;
+  border-top-color: #3a7a6a;
 }
 
-.box.summary .box-title { color: #1a4a6e; }
+.box.summary .box-title { color: #2e5e52; }
 
 /* === Examples & Exercises === */
 .example, .exercise {
   margin: 24px 0;
   padding: 18px 24px;
-  background: #fff;
-  border: 1px solid #e0dbd4;
+  background: #faf6ed;
+  border: 1px solid #d8cdb5;
   border-radius: 20px;
   box-shadow: 0 1px 4px rgba(0,0,0,0.03);
 }
@@ -286,7 +286,7 @@ th, td {
 }
 
 th {
-  background: #f0ede8;
+  background: #ebe4d2;
   font-weight: bold;
 }
 
@@ -296,11 +296,11 @@ th {
   justify-content: space-between;
   margin-top: 50px;
   padding-top: 20px;
-  border-top: 1px solid #e0dbd4;
+  border-top: 1px solid #d8cdb5;
 }
 
 .chapter-nav a {
-  color: #1a4a6e;
+  color: #5a4a32;
   text-decoration: none;
   font-size: 15px;
 }
@@ -332,10 +332,10 @@ th {
 }
 
 .chapter-card {
-  border: 1px solid #e0dbd4;
+  border: 1px solid #d8cdb5;
   border-radius: 20px;
   padding: 22px;
-  background: #fff;
+  background: #faf6ed;
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   transition: box-shadow 0.2s;
 }
