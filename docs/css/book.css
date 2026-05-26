@@ -1,0 +1,132 @@
+/* Book CSS - Literata font, sepia palette, box colors (Markov Chains book) */
+
+body {
+  font-family: 'Literata', Georgia, 'Times New Roman', serif;
+  font-size: 18px;
+  line-height: 1.8;
+  color: #3b3530;
+  background: #f4ecd8;
+}
+
+/* === Sepia palette === */
+.toc {
+  background: #ede5d0;
+  border-right: 1px solid #d8cdb5;
+  color: #4a4540;
+}
+
+.toc a { color: #5a5550; }
+
+.toc a:hover,
+.toc a.active {
+  color: #1a4a6e;
+  font-weight: bold;
+}
+
+.toc .chapter-list a:hover {
+  background: #e5dcc6;
+}
+
+.toc .chapter-list a.current {
+  background: #ddd5be;
+  color: #1a4a6e;
+  font-weight: bold;
+}
+
+.toc .section-list a { color: #777; }
+
+.sidebar {
+  background: #efe7d3;
+  border-left: 1px solid #d8cdb5;
+  color: #555;
+}
+
+.sidebar h4 {
+  color: #888;
+  border-bottom: 1px solid #ddd;
+}
+
+.sidebar .symbol-table td {
+  border-bottom: 1px solid #eee;
+}
+
+h1 { color: #1a4a6e; }
+h1 small { color: #888; }
+h2 {
+  color: #1a4a6e;
+  border-bottom: 2px solid #d4e2ed;
+}
+h3 { color: #34495e; }
+
+.index-hero .subtitle { color: #888; }
+
+/* === Box types via CSS custom properties === */
+.box.definition { --box-header: #2e7d32; --box-bg: #f6fbf4; --box-border: #a5d6a7; }
+.box.theorem    { --box-header: #b71c1c; --box-bg: #fdf4f2; --box-border: #e0a8a0; }
+.box.formula    { --box-header: #c49000; --box-bg: #fefbf0; --box-border: #e0d5a0; }
+.box.summary    { --box-header: #1565c0; --box-bg: #f2f7fc; --box-border: #a8c8e8; }
+
+/* Fallback: boxes without .box-body wrapper (legacy) */
+.box:not(:has(.box-body)) {
+  padding: 16px 20px;
+  border: 1px solid #d8cdb5;
+  background: #faf6ed;
+}
+.box:not(:has(.box-body)) .box-title {
+  background: none;
+  padding: 0;
+  margin-bottom: 10px;
+  color: inherit;
+}
+
+/* Examples & Exercises */
+.example, .exercise {
+  background: #faf6ed;
+  border: 1px solid #d8cdb5;
+}
+
+.example .example-title,
+.exercise .exercise-title {
+  color: #666;
+}
+
+.exercise {
+  border-left: 4px solid #8e44ad;
+}
+
+/* Proof */
+.proof {
+  color: #555;
+  border-left: 2px solid #ccc;
+}
+
+/* Tables */
+th {
+  background: #ebe4d2;
+  font-weight: bold;
+}
+
+/* Chapter nav */
+.chapter-nav { border-top: 1px solid #d8cdb5; }
+.chapter-nav a { color: #5a4a32; }
+
+/* Chapter cards */
+.chapter-card {
+  border: 1px solid #d8cdb5;
+  background: #faf6ed;
+}
+.chapter-card h3 a { color: #1a4a6e; }
+.chapter-card .card-subtitle { color: #999; }
+.chapter-card p { color: #666; }
+
+/* Responsive overrides */
+@media (max-width: 900px) {
+  .toc {
+    border-right: none;
+    border-bottom: 1px solid #e0dbd4;
+  }
+  .sidebar {
+    border-left: none;
+    border-top: 1px solid #e0dbd4;
+  }
+}

@@ -1,13 +1,7 @@
 ---
 layout: chapter
-title: "Ch 1: Chuỗi Markov thời gian rời rạc"
-chapter_num: 1
-heading: "Chương 1: Chuỗi Markov thời gian rời rạc"
-heading_en: "Discrete-Time Markov Chains"
-prev_url: null
-prev_title: null
-next_url: /ch2.html
-next_title: "Chương 2: Phân tích bước đầu tiên"
+slug: ch1
+title: "Ch 1: Rời rạc"
 sections:
   - id: tai-sao-markov
     title: "1. Tại sao chuỗi Markov quan trọng?"
@@ -54,9 +48,7 @@ sections:
       Nó không nhớ đã đi qua bao nhiêu ô, cũng không nhớ con đường đã đi.
       Quyết định bước tiếp theo chỉ dựa vào vị trí hiện tại --- đây là "con kiến Markov".</p>
 
-      <div class="box definition">
-        <p class="box-title">Định nghĩa (Tính chất Markov &mdash; <em>Markov property</em>)</p>
-        <div class="box-body">
+      {% include components/box-start.html type="definition" title='Định nghĩa (Tính chất Markov &mdash; <em>Markov property</em>)' %}
         <p>Một <strong>quá trình ngẫu nhiên</strong> <em>(stochastic process)</em> \((Z_n)_{n\in\mathbb{N}}\) nhận giá trị trong \(\mathbb{Z}\)
         được gọi là <strong>Markov</strong>, hay có <strong>tính chất Markov</strong>, nếu với mọi \(n \geq 1\),
         phân phối xác suất của \(Z_{n+1}\) chỉ được xác định bởi trạng thái \(Z_n\) tại thời điểm \(n\),
@@ -66,18 +58,18 @@ sections:
           \PP(Z_{n+1} = j \mid Z_n = i_n,\; Z_{n-1} = i_{n-1},\; \ldots,\; Z_0 = i_0)
           = \PP(Z_{n+1} = j \mid Z_n = i_n).
         \]</p>
-        </div>
-      </div>
 
-      <div class="box summary">
-        <p class="box-title">Tóm tắt</p>
-        <div class="box-body">
+
+      {% include components/box-end.html %}
+
+      {% include components/box-start.html type="summary" title='Tóm tắt' %}
         <p>Nói đơn giản: nếu bạn biết trạng thái hiện tại \(Z_n\),
         thì biết thêm quá khứ \((Z_0, Z_1, \ldots, Z_{n-1})\) cũng không giúp dự đoán tương lai \(Z_{n+1}\) tốt hơn.
         Đây chính là tính chất "không nhớ" <em>(memoryless property)</em>.</p>
         <p>Ví dụ con kiến: biết con kiến đang ở ô \(A\) là đủ. Biết thêm "nó đi từ \(C \to B \to A\)" không thay đổi xác suất bước tiếp theo.</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p>Đặc biệt ta có:
       \[
@@ -101,8 +93,7 @@ sections:
         \PP(Z_1 = i) = \sum_{j \in \mathbb{Z}} \PP(Z_1 = i \mid Z_0 = j)\,\PP(Z_0 = j), \qquad i \in \mathbb{Z}.
       \end{equation}</p>
 
-      <div class="example">
-        <p class="example-title">Ví dụ: Bước đi ngẫu nhiên &mdash; <em>Random walk</em></p>
+      {% include components/example-start.html title='Ví dụ: Bước đi ngẫu nhiên &mdash; <em>Random walk</em>' %}
         <p>Bước đi ngẫu nhiên <em>(random walk)</em>:
         \begin{equation}\label{eq:random-walk}
           S_n = X_1 + \cdots + X_n, \qquad n \in \mathbb{N},
@@ -118,7 +109,9 @@ sections:
           &= \PP(S_{n+1} = j \mid S_n = i_n).
         \end{align*}
         Bước thứ ba dùng tính <strong>độc lập</strong> của \(X_{n+1}\) với \(S_1, \ldots, S_n\) (vì \(X_{n+1}\) độc lập với \(X_1, \ldots, X_n\)).</p>
-      </div>
+
+
+      {% include components/example-end.html %}
 
       <p>Tổng quát hơn, mọi quá trình có <strong>gia số độc lập</strong> <em>(independent increments)</em> đều là chuỗi Markov. Tuy nhiên, không phải mọi chuỗi Markov đều có gia số độc lập.</p>
 
@@ -136,24 +129,22 @@ sections:
       trong đó ta giả sử xác suất \(\PP(Z_{n+1} = j \mid Z_n = i)\) không phụ thuộc vào \(n \in \mathbb{N}\).
       Khi đó chuỗi Markov \((Z_n)_{n\in\mathbb{N}}\) được gọi là <strong>đồng nhất theo thời gian</strong> <em>(time homogeneous)</em>.</p>
 
-      <div class="box definition">
-        <p class="box-title">Định nghĩa (Ma trận chuyển &mdash; <em>Transition matrix</em>)</p>
-        <div class="box-body">
+      {% include components/box-start.html type="definition" title='Định nghĩa (Ma trận chuyển &mdash; <em>Transition matrix</em>)' %}
         <p>Dữ liệu trên được mã hóa thành một ma trận, gọi là <strong>ma trận chuyển</strong> <em>(transition matrix)</em> của chuỗi Markov:
         \[
           [P_{i,j}]_{i,j\in\mathbb{Z}} = [\PP(Z_{n+1} = j \mid Z_n = i)]_{i,j\in\mathbb{Z}}.
         \]</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p><strong>Lưu ý quan trọng:</strong> Thứ tự các chỉ số \((i,j)\) trong \(\PP(Z_{n+1} = j \mid Z_n = i)\) và \(P_{i,j}\) bị đảo ngược. Cụ thể, trạng thái ban đầu \(i\) là <em>số hàng</em> trong ma trận, còn trạng thái đích \(j\) là <em>số cột</em>.</p>
 
-      <div class="box definition">
-        <p class="box-title">Định nghĩa (Trạng thái hấp thụ &mdash; <em>Absorbing state</em>)</p>
-        <div class="box-body">
+      {% include components/box-start.html type="definition" title='Định nghĩa (Trạng thái hấp thụ &mdash; <em>Absorbing state</em>)' %}
         <p>Trạng thái \(k \in \mathbb{Z}\) được gọi là <strong>hấp thụ</strong> <em>(absorbing)</em> nếu \(P_{k,k} = 1\).</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p>Do quan hệ:
       \begin{equation}\label{eq:row-sum-1}
@@ -173,8 +164,10 @@ sections:
         \end{bmatrix}.
       \]</p>
 
-      <div class="example" id="ex:gambler">
-        <p class="example-title">Ví dụ: Quá trình cờ bạc &mdash; <em>Gambling process</em></p>
+      <div id="ex:gambler">
+
+
+      {% include components/example-start.html title='Ví dụ: Quá trình cờ bạc &mdash; <em>Gambling process</em>' %}
         <p>Một người chơi bắt đầu với \(i\) đô la. Mỗi ván, anh ta thắng \(1\) đô la (xác suất \(p\))
         hoặc thua \(1\) đô la (xác suất \(q = 1-p\)). Trò chơi dừng khi cháy túi (\(0\) đô la) hoặc đạt mục tiêu (\(N\) đô la).</p>
         <p>Ma trận chuyển trên \(\{0, 1, \ldots, N\}\) với các trạng thái hấp thụ \(0\) và \(N\):
@@ -188,10 +181,17 @@ sections:
             0   & 0 & 0 & \cdots & 0 & 0 & 1
           \end{bmatrix}.
         \]</p>
+
+
+      {% include components/example-end.html %}
+
+
       </div>
 
-      <div class="example" id="ex:ehrenfest">
-        <p class="example-title">Ví dụ: Chuỗi Ehrenfest &mdash; <em>Ehrenfest chain</em></p>
+      <div id="ex:ehrenfest">
+
+
+      {% include components/example-start.html title='Ví dụ: Chuỗi Ehrenfest &mdash; <em>Ehrenfest chain</em>' %}
         <p>Hai bình khí (trái và phải) nối với nhau bằng một lỗ, chứa tổng cộng \(N\) viên bi.
         Tại mỗi bước, ta chọn ngẫu nhiên một viên bi và chuyển nó sang bình kia.
         Gọi \(X_n \in \{0,\ldots,N\}\) là số bi bên trái tại thời điểm \(n\).
@@ -203,10 +203,17 @@ sections:
         <p><strong>Ý nghĩa vật lý:</strong> Mô hình này mô phỏng sự khuếch tán khí giữa hai ngăn.
         Nếu bên trái có nhiều bi hơn (\(k > N/2\)), xác suất giảm (\(k/N\)) lớn hơn xác suất tăng (\((N-k)/N\))
         &mdash; hệ thống "kéo" về trạng thái cân bằng \(k = N/2\).</p>
+
+
+      {% include components/example-end.html %}
+
+
       </div>
 
-      <div class="example" id="ex:ehrenfest-N4">
-        <p class="example-title">Ví dụ: Ehrenfest \(N = 4\) &mdash; ma trận cụ thể</p>
+      <div id="ex:ehrenfest-N4">
+
+
+      {% include components/example-start.html title='Ví dụ: Ehrenfest \(N = 4\) &mdash; ma trận cụ thể' %}
         <p>Với \(N = 4\) viên bi, ma trận chuyển \(5 \times 5\):
         \[
           P = \begin{bmatrix}
@@ -223,14 +230,20 @@ sections:
           <li>Hàng 2: nếu bên trái có 2 bi, xác suất giảm = \(2/4\), xác suất tăng = \(2/4\) (cân bằng!).</li>
           <li>Hàng 4: nếu bên trái có 4 bi (tất cả), chắc chắn giảm xuống 3.</li>
         </ul>
+
+
+      {% include components/example-end.html %}
+
+
       </div>
 
-      <div class="example">
-        <p class="example-title">Ví dụ: Xếp hạng tín dụng &mdash; <em>Credit rating</em></p>
+      {% include components/example-start.html title='Ví dụ: Xếp hạng tín dụng &mdash; <em>Credit rating</em>' %}
         <p>Trong tài chính, xếp hạng tín dụng (AAA, AA, A, BBB, &hellip;, D) có thể được mô hình hóa
         bằng chuỗi Markov. Ma trận chuyển ghi lại xác suất thay đổi hạng tín dụng sau mỗi năm.
         Các hạng cao hơn có hệ số đường chéo lớn hơn (ổn định hơn).</p>
-      </div>
+
+
+      {% include components/example-end.html %}
 
       <!-- ================================================================ -->
       <h3 id="xac-suat-nhieu-buoc">2.2. Xác suất chuyển nhiều bước <small>(Multi-step Transition Probabilities)</small></h3>
@@ -248,23 +261,25 @@ sections:
 
       <p>Tổng quát hơn, với mọi \(k \in \mathbb{N}\):</p>
 
-      <div class="box formula">
-        <div class="box-body">
+      {% include components/box-start.html type="formula" %}
         <p><strong>Xác suất chuyển \(k\) bước:</strong>
         \[
           [\PP(Z_{n+k} = j \mid Z_n = i)]_{i,j\in S} = [P^k_{i,j}]_{i,j\in S} = P^k.
         \]
         Nghĩa là: xác suất chuyển \(k\) bước chính là phần tử tương ứng của lũy thừa bậc \(k\) của ma trận chuyển.</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p>Quan hệ \(P^{m+n} = P^m P^n\) chính là <strong>phương trình Chapman&ndash;Kolmogorov</strong> <em>(Chapman&ndash;Kolmogorov equation)</em>:
       \[
         P^{m+n}_{i,j} = \sum_{l \in S} P^m_{i,l}\,P^n_{l,j}, \qquad i,j \in S, \quad m, n \in \mathbb{N}.
       \]</p>
 
-      <div class="example" id="ex:P2-three-state">
-        <p class="example-title">Ví dụ: Tính \(P^2\) cho chuỗi 3 trạng thái</p>
+      <div id="ex:P2-three-state">
+
+
+      {% include components/example-start.html title='Ví dụ: Tính \(P^2\) cho chuỗi 3 trạng thái' %}
         <p>Xét ma trận chuyển trên \(S = \{0, 1, 2\}\):
         \[
           P = \begin{bmatrix}
@@ -281,27 +296,38 @@ sections:
         \end{align*}</p>
         <p>Kiểm tra: \(P^2_{0,0} + P^2_{0,1} + P^2_{0,2} = 5/12 + 1/6 + 5/12 = 5/12 + 2/12 + 5/12 = 12/12 = 1\). Đúng!</p>
         <p><strong>Ý nghĩa:</strong> Xuất phát từ trạng thái 0, sau 2 bước, xác suất ở trạng thái 0 là \(5/12 \approx 0.42\).</p>
+
+
+      {% include components/example-end.html %}
+
+
       </div>
 
-      <div class="example" id="ex:Pn-ehrenfest">
-        <p class="example-title">Ví dụ: Tính \(P^n\) cho chuỗi Ehrenfest \(N = 4\)</p>
+      <div id="ex:Pn-ehrenfest">
+
+
+      {% include components/example-start.html title='Ví dụ: Tính \(P^n\) cho chuỗi Ehrenfest \(N = 4\)' %}
         <p>Với ma trận \(P\) ở Ví dụ Ehrenfest \(N=4\), ta tính \(P^2\):
         \[
           P^2_{0,0} = 0 \cdot 0 + 1 \cdot \frac{1}{4} + 0 + 0 + 0 = \frac{1}{4}.
         \]
         Nghĩa là: nếu bên trái có 0 bi, sau 2 bước xác suất trở về 0 bi là \(1/4\).</p>
         <p>Thật vậy: từ 0 phải đi lên 1 (chắc chắn), rồi từ 1 quay về 0 (xác suất \(1/4\)).</p>
+
+
+      {% include components/example-end.html %}
+
+
       </div>
 
-      <div class="box summary">
-        <p class="box-title">Tóm tắt</p>
-        <div class="box-body">
+      {% include components/box-start.html type="summary" title='Tóm tắt' %}
         <p>Các xác suất chuyển \(k\) bước được tính bằng cách lũy thừa ma trận chuyển: \(P^k\).
         Phương trình Chapman&ndash;Kolmogorov cho phép phân rã quá trình chuyển thành hai giai đoạn.</p>
         <p><strong>Mẹo tính toán:</strong> Đối với ma trận \(n \times n\) lớn, dùng chéo hóa \(P = M D M^{-1}\)
         sẽ cho \(P^k = M D^k M^{-1}\) &mdash; dễ tính hơn nhiều so với nhân ma trận \(k\) lần.</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <!-- ================================================================ -->
       <h2 id="chuoi-hai-trang-thai">3. Chuỗi Markov hai trạng thái <small>(The Two-State Markov Chain)</small></h2>
@@ -364,9 +390,7 @@ sections:
 
       <p>Cho \(n \to \infty\) trong \(\eqref{eq:Pn-two-state}\), vì \(|\lambda_2| = |1-a-b| < 1\) khi \((a,b) \neq (1,1)\):</p>
 
-      <div class="box theorem">
-        <p class="box-title">Định lý (Phân phối giới hạn của chuỗi hai trạng thái)</p>
-        <div class="box-body">
+      {% include components/box-start.html type="theorem" title='Định lý (Phân phối giới hạn của chuỗi hai trạng thái)' %}
         <p>\[
           \lim_{n\to\infty} P^n = \frac{1}{a+b}
           \begin{bmatrix} b & a \\ b & a \end{bmatrix},
@@ -376,25 +400,25 @@ sections:
           \lim_{n\to\infty} \PP(Z_n = 1 \mid Z_0 = 0) &= \lim_{n\to\infty} \PP(Z_n = 1 \mid Z_0 = 1) = \frac{a}{a+b}, \label{eq:limit-1}\\
           \lim_{n\to\infty} \PP(Z_n = 0 \mid Z_0 = 0) &= \lim_{n\to\infty} \PP(Z_n = 0 \mid Z_0 = 1) = \frac{b}{a+b}. \label{eq:limit-0}
         \end{align}</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p><strong>Phân phối giới hạn</strong> <em>(limiting distribution)</em>:
       \begin{equation}\label{eq:pi-two-state}
         \pi = [\pi_0, \pi_1] = \left[\frac{b}{a+b},\; \frac{a}{a+b}\right].
       \end{equation}</p>
 
-      <div class="box summary">
-        <p class="box-title">Tóm tắt</p>
-        <div class="box-body">
+      {% include components/box-start.html type="summary" title='Tóm tắt' %}
         <p>Phân phối giới hạn \(\pi\) <strong>không phụ thuộc vào trạng thái ban đầu</strong> \(Z_0\).
         Sau thời gian đủ lớn, xác suất ở trạng thái \(1\) xấp xỉ \(a/(a+b)\),
         và ở trạng thái \(0\) xấp xỉ \(b/(a+b)\).</p>
         <p>Phân phối \(\pi\) là <strong>bất biến</strong> <em>(invariant)</em> theo \(P\), tức \(\pi P = \pi\).</p>
         <p><strong>Ví dụ thời tiết:</strong> Nếu \(a = 0.3\) (nắng&rarr;mưa) và \(b = 0.4\) (mưa&rarr;nắng),
         thì dài hạn: \(\pi_{\text{nắng}} = 0.4/0.7 \approx 57\%\), \(\pi_{\text{mưa}} = 0.3/0.7 \approx 43\%\).</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p><strong>Trường hợp đặc biệt:</strong> Khi \(a + b = 1\) (hay \(a = 1-b\)):
       \[
@@ -421,29 +445,30 @@ sections:
 
       <p>Sai số giảm theo cấp số nhân. Hội tụ nhanh khi \(|1-a-b|\) nhỏ, tức \(a + b\) gần \(1\).</p>
 
-      <div class="example">
-        <p class="example-title">Ví dụ: So sánh tốc độ hội tụ</p>
+      {% include components/example-start.html title='Ví dụ: So sánh tốc độ hội tụ' %}
         <ul>
           <li>\(a = 0.5, b = 0.5\): \(|\lambda_2| = |1-1| = 0\). Hội tụ ngay sau 1 bước!</li>
           <li>\(a = 0.1, b = 0.1\): \(|\lambda_2| = 0.8\). Hội tụ chậm (cần \(\sim 30\) bước).</li>
           <li>\(a = 0.01, b = 0.01\): \(|\lambda_2| = 0.98\). Rất chậm (cần \(\sim 300\) bước).</li>
         </ul>
         <p>Trực quan: khi \(a, b\) nhỏ, chuỗi "dính" ở mỗi trạng thái lâu, nên mất nhiều thời gian mới "quên" trạng thái ban đầu.</p>
-      </div>
+
+
+      {% include components/example-end.html %}
 
       <!-- ================================================================ -->
       <h2 id="bai-tap">4. Bài tập <small>(Exercises)</small></h2>
 
-      <div class="exercise">
-        <p class="exercise-title">Bài tập 1</p>
+      {% include components/exercise-start.html title='Bài tập 1' %}
         <p>Trong mô hình đơn giản hóa của một chương trình truyền hình, người chơi đã thắng \(k\) đô la,
         sẽ có \(k+1\) đô la ở lượt tiếp theo với xác suất \(q\), hoặc bị loại (về \(0\)) với xác suất \(p = 1-q\).
         Giả sử người chơi bắt đầu với \(1\) đô la. Hãy mô hình hóa tiền thắng sau \(n\) lượt chơi
         bằng chuỗi Markov và viết ma trận chuyển tương ứng.</p>
-      </div>
 
-      <div class="exercise">
-        <p class="exercise-title">Bài tập 2</p>
+
+      {% include components/exercise-end.html %}
+
+      {% include components/exercise-start.html title='Bài tập 2' %}
         <p>Xét chuỗi Markov trên \(S = \{0, 1, 2\}\) với ma trận chuyển:
         \[
           P = \begin{bmatrix}
@@ -457,31 +482,36 @@ sections:
           <li>Tính \(\PP(Z_2 = 0 \mid Z_0 = 1)\).</li>
           <li>Tính \(\PP(Z_3 = 2 \mid Z_0 = 0)\) (gợi ý: dùng \(P^3 = P^2 \cdot P\)).</li>
         </ol>
-      </div>
 
-      <div class="exercise">
-        <p class="exercise-title">Bài tập 3</p>
+
+      {% include components/exercise-end.html %}
+
+      {% include components/exercise-start.html title='Bài tập 3' %}
         <p>Cho chuỗi Ehrenfest với \(N = 4\) viên bi (xem Ví dụ Ehrenfest \(N=4\)).</p>
         <ol type="a">
           <li>Bắt đầu với 4 bi bên trái. Tính xác suất có 2 bi bên trái sau 2 bước.</li>
           <li>Chuỗi này có trạng thái hấp thụ không? Giải thích.</li>
           <li>Tìm phân phối dừng \(\pi\) (gợi ý: so sánh với phân phối nhị thức \(B(4, 1/2)\)).</li>
         </ol>
-      </div>
 
-      <div class="exercise">
-        <p class="exercise-title">Bài tập 4 (Chapman&ndash;Kolmogorov trực tiếp)</p>
+
+      {% include components/exercise-end.html %}
+
+      {% include components/exercise-start.html title='Bài tập 4 (Chapman&ndash;Kolmogorov trực tiếp)' %}
         <p>Xét chuỗi Markov hai trạng thái với \(a = 0.4\), \(b = 0.6\).</p>
         <ol type="a">
           <li>Tính \(P^2\) trực tiếp bằng nhân ma trận.</li>
           <li>Tính \(P^2\) bằng công thức \(\eqref{eq:Pn-two-state}\) với \(n = 2\). Xác minh kết quả trùng nhau.</li>
           <li>Tìm \(n\) nhỏ nhất sao cho \(|P^n_{0,1} - \pi_1| < 0.01\).</li>
         </ol>
-      </div>
 
-      <div class="exercise">
-        <p class="exercise-title">Bài tập 5</p>
+
+      {% include components/exercise-end.html %}
+
+      {% include components/exercise-start.html title='Bài tập 5' %}
         <p>Chứng minh rằng nếu \((S_n)_{n\geq 0}\) là bước đi ngẫu nhiên với \(S_n = X_1 + \cdots + X_n\)
         và \((X_k)\) độc lập cùng phân phối, thì \((S_n)\) thỏa mãn tính chất Markov.
         (Gợi ý: sử dụng tính độc lập của \(X_{n+1}\) với \((X_1, \ldots, X_n)\).)</p>
-      </div>
+
+
+      {% include components/exercise-end.html %}

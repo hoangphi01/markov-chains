@@ -1,13 +1,7 @@
 ---
 layout: chapter
-title: "Ch 3: Phân loại trạng thái"
-chapter_num: 3
-heading: "Chương 3: Phân loại trạng thái"
-heading_en: "Classification of States"
-prev_url: /ch2.html
-prev_title: "Chương 2"
-next_url: /ch4.html
-next_title: "Chương 4: Phân phối giới hạn và dừng"
+slug: ch3
+title: "Ch 3: Phân loại"
 sections:
   - id: communicating-states
     title: "1. Trạng thái liên thông"
@@ -42,9 +36,7 @@ sections:
       <p>Ví dụ đời thường: Từ Hà Nội bạn có thể bay đến Tokyo (qua Seoul chuyển tiếp)
       &mdash; vậy Tokyo &ldquo;có thể đạt đến&rdquo; từ Hà Nội.</p>
 
-      <div class="box definition">
-        <p class="box-title">Định nghĩa (Trạng thái có thể đạt đến &mdash; <em>Accessible state</em>)</p>
-        <div class="box-body">
+      {% include components/box-start.html type="definition" title='Định nghĩa (Trạng thái có thể đạt đến &mdash; <em>Accessible state</em>)' %}
         <p>Cho chuỗi Markov \((X_n)_{n \in \N}\) với không gian trạng thái \(S\) và ma trận chuyển \(P\).
         Trạng thái \(j\) được gọi là <strong>có thể đạt đến</strong> <em>(accessible)</em> từ trạng thái \(i\),
         ký hiệu \(i \to j\), nếu tồn tại \(n \geq 0\) sao cho:</p>
@@ -53,12 +45,11 @@ sections:
         \]
         <p>Nói cách khác, xuất phát từ \(i\), chuỗi Markov có xác suất dương để đến được \(j\)
         sau một số bước hữu hạn nào đó.</p>
-        </div>
-      </div>
 
-      <div class="box definition">
-        <p class="box-title">Định nghĩa (Trạng thái liên thông &mdash; <em>Communicating states</em>)</p>
-        <div class="box-body">
+
+      {% include components/box-end.html %}
+
+      {% include components/box-start.html type="definition" title='Định nghĩa (Trạng thái liên thông &mdash; <em>Communicating states</em>)' %}
         <p>Hai trạng thái \(i\) và \(j\) được gọi là <strong>liên thông</strong> <em>(communicate)</em>,
         ký hiệu \(i \leftrightarrow j\), nếu \(i \to j\) và \(j \to i\), tức là:</p>
         \[
@@ -66,8 +57,9 @@ sections:
           \qquad \text{và} \qquad
           \exists\, b \geq 0: \; P_{j,i}^{(b)} > 0.
         \]
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p>Ví dụ: Hà Nội và Tokyo &ldquo;liên thông&rdquo; vì bạn có thể bay đi lẫn bay về.
       Nhưng nếu đảo \(X\) chỉ có chuyến bay đến mà không có chuyến bay đi,
@@ -96,30 +88,28 @@ sections:
         \qquad A_k \cap A_l = \emptyset \;\text{với}\; k \neq l.
       \end{equation}
 
-      <div class="box summary">
-        <p class="box-title">Tóm tắt</p>
-        <div class="box-body">
+      {% include components/box-start.html type="summary" title='Tóm tắt' %}
         <p>Quan hệ \(\leftrightarrow\) phân chia không gian trạng thái \(S\) thành các lớp liên thông rời nhau.
         Bên trong mỗi lớp, mọi cặp trạng thái đều có thể đạt đến nhau.
         Giữa các lớp khác nhau, việc chuyển đổi có thể chỉ xảy ra theo một chiều hoặc không xảy ra.</p>
         <p>Ví dụ: trong mạng lưới giao thông, các thành phố trong cùng khu vực đều liên thông.
         Nhưng &ldquo;vùng hấp thụ&rdquo; (ví dụ: hố đen) chỉ có đường vào mà không có đường ra.</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <!-- ================================================================ -->
       <h2 id="communicating-class">2. Lớp liên thông <em>(Communicating Class)</em></h2>
 
-      <div class="box definition">
-        <p class="box-title">Định nghĩa (Chuỗi bất khả quy &mdash; <em>Irreducible chain</em>)</p>
-        <div class="box-body">
+      {% include components/box-start.html type="definition" title='Định nghĩa (Chuỗi bất khả quy &mdash; <em>Irreducible chain</em>)' %}
         <p>Một chuỗi Markov được gọi là <strong>bất khả quy</strong> <em>(irreducible)</em> nếu toàn bộ không gian
         trạng thái \(S\) chỉ gồm duy nhất một lớp liên thông, tức là mọi cặp trạng thái \(i, j \in S\)
         đều liên thông: \(i \leftrightarrow j\).</p>
         <p>Ngược lại, nếu \(S\) có ít nhất hai lớp liên thông thì chuỗi được gọi là
         <strong>khả quy</strong> <em>(reducible)</em>.</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p><strong>Ví dụ trực quan:</strong></p>
       <ul>
@@ -127,8 +117,7 @@ sections:
         <li><strong>Khả quy:</strong> Có &ldquo;vùng cấm&rdquo; &mdash; một khi vào rồi, không ra được.</li>
       </ul>
 
-      <div class="example">
-        <p class="example-title">Ví dụ: Chuỗi khả quy &mdash; <em>Reducible chain</em></p>
+      {% include components/example-start.html title='Ví dụ: Chuỗi khả quy &mdash; <em>Reducible chain</em>' %}
         <p>Xét chuỗi Markov trên \(S = \{0, 1, 2, 3\}\) với ma trận chuyển:</p>
         \begin{equation}\label{eq:reducible-matrix}
           P = \begin{bmatrix}
@@ -151,17 +140,18 @@ sections:
           A_1 = \{0, 1, 2\}, \qquad A_2 = \{3\}.
         \]
         <p>Chuỗi này là <strong>khả quy</strong> <em>(reducible)</em>.</p>
-      </div>
 
-      <div class="box summary">
-        <p class="box-title">Tóm tắt</p>
-        <div class="box-body">
+
+      {% include components/example-end.html %}
+
+      {% include components/box-start.html type="summary" title='Tóm tắt' %}
         <p>Chuỗi <strong>bất khả quy</strong>: chỉ có một lớp liên thông, mọi trạng thái đều đạt đến được từ bất kỳ
         trạng thái nào khác.</p>
         <p>Chuỗi <strong>khả quy</strong>: có nhiều lớp liên thông; một khi vào một lớp &ldquo;đóng&rdquo; <em>(closed class)</em>,
         chuỗi không thể thoát ra.</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <!-- ================================================================ -->
       <h2 id="recurrent-states">3. Trạng thái hồi quy <em>(Recurrent States)</em></h2>
@@ -179,22 +169,19 @@ sections:
         p_{ii} := \PP(\tau_i < \infty \mid X_0 = i).
       \]
 
-      <div class="box definition">
-        <p class="box-title">Định nghĩa (Trạng thái hồi quy &mdash; <em>Recurrent state</em>)</p>
-        <div class="box-body">
+      {% include components/box-start.html type="definition" title='Định nghĩa (Trạng thái hồi quy &mdash; <em>Recurrent state</em>)' %}
         <p>Trạng thái \(i \in S\) được gọi là <strong>hồi quy</strong> <em>(recurrent)</em> nếu:</p>
         \begin{equation}\label{eq:recurrent-def}
           p_{ii} = \PP(\tau_i < \infty \mid X_0 = i) = 1.
         \end{equation}
         <p>Tức là, xuất phát từ \(i\), chuỗi Markov <em>chắc chắn</em> sẽ quay lại \(i\).</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p>Tính hồi quy có thể được đặc trưng bằng các điều kiện tương đương sau.</p>
 
-      <div class="box theorem">
-        <p class="box-title">Định lý (Đặc trưng của trạng thái hồi quy)</p>
-        <div class="box-body">
+      {% include components/box-start.html type="theorem" title='Định lý (Đặc trưng của trạng thái hồi quy)' %}
         <p>Các mệnh đề sau là tương đương:</p>
         <ol type="i">
           <li>\(i\) là trạng thái hồi quy, tức \(p_{ii} = 1\).</li>
@@ -211,33 +198,33 @@ sections:
             \end{equation}
           </li>
         </ol>
-        </div>
-      </div>
 
-      <div class="box formula">
-        <div class="box-body">
+
+      {% include components/box-end.html %}
+
+      {% include components/box-start.html type="formula" %}
         <p><strong>Tiêu chuẩn hồi quy (bằng chuỗi):</strong></p>
         \[
           i \text{ hồi quy} \quad\Longleftrightarrow\quad
           \sum_{n=0}^{\infty} P_{i,i}^{(n)} = +\infty.
         \]
         <p>Trực quan: nếu &ldquo;tổng xác suất quay lại&rdquo; phân kỳ, thì chuỗi quay lại vô hạn lần.</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <!-- ================================================================ -->
       <h2 id="transient-states">4. Trạng thái tạm thời <em>(Transient States)</em></h2>
 
-      <div class="box definition">
-        <p class="box-title">Định nghĩa (Trạng thái tạm thời &mdash; <em>Transient state</em>)</p>
-        <div class="box-body">
+      {% include components/box-start.html type="definition" title='Định nghĩa (Trạng thái tạm thời &mdash; <em>Transient state</em>)' %}
         <p>Trạng thái \(i \in S\) được gọi là <strong>tạm thời</strong> <em>(transient)</em> nếu:</p>
         \begin{equation}\label{eq:transient-def}
           \PP(R_i = +\infty \mid X_0 = i) < 1,
         \end{equation}
         <p>hay tương đương, \(p_{ii} < 1\).</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p>Đối với trạng thái tạm thời:</p>
       <ul>
@@ -246,9 +233,7 @@ sections:
         <li>Với xác suất \(1 - p_{ii} > 0\), chuỗi sẽ <em>rời khỏi</em> \(i\) và không bao giờ quay lại.</li>
       </ul>
 
-      <div class="box summary">
-        <p class="box-title">Tóm tắt</p>
-        <div class="box-body">
+      {% include components/box-start.html type="summary" title='Tóm tắt' %}
         <table style="width:100%;">
           <thead>
             <tr>
@@ -285,16 +270,16 @@ sections:
             </tr>
           </tbody>
         </table>
-        </div>
-      </div>
 
-      <div class="box theorem">
-        <p class="box-title">Hệ quả (Hồi quy là tính chất lớp &mdash; <em>Recurrence is a class property</em>)</p>
-        <div class="box-body">
+
+      {% include components/box-end.html %}
+
+      {% include components/box-start.html type="theorem" title='Hệ quả (Hồi quy là tính chất lớp &mdash; <em>Recurrence is a class property</em>)' %}
         <p>Nếu trạng thái \(i\) là hồi quy và \(j\) liên thông với \(i\) (tức \(i \leftrightarrow j\)),
         thì \(j\) cũng là hồi quy.</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <div class="proof">
         Vì \(i \leftrightarrow j\), tồn tại \(a, b \geq 0\) sao cho \(P_{j,i}^{(a)} > 0\) và \(P_{i,j}^{(b)} > 0\).
@@ -315,8 +300,7 @@ sections:
       <p><strong>Hệ quả:</strong> Tạm thời cũng là tính chất lớp. Nếu \(i\) là tạm thời và \(i \leftrightarrow j\),
       thì \(j\) cũng là tạm thời.</p>
 
-      <div class="example">
-        <p class="example-title">Ví dụ: Bước đi ngẫu nhiên đơn giản trên \(\Z\) &mdash; <em>Simple random walk on \(\Z\)</em></p>
+      {% include components/example-start.html title='Ví dụ: Bước đi ngẫu nhiên đơn giản trên \(\Z\) &mdash; <em>Simple random walk on \(\Z\)</em>' %}
         <p>Xét bước đi ngẫu nhiên \((S_n)_{n \geq 0}\) trên \(\Z\) với \(S_0 = 0\),
         \(\PP(X_k = +1) = p\) và \(\PP(X_k = -1) = q = 1-p\).</p>
         <p>Xác suất trở về gốc tại thời điểm chẵn \(n = 2k\):</p>
@@ -337,38 +321,38 @@ sections:
         \]
         <p>Trực quan: với \(p \neq q\), bước đi ngẫu nhiên có &ldquo;xu hướng&rdquo; đi về một phía,
         nên càng lúc càng xa gốc và khó quay lại.</p>
-      </div>
 
-      <div class="box formula">
-        <div class="box-body">
+
+      {% include components/example-end.html %}
+
+      {% include components/box-start.html type="formula" %}
         <p><strong>Bước đi ngẫu nhiên đơn giản trên \(\Z\):</strong></p>
         \[
           \text{Hồi quy} \;\Longleftrightarrow\; p = q = \frac{1}{2}.
         \]
-        </div>
-      </div>
 
-      <div class="box theorem">
-        <p class="box-title">Định lý (Định lý Polya về hồi quy &mdash; <em>Polya's recurrence theorem</em>)</p>
-        <div class="box-body">
+
+      {% include components/box-end.html %}
+
+      {% include components/box-start.html type="theorem" title='Định lý (Định lý Polya về hồi quy &mdash; <em>Polya's recurrence theorem</em>)' %}
         <p>Bước đi ngẫu nhiên đơn giản đối xứng (\(p = 1/2\) mỗi chiều) trên mạng lưới \(\Z^d\):</p>
         <ul>
           <li>\(d = 1\): <strong>hồi quy</strong> (chắc chắn quay lại gốc).</li>
           <li>\(d = 2\): <strong>hồi quy</strong> (&ldquo;A drunk man will find his way home&rdquo; &mdash; Polya).</li>
           <li>\(d \geq 3\): <strong>tạm thời</strong> (&ldquo;A drunk bird will NOT find its way home&rdquo;).</li>
         </ul>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p>Trực quan: trong không gian 1D và 2D, &ldquo;không có đủ chỗ để trốn&rdquo; nên bước đi phải quay lại.
       Trong 3D trở lên, không gian quá rộng, bước đi &ldquo;lạc&rdquo; mãi mãi với xác suất dương.</p>
 
-      <div class="box theorem">
-        <p class="box-title">Định lý (Tồn tại trạng thái hồi quy trong chuỗi hữu hạn)</p>
-        <div class="box-body">
+      {% include components/box-start.html type="theorem" title='Định lý (Tồn tại trạng thái hồi quy trong chuỗi hữu hạn)' %}
         <p>Mọi chuỗi Markov với không gian trạng thái hữu hạn \(S\) có ít nhất một trạng thái hồi quy.</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <div class="proof">
         Giả sử bằng phản chứng rằng <em>tất cả</em> trạng thái đều tạm thời.
@@ -396,53 +380,48 @@ sections:
         <li><strong>Hồi quy không:</strong> Chắc chắn quay lại, nhưng thời gian trung bình vô hạn (&ldquo;chờ mãi mãi&rdquo;).</li>
       </ul>
 
-      <div class="box definition">
-        <p class="box-title">Định nghĩa (Thời gian quay lại trung bình &mdash; <em>Mean recurrence time</em>)</p>
-        <div class="box-body">
+      {% include components/box-start.html type="definition" title='Định nghĩa (Thời gian quay lại trung bình &mdash; <em>Mean recurrence time</em>)' %}
         \[
           \mu_i(i) := \E[\tau_i \mid X_0 = i].
         \]
-        </div>
-      </div>
 
-      <div class="box definition">
-        <p class="box-title">Định nghĩa (Hồi quy dương và hồi quy không)</p>
-        <div class="box-body">
+
+      {% include components/box-end.html %}
+
+      {% include components/box-start.html type="definition" title='Định nghĩa (Hồi quy dương và hồi quy không)' %}
         <p>Cho trạng thái \(i\) là hồi quy (\(p_{ii} = 1\)).</p>
         <ul>
           <li>\(i\) là <strong>hồi quy dương</strong> <em>(positive recurrent)</em> nếu \(\mu_i(i) < +\infty\).</li>
           <li>\(i\) là <strong>hồi quy không</strong> <em>(null recurrent)</em> nếu \(\mu_i(i) = +\infty\).</li>
         </ul>
-        </div>
-      </div>
 
-      <div class="example">
-        <p class="example-title">Ví dụ: Bước đi ngẫu nhiên đối xứng là hồi quy không</p>
+
+      {% include components/box-end.html %}
+
+      {% include components/example-start.html title='Ví dụ: Bước đi ngẫu nhiên đối xứng là hồi quy không' %}
         <p>Bước đi ngẫu nhiên đơn giản trên \(\Z\) với \(p = q = 1/2\) là <strong>hồi quy không</strong>.
         Thời gian quay lại trung bình \(\mu_0(0) = +\infty\).</p>
         <p>Trực quan: bạn <em>chắc chắn</em> quay lại gốc, nhưng không ai biết &ldquo;trung bình bao lâu&rdquo; &mdash;
         có thể mất 2 bước, có thể mất 2 triệu bước.</p>
-      </div>
 
-      <div class="box theorem">
-        <p class="box-title">Định lý (Chuỗi hữu hạn và hồi quy dương)</p>
-        <div class="box-body">
+
+      {% include components/example-end.html %}
+
+      {% include components/box-start.html type="theorem" title='Định lý (Chuỗi hữu hạn và hồi quy dương)' %}
         <p>Trong chuỗi Markov với không gian trạng thái hữu hạn, mọi trạng thái hồi quy đều là
         <strong>hồi quy dương</strong>.</p>
-        </div>
-      </div>
 
-      <div class="box theorem">
-        <p class="box-title">Hệ quả (Chuỗi bất khả quy hữu hạn)</p>
-        <div class="box-body">
+
+      {% include components/box-end.html %}
+
+      {% include components/box-start.html type="theorem" title='Hệ quả (Chuỗi bất khả quy hữu hạn)' %}
         <p>Nếu chuỗi Markov là <strong>bất khả quy</strong> và có không gian trạng thái hữu hạn,
         thì <em>tất cả</em> các trạng thái đều là <strong>hồi quy dương</strong>.</p>
-        </div>
-      </div>
 
-      <div class="box summary">
-        <p class="box-title">Tóm tắt</p>
-        <div class="box-body">
+
+      {% include components/box-end.html %}
+
+      {% include components/box-start.html type="summary" title='Tóm tắt' %}
         <table style="width:100%;">
           <thead>
             <tr>
@@ -481,8 +460,9 @@ sections:
         </table>
         <p style="margin-top:10px;"><strong>Quy tắc nhớ:</strong> Chuỗi Markov hữu hạn bất khả quy \(\Rightarrow\) mọi trạng thái hồi quy dương.
         Hồi quy không chỉ xảy ra khi không gian trạng thái vô hạn.</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <!-- ================================================================ -->
       <h2 id="periodicity">6. Tính tuần hoàn và phi tuần hoàn <em>(Periodicity and Aperiodicity)</em></h2>
@@ -491,23 +471,21 @@ sections:
       sau 1 bước chắc chắn ở ô đen, sau 2 bước lại ở ô trắng. Chuỗi này có &ldquo;nhịp&rdquo; (chu kỳ) = 2.
       Chuỗi tuần hoàn không hội tụ vì nó cứ &ldquo;dao động&rdquo; mãi.</p>
 
-      <div class="box definition">
-        <p class="box-title">Định nghĩa (Chu kỳ của trạng thái &mdash; <em>Period of a state</em>)</p>
-        <div class="box-body">
+      {% include components/box-start.html type="definition" title='Định nghĩa (Chu kỳ của trạng thái &mdash; <em>Period of a state</em>)' %}
         <p><strong>Chu kỳ</strong> <em>(period)</em> của trạng thái \(i\) được định nghĩa là:</p>
         \begin{equation}\label{eq:period}
           d(i) := \gcd\{n \geq 1 : P_{i,i}^{(n)} > 0\}.
         \end{equation}
-        </div>
-      </div>
 
-      <div class="box definition">
-        <p class="box-title">Định nghĩa (Phi tuần hoàn &mdash; <em>Aperiodic</em>)</p>
-        <div class="box-body">
+
+      {% include components/box-end.html %}
+
+      {% include components/box-start.html type="definition" title='Định nghĩa (Phi tuần hoàn &mdash; <em>Aperiodic</em>)' %}
         <p>Trạng thái \(i\) được gọi là <strong>phi tuần hoàn</strong> <em>(aperiodic)</em> nếu \(d(i) = 1\).</p>
         <p>Một chuỗi Markov được gọi là <strong>phi tuần hoàn</strong> nếu <em>tất cả</em> các trạng thái đều phi tuần hoàn.</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p><strong>Nhận xét:</strong></p>
       <ul>
@@ -517,33 +495,32 @@ sections:
         <li>Chu kỳ là tính chất lớp: nếu \(i \leftrightarrow j\) thì \(d(i) = d(j)\).</li>
       </ul>
 
-      <div class="example">
-        <p class="example-title">Ví dụ: Chuỗi có chu kỳ 2</p>
+      {% include components/example-start.html title='Ví dụ: Chuỗi có chu kỳ 2' %}
         <p>Chuỗi Markov trên \(S = \{0, 1\}\) với \(P = \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}\)
         có \(d(0) = d(1) = 2\): chuỗi &ldquo;dao động&rdquo; giữa \(0\) và \(1\).</p>
         <p>\(P_{0,0}^{(n)} > 0\) chỉ khi \(n\) chẵn, nên \(\gcd\{2, 4, 6, \ldots\} = 2\).</p>
-      </div>
 
-      <div class="example">
-        <p class="example-title">Ví dụ: Chuỗi có chu kỳ 3</p>
+
+      {% include components/example-end.html %}
+
+      {% include components/example-start.html title='Ví dụ: Chuỗi có chu kỳ 3' %}
         <p>Trên \(S = \{0, 1, 2\}\) với \(P = \begin{bmatrix} 0 & 1 & 0 \\ 0 & 0 & 1 \\ 1 & 0 & 0 \end{bmatrix}\).
         Chuỗi quay vòng: \(0 \to 1 \to 2 \to 0 \to \cdots\), chu kỳ \(d = 3\).</p>
-      </div>
 
-      <div class="box definition">
-        <p class="box-title">Định nghĩa (Trạng thái ergodic &mdash; <em>Ergodic state</em>)</p>
-        <div class="box-body">
+
+      {% include components/example-end.html %}
+
+      {% include components/box-start.html type="definition" title='Định nghĩa (Trạng thái ergodic &mdash; <em>Ergodic state</em>)' %}
         <p>Trạng thái \(i\) được gọi là <strong>ergodic</strong> nếu nó đồng thời:</p>
         <ol type="i">
           <li><strong>Hồi quy dương</strong>: \(p_{ii} = 1\) và \(\mu_i(i) < +\infty\).</li>
           <li><strong>Phi tuần hoàn</strong>: \(d(i) = 1\).</li>
         </ol>
-        </div>
-      </div>
 
-      <div class="box summary">
-        <p class="box-title">Tóm tắt</p>
-        <div class="box-body">
+
+      {% include components/box-end.html %}
+
+      {% include components/box-start.html type="summary" title='Tóm tắt' %}
         <p>Tính ergodic là điều kiện then chốt để chuỗi Markov hội tụ đến phân phối dừng (Chương 4).</p>
         \[
           \boxed{\text{Ergodic} = \text{Hồi quy dương} + \text{Phi tuần hoàn}}
@@ -556,14 +533,14 @@ sections:
           <li>Hữu hạn? (Nếu có \(\Rightarrow\) tự động hồi quy dương.)</li>
         </ol>
         <p>Nếu cả 3: phân phối dừng tồn tại, duy nhất, và bằng phân phối giới hạn.</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <!-- ================================================================ -->
       <h2 id="ch6-exercises">7. Bài tập <em>(Exercises)</em></h2>
 
-      <div class="exercise">
-        <p class="exercise-title">Bài tập 1</p>
+      {% include components/exercise-start.html title='Bài tập 1' %}
         <p>Xét chuỗi Markov trên \(S = \{0, 1, 2, 3\}\) với ma trận chuyển:</p>
         \[
           P = \begin{bmatrix}
@@ -579,17 +556,19 @@ sections:
           <li>Xác định trạng thái nào hồi quy, tạm thời, hấp thụ.</li>
           <li>Chuỗi có bất khả quy không?</li>
         </ol>
-      </div>
 
-      <div class="exercise">
-        <p class="exercise-title">Bài tập 2</p>
+
+      {% include components/exercise-end.html %}
+
+      {% include components/exercise-start.html title='Bài tập 2' %}
         <p>Chứng minh rằng chu kỳ là tính chất lớp: nếu \(i \leftrightarrow j\) thì \(d(i) = d(j)\).</p>
         <p>(Gợi ý: nếu \(P_{i,j}^{(a)} > 0\) và \(P_{j,i}^{(b)} > 0\), thì \(P_{i,i}^{(a+b)} > 0\),
         nên \(d(i)\) chia hết \(a + b\). Dùng điều này để chỉ \(d(i) \mid d(j)\) và ngược lại.)</p>
-      </div>
 
-      <div class="exercise">
-        <p class="exercise-title">Bài tập 3</p>
+
+      {% include components/exercise-end.html %}
+
+      {% include components/exercise-start.html title='Bài tập 3' %}
         <p>Xét chuỗi Markov trên \(S = \{0, 1, 2, 3, 4\}\) với ma trận chuyển:</p>
         \[
           P = \begin{bmatrix}
@@ -605,14 +584,17 @@ sections:
           <li>Phân loại mỗi trạng thái (hồi quy/tạm thời, tuần hoàn/phi tuần hoàn).</li>
           <li>Từ trạng thái 0, chuỗi sẽ kết thúc ở lớp nào?</li>
         </ol>
-      </div>
 
-      <div class="exercise">
-        <p class="exercise-title">Bài tập 4</p>
+
+      {% include components/exercise-end.html %}
+
+      {% include components/exercise-start.html title='Bài tập 4' %}
         <p>Cho chuỗi Markov bất khả quy trên không gian trạng thái hữu hạn \(S\) với \(|S| = N\).</p>
         <ol type="a">
           <li>Chứng minh rằng mọi trạng thái đều hồi quy.</li>
           <li>Chứng minh rằng mọi trạng thái đều hồi quy dương. (Gợi ý: dùng Định lý về chuỗi hữu hạn và hồi quy dương.)</li>
           <li>Nếu thêm điều kiện phi tuần hoàn, kết luận gì về sự tồn tại phân phối giới hạn?</li>
         </ol>
-      </div>
+
+
+      {% include components/exercise-end.html %}

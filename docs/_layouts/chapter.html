@@ -1,6 +1,26 @@
 ---
 layout: default
 ---
+{% comment %}Look up chapter data and compute prev/next from data order{% endcomment %}
+{% assign chapters = site.data.chapters %}
+{% assign ch_data = nil %}
+{% assign prev_ch = nil %}
+{% assign next_ch = nil %}
+{% for ch in chapters %}
+  {% if ch.slug == page.slug %}
+    {% assign ch_data = ch %}
+    {% assign ch_index = forloop.index0 %}
+  {% endif %}
+{% endfor %}
+{% if ch_index > 0 %}
+  {% assign prev_index = ch_index | minus: 1 %}
+  {% assign prev_ch = chapters[prev_index] %}
+{% endif %}
+{% assign next_index = ch_index | plus: 1 %}
+{% if next_index < chapters.size %}
+  {% assign next_ch = chapters[next_index] %}
+{% endif %}
+
 <div class="page-wrapper">
   <!-- LEFT: TOC -->
   <nav class="toc">
@@ -17,18 +37,18 @@ layout: default
 
   <!-- CENTER: Content -->
   <main class="content">
-    <h1>{{ page.heading }}<br><small>{{ page.heading_en }}</small></h1>
+    <h1>{{ ch_data.heading }}<br><small>{{ ch_data.heading_en }}</small></h1>
 
     {{ content }}
 
     <div class="chapter-nav">
-      {% if page.prev_url %}
-        <a href="{{ page.prev_url | relative_url }}">&larr; {{ page.prev_title }}</a>
+      {% if prev_ch %}
+        <a href="{{ prev_ch.url | relative_url }}">&larr; {{ prev_ch.nav_title }}</a>
       {% else %}
         <span></span>
       {% endif %}
-      {% if page.next_url %}
-        <a href="{{ page.next_url | relative_url }}">{{ page.next_title }} &rarr;</a>
+      {% if next_ch %}
+        <a href="{{ next_ch.url | relative_url }}">{{ next_ch.nav_title }} &rarr;</a>
       {% else %}
         <span></span>
       {% endif %}
@@ -37,13 +57,13 @@ layout: default
 
   <!-- RIGHT: Sidebar -->
   <aside class="sidebar">
-    {% case page.chapter_num %}
-      {% when 1 %}{% include sidebars/ch1.html %}
-      {% when 2 %}{% include sidebars/ch2.html %}
-      {% when 3 %}{% include sidebars/ch3.html %}
-      {% when 4 %}{% include sidebars/ch4.html %}
-      {% when 5 %}{% include sidebars/ch5.html %}
-      {% when 'A' %}{% include sidebars/appendix.html %}
+    {% case page.slug %}
+      {% when 'ch1' %}{% include sidebars/ch1.html %}
+      {% when 'ch2' %}{% include sidebars/ch2.html %}
+      {% when 'ch3' %}{% include sidebars/ch3.html %}
+      {% when 'ch4' %}{% include sidebars/ch4.html %}
+      {% when 'ch5' %}{% include sidebars/ch5.html %}
+      {% when 'appendix' %}{% include sidebars/appendix.html %}
       {% else %}{% include sidebars/default.html %}
     {% endcase %}
   </aside>

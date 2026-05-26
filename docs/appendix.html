@@ -1,13 +1,7 @@
 ---
 layout: chapter
-title: "Phụ lục A: Nền tảng Xác suất"
-chapter_num: "A"
-heading: "Phụ lục A: Nền tảng Xác suất"
-heading_en: "Probability Background"
-prev_url: /ch5.html
-prev_title: "Chương 5"
-next_url: /index.html
-next_title: "Trang chủ"
+slug: appendix
+title: "Phụ lục A"
 sections:
   - id: prob-spaces
     title: "A.1 Không gian xác suất"
@@ -36,17 +30,16 @@ sections:
       <!-- ================================================================ -->
       <h2 id="prob-spaces">A.1 Không gian xác suất <em>(Probability Spaces)</em></h2>
 
-      <div class="box definition">
-        <p class="box-title">Định nghĩa (Không gian xác suất &mdash; <em>Probability space</em>)</p>
-        <div class="box-body">
+      {% include components/box-start.html type="definition" title='Định nghĩa (Không gian xác suất &mdash; <em>Probability space</em>)' %}
         <p><strong>Không gian xác suất</strong> là bộ ba \((\Omega, \mathcal{F}, \mathbb{P})\) trong đó:</p>
         <ul>
           <li>\(\Omega\): <strong>không gian mẫu</strong> <em>(sample space)</em> &mdash; tập hợp tất cả các kết quả có thể.</li>
           <li>\(\mathcal{F}\): <strong>sigma-đại số</strong> <em>(\(\sigma\)-algebra)</em> &mdash; tập các <strong>biến cố</strong> <em>(events)</em>.</li>
           <li>\(\mathbb{P}\): <strong>độ đo xác suất</strong> <em>(probability measure)</em> &mdash; ánh xạ \(\mathbb{P}: \mathcal{F} \to [0,1]\).</li>
         </ul>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p><strong>Ví dụ:</strong></p>
       <ul>
@@ -70,15 +63,14 @@ sections:
       <!-- ================================================================ -->
       <h2 id="conditional">A.2 Xác suất có điều kiện và tính độc lập <em>(Conditional Probability and Independence)</em></h2>
 
-      <div class="box definition">
-        <p class="box-title">Định nghĩa (Xác suất có điều kiện &mdash; <em>Conditional probability</em>)</p>
-        <div class="box-body">
+      {% include components/box-start.html type="definition" title='Định nghĩa (Xác suất có điều kiện &mdash; <em>Conditional probability</em>)' %}
         <p>Với hai biến cố \(A, B \subset \Omega\) và \(\mathbb{P}(B) \neq 0\):</p>
         \[
           \mathbb{P}(A \mid B) := \frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}.
         \]
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p><strong>Quy tắc xác suất toàn phần</strong> <em>(law of total probability)</em>: Nếu \(\{A_n\}_{n\geq 1}\) là phân hoạch của \(\Omega\) với \(\mathbb{P}(A_n) > 0\):</p>
       \[
@@ -90,16 +82,15 @@ sections:
         \mathbb{P}(A_k \mid B) = \frac{\mathbb{P}(B \mid A_k)\,\mathbb{P}(A_k)}{\sum_{n} \mathbb{P}(B \mid A_n)\,\mathbb{P}(A_n)}.
       \]
 
-      <div class="box definition">
-        <p class="box-title">Định nghĩa (Tính độc lập &mdash; <em>Independence</em>)</p>
-        <div class="box-body">
+      {% include components/box-start.html type="definition" title='Định nghĩa (Tính độc lập &mdash; <em>Independence</em>)' %}
         <p>Hai biến cố \(A\) và \(B\) được gọi là <strong>độc lập</strong> <em>(independent)</em> nếu:</p>
         \[
           \mathbb{P}(A \cap B) = \mathbb{P}(A)\,\mathbb{P}(B).
         \]
         <p>Tương đương: \(\mathbb{P}(A \mid B) = \mathbb{P}(A)\) (biết \(B\) không ảnh hưởng đến \(A\)).</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p><strong>Độc lập nhiều biến cố:</strong> \(A_1, \ldots, A_n\) <strong>độc lập tương hỗ</strong> <em>(mutually independent)</em> nếu với mọi tập con \(I \subseteq \{1, \ldots, n\}\):</p>
       \[
@@ -109,12 +100,11 @@ sections:
       <!-- ================================================================ -->
       <h2 id="random-variables">A.3 Biến ngẫu nhiên <em>(Random Variables)</em></h2>
 
-      <div class="box definition">
-        <p class="box-title">Định nghĩa (Biến ngẫu nhiên &mdash; <em>Random variable</em>)</p>
-        <div class="box-body">
+      {% include components/box-start.html type="definition" title='Định nghĩa (Biến ngẫu nhiên &mdash; <em>Random variable</em>)' %}
         <p><strong>Biến ngẫu nhiên</strong> là ánh xạ \(X: \Omega \to \mathbb{R}\) xác định trên không gian xác suất \((\Omega, \mathcal{F}, \mathbb{P})\).</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p><strong>Hàm chỉ báo</strong> <em>(indicator function)</em> của biến cố \(A\):</p>
       \[
@@ -157,8 +147,7 @@ sections:
         <li><strong>Gamma</strong> \(\Gamma(n, \lambda)\): \(f(x) = \frac{\lambda^n}{(n-1)!} x^{n-1} e^{-\lambda x}\) với \(x \geq 0\), \(n \in \mathbb{N}^*\). \(\mathbb{E}[X] = n/\lambda\).</li>
       </ul>
 
-      <div class="box formula">
-        <div class="box-body">
+      {% include components/box-start.html type="formula" %}
         <p><strong>Tính chất quan trọng của phân phối mũ:</strong></p>
         <p>Nếu \(X_1, \ldots, X_n\) độc lập với \(X_i \sim \text{Exp}(\lambda_i)\), thì:</p>
         \begin{equation}\label{eq:min-exp}
@@ -174,22 +163,22 @@ sections:
           \mathbb{P}(X > s + t \mid X > s) = \mathbb{P}(X > t), \qquad s, t \geq 0.
         \]
         <p>Đã đợi \(s\) rồi, thời gian đợi thêm vẫn có cùng phân phối &mdash; không "nhớ" đã đợi bao lâu.</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <!-- ================================================================ -->
       <h2 id="expectation">A.5 Kỳ vọng toán học <em>(Mathematical Expectation)</em></h2>
 
-      <div class="box definition">
-        <p class="box-title">Định nghĩa (Kỳ vọng &mdash; <em>Expectation</em>)</p>
-        <div class="box-body">
+      {% include components/box-start.html type="definition" title='Định nghĩa (Kỳ vọng &mdash; <em>Expectation</em>)' %}
         <p><strong>Kỳ vọng</strong> <em>(expected value)</em> của biến ngẫu nhiên \(X\):</p>
         <ul>
           <li>Trường hợp rời rạc: \(\mathbb{E}[X] = \sum_{k} k \cdot \mathbb{P}(X = k)\).</li>
           <li>Trường hợp liên tục: \(\mathbb{E}[X] = \int_{-\infty}^{\infty} x\, f(x)\,dx\).</li>
         </ul>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p><strong>Tính chất:</strong></p>
       <ul>
@@ -209,40 +198,37 @@ sections:
       <!-- ================================================================ -->
       <h2 id="inequalities">A.6 Bất đẳng thức quan trọng <em>(Important Inequalities)</em></h2>
 
-      <div class="box theorem">
-        <p class="box-title">Định lý (Bất đẳng thức Markov &mdash; <em>Markov's inequality</em>)</p>
-        <div class="box-body">
+      {% include components/box-start.html type="theorem" title='Định lý (Bất đẳng thức Markov &mdash; <em>Markov's inequality</em>)' %}
         <p>Nếu \(X \geq 0\) và \(a > 0\):</p>
         \[
           \mathbb{P}(X \geq a) \leq \frac{\mathbb{E}[X]}{a}.
         \]
-        </div>
-      </div>
 
-      <div class="box theorem">
-        <p class="box-title">Định lý (Bất đẳng thức Chebyshev &mdash; <em>Chebyshev's inequality</em>)</p>
-        <div class="box-body">
+
+      {% include components/box-end.html %}
+
+      {% include components/box-start.html type="theorem" title='Định lý (Bất đẳng thức Chebyshev &mdash; <em>Chebyshev's inequality</em>)' %}
         <p>Với mọi \(k > 0\):</p>
         \[
           \mathbb{P}(|X - \mathbb{E}[X]| \geq k) \leq \frac{\text{Var}(X)}{k^2}.
         \]
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p><strong>Ứng dụng:</strong> Bất đẳng thức Chebyshev cho ước lượng "nhanh" về xác suất biến ngẫu nhiên lệch xa kỳ vọng, mà không cần biết phân phối chính xác.</p>
 
       <!-- ================================================================ -->
       <h2 id="pgf">A.7 Hàm sinh xác suất <em>(Probability Generating Functions)</em></h2>
 
-      <div class="box definition">
-        <p class="box-title">Định nghĩa (Hàm sinh xác suất &mdash; <em>Probability generating function</em>)</p>
-        <div class="box-body">
+      {% include components/box-start.html type="definition" title='Định nghĩa (Hàm sinh xác suất &mdash; <em>Probability generating function</em>)' %}
         <p>Cho biến ngẫu nhiên \(X\) nhận giá trị trong \(\mathbb{N}\). <strong>Hàm sinh xác suất</strong> <em>(p.g.f.)</em> của \(X\) là:</p>
         \[
           G_X(s) = \mathbb{E}[s^X] = \sum_{k=0}^{\infty} \mathbb{P}(X = k)\, s^k, \qquad |s| \leq 1.
         \]
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p><strong>Tính chất:</strong></p>
       <ul>
@@ -260,26 +246,26 @@ sections:
         <li>Số lần thăm trạng thái: phân phối hình học có \(G(s) = \frac{p\, s}{1 - (1-p)s}\).</li>
       </ul>
 
-      <div class="example">
-        <p class="example-title">Ví dụ: Hàm sinh của phân phối hình học</p>
+      {% include components/example-start.html title='Ví dụ: Hàm sinh của phân phối hình học' %}
         <p>Nếu \(X \sim \text{Geo}(p)\) (tức \(\mathbb{P}(X = k) = (1-p)^k p\), \(k \geq 0\)):</p>
         \[
           G_X(s) = \sum_{k=0}^{\infty} (1-p)^k p\, s^k = \frac{p}{1 - (1-p)s}.
         \]
         <p>Kiểm tra: \(G_X'(1) = \frac{p(1-p)}{[1-(1-p)]^2} = \frac{1-p}{p} = \mathbb{E}[X]\). Đúng!</p>
-      </div>
+
+
+      {% include components/example-end.html %}
 
       <!-- ================================================================ -->
       <h2 id="cond-expectation">A.8 Kỳ vọng có điều kiện <em>(Conditional Expectation)</em></h2>
 
-      <div class="box definition">
-        <p class="box-title">Định nghĩa (Kỳ vọng có điều kiện &mdash; <em>Conditional expectation</em>)</p>
-        <div class="box-body">
+      {% include components/box-start.html type="definition" title='Định nghĩa (Kỳ vọng có điều kiện &mdash; <em>Conditional expectation</em>)' %}
         \[
           \mathbb{E}[X \mid B] = \sum_k k\,\mathbb{P}(X = k \mid B), \qquad \text{khi } \mathbb{P}(B) > 0.
         \]
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p><strong>Quy tắc kỳ vọng lặp</strong> <em>(law of iterated expectations / tower property)</em>:</p>
       \[
@@ -302,9 +288,7 @@ sections:
       <!-- ================================================================ -->
       <h2 id="joint">A.9 Phân phối đồng thời và mật độ có điều kiện</h2>
 
-      <div class="box definition">
-        <p class="box-title">Định nghĩa (Phân phối đồng thời &mdash; <em>Joint distribution</em>)</p>
-        <div class="box-body">
+      {% include components/box-start.html type="definition" title='Định nghĩa (Phân phối đồng thời &mdash; <em>Joint distribution</em>)' %}
         <p><strong>Phân phối đồng thời</strong> của \((X, Y)\) rời rạc:</p>
         \[
           p_{X,Y}(x, y) = \mathbb{P}(X = x,\; Y = y).
@@ -314,8 +298,9 @@ sections:
           \mathbb{P}(X = x) = \sum_y p_{X,Y}(x, y), \qquad
           \mathbb{P}(Y = y) = \sum_x p_{X,Y}(x, y).
         \]
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p>Trong trường hợp liên tục, <strong>mật độ đồng thời</strong> <em>(joint density)</em> \(f_{X,Y}(x,y)\) thỏa mãn:</p>
       \[
@@ -335,9 +320,7 @@ sections:
       <!-- ================================================================ -->
       <h2 id="summary">A.10 Tổng kết <em>(Summary)</em></h2>
 
-      <div class="box summary">
-        <p class="box-title">Tóm tắt</p>
-        <div class="box-body">
+      {% include components/box-start.html type="summary" title='Tóm tắt' %}
         <p>Các công cụ xác suất chính dùng trong tài liệu:</p>
         <ul>
           <li><strong>Xác suất có điều kiện</strong> và <strong>quy tắc xác suất toàn phần</strong>: nền tảng cho phân tích bước đầu tiên (Chương 2).</li>
@@ -347,5 +330,6 @@ sections:
           <li><strong>Hàm sinh xác suất</strong>: công cụ đại số để phân tích phân phối thời gian quay lại.</li>
           <li><strong>Bất đẳng thức Markov/Chebyshev</strong>: ước lượng xác suất không cần biết phân phối chính xác.</li>
         </ul>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}

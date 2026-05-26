@@ -22,12 +22,20 @@ markov_chains_bilingual/
     ch7_limiting.tex          # Ch 4: Limiting and Stationary Distributions
     ch9_continuous.tex        # Ch 5: Continuous-Time Markov Chains
     appendix_prob.tex         # Appendix A: Probability Background
-  docs/                        # Static HTML lessons (3-column layout, MathJax)
-    index.html                # Landing page
-    ch1.html - ch5.html       # Chapter pages
-    appendix.html             # Appendix page
-    css/style.css             # Minimal grid layout
+  docs/                        # Jekyll web book (3-column layout, MathJax)
+    _data/chapters.yml        # Single source of truth for chapter order/titles/URLs
+    _layouts/default.html     # Base layout (loads framework.css + book.css + MathJax)
+    _layouts/chapter.html     # 3-column layout with auto prev/next from data
+    _includes/
+      nav.html                # Data-driven chapter navigation
+      mathjax.html            # MathJax v3 config
+      components/             # 6 reusable includes (box, example, exercise start/end)
+      sidebars/               # Per-chapter sidebar content
+    css/framework.css         # Reusable grid, box structure, nav (any book)
+    css/book.css              # Literata font, sepia palette, box colors (this book)
     js/nav.js                 # TOC active state tracking
+    index.html                # Landing page (standalone)
+    ch1-ch5.html, appendix.html  # Chapter pages (layout + slug + sections)
   MARKOV_PLAN.md              # Project plan with progress tracker
   WEB_PLAN.md                 # Web conversion strategy
   README.md                   # GitHub README
@@ -50,11 +58,15 @@ xelatex main.tex && xelatex main.tex  # 2 passes for TOC
 
 ## Web Details
 
-- Pure static HTML/CSS/JS, no frameworks, no build step
+- Jekyll framework with data-driven navigation (`_data/chapters.yml`)
 - MathJax v3 for LaTeX math rendering
-- 3-column layout: left TOC | center content | right sidebar (key symbols, quick refs)
-- GitHub Pages compatible (no server-side code)
-- See WEB_PLAN.md for .tex -> HTML mapping
+- 3-column layout: left TOC | center content | right sidebar
+- CSS split: `framework.css` (reusable) + `book.css` (this book's theme)
+- Global `--box-radius: 20px` CSS variable for all boxes
+- 6 component includes: box-start/end, example-start/end, exercise-start/end
+- Add new chapter: 1 YAML entry + 1 HTML file (nav/prev/next auto-update)
+- GitHub Pages compatible
+- See WEB_PLAN.md for .tex -> HTML mapping and component usage
 
 ## Chapter Mapping (Source -> Our Numbering)
 

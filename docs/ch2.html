@@ -1,13 +1,7 @@
 ---
 layout: chapter
-title: "Ch 2: Phân tích bước đầu tiên"
-chapter_num: 2
-heading: "Chương 2: Phân tích bước đầu tiên"
-heading_en: "First Step Analysis"
-prev_url: /ch1.html
-prev_title: "Chương 1"
-next_url: /ch3.html
-next_title: "Chương 3: Phân loại trạng thái"
+slug: ch2
+title: "Ch 2: Bước đầu tiên"
 sections:
   - id: sec-hitting-prob
     title: "1. Xác suất chạm"
@@ -45,13 +39,12 @@ sections:
       <p>Kỹ thuật <strong>phân tích bước đầu tiên</strong> trả lời cả hai câu hỏi bằng cách:
       "Nhìn bước đầu tiên --- bạn đi lên hay xuống? --- rồi từ vị trí mới, bài toán giống hệt nhưng nhỏ hơn."</p>
 
-      <div class="box summary">
-        <p class="box-title">Tom tat</p>
-        <div class="box-body">
+      {% include components/box-start.html type="summary" title='Tom tat' %}
         <p><strong>Ý tưởng cốt lõi:</strong> Điều kiện hóa theo bước đầu tiên \(Z_1\), rồi dùng tính Markov
         để quy về bài toán cùng dạng. Kết quả: hệ phương trình tuyến tính --- giải là xong!</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <!-- ================================================================ -->
       <h2 id="sec-hitting-prob">1. Xác suất chạm <small>(Hitting Probabilities)</small></h2>
@@ -59,38 +52,35 @@ sections:
       <p>Cho chuỗi Markov \((Z_n)_{n \in \N}\) nhận giá trị trong không gian trạng thái hữu hạn
       \(S = \{0, 1, \ldots, N\}\) với ma trận chuyển \(P = [P_{k,l}]_{k,l \in S}\).</p>
 
-      <div class="box definition">
-        <p class="box-title">Định nghĩa (Thời gian chạm -- <em>(Hitting time)</em>)</p>
-        <div class="box-body">
+      {% include components/box-start.html type="definition" title='Định nghĩa (Thời gian chạm -- <em>(Hitting time)</em>)' %}
         <p>Cho \(A \subseteq S\). <strong>Thời gian chạm</strong> <em>(hitting time)</em> tập \(A\) được định nghĩa là:</p>
         \[
           T_A := \inf\{n \geq 0 : Z_n \in A\},
         \]
         <p>tức là thời điểm đầu tiên chuỗi Markov rơi vào tập \(A\).</p>
-        </div>
-      </div>
 
-      <div class="box definition">
-        <p class="box-title">Định nghĩa (Xác suất chạm -- <em>(Hitting probability)</em>)</p>
-        <div class="box-body">
+
+      {% include components/box-end.html %}
+
+      {% include components/box-start.html type="definition" title='Định nghĩa (Xác suất chạm -- <em>(Hitting probability)</em>)' %}
         <p><strong>Xác suất chạm</strong> <em>(hitting probability)</em> trạng thái \(l \in A\) xuất phát từ \(k \in S\) là:</p>
         \[
           g_l(k) := \PP(Z_{T_A} = l \mid Z_0 = k), \qquad k \in S, \quad l \in A.
         \]
         <p>Đây là xác suất mà chuỗi Markov sẽ đến trạng thái \(l\) khi lần đầu tiên đi vào tập \(A\),
         biết rằng ban đầu chuỗi ở trạng thái \(k\).</p>
-        </div>
-      </div>
 
-      <div class="box definition">
-        <p class="box-title">Định nghĩa (Thời gian chạm trung bình -- <em>(Mean hitting time)</em>)</p>
-        <div class="box-body">
+
+      {% include components/box-end.html %}
+
+      {% include components/box-start.html type="definition" title='Định nghĩa (Thời gian chạm trung bình -- <em>(Mean hitting time)</em>)' %}
         <p><strong>Thời gian chạm trung bình</strong> <em>(mean hitting time)</em> tập \(A\) xuất phát từ \(k\) là:</p>
         \[
           h_A(k) := \E[T_A \mid Z_0 = k], \qquad k \in S.
         \]
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <h3 id="sec-fsa-method">1.1 Phương pháp phân tích bước đầu tiên <small>(First Step Analysis Method)</small></h3>
 
@@ -109,8 +99,7 @@ sections:
         g_l(k) = \ind_{\{k = l\}}, \qquad k \in A, \quad l \in A.
       \]
 
-      <div class="box formula">
-        <div class="box-body">
+      {% include components/box-start.html type="formula" %}
         <p><strong>Hệ phương trình phân tích bước đầu tiên cho xác suất chạm:</strong></p>
         \[
           \boxed{
@@ -118,17 +107,17 @@ sections:
           }
         \]
         <p>với điều kiện biên \(g_l(k) = \ind_{\{k = l\}}\) khi \(k \in A\).</p>
-        </div>
-      </div>
 
-      <div class="box summary">
-        <p class="box-title">Tom tat</p>
-        <div class="box-body">
+
+      {% include components/box-end.html %}
+
+      {% include components/box-start.html type="summary" title='Tom tat' %}
         <p>Phân tích bước đầu tiên biến bài toán tính xác suất chạm thành một hệ phương trình tuyến tính.
         Ta "mở ra" bước đầu tiên \(Z_0 \to Z_1\), sau đó sử dụng tính Markov để quy bài toán
         về cùng dạng nhưng xuất phát từ trạng thái \(Z_1\).</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <h3 id="sec-absorbing-matrix">1.2 Tập hấp thụ và dạng ma trận <small>(Absorbing Set and Matrix Form)</small></h3>
 
@@ -153,8 +142,7 @@ sections:
 
       <p>Trong dạng ma trận, hệ phương trình cho xác suất chạm trở thành:</p>
 
-      <div class="box formula">
-        <div class="box-body">
+      {% include components/box-start.html type="formula" %}
         <p><strong>Dạng ma trận:</strong></p>
         \[
           \mathbf{g}_l = Q\, \mathbf{g}_l + R\, \mathbf{e}_l,
@@ -166,8 +154,9 @@ sections:
             \mathbf{g}_l = (I - Q)^{-1} R\, \mathbf{e}_l.
           }
         \]
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p>Ngoài ra, tổng xác suất chạm tất cả các trạng thái trong \(A\) thỏa mãn:</p>
       \begin{equation}\label{eq:total-hitting}
@@ -176,8 +165,7 @@ sections:
       <p>Khi \(A\) là tập hấp thụ và chuỗi chắc chắn bị hấp thụ, thì \(\PP(T_A = +\infty \mid Z_0 = k) = 0\)
       và \(\sum_{l \in A} g_l(k) = 1\) với mọi \(k \in S\).</p>
 
-      <div class="example">
-        <p class="example-title">Ví dụ: Chuỗi 4 trạng thái -- <em>(4-state chain)</em></p>
+      {% include components/example-start.html title='Ví dụ: Chuỗi 4 trạng thái -- <em>(4-state chain)</em>' %}
         <p>Xét chuỗi Markov trên \(S = \{0, 1, 2, 3\}\) với các trạng thái hấp thụ \(A = \{0, 3\}\).
         Ma trận chuyển có dạng:</p>
         \[
@@ -220,20 +208,21 @@ sections:
           \quad\Longrightarrow\quad
           g_0(1) = g_0(2) = \frac{1}{2}.
         \]
-      </div>
+
+
+      {% include components/example-end.html %}
 
       <!-- ================================================================ -->
       <h2 id="sec-mean-hitting">2. Thời gian chạm và hấp thụ trung bình <small>(Mean Hitting and Absorption Times)</small></h2>
 
-      <div class="box definition">
-        <p class="box-title">Định nghĩa (Thời gian chạm trung bình -- <em>(Mean hitting time)</em>)</p>
-        <div class="box-body">
+      {% include components/box-start.html type="definition" title='Định nghĩa (Thời gian chạm trung bình -- <em>(Mean hitting time)</em>)' %}
         <p>Cho \(A \subseteq S\). <strong>Thời gian chạm trung bình</strong> tập \(A\) xuất phát từ \(k\) là:</p>
         \[
           h_A(k) := \E[T_A \mid Z_0 = k], \qquad k \in S.
         \]
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p>Áp dụng phân tích bước đầu tiên tương tự như phần trước, nhưng lần này ta điều kiện hóa
       kỳ vọng thay vì xác suất:</p>
@@ -248,8 +237,7 @@ sections:
 
       <p>Điều kiện biên: \(h_A(l) = 0\) với mọi \(l \in A\) (nếu đã ở trong \(A\) thì không cần thời gian nào).</p>
 
-      <div class="box formula">
-        <div class="box-body">
+      {% include components/box-start.html type="formula" %}
         <p><strong>Hệ phương trình phân tích bước đầu tiên cho thời gian chạm trung bình:</strong></p>
         \[
           \boxed{
@@ -257,8 +245,9 @@ sections:
           }
         \]
         <p>với điều kiện biên \(h_A(l) = 0\) khi \(l \in A\).</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p>Trong dạng ma trận, với \(\mathbf{h}_A = [h_A(0), \ldots, h_A(r)]^\top\) chỉ chứa các trạng thái
       không hấp thụ:</p>
@@ -271,17 +260,15 @@ sections:
       \end{equation}
       <p>trong đó \(\mathbf{1}\) là vectơ toàn \(1\).</p>
 
-      <div class="box summary">
-        <p class="box-title">Tom tat</p>
-        <div class="box-body">
+      {% include components/box-start.html type="summary" title='Tom tat' %}
         <p>Thời gian chạm trung bình thỏa mãn hệ phương trình tuyến tính tương tự xác suất chạm,
         chỉ khác ở vế phải: thêm \(+1\) (đếm một bước) và điều kiện biên bằng \(0\) tại \(A\).
         Ma trận \((I - Q)^{-1}\) được gọi là <strong>ma trận cơ bản</strong> <em>(fundamental matrix)</em> của chuỗi Markov hấp thụ.</p>
-        </div>
-      </div>
 
-      <div class="example">
-        <p class="example-title">Ví dụ: Chuỗi hai trạng thái -- <em>(Two-state chain)</em></p>
+
+      {% include components/box-end.html %}
+
+      {% include components/example-start.html title='Ví dụ: Chuỗi hai trạng thái -- <em>(Two-state chain)</em>' %}
         <p>Xét chuỗi Markov hai trạng thái \(S = \{0, 1\}\) với ma trận chuyển:</p>
         \[
           P = \begin{bmatrix} 1-a & a \\ b & 1-b \end{bmatrix}.
@@ -297,10 +284,11 @@ sections:
           b\, h_{\{0\}}(1) = 1 \quad\Longrightarrow\quad h_{\{0\}}(1) = \frac{1}{b}.
         \]
         <p>Tương tự, \(h_{\{1\}}(0) = \dfrac{1}{a}\).</p>
-      </div>
 
-      <div class="example">
-        <p class="example-title">Ví dụ: Chuỗi với tham số \(\alpha\), \(\beta\) -- <em>(Chain with parameters \(\alpha\), \(\beta\))</em></p>
+
+      {% include components/example-end.html %}
+
+      {% include components/example-start.html title='Ví dụ: Chuỗi với tham số \(\alpha\), \(\beta\) -- <em>(Chain with parameters \(\alpha\), \(\beta\))</em>' %}
         <p>Xét chuỗi Markov trên \(S = \{0, 1, 2, 3\}\) với trạng thái hấp thụ \(A = \{3\}\) và ma trận chuyển:</p>
         \[
           P = \begin{bmatrix}
@@ -326,7 +314,9 @@ sections:
         \(\beta\, h_3(0) = 1 + \beta \cdot \dfrac{2}{\beta} = 3\), suy ra \(h_3(0) = \dfrac{3}{\beta}\).</p>
         <p>Tổng quát hơn, với chuỗi "sinh--tử" <em>(birth chain)</em> tuyến tính đi từ \(0\) đến \(N\),
         ta có \(h_{\{N\}}(k) = \dfrac{N - k}{\beta}\).</p>
-      </div>
+
+
+      {% include components/example-end.html %}
 
       <h3 id="sec-generalization">2.1 Tổng quát hóa <small>(Generalization)</small></h3>
 
@@ -354,50 +344,46 @@ sections:
       thời gian chạm cho phép \(n = 0\) (tức nếu đã ở \(j\) thì \(T_{\{j\}} = 0\)),
       còn thời gian quay lại yêu cầu \(n \geq 1\) (phải rời khỏi rồi quay lại).</p>
 
-      <div class="box definition">
-        <p class="box-title">Định nghĩa (Thời gian quay lại lần đầu -- <em>(First return time)</em>)</p>
-        <div class="box-body">
+      {% include components/box-start.html type="definition" title='Định nghĩa (Thời gian quay lại lần đầu -- <em>(First return time)</em>)' %}
         <p><strong>Thời gian quay lại lần đầu</strong> trạng thái \(j\) là:</p>
         \[
           \tau_j := \inf\{n \geq 1 : X_n = j\}.
         \]
         <p>Lưu ý: \(n \geq 1\), không phải \(n \geq 0\).</p>
-        </div>
-      </div>
 
-      <div class="box definition">
-        <p class="box-title">Định nghĩa (Xác suất quay lại -- <em>(Return probability)</em>)</p>
-        <div class="box-body">
+
+      {% include components/box-end.html %}
+
+      {% include components/box-start.html type="definition" title='Định nghĩa (Xác suất quay lại -- <em>(Return probability)</em>)' %}
         <p><strong>Xác suất quay lại</strong> trạng thái \(j\) từ trạng thái \(i\) là:</p>
         \[
           p_{ij} := \PP(\tau_j < \infty \mid X_0 = i).
         \]
         <p>Khi \(i = j\), đại lượng \(p_{jj}\) là xác suất quay lại chính trạng thái \(j\).</p>
-        </div>
-      </div>
 
-      <div class="box definition">
-        <p class="box-title">Định nghĩa (Phân phối thời gian quay lại -- <em>(First return distribution)</em>)</p>
-        <div class="box-body">
+
+      {% include components/box-end.html %}
+
+      {% include components/box-start.html type="definition" title='Định nghĩa (Phân phối thời gian quay lại -- <em>(First return distribution)</em>)' %}
         <p>Xác suất quay lại trạng thái \(j\) sau đúng \(n\) bước là:</p>
         \[
           f_{ij}^{(n)} := \PP(\tau_j = n \mid X_0 = i), \qquad n \geq 1.
         \]
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p>Tổng xác suất quay lại: \(p_{ij} = \sum_{n=1}^{\infty} f_{ij}^{(n)}\).</p>
 
-      <div class="box theorem">
-        <p class="box-title">Định lý (Quan hệ giữa \(P_{i,i}^n\) và \(f_{ii}^{(n)}\))</p>
-        <div class="box-body">
+      {% include components/box-start.html type="theorem" title='Định lý (Quan hệ giữa \(P_{i,i}^n\) và \(f_{ii}^{(n)}\))' %}
         <p>Xác suất chuyển \(n\) bước quay lại trạng thái \(i\) có thể phân tách theo thời gian quay lại lần đầu:</p>
         \begin{equation}\label{eq:Pn-fn}
           P_{i,i}^{(n)} = \sum_{k=1}^{n} f_{ii}^{(k)}\, P_{i,i}^{(n-k)}, \qquad n \geq 1,
         \end{equation}
         <p>với quy ước \(P_{i,i}^{(0)} = 1\).</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p><strong>Chứng minh.</strong>
       Ta phân hoạch sự kiện \(\{X_n = i\}\) theo thời điểm quay lại lần đầu \(\tau_i = k\):</p>
@@ -410,31 +396,29 @@ sections:
 
       <h3 id="sec-mean-return">3.1 Thời gian quay lại trung bình <small>(Mean Return Time)</small></h3>
 
-      <div class="box definition">
-        <p class="box-title">Định nghĩa (Thời gian quay lại trung bình -- <em>(Mean return time)</em>)</p>
-        <div class="box-body">
+      {% include components/box-start.html type="definition" title='Định nghĩa (Thời gian quay lại trung bình -- <em>(Mean return time)</em>)' %}
         \[
           \mu_j(i) := \E[\tau_j \mid X_0 = i].
         \]
         <p>Khi \(i = j\), ta ký hiệu \(\mu_j := \mu_j(j) = \E[\tau_j \mid X_0 = j]\).</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p>Áp dụng phân tích bước đầu tiên:</p>
 
-      <div class="box formula">
-        <div class="box-body">
+      {% include components/box-start.html type="formula" %}
         <p><strong>Thời gian quay lại trung bình:</strong></p>
         \[
           \boxed{
             \mu_j(i) = 1 + \sum_{l \neq j} P_{i,l}\, \mu_j(l), \qquad i \in S.
           }
         \]
-        </div>
-      </div>
 
-      <div class="example">
-        <p class="example-title">Ví dụ: Chuỗi hai trạng thái -- thời gian quay lại</p>
+
+      {% include components/box-end.html %}
+
+      {% include components/example-start.html title='Ví dụ: Chuỗi hai trạng thái -- thời gian quay lại' %}
         <p>Với chuỗi hai trạng thái \(S = \{0,1\}\) và ma trận chuyển
         \(P = \begin{bmatrix} 1-a & a \\ b & 1-b \end{bmatrix}\):</p>
 
@@ -459,9 +443,7 @@ sections:
           \mu_0(1) = \frac{1}{b}.
         \]
 
-        <div class="box summary">
-          <p class="box-title">Tom tat</p>
-        <div class="box-body">
+        {% include components/box-start.html type="summary" title='Tom tat' %}
           <p>Lưu ý mối liên hệ với phân phối giới hạn (Chương 1):</p>
           \[
             \pi_0 = \frac{b}{a+b} = \frac{1}{\mu_0(0)}, \qquad
@@ -469,26 +451,26 @@ sections:
           \]
           <p>Đây không phải sự trùng hợp! Với chuỗi Markov <strong>ergodic</strong>, phân phối dừng
           thỏa mãn \(\pi_j = 1/\mu_j\) <em>(ergodic theorem)</em>.</p>
-        </div>
-        </div>
-      </div>
+
+
+        {% include components/box-end.html %}
+
+
+      {% include components/example-end.html %}
 
       <!-- ================================================================ -->
       <h2 id="sec-number-returns">4. Số lần quay lại <small>(Number of Returns)</small></h2>
 
-      <div class="box definition">
-        <p class="box-title">Định nghĩa (Số lần thăm -- <em>(Number of visits)</em>)</p>
-        <div class="box-body">
+      {% include components/box-start.html type="definition" title='Định nghĩa (Số lần thăm -- <em>(Number of visits)</em>)' %}
         <p>Số lần chuỗi Markov thăm trạng thái \(i\) (không kể thời điểm \(n=0\)) là:</p>
         \[
           R_i := \sum_{n=1}^{\infty} \ind_{\{X_n = i\}}.
         \]
-        </div>
-      </div>
 
-      <div class="box theorem">
-        <p class="box-title">Định lý (Phân phối số lần thăm)</p>
-        <div class="box-body">
+
+      {% include components/box-end.html %}
+
+      {% include components/box-start.html type="theorem" title='Định lý (Phân phối số lần thăm)' %}
         <p>Với \(m \geq 1\):</p>
         \begin{equation}\label{eq:num-visits}
           \PP(R_j = m \mid X_0 = i) = p_{ij}(1 - p_{jj})(p_{jj})^{m-1},
@@ -497,8 +479,9 @@ sections:
         \[
           \PP(R_j = 0 \mid X_0 = i) = 1 - p_{ij}.
         \]
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p><strong>Chứng minh.</strong>
       Để thăm trạng thái \(j\) đúng \(m\) lần:</p>
@@ -515,19 +498,17 @@ sections:
 
       <p>Đây chính là <strong>phân phối hình học</strong> <em>(geometric distribution)</em> trên \(\{0, 1, 2, \ldots\}\).</p>
 
-      <div class="box theorem">
-        <p class="box-title">Định lý (Trường hợp \(p_{jj} = 1\))</p>
-        <div class="box-body">
+      {% include components/box-start.html type="theorem" title='Định lý (Trường hợp \(p_{jj} = 1\))' %}
         <p>Nếu \(p_{jj} = 1\) (chuỗi chắc chắn quay lại \(j\)), thì:</p>
         \[
           \PP(R_j = \infty \mid X_0 = j) = 1.
         \]
         <p>Ngược lại, nếu \(p_{jj} < 1\), thì \(\PP(R_j < \infty \mid X_0 = j) = 1\).</p>
-        </div>
-      </div>
 
-      <div class="box formula">
-        <div class="box-body">
+
+      {% include components/box-end.html %}
+
+      {% include components/box-start.html type="formula" %}
         <p><strong>Kỳ vọng số lần thăm:</strong></p>
         \[
           \boxed{
@@ -535,8 +516,9 @@ sections:
           }
         \]
         <p>khi \(p_{jj} < 1\).</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p><strong>Chứng minh.</strong></p>
       \begin{align*}
@@ -548,17 +530,15 @@ sections:
       \end{align*}
       \(\square\)
 
-      <div class="box summary">
-        <p class="box-title">Tom tat</p>
-        <div class="box-body">
+      {% include components/box-start.html type="summary" title='Tom tat' %}
         <p>Nếu trạng thái \(j\) là <strong>thoáng qua</strong> <em>(transient)</em>, tức \(p_{jj} < 1\), thì số lần thăm
         \(R_j\) là hữu hạn hầu chắc chắn và có phân phối hình học.
         Nếu \(j\) là <strong>hồi quy</strong> <em>(recurrent)</em>, tức \(p_{jj} = 1\), thì chuỗi quay lại \(j\) vô hạn lần.</p>
-        </div>
-      </div>
 
-      <div class="example">
-        <p class="example-title">Ví dụ: Bài toán mê cung: Cá trong bể 9 ngăn -- <em>(Maze problem: Fish in 9-compartment aquarium)</em></p>
+
+      {% include components/box-end.html %}
+
+      {% include components/example-start.html title='Ví dụ: Bài toán mê cung: Cá trong bể 9 ngăn -- <em>(Maze problem: Fish in 9-compartment aquarium)</em>' %}
         <p>Xét một con cá bơi trong bể có \(9\) ngăn xếp thành lưới \(3 \times 3\), đánh số từ \(1\) đến \(9\).
         Tại mỗi bước, cá di chuyển ngẫu nhiên đều sang một ngăn kề (chia sẻ cạnh chung).</p>
         <p>Đây là chuỗi Markov trên \(S = \{1, 2, \ldots, 9\}\). Ta có thể áp dụng phân tích bước đầu tiên
@@ -572,14 +552,14 @@ sections:
         tuyến tính \(7 \times 7\) cho các trạng thái còn lại \(\{2, 3, 4, 5, 6, 7, 8\}\).</p>
         <p>Ma trận chuyển được xây dựng từ cấu trúc kề của lưới: mỗi ngăn góc có \(2\) ngăn kề,
         mỗi ngăn cạnh có \(3\) ngăn kề, và ngăn trung tâm có \(4\) ngăn kề.</p>
-      </div>
+
+
+      {% include components/example-end.html %}
 
       <!-- ================================================================ -->
       <h2 id="sec-summary">5. Tổng kết chương <small>(Chapter Summary)</small></h2>
 
-      <div class="box summary">
-        <p class="box-title">Tom tat</p>
-        <div class="box-body">
+      {% include components/box-start.html type="summary" title='Tom tat' %}
         <p><strong>Phân tích bước đầu tiên</strong> <em>(first step analysis)</em> là kỹ thuật quan trọng nhất
         để giải các bài toán về chuỗi Markov hữu hạn. Ý tưởng cốt lõi:
         <em>điều kiện hóa theo bước đầu tiên \(Z_1\), rồi dùng tính Markov để quy về bài toán cùng dạng.</em></p>
@@ -616,8 +596,9 @@ sections:
           \mathbf{g}_l = (I-Q)^{-1} R\, \mathbf{e}_l, \qquad
           \mathbf{h}_A = (I-Q)^{-1}\, \mathbf{1}.
         \]
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <!-- ================================================================ -->
       <h2 id="sec-gamblers-ruin">6. Bài toán con bạc -- Gambler's Ruin</h2>
@@ -646,8 +627,7 @@ sections:
 
       <p>Từ \(g(N) - g(0) = \sum_{k=1}^{N} d_k = 1\):</p>
 
-      <div class="box formula">
-        <div class="box-body">
+      {% include components/box-start.html type="formula" %}
         <p><strong>Xác suất thắng trong bài toán con bạc:</strong></p>
 
         <p><strong>Trường hợp \(p \neq q\)</strong> (đặt \(\rho = q/p\)):</p>
@@ -659,17 +639,19 @@ sections:
         \begin{equation}\label{eq:gambler-fair}
           g(i) = \frac{i}{N}.
         \end{equation}
-        </div>
-      </div>
 
-      <div class="example">
-        <p class="example-title">Ví dụ: Con bạc với \$3, mục tiêu \$5</p>
+
+      {% include components/box-end.html %}
+
+      {% include components/example-start.html title='Ví dụ: Con bạc với \$3, mục tiêu \$5' %}
         <p>\(N = 5\), \(i = 3\), \(p = 0.4\) (bất lợi), \(\rho = q/p = 0.6/0.4 = 1.5\).</p>
         \[
           g(3) = \frac{1 - 1.5^3}{1 - 1.5^5} = \frac{1 - 3.375}{1 - 7.594} = \frac{-2.375}{-6.594} \approx 0.360.
         \]
         <p>Chỉ \(36\%\) cơ hội thắng! So với trò chơi công bằng: \(g(3) = 3/5 = 60\%\).</p>
-      </div>
+
+
+      {% include components/example-end.html %}
 
       <h3 id="sec-expected-duration">6.2 Thời gian chơi trung bình <small>(Expected Duration)</small></h3>
 
@@ -691,8 +673,7 @@ sections:
         h(i) = \frac{1}{q - p}\left[i - N \cdot \frac{1 - \rho^i}{1 - \rho^N}\right], \qquad \rho = q/p.
       \end{equation}
 
-      <div class="example">
-        <p class="example-title">Ví dụ: Thời gian chơi -- trò chơi công bằng</p>
+      {% include components/example-start.html title='Ví dụ: Thời gian chơi -- trò chơi công bằng' %}
         <p>\(N = 10\), \(p = q = 1/2\), xuất phát \(i = 5\):</p>
         \[
           h(5) = 5 \times (10 - 5) = 25 \text{ ván}.
@@ -700,11 +681,11 @@ sections:
         <p>Xuất phát \(i = 1\): \(h(1) = 1 \times 9 = 9\) ván.
         Xuất phát \(i = 9\): \(h(9) = 9 \times 1 = 9\) ván.</p>
         <p>Trò chơi kéo dài nhất khi xuất phát ở giữa!</p>
-      </div>
 
-      <div class="box summary">
-        <p class="box-title">Tom tat</p>
-        <div class="box-body">
+
+      {% include components/example-end.html %}
+
+      {% include components/box-start.html type="summary" title='Tom tat' %}
         <p>Bài toán con bạc cho thấy sức mạnh của phân tích bước đầu tiên:</p>
         <ul>
           <li>Xác suất thắng phụ thuộc vào \(\rho = q/p\) và vị trí ban đầu.</li>
@@ -712,14 +693,14 @@ sections:
           <li>Trò chơi "công bằng" (\(p = 1/2\)): xác suất thắng tỷ lệ với vốn ban đầu.</li>
           <li>Đây cũng là mô hình cho bước đi ngẫu nhiên với biên hấp thụ.</li>
         </ul>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <!-- ================================================================ -->
       <h2 id="sec-exercises">7. Bài tập <small>(Exercises)</small></h2>
 
-      <div class="exercise">
-        <p class="exercise-title">Bài tập 1</p>
+      {% include components/exercise-start.html title='Bài tập 1' %}
         <p>Xét chuỗi Markov trên \(S = \{0, 1, 2, 3, 4\}\) với các trạng thái hấp thụ \(A = \{0, 4\}\)
         và ma trận chuyển:</p>
         \[
@@ -735,10 +716,11 @@ sections:
           <li>Tính xác suất bị hấp thụ vào trạng thái \(0\), xuất phát từ mỗi trạng thái \(k = 1, 2, 3\).</li>
           <li>Tính thời gian hấp thụ trung bình \(h_A(k)\) với \(k = 1, 2, 3\).</li>
         </ol>
-      </div>
 
-      <div class="exercise">
-        <p class="exercise-title">Bài tập 2</p>
+
+      {% include components/exercise-end.html %}
+
+      {% include components/exercise-start.html title='Bài tập 2' %}
         <p>Cho chuỗi Markov hai trạng thái với ma trận chuyển
         \(P = \begin{bmatrix} 1-a & a \\ b & 1-b \end{bmatrix}\),
         trong đó \(a, b \in (0,1)\).</p>
@@ -746,10 +728,11 @@ sections:
           <li>Chứng minh rằng \(\mu_0(0) = (a+b)/b\) và \(\mu_1(1) = (a+b)/a\).</li>
           <li>Xác minh rằng \(\pi_j = 1/\mu_j(j)\) với phân phối dừng \(\pi\) đã tìm ở Chương 1.</li>
         </ol>
-      </div>
 
-      <div class="exercise">
-        <p class="exercise-title">Bài tập 3</p>
+
+      {% include components/exercise-end.html %}
+
+      {% include components/exercise-start.html title='Bài tập 3' %}
         <p>Một con chuột ở trong mê cung gồm \(5\) phòng \(\{1, 2, 3, 4, 5\}\), xếp thành hàng ngang.
         Tại mỗi bước, chuột di chuyển sang phòng kề bên trái hoặc bên phải với xác suất bằng nhau.
         Phòng \(1\) có phô mai và phòng \(5\) có bẫy (cả hai đều là trạng thái hấp thụ).</p>
@@ -758,10 +741,11 @@ sections:
           <li>Tính xác suất chuột đến phô mai trước bẫy, xuất phát từ phòng \(k = 2, 3, 4\).</li>
           <li>Tính thời gian trung bình để chuột bị hấp thụ, xuất phát từ phòng \(3\).</li>
         </ol>
-      </div>
 
-      <div class="exercise">
-        <p class="exercise-title">Bài tập 4</p>
+
+      {% include components/exercise-end.html %}
+
+      {% include components/exercise-start.html title='Bài tập 4' %}
         <p>Cho chuỗi Markov trên \(S = \{0, 1, 2\}\) với ma trận chuyển:</p>
         \[
           P = \begin{bmatrix}
@@ -775,19 +759,21 @@ sections:
           <li>Tính \(\mu_0(0)\), \(\mu_1(1)\), \(\mu_2(2)\) (thời gian quay lại trung bình).</li>
           <li>Tính \(\E[R_1 \mid X_0 = 0]\) (kỳ vọng số lần thăm trạng thái \(1\) xuất phát từ \(0\)).</li>
         </ol>
-      </div>
 
-      <div class="exercise">
-        <p class="exercise-title">Bài tập 5</p>
+
+      {% include components/exercise-end.html %}
+
+      {% include components/exercise-start.html title='Bài tập 5' %}
         <p>Chứng minh công thức \eqref{eq:Pn-fn}:</p>
         \[
           P_{i,i}^{(n)} = \sum_{k=1}^{n} f_{ii}^{(k)}\, P_{i,i}^{(n-k)}, \qquad n \geq 1,
         \]
         <p>bằng cách phân hoạch sự kiện \(\{X_n = i\}\) theo giá trị của \(\tau_i\).</p>
-      </div>
 
-      <div class="exercise">
-        <p class="exercise-title">Bài tập 6</p>
+
+      {% include components/exercise-end.html %}
+
+      {% include components/exercise-start.html title='Bài tập 6' %}
         <p>Xét bể cá \(9\) ngăn (Ví dụ mê cung ở trên). Giả sử cá xuất phát ở ngăn \(5\) (trung tâm),
         ngăn \(1\) có thức ăn (hấp thụ) và ngăn \(9\) là bẫy (hấp thụ).</p>
         <ol type="a">
@@ -795,4 +781,6 @@ sections:
           <li>Xác định ma trận \(Q\) (phần không hấp thụ) và \(R\).</li>
           <li>Tính (hoặc thiết lập hệ phương trình) xác suất cá đến thức ăn trước bẫy.</li>
         </ol>
-      </div>
+
+
+      {% include components/exercise-end.html %}

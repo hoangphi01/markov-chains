@@ -1,0 +1,39 @@
+- slug: index
+  url: /
+  nav_title: "Trang chủ"
+
+- slug: ch1
+  url: /ch1.html
+  nav_title: "Ch 1: Rời rạc"
+  heading: "Chương 1: Chuỗi Markov thời gian rời rạc"
+  heading_en: "Discrete-Time Markov Chains"
+
+- slug: ch2
+  url: /ch2.html
+  nav_title: "Ch 2: Bước đầu tiên"
+  heading: "Chương 2: Phân tích bước đầu tiên"
+  heading_en: "First Step Analysis"
+
+- slug: ch3
+  url: /ch3.html
+  nav_title: "Ch 3: Phân loại"
+  heading: "Chương 3: Phân loại trạng thái"
+  heading_en: "Classification of States"
+
+- slug: ch4
+  url: /ch4.html
+  nav_title: "Ch 4: Giới hạn"
+  heading: "Chương 4: Phân phối giới hạn và dừng"
+  heading_en: "Limiting and Stationary Distributions"
+
+- slug: ch5
+  url: /ch5.html
+  nav_title: "Ch 5: Liên tục"
+  heading: "Chương 5: Chuỗi Markov thời gian liên tục"
+  heading_en: "Continuous-Time Markov Chains"
+
+- slug: appendix
+  url: /appendix.html
+  nav_title: "Phụ lục A"
+  heading: "Phụ lục A: Nền tảng Xác suất"
+  heading_en: "Probability Background"

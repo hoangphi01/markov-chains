@@ -1,13 +1,6 @@
 ---
 layout: chapter
-title: "Ch N: Tiêu đề tiếng Việt"
-chapter_num: N
-heading: "Chương N: Tiêu đề tiếng Việt"
-heading_en: "English Title"
-prev_url: /chN-1.html
-prev_title: "Chương N-1"
-next_url: /chN+1.html
-next_title: "Chương N+1"
+slug: chN
 sections:
   - id: section-1
     title: "1. Tên mục"
@@ -20,26 +13,41 @@ sections:
 <!--
   MẪU CHO CHƯƠNG MỚI (CHAPTER TEMPLATE)
 
-  Sao chép file này thành chN.html (ví dụ: ch6.html, ch7.html)
-  Điền front matter ở trên, rồi viết nội dung bên dưới.
+  1. Sao chép file này thành chN.html (ví dụ: ch6.html)
+  2. Đặt slug: chN (phải trùng với tên file, không có .html)
+  3. Thêm entry vào _data/chapters.yml:
+       - slug: chN
+         url: /chN.html
+         nav_title: "Ch N: Tiêu đề ngắn"
+         heading: "Chương N: Tiêu đề đầy đủ"
+         heading_en: "English Title"
+  4. Tạo _includes/sidebars/chN.html cho sidebar
+  5. Thêm case vào _layouts/chapter.html sidebar section
 
   Layout tự động xử lý:
   - <head> với MathJax config (từ _includes/mathjax.html)
-  - Thanh điều hướng trái (từ _includes/nav.html -- thêm entry mới ở đó)
+  - Thanh điều hướng trái (từ _data/chapters.yml -- tự động!)
   - Danh sách mục (từ front matter "sections")
-  - Sidebar phải (thêm _includes/sidebars/chN.html, cập nhật _layouts/chapter.html)
-  - Điều hướng chương trước/sau
+  - Điều hướng chương trước/sau (tự động từ data!)
 
-  Bạn chỉ viết nội dung -- không cần boilerplate.
+  Các component có sẵn:
+    {% include components/box-start.html type="definition" title='Tiêu đề' %}
+    {% include components/box-end.html %}
 
-  Các CSS class có sẵn:
-    <div class="box definition">   -- viền xanh lá (Định nghĩa)
-    <div class="box theorem">      -- viền đỏ (Định lý)
-    <div class="box formula">      -- viền vàng (Công thức)
-    <div class="box summary">      -- viền xanh dương (Tóm tắt)
-    <div class="example">          -- khối ví dụ
-    <div class="exercise">         -- khối bài tập (viền tím bên trái)
-    <div class="proof">            -- khối chứng minh (tự thêm "Chứng minh." + QED)
+    {% include components/box-start.html type="theorem" title='Tiêu đề' %}
+    {% include components/box-end.html %}
+
+    {% include components/box-start.html type="formula" %}
+    {% include components/box-end.html %}
+
+    {% include components/box-start.html type="summary" title='Tiêu đề' %}
+    {% include components/box-end.html %}
+
+    {% include components/example-start.html title='Tiêu đề' %}
+    {% include components/example-end.html %}
+
+    {% include components/exercise-start.html title='Tiêu đề' %}
+    {% include components/exercise-end.html %}
 
   Toán: dùng \(...\) cho inline, \[...\] cho display.
   MathJax macros: \PP, \E, \N, \Z, \R, \ind
@@ -49,36 +57,31 @@ sections:
 
 <p>Nội dung ở đây...</p>
 
-<div class="box definition">
-  <p class="box-title">Định nghĩa (Tên -- <em>English name</em>)</p>
-  <p>Nội dung định nghĩa với toán: \(\PP(X = k)\).</p>
-</div>
+{% include components/box-start.html type="definition" title='Định nghĩa (Tên -- <em>English name</em>)' %}
+<p>Nội dung định nghĩa với toán: \(\PP(X = k)\).</p>
+{% include components/box-end.html %}
 
-<div class="box theorem">
-  <p class="box-title">Định lý (Tên)</p>
-  <p>Phát biểu định lý.</p>
-</div>
+{% include components/box-start.html type="theorem" title='Định lý (Tên)' %}
+<p>Phát biểu định lý.</p>
+{% include components/box-end.html %}
 
-<div class="box formula">
-  <p><strong>Tên công thức:</strong>
-  \[
-    \text{công thức ở đây}
-  \]</p>
-</div>
+{% include components/box-start.html type="formula" %}
+<p><strong>Tên công thức:</strong>
+\[
+  \text{công thức ở đây}
+\]</p>
+{% include components/box-end.html %}
 
-<div class="box summary">
-  <p class="box-title">Tóm tắt</p>
-  <p>Nội dung tóm tắt.</p>
-</div>
+{% include components/box-start.html type="summary" title='Tóm tắt' %}
+<p>Nội dung tóm tắt.</p>
+{% include components/box-end.html %}
 
-<div class="example">
-  <p class="example-title">Ví dụ: Tên ví dụ</p>
-  <p>Nội dung ví dụ.</p>
-</div>
+{% include components/example-start.html title='Ví dụ: Tên ví dụ' %}
+<p>Nội dung ví dụ.</p>
+{% include components/example-end.html %}
 
 <h2 id="bai-tap">Bài tập <small>(Exercises)</small></h2>
 
-<div class="exercise">
-  <p class="exercise-title">Bài tập 1</p>
-  <p>Nội dung bài tập.</p>
-</div>
+{% include components/exercise-start.html title='Bài tập 1' %}
+<p>Nội dung bài tập.</p>
+{% include components/exercise-end.html %}

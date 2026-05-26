@@ -1,13 +1,7 @@
 ---
 layout: chapter
-title: "Ch 5: Chuỗi Markov thời gian liên tục"
-chapter_num: 5
-heading: "Chương 5: Chuỗi Markov thời gian liên tục"
-heading_en: "Continuous-Time Markov Chains"
-prev_url: /ch4.html
-prev_title: "Chương 4"
-next_url: /appendix.html
-next_title: "Phụ lục A: Nền tảng Xác suất"
+slug: ch5
+title: "Ch 5: Liên tục"
 sections:
   - id: sec-poisson
     title: "1. Quá trình Poisson"
@@ -46,18 +40,15 @@ sections:
       Khac voi chuoi Markov roi rac (thoi gian nhay tai \(n = 0, 1, 2, \ldots\)),
       o day thoi gian chay lien tuc va qua trinh co the &ldquo;nhay&rdquo; vao bat ky luc nao.</p>
 
-      <div class="box summary">
-        <p class="box-title">Tom tat</p>
-        <div class="box-body">
+      {% include components/box-start.html type="summary" title='Tom tat' %}
         <p><strong>Y tuong chinh:</strong> Qua trinh Poisson dem so su kien xay ra theo thoi gian.
         No la &ldquo;vien gach nen tang&rdquo; cho moi chuoi Markov lien tuc,
         giong nhu buoc di ngau nhien la nen tang cho chuoi Markov roi rac.</p>
-        </div>
-      </div>
 
-      <div class="box definition">
-        <p class="box-title">Dinh nghia (Qua trinh Poisson chuan &mdash; <em>Standard Poisson process</em>)</p>
-        <div class="box-body">
+
+      {% include components/box-end.html %}
+
+      {% include components/box-start.html type="definition" title='Dinh nghia (Qua trinh Poisson chuan &mdash; <em>Standard Poisson process</em>)' %}
         <p><strong>Qua trinh Poisson chuan</strong> <em>(standard Poisson process)</em> la qua trinh ngau nhien \((N_t)_{t\in\mathbb{R}_+}\) chi co buoc nhay \(+1\), va duong di <em>(paths)</em> khong doi giua cac buoc nhay. Tai thoi diem \(t\):</p>
         \[
           N_t = \sum_{k=1}^{\infty} \ind_{(T_k, \infty)}(t), \qquad t \in \mathbb{R}_+,
@@ -68,8 +59,9 @@ sections:
           <li><strong>Gia so doc lap</strong> <em>(independence of increments)</em>: voi moi \(0 \leq t_0 &lt; t_1 &lt; \cdots &lt; t_n\), cac bien \(N_{t_1} - N_{t_0}, \ldots, N_{t_n} - N_{t_{n-1}}\) la doc lap.</li>
           <li><strong>Gia so dung</strong> <em>(stationarity of increments)</em>: \(N_{t+h} - N_{s+h}\) co cung phan phoi voi \(N_t - N_s\) voi moi \(h &gt; 0\) va \(0 \leq s \leq t\).</li>
         </ol>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p><strong>Vi du doi thuong:</strong></p>
       <ul>
@@ -78,16 +70,15 @@ sections:
         <li>So hat phong xa phat ra boi mot mau chat trong thoi gian \(t\).</li>
       </ul>
 
-      <div class="box theorem">
-        <p class="box-title">Dinh ly 9 &mdash; Phan phoi Poisson</p>
-        <div class="box-body">
+      {% include components/box-start.html type="theorem" title='Dinh ly 9 &mdash; Phan phoi Poisson' %}
         <p>Gia su qua trinh dem \((N_t)_{t\in\mathbb{R}_+}\) thoa man cac dieu kien (1) va (2). Khi do:</p>
         \[
           \PP(N_t - N_s = k) = e^{-\lambda(t-s)} \frac{(\lambda(t-s))^k}{k!}, \qquad k \in \mathbb{N}, \quad 0 \leq s \leq t,
         \]
         <p>voi hang so \(\lambda &gt; 0\).</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p>Tham so \(\lambda &gt; 0\) duoc goi la <strong>cuong do</strong> <em>(intensity)</em> cua qua trinh:</p>
       \[
@@ -107,12 +98,11 @@ sections:
 
       <p>Dieu nay co nghia: trong khoang thoi gian &ldquo;ngan&rdquo; \([t, t+h]\), gia so \(N_{t+h} - N_t\) xu su nhu bien ngau nhien Bernoulli voi tham so \(\lambda h\).</p>
 
-      <div class="box theorem">
-        <p class="box-title">Menh de: Phan phoi thoi gian nhay</p>
-        <div class="box-body">
+      {% include components/box-start.html type="theorem" title='Menh de: Phan phoi thoi gian nhay' %}
         <p>Luat cua \(T_n\) co mat do \(t \mapsto \lambda^n e^{-\lambda t} \frac{t^{n-1}}{(n-1)!}\) tren \(\mathbb{R}_+\), \(n \geq 1\).</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p>Thoi gian \(\tau_k := T_{k+1} - T_k\) giua cac buoc nhay tao thanh day cac bien ngau nhien <strong>doc lap cung phan phoi</strong> <em>(i.i.d.)</em> co phan phoi mu voi tham so \(\lambda &gt; 0\):</p>
       \[
@@ -120,8 +110,7 @@ sections:
       \]
       <p>va \(\mathbb{E}[\tau_k] = 1/\lambda\).</p>
 
-      <div class="example">
-        <p class="example-title">Vi du: Xe buyt den tram</p>
+      {% include components/example-start.html title='Vi du: Xe buyt den tram' %}
         <p>Gia su xe buyt den tram theo qua trinh Poisson voi cuong do \(\lambda = 6\) chuyen/gio (trung binh 10 phut/chuyen).</p>
 
         <p><strong>Cau hoi 1:</strong> Xac suat khong co xe nao trong 15 phut?</p>
@@ -138,16 +127,17 @@ sections:
         \[
           \mathbb{E}[\tau] = \frac{1}{\lambda} = \frac{1}{6} \text{ gio} = 10 \text{ phut}.
         \]
-      </div>
 
-      <div class="box summary">
-        <p class="box-title">Tom tat</p>
-        <div class="box-body">
+
+      {% include components/example-end.html %}
+
+      {% include components/box-start.html type="summary" title='Tom tat' %}
         <p>Qua trinh Poisson: gia so doc lap va dung, \(N_t \sim \text{Poisson}(\lambda t)\).
         Cuong do \(\lambda\) cao hon \(\Rightarrow\) nhay thuong xuyen hon \(\Rightarrow\) thoi gian o moi trang thai ngan hon (\(\mathbb{E}[\tau_k] = 1/\lambda\)).</p>
         <p>Tinh chat &ldquo;khong nho&rdquo; <em>(memoryless)</em>: du ban da doi 5 phut roi, thoi gian doi them van co phan phoi mu &mdash; qua khu khong anh huong tuong lai.</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <!-- ================================================================ -->
       <h2 id="sec-birth-death">2. Qua trinh sinh-tu <em>(Birth and Death Processes)</em></h2>
@@ -160,9 +150,7 @@ sections:
       </ul>
       <p>So khach trong quan thay doi lien tuc theo thoi gian &mdash; day la <strong>qua trinh sinh-tu</strong>.</p>
 
-      <div class="box definition">
-        <p class="box-title">Dinh nghia (Qua trinh sinh thuan tuy &mdash; <em>Pure birth process</em>)</p>
-        <div class="box-body">
+      {% include components/box-start.html type="definition" title='Dinh nghia (Qua trinh sinh thuan tuy &mdash; <em>Pure birth process</em>)' %}
         <p>Chuoi Markov thoi gian lien tuc \((X_t)_{t\in\mathbb{R}_+}\) thoa man:</p>
         \[
           \PP(X_{t+h} - X_t = 1 \mid X_t = i) \simeq \lambda_i h, \qquad h \to 0,\; i \in S,
@@ -172,24 +160,22 @@ sections:
         \]
         <p>duoc goi la <strong>qua trinh sinh thuan tuy</strong> <em>(pure birth process)</em> voi toc do sinh \(\lambda_i \geq 0\).
         Qua trinh Poisson la truong hop dac biet voi \(\lambda_n = \lambda\) khong phu thuoc trang thai.</p>
-        </div>
-      </div>
 
-      <div class="box definition">
-        <p class="box-title">Dinh nghia (Qua trinh tu thuan tuy &mdash; <em>Pure death process</em>)</p>
-        <div class="box-body">
+
+      {% include components/box-end.html %}
+
+      {% include components/box-start.html type="definition" title='Dinh nghia (Qua trinh tu thuan tuy &mdash; <em>Pure death process</em>)' %}
         <p>Tuong tu, \((X_t)_{t\in\mathbb{R}_+}\) voi:</p>
         \[
           \PP(X_{t+h} - X_t = -1 \mid X_t = i) \simeq \mu_i h, \quad
           \PP(X_{t+h} - X_t = 0 \mid X_t = i) \simeq 1 - \mu_i h,
         \]
         <p>la <strong>qua trinh tu thuan tuy</strong> <em>(pure death process)</em> voi toc do tu \(\mu_i \geq 0\).</p>
-        </div>
-      </div>
 
-      <div class="box definition">
-        <p class="box-title">Dinh nghia (Qua trinh sinh-tu &mdash; <em>Birth and death process</em>)</p>
-        <div class="box-body">
+
+      {% include components/box-end.html %}
+
+      {% include components/box-start.html type="definition" title='Dinh nghia (Qua trinh sinh-tu &mdash; <em>Birth and death process</em>)' %}
         <p>Chuoi Markov thoi gian lien tuc \((X_t)_{t\in\mathbb{R}_+}\) voi:</p>
         \begin{align*}
           \PP(X_{t+h} - X_t = 1 \mid X_t = i)  &\simeq \lambda_i h, \\
@@ -197,8 +183,9 @@ sections:
           \PP(X_{t+h} - X_t = 0 \mid X_t = i)  &\simeq 1 - (\lambda_i + \mu_i)h,
         \end{align*}
         <p>khi \(h \to 0\), duoc goi la <strong>qua trinh sinh-tu</strong> <em>(birth and death process)</em> voi toc do sinh \(\lambda_i \geq 0\) va toc do tu \(\mu_i \geq 0\), \(i \in S\).</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p>Thoi gian \(\tau_i\) o trang thai \(i\) truoc khi chuyen sang trang thai khac la bien ngau nhien co phan phoi mu:</p>
       \[
@@ -206,8 +193,7 @@ sections:
       \]
       <p>voi tham so \(\lambda_i + \mu_i\), va \(\mathbb{E}[\tau_i] = \frac{1}{\lambda_i + \mu_i}\).</p>
 
-      <div class="example">
-        <p class="example-title">Vi du: Quan cafe co suc chua \(N = 4\)</p>
+      {% include components/example-start.html title='Vi du: Quan cafe co suc chua \(N = 4\)' %}
         <p>Xet quan cafe co toi da \(4\) cho ngoi. Khach den voi toc do \(\lambda = 2\) nguoi/gio,
         khach roi di voi toc do \(\mu = 3\) nguoi/gio (moi khach ngoi trung binh 20 phut).</p>
 
@@ -221,7 +207,9 @@ sections:
         \[
           \mathbb{E}[\tau_2] = \frac{1}{\lambda_2 + \mu_2} = \frac{1}{2 + 6} = \frac{1}{8} \text{ gio} = 7.5 \text{ phut}.
         \]
-      </div>
+
+
+      {% include components/example-end.html %}
 
       <!-- ================================================================ -->
       <h2 id="sec-ctmc-definition">3. Chuoi Markov thoi gian lien tuc <em>(Continuous-Time Markov Chains)</em></h2>
@@ -230,16 +218,15 @@ sections:
       chuoi Markov lien tuc cung &ldquo;khong nho&rdquo; &mdash; nhung bay gio con kien di chuyen trong thoi gian lien tuc.
       No o mot o trong thoi gian ngau nhien (phan phoi mu), roi nhay sang o khac.</p>
 
-      <div class="box definition">
-        <p class="box-title">Dinh nghia (Tinh chat Markov lien tuc &mdash; <em>Continuous-time Markov property</em>)</p>
-        <div class="box-body">
+      {% include components/box-start.html type="definition" title='Dinh nghia (Tinh chat Markov lien tuc &mdash; <em>Continuous-time Markov property</em>)' %}
         <p>Qua trinh ngau nhien \((X_t)_{t\in\mathbb{R}_+}\) nhan gia tri trong \(\mathbb{Z}\) co <strong>tinh chat Markov</strong> neu voi moi
         \(0 &lt; s_1 &lt; \cdots &lt; s_{n-1} &lt; s &lt; t\):</p>
         \[
           \PP(X_t = j \mid X_s = i_n,\; X_{s_{n-1}} = i_{n-1},\; \ldots,\; X_{s_1} = i_0) = \PP(X_t = j \mid X_s = i_n).
         \]
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p><strong>Vi du:</strong> Qua trinh Poisson la chuoi Markov thoi gian lien tuc vi no co gia so doc lap.
       Tong quat hon, moi qua trinh co gia so doc lap deu la chuoi Markov.</p>
@@ -254,15 +241,15 @@ sections:
 
       <p>Ma tran \(P(t) = [P_{i,j}(t)]_{i,j\in S}\) duoc goi la <strong>nua nhom chuyen</strong> <em>(transition semigroup)</em>.</p>
 
-      <div class="box formula">
-        <div class="box-body">
+      {% include components/box-start.html type="formula" %}
         <p><strong>Tinh chat nua nhom</strong> <em>(semigroup property)</em>:</p>
         \[
           P(s+t) = P(s)\,P(t) = P(t)\,P(s), \qquad s, t \in \mathbb{R}_+.
         \]
         <p>Day chinh la phuong trinh <strong>Chapman&ndash;Kolmogorov</strong> phien ban thoi gian lien tuc.</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <!-- ================================================================ -->
       <h2 id="sec-generator">4. Ma tran sinh vo cung be <em>(Infinitesimal Generator)</em></h2>
@@ -283,15 +270,14 @@ sections:
       \]
       <p>trong do:</p>
 
-      <div class="box definition">
-        <p class="box-title">Dinh nghia (Ma tran sinh &mdash; <em>Infinitesimal generator</em>)</p>
-        <div class="box-body">
+      {% include components/box-start.html type="definition" title='Dinh nghia (Ma tran sinh &mdash; <em>Infinitesimal generator</em>)' %}
         \[
           Q := P'(0) = \lim_{s \to 0} \frac{P(s) - P(0)}{s}
         \]
         <p>duoc goi la <strong>ma tran sinh vo cung be</strong> <em>(infinitesimal generator)</em> cua \((X_t)_{t\in\mathbb{R}_+}\).</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p>Ky hieu \(Q = [\lambda_{i,j}]_{i,j\in S}\). Cac hang cua \(Q\) luon co tong bang 0:</p>
       \[
@@ -299,8 +285,7 @@ sections:
       \]
       <p>Do do: \(\lambda_{i,i} = -\sum_{l \neq i} \lambda_{i,l}\) (phan tu duong cheo luon am hoac bang 0).</p>
 
-      <div class="box formula">
-        <div class="box-body">
+      {% include components/box-start.html type="formula" %}
         <p><strong>Phuong trinh Kolmogorov tien</strong> <em>(forward Kolmogorov equation)</em>:</p>
         \[
           P'(t) = P(t)\,Q, \qquad t &gt; 0.
@@ -313,8 +298,9 @@ sections:
         \[
           P(t) = P(0)\,e^{tQ} = e^{tQ}, \qquad \text{trong do } e^{tQ} = I_d + \sum_{n=1}^{\infty} \frac{t^n}{n!} Q^n.
         \]
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p><strong>Xap xi bac nhat</strong> khi \(h \to 0\):</p>
       \[
@@ -345,8 +331,7 @@ sections:
 
       <h3 id="subsec-generator-examples">Vi du cac ma tran sinh</h3>
 
-      <div class="example">
-        <p class="example-title">Vi du: Qua trinh Poisson</p>
+      {% include components/example-start.html title='Vi du: Qua trinh Poisson' %}
         <p>Ma tran sinh:</p>
         \[
           Q = [\lambda_{i,j}]_{i,j\in\mathbb{N}} = \begin{bmatrix}
@@ -357,10 +342,11 @@ sections:
           \end{bmatrix}.
         \]
         <p>Thoi gian o moi trang thai: \(\mathbb{E}[\tau_i] = 1/\lambda\) (khong phu thuoc \(i\)).</p>
-      </div>
 
-      <div class="example">
-        <p class="example-title">Vi du: Qua trinh sinh-tu tren \(\{0,1,\ldots,N\}\)</p>
+
+      {% include components/example-end.html %}
+
+      {% include components/example-start.html title='Vi du: Qua trinh sinh-tu tren \(\{0,1,\ldots,N\}\)' %}
         <p>Ma tran sinh (voi \(\mu_0 = \lambda_N = 0\)):</p>
         \[
           Q = \begin{bmatrix}
@@ -371,10 +357,14 @@ sections:
             0 & \cdots & 0 & \mu_N & -\mu_N
           \end{bmatrix}.
         \]
-      </div>
 
-      <div class="example" id="ex-5state-generator">
-        <p class="example-title">Vi du: Ma tran sinh 5 trang thai &mdash; tinh toan chi tiet</p>
+
+      {% include components/example-end.html %}
+
+      <div id="ex-5state-generator">
+
+
+      {% include components/example-start.html title='Vi du: Ma tran sinh 5 trang thai &mdash; tinh toan chi tiet' %}
         <p>Xet qua trinh Markov lien tuc tren \(S = \{0, 1, 2, 3, 4\}\) voi ma tran sinh:</p>
         \[
           Q = \begin{bmatrix}
@@ -393,11 +383,14 @@ sections:
           <li>Thoi gian trung binh o trang thai \(3\): \(\mathbb{E}[\tau_3] = 1/5\) (trang thai &ldquo;ban ron&rdquo; nhat).</li>
           <li>Tu trang thai \(4\): chi co the quay lai \(3\) (toc do \(4\)), \(\mathbb{E}[\tau_4] = 1/4\).</li>
         </ul>
+
+
+      {% include components/example-end.html %}
+
+
       </div>
 
-      <div class="box summary">
-        <p class="box-title">Tom tat</p>
-        <div class="box-body">
+      {% include components/box-start.html type="summary" title='Tom tat' %}
         <p>Ma tran sinh \(Q\) dong vai tro tuong tu ma tran chuyen \(P\) trong truong hop roi rac.
         Quan he: \(P(h) \approx I_d + hQ\) cho \(h\) nho &mdash; &ldquo;roi rac hoa&rdquo; chuoi lien tuc.
         Khac biet chinh: phan tu ngoai duong cheo \(\lambda_{i,j} \geq 0\) (toc do), phan tu duong cheo \(\lambda_{i,i} \leq 0\).</p>
@@ -434,8 +427,9 @@ sections:
             </tr>
           </tbody>
         </table>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <!-- ================================================================ -->
       <h2 id="sec-two-state">5. Chuoi Markov hai trang thai lien tuc <em>(Two-State Continuous-Time Chain)</em></h2>
@@ -483,13 +477,12 @@ sections:
         \pi = (\pi_0, \pi_1) = \left(\frac{\beta}{\alpha+\beta},\; \frac{\alpha}{\alpha+\beta}\right).
       \]
 
-      <div class="box summary">
-        <p class="box-title">Tom tat</p>
-        <div class="box-body">
+      {% include components/box-start.html type="summary" title='Tom tat' %}
         <p>Chuoi hai trang thai lien tuc co cung phan phoi gioi han \(\pi = (\beta/(\alpha+\beta),\; \alpha/(\alpha+\beta))\) nhu truong hop roi rac (thay \(a \to \alpha\), \(b \to \beta\)).
         Su hoi tu luon xay ra trong thoi gian lien tuc (tru \(\alpha = \beta = 0\)), va nhanh hon khi \(\alpha + \beta\) lon hon.</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <!-- ================================================================ -->
       <h2 id="sec-ct-stationary">6. Phan phoi gioi han va dung <em>(Limiting and Stationary Distributions)</em></h2>
@@ -498,44 +491,41 @@ sections:
       se on dinh &mdash; khong phu thuoc vao luc mo cua co bao nhieu khach.
       Day chinh la phan phoi dung: &ldquo;dan so on dinh&rdquo; sau thoi gian dai.</p>
 
-      <div class="box definition">
-        <p class="box-title">Dinh nghia (Phan phoi dung lien tuc &mdash; <em>Stationary distribution, continuous-time</em>)</p>
-        <div class="box-body">
+      {% include components/box-start.html type="definition" title='Dinh nghia (Phan phoi dung lien tuc &mdash; <em>Stationary distribution, continuous-time</em>)' %}
         <p>Phan phoi \(\pi = (\pi_i)_{i\in S}\) duoc goi la <strong>dung</strong> <em>(stationary)</em> neu \(\pi P(t) = \pi\) voi moi \(t \in \mathbb{R}_+\).</p>
-        </div>
-      </div>
 
-      <div class="box theorem">
-        <p class="box-title">Menh de 4</p>
-        <div class="box-body">
+
+      {% include components/box-end.html %}
+
+      {% include components/box-start.html type="theorem" title='Menh de 4' %}
         <p>Phan phoi \(\pi = (\pi_i)_{i\in S}\) la dung khi va chi khi:</p>
         \[
           \pi Q = 0.
         \]
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p><em>Chung minh.</em> Neu \(\pi Q = 0\), thi \(\pi P(t) = \pi e^{tQ} = \pi \sum_{n=0}^{\infty} \frac{t^n}{n!} Q^n = \pi\).
       Nguoc lai, lay dao ham \(\pi = \pi P(t)\) tai \(t = 0\): \(0 = \pi P'(0) = \pi Q P(0) = \pi Q\). \(\square\)</p>
 
-      <div class="box theorem">
-        <p class="box-title">Menh de 5</p>
-        <div class="box-body">
+      {% include components/box-start.html type="theorem" title='Menh de 5' %}
         <p>Neu chuoi Markov lien tuc \((X_t)_{t\in\mathbb{R}_+}\) co phan phoi gioi han</p>
         \[
           \pi_j := \lim_{t\to\infty} \PP(X_t = j \mid X_0 = i) = \lim_{t\to\infty} P_{i,j}(t), \qquad j \in S,
         \]
         <p>khong phu thuoc vao trang thai ban dau \(i \in S\), thi \(\pi Q = 0\), tuc \(\pi\) la phan phoi dung.</p>
-        </div>
-      </div>
 
-      <div class="box formula">
-        <div class="box-body">
+
+      {% include components/box-end.html %}
+
+      {% include components/box-start.html type="formula" %}
         <p><strong>Tim phan phoi dung:</strong> Giai he \(\pi Q = 0\) ket hop \(\sum_i \pi_i = 1\).</p>
         <p>Tuong duong: \(\sum_{i \in S} \pi_i \lambda_{i,j} = 0\) voi moi \(j \in S\).</p>
         <p>Luu y: dieu kien \(\pi Q = 0\) tuong duong voi \(\pi = \pi(I_d + hQ)\) cho moi \(h &gt; 0\), chinh la phan phoi dung cua chuoi roi rac co ma tran chuyen \(P(h) \simeq I_d + hQ\).</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <h3 id="subsec-bd-stationary">Phan phoi dung cua qua trinh sinh-tu</h3>
 
@@ -562,8 +552,10 @@ sections:
       \]
       <p>voi dieu kien \(\lambda &lt; \mu\) (phan phoi hinh hoc voi tham so \(\lambda/\mu\)).</p>
 
-      <div class="example" id="ex-mm1-queue">
-        <p class="example-title">Vi du: Hang doi M/M/1</p>
+      <div id="ex-mm1-queue">
+
+
+      {% include components/example-start.html title='Vi du: Hang doi M/M/1' %}
         <p>Mot quay phuc vu co khach den theo Poisson voi toc do \(\lambda\) va thoi gian phuc vu mu voi toc do \(\mu\).
         Day la qua trinh sinh-tu voi \(\lambda_i = \lambda\) va \(\mu_i = \mu\) cho moi \(i \geq 1\), \(\mu_0 = 0\).</p>
 
@@ -578,6 +570,11 @@ sections:
         \]
 
         <p>Vi du: neu \(\lambda = 4\) khach/gio, \(\mu = 5\) khach/gio, thi \(\rho = 0.8\) va \(\mathbb{E}[X] = 4\) khach.</p>
+
+
+      {% include components/example-end.html %}
+
+
       </div>
 
       <!-- ================================================================ -->
@@ -589,9 +586,7 @@ sections:
 
       <p>Chuoi nhung &ldquo;bo qua thoi gian&rdquo;, chi ghi lai <em>trang thai nao</em> xuat hien, khong quan tam <em>bao lau</em> o moi trang thai.</p>
 
-      <div class="box definition">
-        <p class="box-title">Dinh nghia (Chuoi nhung &mdash; <em>Embedded chain</em>)</p>
-        <div class="box-body">
+      {% include components/box-start.html type="definition" title='Dinh nghia (Chuoi nhung &mdash; <em>Embedded chain</em>)' %}
         <p>Xet day \((T_n)_{n\in\mathbb{N}}\) cac thoi diem nhay cua qua trinh Markov lien tuc \((X_t)_{t\in\mathbb{R}_+}\):</p>
         \[
           T_1 = \inf\{t &gt; 0 : X_t \neq X_0\}, \qquad
@@ -601,8 +596,9 @@ sections:
         \[
           Z_0 = X_0, \qquad Z_n = X_{T_n}, \quad n \in \mathbb{N}.
         \]
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <h3 id="subsec-embedded-transition">Ma tran chuyen cua chuoi nhung</h3>
 
@@ -624,8 +620,7 @@ sections:
         \hat{P}_{i,j} = \frac{\lambda_{i,j}}{-\lambda_{i,i}} = \frac{\lambda_{i,j}}{\sum_{l \neq i} \lambda_{i,l}}, \qquad i \neq j.
       \]
 
-      <div class="example">
-        <p class="example-title">Vi du: Tu ma tran \(Q\) den chuoi nhung &mdash; 5 trang thai</p>
+      {% include components/example-start.html title='Vi du: Tu ma tran \(Q\) den chuoi nhung &mdash; 5 trang thai' %}
         <p>Xet qua trinh o Vi du <a href="#ex-5state-generator">ma tran sinh 5 trang thai</a> voi ma tran sinh:</p>
         \[
           Q = \begin{bmatrix}
@@ -654,17 +649,18 @@ sections:
         \[
           \hat{P}_{1,0} = \frac{1}{4}, \quad \hat{P}_{1,2} = \frac{2}{4}, \quad \hat{P}_{1,3} = \frac{1}{4}.
         \]
-      </div>
 
-      <div class="box summary">
-        <p class="box-title">Tom tat</p>
-        <div class="box-body">
+
+      {% include components/example-end.html %}
+
+      {% include components/box-start.html type="summary" title='Tom tat' %}
         <p>Chuoi nhung &ldquo;roi rac hoa&rdquo; qua trinh lien tuc bang cach chi ghi lai cac trang thai tai thoi diem nhay.
         Ma tran chuyen cua chuoi nhung chi phu thuoc vao <em>ty le</em> cac toc do, khong phu thuoc vao toc do tuyet doi.</p>
         <p>De phuc hoi qua trinh lien tuc tu chuoi nhung, can them thong tin ve <em>thoi gian o moi trang thai</em>
         \(\tau_i \sim \text{Exp}(-\lambda_{i,i})\).</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <!-- ================================================================ -->
       <h2 id="sec-absorption-prob">8. Xac suat hap thu <em>(Absorption Probabilities)</em></h2>
@@ -726,15 +722,15 @@ sections:
 
       <p>Dat \(R_k = \prod_{j=1}^{k-1} \frac{\mu_j}{\lambda_j}\) (voi \(R_1 = 1\)). Ta duoc \(d_1 \sum_{k=1}^{N} R_k = -1\), nen:</p>
 
-      <div class="box formula">
-        <div class="box-body">
+      {% include components/box-start.html type="formula" %}
         <p><strong>Xac suat hap thu vao trang thai \(0\):</strong></p>
         \[
           g_0(i) = \frac{\displaystyle\sum_{k=i+1}^{N} R_k}{\displaystyle\sum_{k=1}^{N} R_k},
           \qquad \text{voi } R_k = \prod_{j=1}^{k-1} \frac{\mu_j}{\lambda_j},\; R_1 = 1.
         \]
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p><strong>Truong hop dac biet</strong> \(\lambda_i = \lambda\), \(\mu_i = \mu\) (toc do khong doi):</p>
 
@@ -748,8 +744,10 @@ sections:
         g_0(i) = 1 - \frac{i}{N}.
       \]
 
-      <div class="example" id="ex-absorption-N4">
-        <p class="example-title">Vi du: Xac suat hap thu voi \(N = 4\)</p>
+      <div id="ex-absorption-N4">
+
+
+      {% include components/example-start.html title='Vi du: Xac suat hap thu voi \(N = 4\)' %}
         <p>Xet qua trinh sinh-tu tren \(\{0, 1, 2, 3, 4\}\) voi \(\lambda_i = 2\), \(\mu_i = 3\) cho \(1 \leq i \leq 3\).</p>
 
         <p>Ta co \(\rho = \mu/\lambda = 3/2\). Ap dung cong thuc:</p>
@@ -768,6 +766,11 @@ sections:
 
         <p><strong>Nhan xet:</strong> Vi \(\mu &gt; \lambda\) (toc do tu &gt; toc do sinh), qua trinh &ldquo;keo ve 0&rdquo; manh hon,
         nen xac suat cham 0 kha cao ngay ca tu trang thai 3.</p>
+
+
+      {% include components/example-end.html %}
+
+
       </div>
 
       <!-- ================================================================ -->
@@ -824,8 +827,7 @@ sections:
         = \frac{1}{\lambda_i} + \rho_i \Delta_{i-1}.
       \]
 
-      <div class="example">
-        <p class="example-title">Vi du: Thoi gian hap thu trung binh voi \(N = 4\)</p>
+      {% include components/example-start.html title='Vi du: Thoi gian hap thu trung binh voi \(N = 4\)' %}
         <p>Tiep tuc Vi du <a href="#ex-absorption-N4">xac suat hap thu voi N=4</a> voi \(\lambda_i = 2\), \(\mu_i = 3\).</p>
 
         <p>Thoi gian trung binh o moi trang thai: \(\mathbb{E}[\tau_i] = 1/(\lambda_i + \mu_i) = 1/5\) gio = 12 phut.</p>
@@ -865,7 +867,9 @@ sections:
 
         <p><strong>Nhan xet:</strong> \(\eta(2) &gt; \eta(3) &gt; \eta(1)\). Trang thai \(2\) (o giua) mat lau nhat
         vi no xa ca hai bien hap thu.</p>
-      </div>
+
+
+      {% include components/example-end.html %}
 
       <!-- ================================================================ -->
       <h2 id="sec-continuous-vs-discrete">10. Quan he giua phan phoi dung lien tuc va roi rac</h2>
@@ -873,17 +877,16 @@ sections:
       <p>Mot cau hoi tu nhien: phan phoi dung \(\pi\) cua qua trinh lien tuc
       va phan phoi dung \(\hat{\pi}\) cua chuoi nhung co quan he gi?</p>
 
-      <div class="box theorem">
-        <p class="box-title">Dinh ly: Quan he \(\pi\) va \(\hat{\pi}\)</p>
-        <div class="box-body">
+      {% include components/box-start.html type="theorem" title='Dinh ly: Quan he \(\pi\) va \(\hat{\pi}\)' %}
         <p>Neu \(\pi\) la phan phoi dung cua qua trinh Markov lien tuc (tuc \(\pi Q = 0\)),
         va \(\hat{\pi}\) la phan phoi dung cua chuoi nhung (tuc \(\hat{\pi} \hat{P} = \hat{\pi}\)), thi:</p>
         \[
           \pi_i \propto \frac{\hat{\pi}_i}{-\lambda_{i,i}}, \qquad i \in S.
         \]
         <p>Tuc la: \(\pi_i = \dfrac{\hat{\pi}_i / (-\lambda_{i,i})}{\sum_j \hat{\pi}_j / (-\lambda_{j,j})}\).</p>
-        </div>
-      </div>
+
+
+      {% include components/box-end.html %}
 
       <p><strong>Y nghia truc quan:</strong> Phan phoi dung lien tuc \(\pi_i\) ty le voi ca hai yeu to:</p>
       <ol>
@@ -895,28 +898,29 @@ sections:
       <!-- ================================================================ -->
       <h2 id="sec-exercises">11. Bai tap <em>(Exercises)</em></h2>
 
-      <div class="exercise">
-        <p class="exercise-title">Bai tap 1</p>
+      {% include components/exercise-start.html title='Bai tap 1' %}
         <p>Xet qua trinh sinh-tu tren \(\{0, 1, 2, 3\}\) voi toc do sinh \(\lambda_i = 2\) va toc do tu \(\mu_i = 3\) cho \(1 \leq i \leq 2\), \(\lambda_0 = 2\), \(\mu_3 = 3\), \(\lambda_3 = \mu_0 = 0\).</p>
         <ol>
           <li>Viet ma tran sinh \(Q\).</li>
           <li>Tim phan phoi dung \(\pi\).</li>
           <li>Viet ma tran chuyen cua chuoi nhung.</li>
         </ol>
-      </div>
 
-      <div class="exercise">
-        <p class="exercise-title">Bai tap 2</p>
+
+      {% include components/exercise-end.html %}
+
+      {% include components/exercise-start.html title='Bai tap 2' %}
         <p>Cho chuoi Markov lien tuc hai trang thai voi \(\alpha = 3\) va \(\beta = 6\).</p>
         <ol>
           <li>Tinh \(P(t)\) cho moi \(t &gt; 0\).</li>
           <li>Tinh thoi gian trung binh o moi trang thai.</li>
           <li>Tim phan phoi gioi han.</li>
         </ol>
-      </div>
 
-      <div class="exercise">
-        <p class="exercise-title">Bai tap: Hang doi M/M/1</p>
+
+      {% include components/exercise-end.html %}
+
+      {% include components/exercise-start.html title='Bai tap: Hang doi M/M/1' %}
         <p>Khach den quay theo Poisson voi toc do \(\lambda = 3\) khach/gio.
         Thoi gian phuc vu moi khach la bien mu voi toc do \(\mu = 5\) phuc vu/gio.</p>
         <ol>
@@ -925,10 +929,11 @@ sections:
           <li>Tinh so khach trung binh trong he thong.</li>
           <li>Tinh xac suat he thong rong (khong co khach nao).</li>
         </ol>
-      </div>
 
-      <div class="exercise">
-        <p class="exercise-title">Bai tap: Qua trinh dien tin &mdash; <em>Telegraph process</em></p>
+
+      {% include components/exercise-end.html %}
+
+      {% include components/exercise-start.html title='Bai tap: Qua trinh dien tin &mdash; <em>Telegraph process</em>' %}
         <p>Tin hieu dien tin chuyen giua &ldquo;bat&rdquo; va &ldquo;tat&rdquo; theo chuoi Markov lien tuc hai trang thai
         voi toc do bat&rarr;tat la \(\alpha = 2\) va tat&rarr;bat la \(\beta = 3\).</p>
         <ol>
@@ -936,20 +941,22 @@ sections:
           <li>Tim phan phoi gioi han. Bao nhieu phan tram thoi gian tin hieu &ldquo;bat&rdquo;?</li>
           <li>Thoi gian trung binh mot chu ky &ldquo;bat&rdquo; keo dai bao lau?</li>
         </ol>
-      </div>
 
-      <div class="exercise">
-        <p class="exercise-title">Bai tap: Xac suat hap thu</p>
+
+      {% include components/exercise-end.html %}
+
+      {% include components/exercise-start.html title='Bai tap: Xac suat hap thu' %}
         <p>Xet qua trinh sinh-tu tren \(\{0, 1, 2, 3, 4, 5\}\) voi \(\lambda_i = 1\) va \(\mu_i = 2\) cho \(1 \leq i \leq 4\),
         trang thai \(0\) va \(5\) hap thu.</p>
         <ol>
           <li>Tinh xac suat bi hap thu vao trang thai \(0\) xuat phat tu \(i = 1, 2, 3, 4\).</li>
           <li>So sanh voi truong hop \(\lambda_i = \mu_i = 1\) (toc do bang nhau).</li>
         </ol>
-      </div>
 
-      <div class="exercise">
-        <p class="exercise-title">Bai tap: Qua trinh Yule &mdash; <em>Yule process</em></p>
+
+      {% include components/exercise-end.html %}
+
+      {% include components/exercise-start.html title='Bai tap: Qua trinh Yule &mdash; <em>Yule process</em>' %}
         <p>Qua trinh Yule la qua trinh sinh thuan tuy voi \(\lambda_i = i\lambda\) (toc do sinh ty le voi so ca the hien tai).
         Bat dau voi \(X_0 = 1\).</p>
         <ol>
@@ -957,14 +964,17 @@ sections:
           <li>Tinh thoi gian trung binh de quan the tang tu \(1\) len \(n\) ca the.</li>
           <li>Giai thich tai sao qua trinh Yule mo hinh hoa su tang truong dan so.</li>
         </ol>
-      </div>
 
-      <div class="exercise">
-        <p class="exercise-title">Bai tap: Thoi gian hap thu trung binh</p>
+
+      {% include components/exercise-end.html %}
+
+      {% include components/exercise-start.html title='Bai tap: Thoi gian hap thu trung binh' %}
         <p>Xet qua trinh sinh-tu tren \(\{0, 1, 2, 3\}\) voi \(\lambda_i = 1\), \(\mu_i = 1\) cho \(i = 1, 2\),
         trang thai \(0\) va \(3\) hap thu.</p>
         <ol>
           <li>Tinh thoi gian hap thu trung binh \(\eta(1)\) va \(\eta(2)\).</li>
           <li>So sanh voi thoi gian hap thu trong chuoi roi rac tuong ung (gambler's ruin voi \(p = q = 1/2\), \(N = 3\)).</li>
         </ol>
-      </div>
+
+
+      {% include components/exercise-end.html %}

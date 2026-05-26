@@ -1,10 +1,6 @@
 <h3>Chuỗi Markov</h3>
 <ul class="chapter-list">
-  <li><a href="{{ '/' | relative_url }}" {% if page.url == '/' or page.url == '/index.html' %}class="current"{% endif %}>Trang chủ</a></li>
-  <li><a href="{{ '/ch1.html' | relative_url }}" {% if page.chapter_num == 1 %}class="current"{% endif %}>Ch 1: Rời rạc</a></li>
-  <li><a href="{{ '/ch2.html' | relative_url }}" {% if page.chapter_num == 2 %}class="current"{% endif %}>Ch 2: Bước đầu tiên</a></li>
-  <li><a href="{{ '/ch3.html' | relative_url }}" {% if page.chapter_num == 3 %}class="current"{% endif %}>Ch 3: Phân loại</a></li>
-  <li><a href="{{ '/ch4.html' | relative_url }}" {% if page.chapter_num == 4 %}class="current"{% endif %}>Ch 4: Giới hạn</a></li>
-  <li><a href="{{ '/ch5.html' | relative_url }}" {% if page.chapter_num == 5 %}class="current"{% endif %}>Ch 5: Liên tục</a></li>
-  <li><a href="{{ '/appendix.html' | relative_url }}" {% if page.chapter_num == 'A' %}class="current"{% endif %}>Phụ lục A</a></li>
+  {% for ch in site.data.chapters %}
+  <li><a href="{{ ch.url | relative_url }}" {% if page.slug == ch.slug %}class="current"{% endif %}>{{ ch.nav_title }}</a></li>
+  {% endfor %}
 </ul>
