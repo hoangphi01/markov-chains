@@ -56,6 +56,7 @@ sections:
 
       <div class="box definition">
         <p class="box-title">Định nghĩa (Tính chất Markov &mdash; <em>Markov property</em>)</p>
+        <div class="box-body">
         <p>Một <strong>quá trình ngẫu nhiên</strong> <em>(stochastic process)</em> \((Z_n)_{n\in\mathbb{N}}\) nhận giá trị trong \(\mathbb{Z}\)
         được gọi là <strong>Markov</strong>, hay có <strong>tính chất Markov</strong>, nếu với mọi \(n \geq 1\),
         phân phối xác suất của \(Z_{n+1}\) chỉ được xác định bởi trạng thái \(Z_n\) tại thời điểm \(n\),
@@ -65,14 +66,17 @@ sections:
           \PP(Z_{n+1} = j \mid Z_n = i_n,\; Z_{n-1} = i_{n-1},\; \ldots,\; Z_0 = i_0)
           = \PP(Z_{n+1} = j \mid Z_n = i_n).
         \]</p>
+        </div>
       </div>
 
       <div class="box summary">
         <p class="box-title">Tóm tắt</p>
+        <div class="box-body">
         <p>Nói đơn giản: nếu bạn biết trạng thái hiện tại \(Z_n\),
         thì biết thêm quá khứ \((Z_0, Z_1, \ldots, Z_{n-1})\) cũng không giúp dự đoán tương lai \(Z_{n+1}\) tốt hơn.
         Đây chính là tính chất "không nhớ" <em>(memoryless property)</em>.</p>
         <p>Ví dụ con kiến: biết con kiến đang ở ô \(A\) là đủ. Biết thêm "nó đi từ \(C \to B \to A\)" không thay đổi xác suất bước tiếp theo.</p>
+        </div>
       </div>
 
       <p>Đặc biệt ta có:
@@ -134,17 +138,21 @@ sections:
 
       <div class="box definition">
         <p class="box-title">Định nghĩa (Ma trận chuyển &mdash; <em>Transition matrix</em>)</p>
+        <div class="box-body">
         <p>Dữ liệu trên được mã hóa thành một ma trận, gọi là <strong>ma trận chuyển</strong> <em>(transition matrix)</em> của chuỗi Markov:
         \[
           [P_{i,j}]_{i,j\in\mathbb{Z}} = [\PP(Z_{n+1} = j \mid Z_n = i)]_{i,j\in\mathbb{Z}}.
         \]</p>
+        </div>
       </div>
 
       <p><strong>Lưu ý quan trọng:</strong> Thứ tự các chỉ số \((i,j)\) trong \(\PP(Z_{n+1} = j \mid Z_n = i)\) và \(P_{i,j}\) bị đảo ngược. Cụ thể, trạng thái ban đầu \(i\) là <em>số hàng</em> trong ma trận, còn trạng thái đích \(j\) là <em>số cột</em>.</p>
 
       <div class="box definition">
         <p class="box-title">Định nghĩa (Trạng thái hấp thụ &mdash; <em>Absorbing state</em>)</p>
+        <div class="box-body">
         <p>Trạng thái \(k \in \mathbb{Z}\) được gọi là <strong>hấp thụ</strong> <em>(absorbing)</em> nếu \(P_{k,k} = 1\).</p>
+        </div>
       </div>
 
       <p>Do quan hệ:
@@ -241,11 +249,13 @@ sections:
       <p>Tổng quát hơn, với mọi \(k \in \mathbb{N}\):</p>
 
       <div class="box formula">
+        <div class="box-body">
         <p><strong>Xác suất chuyển \(k\) bước:</strong>
         \[
           [\PP(Z_{n+k} = j \mid Z_n = i)]_{i,j\in S} = [P^k_{i,j}]_{i,j\in S} = P^k.
         \]
         Nghĩa là: xác suất chuyển \(k\) bước chính là phần tử tương ứng của lũy thừa bậc \(k\) của ma trận chuyển.</p>
+        </div>
       </div>
 
       <p>Quan hệ \(P^{m+n} = P^m P^n\) chính là <strong>phương trình Chapman&ndash;Kolmogorov</strong> <em>(Chapman&ndash;Kolmogorov equation)</em>:
@@ -285,10 +295,12 @@ sections:
 
       <div class="box summary">
         <p class="box-title">Tóm tắt</p>
+        <div class="box-body">
         <p>Các xác suất chuyển \(k\) bước được tính bằng cách lũy thừa ma trận chuyển: \(P^k\).
         Phương trình Chapman&ndash;Kolmogorov cho phép phân rã quá trình chuyển thành hai giai đoạn.</p>
         <p><strong>Mẹo tính toán:</strong> Đối với ma trận \(n \times n\) lớn, dùng chéo hóa \(P = M D M^{-1}\)
         sẽ cho \(P^k = M D^k M^{-1}\) &mdash; dễ tính hơn nhiều so với nhân ma trận \(k\) lần.</p>
+        </div>
       </div>
 
       <!-- ================================================================ -->
@@ -354,6 +366,7 @@ sections:
 
       <div class="box theorem">
         <p class="box-title">Định lý (Phân phối giới hạn của chuỗi hai trạng thái)</p>
+        <div class="box-body">
         <p>\[
           \lim_{n\to\infty} P^n = \frac{1}{a+b}
           \begin{bmatrix} b & a \\ b & a \end{bmatrix},
@@ -363,6 +376,7 @@ sections:
           \lim_{n\to\infty} \PP(Z_n = 1 \mid Z_0 = 0) &= \lim_{n\to\infty} \PP(Z_n = 1 \mid Z_0 = 1) = \frac{a}{a+b}, \label{eq:limit-1}\\
           \lim_{n\to\infty} \PP(Z_n = 0 \mid Z_0 = 0) &= \lim_{n\to\infty} \PP(Z_n = 0 \mid Z_0 = 1) = \frac{b}{a+b}. \label{eq:limit-0}
         \end{align}</p>
+        </div>
       </div>
 
       <p><strong>Phân phối giới hạn</strong> <em>(limiting distribution)</em>:
@@ -372,12 +386,14 @@ sections:
 
       <div class="box summary">
         <p class="box-title">Tóm tắt</p>
+        <div class="box-body">
         <p>Phân phối giới hạn \(\pi\) <strong>không phụ thuộc vào trạng thái ban đầu</strong> \(Z_0\).
         Sau thời gian đủ lớn, xác suất ở trạng thái \(1\) xấp xỉ \(a/(a+b)\),
         và ở trạng thái \(0\) xấp xỉ \(b/(a+b)\).</p>
         <p>Phân phối \(\pi\) là <strong>bất biến</strong> <em>(invariant)</em> theo \(P\), tức \(\pi P = \pi\).</p>
         <p><strong>Ví dụ thời tiết:</strong> Nếu \(a = 0.3\) (nắng&rarr;mưa) và \(b = 0.4\) (mưa&rarr;nắng),
         thì dài hạn: \(\pi_{\text{nắng}} = 0.4/0.7 \approx 57\%\), \(\pi_{\text{mưa}} = 0.3/0.7 \approx 43\%\).</p>
+        </div>
       </div>
 
       <p><strong>Trường hợp đặc biệt:</strong> Khi \(a + b = 1\) (hay \(a = 1-b\)):

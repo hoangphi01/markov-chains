@@ -48,13 +48,16 @@ sections:
 
       <div class="box summary">
         <p class="box-title">Tom tat</p>
+        <div class="box-body">
         <p><strong>Y tuong chinh:</strong> Qua trinh Poisson dem so su kien xay ra theo thoi gian.
         No la &ldquo;vien gach nen tang&rdquo; cho moi chuoi Markov lien tuc,
         giong nhu buoc di ngau nhien la nen tang cho chuoi Markov roi rac.</p>
+        </div>
       </div>
 
       <div class="box definition">
         <p class="box-title">Dinh nghia (Qua trinh Poisson chuan &mdash; <em>Standard Poisson process</em>)</p>
+        <div class="box-body">
         <p><strong>Qua trinh Poisson chuan</strong> <em>(standard Poisson process)</em> la qua trinh ngau nhien \((N_t)_{t\in\mathbb{R}_+}\) chi co buoc nhay \(+1\), va duong di <em>(paths)</em> khong doi giua cac buoc nhay. Tai thoi diem \(t\):</p>
         \[
           N_t = \sum_{k=1}^{\infty} \ind_{(T_k, \infty)}(t), \qquad t \in \mathbb{R}_+,
@@ -65,6 +68,7 @@ sections:
           <li><strong>Gia so doc lap</strong> <em>(independence of increments)</em>: voi moi \(0 \leq t_0 &lt; t_1 &lt; \cdots &lt; t_n\), cac bien \(N_{t_1} - N_{t_0}, \ldots, N_{t_n} - N_{t_{n-1}}\) la doc lap.</li>
           <li><strong>Gia so dung</strong> <em>(stationarity of increments)</em>: \(N_{t+h} - N_{s+h}\) co cung phan phoi voi \(N_t - N_s\) voi moi \(h &gt; 0\) va \(0 \leq s \leq t\).</li>
         </ol>
+        </div>
       </div>
 
       <p><strong>Vi du doi thuong:</strong></p>
@@ -76,11 +80,13 @@ sections:
 
       <div class="box theorem">
         <p class="box-title">Dinh ly 9 &mdash; Phan phoi Poisson</p>
+        <div class="box-body">
         <p>Gia su qua trinh dem \((N_t)_{t\in\mathbb{R}_+}\) thoa man cac dieu kien (1) va (2). Khi do:</p>
         \[
           \PP(N_t - N_s = k) = e^{-\lambda(t-s)} \frac{(\lambda(t-s))^k}{k!}, \qquad k \in \mathbb{N}, \quad 0 \leq s \leq t,
         \]
         <p>voi hang so \(\lambda &gt; 0\).</p>
+        </div>
       </div>
 
       <p>Tham so \(\lambda &gt; 0\) duoc goi la <strong>cuong do</strong> <em>(intensity)</em> cua qua trinh:</p>
@@ -103,7 +109,9 @@ sections:
 
       <div class="box theorem">
         <p class="box-title">Menh de: Phan phoi thoi gian nhay</p>
+        <div class="box-body">
         <p>Luat cua \(T_n\) co mat do \(t \mapsto \lambda^n e^{-\lambda t} \frac{t^{n-1}}{(n-1)!}\) tren \(\mathbb{R}_+\), \(n \geq 1\).</p>
+        </div>
       </div>
 
       <p>Thoi gian \(\tau_k := T_{k+1} - T_k\) giua cac buoc nhay tao thanh day cac bien ngau nhien <strong>doc lap cung phan phoi</strong> <em>(i.i.d.)</em> co phan phoi mu voi tham so \(\lambda &gt; 0\):</p>
@@ -134,9 +142,11 @@ sections:
 
       <div class="box summary">
         <p class="box-title">Tom tat</p>
+        <div class="box-body">
         <p>Qua trinh Poisson: gia so doc lap va dung, \(N_t \sim \text{Poisson}(\lambda t)\).
         Cuong do \(\lambda\) cao hon \(\Rightarrow\) nhay thuong xuyen hon \(\Rightarrow\) thoi gian o moi trang thai ngan hon (\(\mathbb{E}[\tau_k] = 1/\lambda\)).</p>
         <p>Tinh chat &ldquo;khong nho&rdquo; <em>(memoryless)</em>: du ban da doi 5 phut roi, thoi gian doi them van co phan phoi mu &mdash; qua khu khong anh huong tuong lai.</p>
+        </div>
       </div>
 
       <!-- ================================================================ -->
@@ -152,6 +162,7 @@ sections:
 
       <div class="box definition">
         <p class="box-title">Dinh nghia (Qua trinh sinh thuan tuy &mdash; <em>Pure birth process</em>)</p>
+        <div class="box-body">
         <p>Chuoi Markov thoi gian lien tuc \((X_t)_{t\in\mathbb{R}_+}\) thoa man:</p>
         \[
           \PP(X_{t+h} - X_t = 1 \mid X_t = i) \simeq \lambda_i h, \qquad h \to 0,\; i \in S,
@@ -161,20 +172,24 @@ sections:
         \]
         <p>duoc goi la <strong>qua trinh sinh thuan tuy</strong> <em>(pure birth process)</em> voi toc do sinh \(\lambda_i \geq 0\).
         Qua trinh Poisson la truong hop dac biet voi \(\lambda_n = \lambda\) khong phu thuoc trang thai.</p>
+        </div>
       </div>
 
       <div class="box definition">
         <p class="box-title">Dinh nghia (Qua trinh tu thuan tuy &mdash; <em>Pure death process</em>)</p>
+        <div class="box-body">
         <p>Tuong tu, \((X_t)_{t\in\mathbb{R}_+}\) voi:</p>
         \[
           \PP(X_{t+h} - X_t = -1 \mid X_t = i) \simeq \mu_i h, \quad
           \PP(X_{t+h} - X_t = 0 \mid X_t = i) \simeq 1 - \mu_i h,
         \]
         <p>la <strong>qua trinh tu thuan tuy</strong> <em>(pure death process)</em> voi toc do tu \(\mu_i \geq 0\).</p>
+        </div>
       </div>
 
       <div class="box definition">
         <p class="box-title">Dinh nghia (Qua trinh sinh-tu &mdash; <em>Birth and death process</em>)</p>
+        <div class="box-body">
         <p>Chuoi Markov thoi gian lien tuc \((X_t)_{t\in\mathbb{R}_+}\) voi:</p>
         \begin{align*}
           \PP(X_{t+h} - X_t = 1 \mid X_t = i)  &\simeq \lambda_i h, \\
@@ -182,6 +197,7 @@ sections:
           \PP(X_{t+h} - X_t = 0 \mid X_t = i)  &\simeq 1 - (\lambda_i + \mu_i)h,
         \end{align*}
         <p>khi \(h \to 0\), duoc goi la <strong>qua trinh sinh-tu</strong> <em>(birth and death process)</em> voi toc do sinh \(\lambda_i \geq 0\) va toc do tu \(\mu_i \geq 0\), \(i \in S\).</p>
+        </div>
       </div>
 
       <p>Thoi gian \(\tau_i\) o trang thai \(i\) truoc khi chuyen sang trang thai khac la bien ngau nhien co phan phoi mu:</p>
@@ -216,11 +232,13 @@ sections:
 
       <div class="box definition">
         <p class="box-title">Dinh nghia (Tinh chat Markov lien tuc &mdash; <em>Continuous-time Markov property</em>)</p>
+        <div class="box-body">
         <p>Qua trinh ngau nhien \((X_t)_{t\in\mathbb{R}_+}\) nhan gia tri trong \(\mathbb{Z}\) co <strong>tinh chat Markov</strong> neu voi moi
         \(0 &lt; s_1 &lt; \cdots &lt; s_{n-1} &lt; s &lt; t\):</p>
         \[
           \PP(X_t = j \mid X_s = i_n,\; X_{s_{n-1}} = i_{n-1},\; \ldots,\; X_{s_1} = i_0) = \PP(X_t = j \mid X_s = i_n).
         \]
+        </div>
       </div>
 
       <p><strong>Vi du:</strong> Qua trinh Poisson la chuoi Markov thoi gian lien tuc vi no co gia so doc lap.
@@ -237,11 +255,13 @@ sections:
       <p>Ma tran \(P(t) = [P_{i,j}(t)]_{i,j\in S}\) duoc goi la <strong>nua nhom chuyen</strong> <em>(transition semigroup)</em>.</p>
 
       <div class="box formula">
+        <div class="box-body">
         <p><strong>Tinh chat nua nhom</strong> <em>(semigroup property)</em>:</p>
         \[
           P(s+t) = P(s)\,P(t) = P(t)\,P(s), \qquad s, t \in \mathbb{R}_+.
         \]
         <p>Day chinh la phuong trinh <strong>Chapman&ndash;Kolmogorov</strong> phien ban thoi gian lien tuc.</p>
+        </div>
       </div>
 
       <!-- ================================================================ -->
@@ -265,10 +285,12 @@ sections:
 
       <div class="box definition">
         <p class="box-title">Dinh nghia (Ma tran sinh &mdash; <em>Infinitesimal generator</em>)</p>
+        <div class="box-body">
         \[
           Q := P'(0) = \lim_{s \to 0} \frac{P(s) - P(0)}{s}
         \]
         <p>duoc goi la <strong>ma tran sinh vo cung be</strong> <em>(infinitesimal generator)</em> cua \((X_t)_{t\in\mathbb{R}_+}\).</p>
+        </div>
       </div>
 
       <p>Ky hieu \(Q = [\lambda_{i,j}]_{i,j\in S}\). Cac hang cua \(Q\) luon co tong bang 0:</p>
@@ -278,6 +300,7 @@ sections:
       <p>Do do: \(\lambda_{i,i} = -\sum_{l \neq i} \lambda_{i,l}\) (phan tu duong cheo luon am hoac bang 0).</p>
 
       <div class="box formula">
+        <div class="box-body">
         <p><strong>Phuong trinh Kolmogorov tien</strong> <em>(forward Kolmogorov equation)</em>:</p>
         \[
           P'(t) = P(t)\,Q, \qquad t &gt; 0.
@@ -290,6 +313,7 @@ sections:
         \[
           P(t) = P(0)\,e^{tQ} = e^{tQ}, \qquad \text{trong do } e^{tQ} = I_d + \sum_{n=1}^{\infty} \frac{t^n}{n!} Q^n.
         \]
+        </div>
       </div>
 
       <p><strong>Xap xi bac nhat</strong> khi \(h \to 0\):</p>
@@ -373,6 +397,7 @@ sections:
 
       <div class="box summary">
         <p class="box-title">Tom tat</p>
+        <div class="box-body">
         <p>Ma tran sinh \(Q\) dong vai tro tuong tu ma tran chuyen \(P\) trong truong hop roi rac.
         Quan he: \(P(h) \approx I_d + hQ\) cho \(h\) nho &mdash; &ldquo;roi rac hoa&rdquo; chuoi lien tuc.
         Khac biet chinh: phan tu ngoai duong cheo \(\lambda_{i,j} \geq 0\) (toc do), phan tu duong cheo \(\lambda_{i,i} \leq 0\).</p>
@@ -409,6 +434,7 @@ sections:
             </tr>
           </tbody>
         </table>
+        </div>
       </div>
 
       <!-- ================================================================ -->
@@ -459,8 +485,10 @@ sections:
 
       <div class="box summary">
         <p class="box-title">Tom tat</p>
+        <div class="box-body">
         <p>Chuoi hai trang thai lien tuc co cung phan phoi gioi han \(\pi = (\beta/(\alpha+\beta),\; \alpha/(\alpha+\beta))\) nhu truong hop roi rac (thay \(a \to \alpha\), \(b \to \beta\)).
         Su hoi tu luon xay ra trong thoi gian lien tuc (tru \(\alpha = \beta = 0\)), va nhanh hon khi \(\alpha + \beta\) lon hon.</p>
+        </div>
       </div>
 
       <!-- ================================================================ -->
@@ -472,15 +500,19 @@ sections:
 
       <div class="box definition">
         <p class="box-title">Dinh nghia (Phan phoi dung lien tuc &mdash; <em>Stationary distribution, continuous-time</em>)</p>
+        <div class="box-body">
         <p>Phan phoi \(\pi = (\pi_i)_{i\in S}\) duoc goi la <strong>dung</strong> <em>(stationary)</em> neu \(\pi P(t) = \pi\) voi moi \(t \in \mathbb{R}_+\).</p>
+        </div>
       </div>
 
       <div class="box theorem">
         <p class="box-title">Menh de 4</p>
+        <div class="box-body">
         <p>Phan phoi \(\pi = (\pi_i)_{i\in S}\) la dung khi va chi khi:</p>
         \[
           \pi Q = 0.
         \]
+        </div>
       </div>
 
       <p><em>Chung minh.</em> Neu \(\pi Q = 0\), thi \(\pi P(t) = \pi e^{tQ} = \pi \sum_{n=0}^{\infty} \frac{t^n}{n!} Q^n = \pi\).
@@ -488,17 +520,21 @@ sections:
 
       <div class="box theorem">
         <p class="box-title">Menh de 5</p>
+        <div class="box-body">
         <p>Neu chuoi Markov lien tuc \((X_t)_{t\in\mathbb{R}_+}\) co phan phoi gioi han</p>
         \[
           \pi_j := \lim_{t\to\infty} \PP(X_t = j \mid X_0 = i) = \lim_{t\to\infty} P_{i,j}(t), \qquad j \in S,
         \]
         <p>khong phu thuoc vao trang thai ban dau \(i \in S\), thi \(\pi Q = 0\), tuc \(\pi\) la phan phoi dung.</p>
+        </div>
       </div>
 
       <div class="box formula">
+        <div class="box-body">
         <p><strong>Tim phan phoi dung:</strong> Giai he \(\pi Q = 0\) ket hop \(\sum_i \pi_i = 1\).</p>
         <p>Tuong duong: \(\sum_{i \in S} \pi_i \lambda_{i,j} = 0\) voi moi \(j \in S\).</p>
         <p>Luu y: dieu kien \(\pi Q = 0\) tuong duong voi \(\pi = \pi(I_d + hQ)\) cho moi \(h &gt; 0\), chinh la phan phoi dung cua chuoi roi rac co ma tran chuyen \(P(h) \simeq I_d + hQ\).</p>
+        </div>
       </div>
 
       <h3 id="subsec-bd-stationary">Phan phoi dung cua qua trinh sinh-tu</h3>
@@ -555,6 +591,7 @@ sections:
 
       <div class="box definition">
         <p class="box-title">Dinh nghia (Chuoi nhung &mdash; <em>Embedded chain</em>)</p>
+        <div class="box-body">
         <p>Xet day \((T_n)_{n\in\mathbb{N}}\) cac thoi diem nhay cua qua trinh Markov lien tuc \((X_t)_{t\in\mathbb{R}_+}\):</p>
         \[
           T_1 = \inf\{t &gt; 0 : X_t \neq X_0\}, \qquad
@@ -564,6 +601,7 @@ sections:
         \[
           Z_0 = X_0, \qquad Z_n = X_{T_n}, \quad n \in \mathbb{N}.
         \]
+        </div>
       </div>
 
       <h3 id="subsec-embedded-transition">Ma tran chuyen cua chuoi nhung</h3>
@@ -620,10 +658,12 @@ sections:
 
       <div class="box summary">
         <p class="box-title">Tom tat</p>
+        <div class="box-body">
         <p>Chuoi nhung &ldquo;roi rac hoa&rdquo; qua trinh lien tuc bang cach chi ghi lai cac trang thai tai thoi diem nhay.
         Ma tran chuyen cua chuoi nhung chi phu thuoc vao <em>ty le</em> cac toc do, khong phu thuoc vao toc do tuyet doi.</p>
         <p>De phuc hoi qua trinh lien tuc tu chuoi nhung, can them thong tin ve <em>thoi gian o moi trang thai</em>
         \(\tau_i \sim \text{Exp}(-\lambda_{i,i})\).</p>
+        </div>
       </div>
 
       <!-- ================================================================ -->
@@ -687,11 +727,13 @@ sections:
       <p>Dat \(R_k = \prod_{j=1}^{k-1} \frac{\mu_j}{\lambda_j}\) (voi \(R_1 = 1\)). Ta duoc \(d_1 \sum_{k=1}^{N} R_k = -1\), nen:</p>
 
       <div class="box formula">
+        <div class="box-body">
         <p><strong>Xac suat hap thu vao trang thai \(0\):</strong></p>
         \[
           g_0(i) = \frac{\displaystyle\sum_{k=i+1}^{N} R_k}{\displaystyle\sum_{k=1}^{N} R_k},
           \qquad \text{voi } R_k = \prod_{j=1}^{k-1} \frac{\mu_j}{\lambda_j},\; R_1 = 1.
         \]
+        </div>
       </div>
 
       <p><strong>Truong hop dac biet</strong> \(\lambda_i = \lambda\), \(\mu_i = \mu\) (toc do khong doi):</p>
@@ -833,12 +875,14 @@ sections:
 
       <div class="box theorem">
         <p class="box-title">Dinh ly: Quan he \(\pi\) va \(\hat{\pi}\)</p>
+        <div class="box-body">
         <p>Neu \(\pi\) la phan phoi dung cua qua trinh Markov lien tuc (tuc \(\pi Q = 0\)),
         va \(\hat{\pi}\) la phan phoi dung cua chuoi nhung (tuc \(\hat{\pi} \hat{P} = \hat{\pi}\)), thi:</p>
         \[
           \pi_i \propto \frac{\hat{\pi}_i}{-\lambda_{i,i}}, \qquad i \in S.
         \]
         <p>Tuc la: \(\pi_i = \dfrac{\hat{\pi}_i / (-\lambda_{i,i})}{\sum_j \hat{\pi}_j / (-\lambda_{j,j})}\).</p>
+        </div>
       </div>
 
       <p><strong>Y nghia truc quan:</strong> Phan phoi dung lien tuc \(\pi_i\) ty le voi ca hai yeu to:</p>

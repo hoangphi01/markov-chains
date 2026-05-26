@@ -36,28 +36,34 @@ sections:
 
       <div class="box definition">
         <p class="box-title">Định nghĩa (Phân phối giới hạn &mdash; <em>Limiting distribution</em>)</p>
+        <div class="box-body">
         <p>Một chuỗi Markov \((X_n)_{n\in\N}\) với ma trận chuyển \(P\) trên không gian trạng thái \(S\)
         được gọi là có <strong>phân phối giới hạn</strong> <em>(limiting distribution)</em> nếu giới hạn
         \[
           \pi_j := \lim_{n\to\infty} \PP(X_n = j \mid X_0 = i)
         \]
         tồn tại với mọi \(i, j \in S\), và <em>không phụ thuộc</em> vào trạng thái ban đầu \(i\).</p>
+        </div>
       </div>
 
       <div class="box summary">
         <p class="box-title">Tóm tắt</p>
+        <div class="box-body">
         <p>Phân phối giới hạn \(\pi = (\pi_j)_{j\in S}\) mô tả xác suất "dài hạn" của chuỗi Markov:
         sau thời gian đủ lớn, xác suất ở trạng thái \(j\) tiến tới \(\pi_j\),
         bất kể chuỗi xuất phát từ đâu.</p>
         <p>Ví dụ: sau nhiều năm di cư, dù ban đầu tất cả sống ở khu A, tỷ lệ dân vẫn tiến tới \(\pi\).</p>
+        </div>
       </div>
 
       <h3 id="subsec-regular-matrix">Ma trận chính quy <em>(Regular Matrices)</em></h3>
 
       <div class="box definition">
         <p class="box-title">Định nghĩa (Ma trận chính quy &mdash; <em>Regular matrix</em>)</p>
+        <div class="box-body">
         <p>Ma trận chuyển \(P\) được gọi là <strong>chính quy</strong> <em>(regular)</em> nếu tồn tại
         lũy thừa \(P^n\) (với \(n\) nào đó) mà tất cả các phần tử đều dương.</p>
+        </div>
       </div>
 
       <p>Nếu \(P\) là chính quy, thì chuỗi Markov tương ứng có phân phối giới hạn
@@ -85,6 +91,7 @@ sections:
 
       <div class="box summary">
         <p class="box-title">Tóm tắt</p>
+        <div class="box-body">
         <p><strong>Quan sát quan trọng:</strong>
         So sánh hai phương trình trên, ta thấy:
         \[
@@ -94,12 +101,14 @@ sections:
         Xác suất giới hạn của trạng thái \(j\) bằng <em>nghịch đảo</em> của thời gian quay lại trung bình \(\mu_j(j)\).
         Đây là kết quả tổng quát, không chỉ đúng cho chuỗi hai trạng thái.</p>
         <p>Trực quan: nếu trung bình cứ 5 bước bạn quay lại quán quen, thì "tỷ lệ thời gian" ở quán là \(1/5 = 20\%\).</p>
+        </div>
       </div>
 
       <h3 id="subsec-main-theorem">Định lý chính về phân phối giới hạn</h3>
 
       <div class="box theorem">
         <p class="box-title">Định lý 6 &mdash; Phân phối giới hạn <em>(Theorem IV.4.1 in Feller)</em></p>
+        <div class="box-body">
         <p>Cho chuỗi Markov \((X_n)_{n\in\N}\) <strong>bất khả quy</strong> <em>(irreducible)</em>,
         <strong>hồi quy</strong> <em>(recurrent)</em>, và <strong>không tuần hoàn</strong> <em>(aperiodic)</em>
         trên không gian trạng thái \(S\). Khi đó:
@@ -110,15 +119,18 @@ sections:
         trong đó \(\mu_i(i) = \E[\tau_i \mid X_0 = i]\) là <strong>thời gian hồi quy trung bình</strong>
         <em>(mean recurrence time)</em> của trạng thái \(i\), và
         \(\tau_i = \inf\{n \geq 1 : X_n = i\}\) là <strong>thời điểm quay lại</strong> <em>(return time)</em>.</p>
+        </div>
       </div>
 
       <div class="box formula">
+        <div class="box-body">
         <p><strong>Phân phối giới hạn và thời gian hồi quy:</strong>
         \[
           \boxed{\pi_j = \frac{1}{\mu_j(j)}}
         \]
         Xác suất dài hạn ở trạng thái \(j\) tỷ lệ nghịch với thời gian trung bình để quay lại \(j\).
         Trạng thái có thời gian hồi quy ngắn sẽ được "ghé thăm" thường xuyên hơn.</p>
+        </div>
       </div>
 
       <p><strong>Giải thích trực quan:</strong> Nếu trung bình cứ \(\mu_j(j)\) bước ta quay lại trạng thái \(j\) một lần,
@@ -144,11 +156,13 @@ sections:
 
       <div class="box definition">
         <p class="box-title">Định nghĩa (Phân phối dừng &mdash; <em>Stationary distribution</em>)</p>
+        <div class="box-body">
         <p>Vectơ xác suất \(\pi = (\pi_i)_{i\in S}\) với \(\pi_i \geq 0\) và \(\sum_{i\in S} \pi_i = 1\)
         được gọi là <strong>phân phối dừng</strong> <em>(stationary distribution)</em> (hay <strong>phân phối bất biến</strong>
         &mdash; <em>invariant distribution</em>) của chuỗi Markov nếu:
         khi \(X_0\) có phân phối \(\pi\) (tức \(\PP(X_0 = i) = \pi_i\)),
         thì \(X_1\) cũng có phân phối \(\pi\).</p>
+        </div>
       </div>
 
       <p>Điều kiện trên tương đương với:
@@ -162,20 +176,24 @@ sections:
 
       <div class="box summary">
         <p class="box-title">Tóm tắt</p>
+        <div class="box-body">
         <p>\(\pi\) là phân phối dừng nếu và chỉ nếu \(\pi P = \pi\):
         \(\pi\) là <strong>vectơ riêng trái</strong> <em>(left eigenvector)</em> của \(P\) ứng với trị riêng \(\lambda = 1\).</p>
         <p>Vì quá trình Markov là <strong>đồng nhất theo thời gian</strong> <em>(time homogeneous)</em>,
         nếu \(X_0 \sim \pi\) thì \(X_k \sim \pi\) với <em>mọi</em> \(k \geq 1\).
         Do đó, phân phối \(\pi\) được "bảo toàn" qua thời gian -- vì vậy gọi là "dừng" hay "bất biến".</p>
+        </div>
       </div>
 
       <div class="box theorem">
         <p class="box-title">Mệnh đề: Phân phối giới hạn là phân phối dừng</p>
+        <div class="box-body">
         <p>Cho chuỗi Markov trên \(S = \{0, \ldots, N\}\) hữu hạn. Nếu phân phối giới hạn
         \[
           \pi_j = \lim_{n\to\infty} \PP(X_n = j \mid X_0 = i)
         \]
         tồn tại và không phụ thuộc vào \(i\), thì \(\pi = (\pi_j)_{j\in S}\) là phân phối dừng: \(\pi = \pi P\).</p>
+        </div>
       </div>
 
       <div class="proof">
@@ -215,6 +233,7 @@ sections:
 
       <div class="box summary">
         <p class="box-title">Tóm tắt</p>
+        <div class="box-body">
         <table>
           <tbody>
             <tr>
@@ -228,6 +247,7 @@ sections:
           </tbody>
         </table>
         <p>Chuỗi tuần hoàn có phân phối dừng nhưng không có phân phối giới hạn.</p>
+        </div>
       </div>
 
       <!-- ================================================================ -->
@@ -236,6 +256,7 @@ sections:
       <p>Để tìm phân phối dừng \(\pi = (\pi_i)_{i\in S}\), ta giải hệ phương trình tuyến tính:</p>
 
       <div class="box formula">
+        <div class="box-body">
         <p><strong>Hệ phương trình cho phân phối dừng:</strong>
         \[
           \begin{cases}
@@ -245,6 +266,7 @@ sections:
         \]
         Phương trình \(\pi = \pi P\) tương đương với \(\pi (P - I) = 0\), hay \(\pi\) nằm trong
         <strong>không gian riêng trái</strong> <em>(left eigenspace)</em> ứng với trị riêng \(1\) của \(P\).</p>
+        </div>
       </div>
 
       <div class="example">
@@ -327,11 +349,13 @@ sections:
 
       <div class="box definition">
         <p class="box-title">Định nghĩa (Điều kiện cân bằng chi tiết &mdash; <em>Detailed balance condition</em>)</p>
+        <div class="box-body">
         <p>Phân phối \(\pi = (\pi_i)_{i\in S}\) thỏa mãn <strong>điều kiện cân bằng chi tiết</strong>
         <em>(detailed balance condition)</em> với ma trận chuyển \(P\) nếu:
         \begin{equation}
           \boxed{\pi_i P_{i,j} = \pi_j P_{j,i}, \qquad \text{với mọi } i, j \in S.}
         \end{equation}</p>
+        </div>
       </div>
 
       <p><strong>Ý nghĩa:</strong> \(\pi_i P_{i,j}\) = "dòng xác suất" <em>(probability flow)</em> từ \(i\) sang \(j\) ở trạng thái cân bằng.
@@ -339,8 +363,10 @@ sections:
 
       <div class="box theorem">
         <p class="box-title">Mệnh đề: Cân bằng chi tiết \(\Rightarrow\) phân phối dừng</p>
+        <div class="box-body">
         <p>Nếu \(\pi\) thỏa mãn điều kiện cân bằng chi tiết và \(\sum_i \pi_i = 1\),
         thì \(\pi\) là phân phối dừng (\(\pi P = \pi\)).</p>
+        </div>
       </div>
 
       <div class="proof">
@@ -372,12 +398,14 @@ sections:
       </div>
 
       <div class="box formula">
+        <div class="box-body">
         <p><strong>Tìm phân phối dừng bằng cân bằng chi tiết:</strong></p>
         <p>Nếu chuỗi là thuận nghịch, ta có thể tìm \(\pi\) nhanh hơn bằng cách giải:
         \[
           \frac{\pi_j}{\pi_i} = \frac{P_{i,j}}{P_{j,i}}, \qquad \text{với mọi } i \sim j.
         \]
         Chọn một trạng thái tham chiếu (ví dụ \(\pi_0\)), tính tất cả \(\pi_j\) theo \(\pi_0\), rồi chuẩn hóa.</p>
+        </div>
       </div>
 
       <!-- ================================================================ -->
@@ -387,6 +415,7 @@ sections:
 
       <div class="box theorem">
         <p class="box-title">Định lý (Hội tụ &mdash; <em>Convergence theorem</em>)</p>
+        <div class="box-body">
         <p>Cho chuỗi Markov \((X_n)_{n\in\N}\) <strong>bất khả quy</strong> <em>(irreducible)</em>,
         <strong>không tuần hoàn</strong> <em>(aperiodic)</em>, và <strong>hồi quy dương</strong> <em>(positive recurrent)</em>
         trên không gian trạng thái \(S\). Khi đó:</p>
@@ -402,10 +431,12 @@ sections:
               \pi_j = \frac{1}{\mu_j(j)}, \qquad \text{với mọi } j \in S.
             \]</li>
         </ol>
+        </div>
       </div>
 
       <div class="box summary">
         <p class="box-title">Tóm tắt</p>
+        <div class="box-body">
         <p>Với chuỗi Markov bất khả quy, không tuần hoàn, hồi quy dương:
         \[
           \underbrace{\text{Phân phối dừng}}_{\pi = \pi P}
@@ -413,6 +444,7 @@ sections:
           = \underbrace{\text{Nghịch đảo thời gian hồi quy}}_{1/\mu_j(j)}.
         \]
         Ba khái niệm này <em>trùng nhau</em> trong trường hợp tốt nhất.</p>
+        </div>
       </div>
 
       <p><strong>Lưu ý về không gian trạng thái hữu hạn:</strong>
@@ -428,12 +460,14 @@ sections:
 
       <div class="box theorem">
         <p class="box-title">Định lý (Tốc độ hội tụ hình học)</p>
+        <div class="box-body">
         <p>Cho chuỗi Markov hữu hạn bất khả quy và không tuần hoàn với ma trận chuyển \(P\) có
         các trị riêng \(1 = \lambda_1 > |\lambda_2| \geq |\lambda_3| \geq \cdots \geq |\lambda_N|\).
         Khi đó tồn tại hằng số \(C > 0\) sao cho:
         \begin{equation}
           |P^n_{i,j} - \pi_j| \leq C\, |\lambda_2|^n, \qquad \text{với mọi } i, j \in S, \; n \geq 0.
         \end{equation}</p>
+        </div>
       </div>
 
       <p><strong>Ý nghĩa:</strong> Tốc độ hội tụ được quyết định bởi \(|\lambda_2|\) --- trị riêng lớn thứ hai (về giá trị tuyệt đối).</p>
@@ -460,6 +494,7 @@ sections:
       <h2 id="sec-summary-methods">7. Bảng tổng hợp phương pháp <em>(Summary of Methods)</em></h2>
 
       <div class="box formula">
+        <div class="box-body">
         <p><strong>Bảng tổng hợp các phương pháp tính toán cho chuỗi Markov:</strong></p>
         <table>
           <thead>
@@ -491,16 +526,19 @@ sections:
             </tr>
           </tbody>
         </table>
+        </div>
       </div>
 
       <div class="box summary">
         <p class="box-title">Tóm tắt</p>
+        <div class="box-body">
         <p>Tất cả các bài toán trên đều quy về <strong>hệ phương trình tuyến tính</strong>.</p>
         <ul>
           <li>Xác suất chạm và thời gian chạm: giải hệ với điều kiện biên tại trạng thái hấp thụ.</li>
           <li>Phân phối dừng: giải hệ thuần nhất \(\pi(P - I) = 0\) với ràng buộc chuẩn hóa \(\sum \pi_i = 1\).</li>
           <li>Nếu chuỗi thuận nghịch: dùng cân bằng chi tiết --- đơn giản hơn, không cần giải hệ.</li>
         </ul>
+        </div>
       </div>
 
       <!-- ================================================================ -->

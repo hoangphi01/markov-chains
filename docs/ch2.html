@@ -47,8 +47,10 @@ sections:
 
       <div class="box summary">
         <p class="box-title">Tom tat</p>
+        <div class="box-body">
         <p><strong>Ý tưởng cốt lõi:</strong> Điều kiện hóa theo bước đầu tiên \(Z_1\), rồi dùng tính Markov
         để quy về bài toán cùng dạng. Kết quả: hệ phương trình tuyến tính --- giải là xong!</p>
+        </div>
       </div>
 
       <!-- ================================================================ -->
@@ -59,29 +61,35 @@ sections:
 
       <div class="box definition">
         <p class="box-title">Định nghĩa (Thời gian chạm -- <em>(Hitting time)</em>)</p>
+        <div class="box-body">
         <p>Cho \(A \subseteq S\). <strong>Thời gian chạm</strong> <em>(hitting time)</em> tập \(A\) được định nghĩa là:</p>
         \[
           T_A := \inf\{n \geq 0 : Z_n \in A\},
         \]
         <p>tức là thời điểm đầu tiên chuỗi Markov rơi vào tập \(A\).</p>
+        </div>
       </div>
 
       <div class="box definition">
         <p class="box-title">Định nghĩa (Xác suất chạm -- <em>(Hitting probability)</em>)</p>
+        <div class="box-body">
         <p><strong>Xác suất chạm</strong> <em>(hitting probability)</em> trạng thái \(l \in A\) xuất phát từ \(k \in S\) là:</p>
         \[
           g_l(k) := \PP(Z_{T_A} = l \mid Z_0 = k), \qquad k \in S, \quad l \in A.
         \]
         <p>Đây là xác suất mà chuỗi Markov sẽ đến trạng thái \(l\) khi lần đầu tiên đi vào tập \(A\),
         biết rằng ban đầu chuỗi ở trạng thái \(k\).</p>
+        </div>
       </div>
 
       <div class="box definition">
         <p class="box-title">Định nghĩa (Thời gian chạm trung bình -- <em>(Mean hitting time)</em>)</p>
+        <div class="box-body">
         <p><strong>Thời gian chạm trung bình</strong> <em>(mean hitting time)</em> tập \(A\) xuất phát từ \(k\) là:</p>
         \[
           h_A(k) := \E[T_A \mid Z_0 = k], \qquad k \in S.
         \]
+        </div>
       </div>
 
       <h3 id="sec-fsa-method">1.1 Phương pháp phân tích bước đầu tiên <small>(First Step Analysis Method)</small></h3>
@@ -102,6 +110,7 @@ sections:
       \]
 
       <div class="box formula">
+        <div class="box-body">
         <p><strong>Hệ phương trình phân tích bước đầu tiên cho xác suất chạm:</strong></p>
         \[
           \boxed{
@@ -109,13 +118,16 @@ sections:
           }
         \]
         <p>với điều kiện biên \(g_l(k) = \ind_{\{k = l\}}\) khi \(k \in A\).</p>
+        </div>
       </div>
 
       <div class="box summary">
         <p class="box-title">Tom tat</p>
+        <div class="box-body">
         <p>Phân tích bước đầu tiên biến bài toán tính xác suất chạm thành một hệ phương trình tuyến tính.
         Ta "mở ra" bước đầu tiên \(Z_0 \to Z_1\), sau đó sử dụng tính Markov để quy bài toán
         về cùng dạng nhưng xuất phát từ trạng thái \(Z_1\).</p>
+        </div>
       </div>
 
       <h3 id="sec-absorbing-matrix">1.2 Tập hấp thụ và dạng ma trận <small>(Absorbing Set and Matrix Form)</small></h3>
@@ -142,6 +154,7 @@ sections:
       <p>Trong dạng ma trận, hệ phương trình cho xác suất chạm trở thành:</p>
 
       <div class="box formula">
+        <div class="box-body">
         <p><strong>Dạng ma trận:</strong></p>
         \[
           \mathbf{g}_l = Q\, \mathbf{g}_l + R\, \mathbf{e}_l,
@@ -153,6 +166,7 @@ sections:
             \mathbf{g}_l = (I - Q)^{-1} R\, \mathbf{e}_l.
           }
         \]
+        </div>
       </div>
 
       <p>Ngoài ra, tổng xác suất chạm tất cả các trạng thái trong \(A\) thỏa mãn:</p>
@@ -213,10 +227,12 @@ sections:
 
       <div class="box definition">
         <p class="box-title">Định nghĩa (Thời gian chạm trung bình -- <em>(Mean hitting time)</em>)</p>
+        <div class="box-body">
         <p>Cho \(A \subseteq S\). <strong>Thời gian chạm trung bình</strong> tập \(A\) xuất phát từ \(k\) là:</p>
         \[
           h_A(k) := \E[T_A \mid Z_0 = k], \qquad k \in S.
         \]
+        </div>
       </div>
 
       <p>Áp dụng phân tích bước đầu tiên tương tự như phần trước, nhưng lần này ta điều kiện hóa
@@ -233,6 +249,7 @@ sections:
       <p>Điều kiện biên: \(h_A(l) = 0\) với mọi \(l \in A\) (nếu đã ở trong \(A\) thì không cần thời gian nào).</p>
 
       <div class="box formula">
+        <div class="box-body">
         <p><strong>Hệ phương trình phân tích bước đầu tiên cho thời gian chạm trung bình:</strong></p>
         \[
           \boxed{
@@ -240,6 +257,7 @@ sections:
           }
         \]
         <p>với điều kiện biên \(h_A(l) = 0\) khi \(l \in A\).</p>
+        </div>
       </div>
 
       <p>Trong dạng ma trận, với \(\mathbf{h}_A = [h_A(0), \ldots, h_A(r)]^\top\) chỉ chứa các trạng thái
@@ -255,9 +273,11 @@ sections:
 
       <div class="box summary">
         <p class="box-title">Tom tat</p>
+        <div class="box-body">
         <p>Thời gian chạm trung bình thỏa mãn hệ phương trình tuyến tính tương tự xác suất chạm,
         chỉ khác ở vế phải: thêm \(+1\) (đếm một bước) và điều kiện biên bằng \(0\) tại \(A\).
         Ma trận \((I - Q)^{-1}\) được gọi là <strong>ma trận cơ bản</strong> <em>(fundamental matrix)</em> của chuỗi Markov hấp thụ.</p>
+        </div>
       </div>
 
       <div class="example">
@@ -336,39 +356,47 @@ sections:
 
       <div class="box definition">
         <p class="box-title">Định nghĩa (Thời gian quay lại lần đầu -- <em>(First return time)</em>)</p>
+        <div class="box-body">
         <p><strong>Thời gian quay lại lần đầu</strong> trạng thái \(j\) là:</p>
         \[
           \tau_j := \inf\{n \geq 1 : X_n = j\}.
         \]
         <p>Lưu ý: \(n \geq 1\), không phải \(n \geq 0\).</p>
+        </div>
       </div>
 
       <div class="box definition">
         <p class="box-title">Định nghĩa (Xác suất quay lại -- <em>(Return probability)</em>)</p>
+        <div class="box-body">
         <p><strong>Xác suất quay lại</strong> trạng thái \(j\) từ trạng thái \(i\) là:</p>
         \[
           p_{ij} := \PP(\tau_j < \infty \mid X_0 = i).
         \]
         <p>Khi \(i = j\), đại lượng \(p_{jj}\) là xác suất quay lại chính trạng thái \(j\).</p>
+        </div>
       </div>
 
       <div class="box definition">
         <p class="box-title">Định nghĩa (Phân phối thời gian quay lại -- <em>(First return distribution)</em>)</p>
+        <div class="box-body">
         <p>Xác suất quay lại trạng thái \(j\) sau đúng \(n\) bước là:</p>
         \[
           f_{ij}^{(n)} := \PP(\tau_j = n \mid X_0 = i), \qquad n \geq 1.
         \]
+        </div>
       </div>
 
       <p>Tổng xác suất quay lại: \(p_{ij} = \sum_{n=1}^{\infty} f_{ij}^{(n)}\).</p>
 
       <div class="box theorem">
         <p class="box-title">Định lý (Quan hệ giữa \(P_{i,i}^n\) và \(f_{ii}^{(n)}\))</p>
+        <div class="box-body">
         <p>Xác suất chuyển \(n\) bước quay lại trạng thái \(i\) có thể phân tách theo thời gian quay lại lần đầu:</p>
         \begin{equation}\label{eq:Pn-fn}
           P_{i,i}^{(n)} = \sum_{k=1}^{n} f_{ii}^{(k)}\, P_{i,i}^{(n-k)}, \qquad n \geq 1,
         \end{equation}
         <p>với quy ước \(P_{i,i}^{(0)} = 1\).</p>
+        </div>
       </div>
 
       <p><strong>Chứng minh.</strong>
@@ -384,21 +412,25 @@ sections:
 
       <div class="box definition">
         <p class="box-title">Định nghĩa (Thời gian quay lại trung bình -- <em>(Mean return time)</em>)</p>
+        <div class="box-body">
         \[
           \mu_j(i) := \E[\tau_j \mid X_0 = i].
         \]
         <p>Khi \(i = j\), ta ký hiệu \(\mu_j := \mu_j(j) = \E[\tau_j \mid X_0 = j]\).</p>
+        </div>
       </div>
 
       <p>Áp dụng phân tích bước đầu tiên:</p>
 
       <div class="box formula">
+        <div class="box-body">
         <p><strong>Thời gian quay lại trung bình:</strong></p>
         \[
           \boxed{
             \mu_j(i) = 1 + \sum_{l \neq j} P_{i,l}\, \mu_j(l), \qquad i \in S.
           }
         \]
+        </div>
       </div>
 
       <div class="example">
@@ -429,6 +461,7 @@ sections:
 
         <div class="box summary">
           <p class="box-title">Tom tat</p>
+        <div class="box-body">
           <p>Lưu ý mối liên hệ với phân phối giới hạn (Chương 1):</p>
           \[
             \pi_0 = \frac{b}{a+b} = \frac{1}{\mu_0(0)}, \qquad
@@ -437,6 +470,7 @@ sections:
           <p>Đây không phải sự trùng hợp! Với chuỗi Markov <strong>ergodic</strong>, phân phối dừng
           thỏa mãn \(\pi_j = 1/\mu_j\) <em>(ergodic theorem)</em>.</p>
         </div>
+        </div>
       </div>
 
       <!-- ================================================================ -->
@@ -444,14 +478,17 @@ sections:
 
       <div class="box definition">
         <p class="box-title">Định nghĩa (Số lần thăm -- <em>(Number of visits)</em>)</p>
+        <div class="box-body">
         <p>Số lần chuỗi Markov thăm trạng thái \(i\) (không kể thời điểm \(n=0\)) là:</p>
         \[
           R_i := \sum_{n=1}^{\infty} \ind_{\{X_n = i\}}.
         \]
+        </div>
       </div>
 
       <div class="box theorem">
         <p class="box-title">Định lý (Phân phối số lần thăm)</p>
+        <div class="box-body">
         <p>Với \(m \geq 1\):</p>
         \begin{equation}\label{eq:num-visits}
           \PP(R_j = m \mid X_0 = i) = p_{ij}(1 - p_{jj})(p_{jj})^{m-1},
@@ -460,6 +497,7 @@ sections:
         \[
           \PP(R_j = 0 \mid X_0 = i) = 1 - p_{ij}.
         \]
+        </div>
       </div>
 
       <p><strong>Chứng minh.</strong>
@@ -479,14 +517,17 @@ sections:
 
       <div class="box theorem">
         <p class="box-title">Định lý (Trường hợp \(p_{jj} = 1\))</p>
+        <div class="box-body">
         <p>Nếu \(p_{jj} = 1\) (chuỗi chắc chắn quay lại \(j\)), thì:</p>
         \[
           \PP(R_j = \infty \mid X_0 = j) = 1.
         \]
         <p>Ngược lại, nếu \(p_{jj} < 1\), thì \(\PP(R_j < \infty \mid X_0 = j) = 1\).</p>
+        </div>
       </div>
 
       <div class="box formula">
+        <div class="box-body">
         <p><strong>Kỳ vọng số lần thăm:</strong></p>
         \[
           \boxed{
@@ -494,6 +535,7 @@ sections:
           }
         \]
         <p>khi \(p_{jj} < 1\).</p>
+        </div>
       </div>
 
       <p><strong>Chứng minh.</strong></p>
@@ -508,9 +550,11 @@ sections:
 
       <div class="box summary">
         <p class="box-title">Tom tat</p>
+        <div class="box-body">
         <p>Nếu trạng thái \(j\) là <strong>thoáng qua</strong> <em>(transient)</em>, tức \(p_{jj} < 1\), thì số lần thăm
         \(R_j\) là hữu hạn hầu chắc chắn và có phân phối hình học.
         Nếu \(j\) là <strong>hồi quy</strong> <em>(recurrent)</em>, tức \(p_{jj} = 1\), thì chuỗi quay lại \(j\) vô hạn lần.</p>
+        </div>
       </div>
 
       <div class="example">
@@ -535,6 +579,7 @@ sections:
 
       <div class="box summary">
         <p class="box-title">Tom tat</p>
+        <div class="box-body">
         <p><strong>Phân tích bước đầu tiên</strong> <em>(first step analysis)</em> là kỹ thuật quan trọng nhất
         để giải các bài toán về chuỗi Markov hữu hạn. Ý tưởng cốt lõi:
         <em>điều kiện hóa theo bước đầu tiên \(Z_1\), rồi dùng tính Markov để quy về bài toán cùng dạng.</em></p>
@@ -571,6 +616,7 @@ sections:
           \mathbf{g}_l = (I-Q)^{-1} R\, \mathbf{e}_l, \qquad
           \mathbf{h}_A = (I-Q)^{-1}\, \mathbf{1}.
         \]
+        </div>
       </div>
 
       <!-- ================================================================ -->
@@ -601,6 +647,7 @@ sections:
       <p>Từ \(g(N) - g(0) = \sum_{k=1}^{N} d_k = 1\):</p>
 
       <div class="box formula">
+        <div class="box-body">
         <p><strong>Xác suất thắng trong bài toán con bạc:</strong></p>
 
         <p><strong>Trường hợp \(p \neq q\)</strong> (đặt \(\rho = q/p\)):</p>
@@ -612,6 +659,7 @@ sections:
         \begin{equation}\label{eq:gambler-fair}
           g(i) = \frac{i}{N}.
         \end{equation}
+        </div>
       </div>
 
       <div class="example">
@@ -656,6 +704,7 @@ sections:
 
       <div class="box summary">
         <p class="box-title">Tom tat</p>
+        <div class="box-body">
         <p>Bài toán con bạc cho thấy sức mạnh của phân tích bước đầu tiên:</p>
         <ul>
           <li>Xác suất thắng phụ thuộc vào \(\rho = q/p\) và vị trí ban đầu.</li>
@@ -663,6 +712,7 @@ sections:
           <li>Trò chơi "công bằng" (\(p = 1/2\)): xác suất thắng tỷ lệ với vốn ban đầu.</li>
           <li>Đây cũng là mô hình cho bước đi ngẫu nhiên với biên hấp thụ.</li>
         </ul>
+        </div>
       </div>
 
       <!-- ================================================================ -->

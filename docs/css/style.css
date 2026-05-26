@@ -184,51 +184,79 @@ ul, ol {
 
 li { margin-bottom: 5px; }
 
-/* === Boxes (definition, theorem, formula, summary) === */
+/* === Boxes (tcolorbox style: colored header + white body) === */
 .box {
   margin: 24px 0;
-  padding: 20px 24px;
-  border-radius: 20px;
-  border: 1px solid;
-  border-top-width: 4px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
 .box .box-title {
   font-weight: bold;
+  font-size: 16px;
+  padding: 10px 20px;
+  margin: 0;
+}
+
+.box .box-body {
+  padding: 16px 20px;
+  border: 1px solid;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+}
+
+/* Definition: green header */
+.box.definition .box-title {
+  background: #2e7d32;
+  color: #fff;
+}
+.box.definition .box-body {
+  background: #f6fbf4;
+  border-color: #a5d6a7;
+}
+
+/* Theorem: red header */
+.box.theorem .box-title {
+  background: #b71c1c;
+  color: #fff;
+}
+.box.theorem .box-body {
+  background: #fdf4f2;
+  border-color: #e0a8a0;
+}
+
+/* Formula: amber/gold header */
+.box.formula .box-title {
+  background: #c49000;
+  color: #fff;
+}
+.box.formula .box-body {
+  background: #fefbf0;
+  border-color: #e0d5a0;
+}
+
+/* Summary: blue/teal header */
+.box.summary .box-title {
+  background: #1565c0;
+  color: #fff;
+}
+.box.summary .box-body {
+  background: #f2f7fc;
+  border-color: #a8c8e8;
+}
+
+/* Fallback: boxes without .box-body wrapper (legacy) */
+.box:not(:has(.box-body)) {
+  padding: 16px 20px;
+  border: 1px solid #d8cdb5;
+  background: #faf6ed;
+}
+.box:not(:has(.box-body)) .box-title {
+  background: none;
+  padding: 0;
   margin-bottom: 10px;
-  font-size: 15px;
 }
-
-.box.definition {
-  background: #f2f5ec;
-  border-color: #b8ccaa;
-  border-top-color: #5a8a42;
-}
-
-.box.definition .box-title { color: #3d6e2c; }
-
-.box.theorem {
-  background: #f8f0eb;
-  border-color: #d4b5a8;
-  border-top-color: #a0432e;
-}
-
-.box.theorem .box-title { color: #8b3622; }
-
-.box.formula {
-  background: #f8f3e4;
-  border-color: #ddd0a8;
-  border-top-color: #b8960d;
-}
-
-.box.summary {
-  background: #eef2f0;
-  border-color: #b0c8c0;
-  border-top-color: #3a7a6a;
-}
-
-.box.summary .box-title { color: #2e5e52; }
 
 /* === Examples & Exercises === */
 .example, .exercise {
