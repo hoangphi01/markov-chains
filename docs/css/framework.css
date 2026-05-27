@@ -9,7 +9,7 @@
 /* === 3-Column Layout === */
 .page-wrapper {
   display: grid;
-  grid-template-columns: 220px 1fr 240px;
+  grid-template-columns: 220px 1fr 280px;
   min-height: 100vh;
 }
 
@@ -110,6 +110,51 @@
 
 .sidebar .sidebar-section {
   margin-bottom: 22px;
+}
+
+/* Sidebar cards: visual grouping with rounded boxes */
+.sidebar-card {
+  padding: 14px 14px 10px;
+  margin-bottom: 14px;
+  border-radius: 14px;
+}
+
+.sidebar-card h4 {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sidebar-card h5 {
+  font-size: 12.5px;
+  font-weight: 600;
+  margin: 10px 0 4px;
+}
+
+.sidebar-tip {
+  font-size: 12px;
+  font-style: italic;
+  line-height: 1.5;
+  margin: 4px 0 8px;
+  padding-left: 8px;
+  border-left: 2px solid transparent;
+}
+
+.sidebar-card table.symbol-table {
+  width: 100%;
+  font-size: 12.5px;
+  border-collapse: collapse;
+}
+
+.sidebar-card table.symbol-table td,
+.sidebar-card table.symbol-table th {
+  padding: 5px 6px;
+  border: none;
 }
 
 /* === Typography === */

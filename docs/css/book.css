@@ -46,6 +46,25 @@ body {
   border-bottom: 1px solid var(--sidebar-heading-border, #ddd);
 }
 
+.sidebar-card {
+  background: var(--bg-card, #faf6ed);
+  border: 1px solid var(--border-color, #d8cdb5);
+}
+
+.sidebar-card h4 {
+  color: var(--text-heading, #1a4a6e);
+  border-bottom: 1px solid var(--sidebar-heading-border, #ddd);
+}
+
+.sidebar-card h5 {
+  color: var(--text-h3, #34495e);
+}
+
+.sidebar-tip {
+  color: var(--text-muted, #888);
+  border-left-color: var(--border-color, #d8cdb5);
+}
+
 .sidebar .symbol-table td {
   border-bottom: 1px solid var(--sidebar-cell-border, #eee);
 }
