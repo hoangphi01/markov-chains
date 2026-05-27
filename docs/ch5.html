@@ -48,7 +48,7 @@ sections:
 
       {% include components/box-end.html %}
 
-      {% include components/box-start.html type="definition" title='Định nghĩa (Quá trình Poisson chuẩn &mdash; <em>Standard Poisson process</em>)' %}
+      {% include components/box-start.html type="definition" title='Định nghĩa (Quá trình Poisson chuẩn &mdash; <em>Standard Poisson process)</em>' %}
         <p><strong>Quá trình Poisson chuẩn</strong> <em>(standard Poisson process)</em> là quá trình ngẫu nhiên \((N_t)_{t\in\mathbb{R}_+}\) chỉ có bước nhảy \(+1\), và đường đi <em>(paths)</em> không đổi giữa các bước nhảy. Tại thời điểm \(t\):</p>
         \[
           N_t = \sum_{k=1}^{\infty} \ind_{(T_k, \infty)}(t), \qquad t \in \mathbb{R}_+,
@@ -150,7 +150,7 @@ sections:
       </ul>
       <p>Số khách trong quán thay đổi liên tục theo thời gian &mdash; đây là <strong>quá trình sinh-tử</strong>.</p>
 
-      {% include components/box-start.html type="definition" title='Định nghĩa (Quá trình sinh thuần túy &mdash; <em>Pure birth process</em>)' %}
+      {% include components/box-start.html type="definition" title='Định nghĩa (Quá trình sinh thuần túy &mdash; <em>Pure birth process)</em>' %}
         <p>Chuỗi Markov thời gian liên tục \((X_t)_{t\in\mathbb{R}_+}\) thỏa mãn:</p>
         \[
           \PP(X_{t+h} - X_t = 1 \mid X_t = i) \simeq \lambda_i h, \qquad h \to 0,\; i \in S,
@@ -164,7 +164,7 @@ sections:
 
       {% include components/box-end.html %}
 
-      {% include components/box-start.html type="definition" title='Định nghĩa (Quá trình tử thuần túy &mdash; <em>Pure death process</em>)' %}
+      {% include components/box-start.html type="definition" title='Định nghĩa (Quá trình tử thuần túy &mdash; <em>Pure death process)</em>' %}
         <p>Tương tự, \((X_t)_{t\in\mathbb{R}_+}\) với:</p>
         \[
           \PP(X_{t+h} - X_t = -1 \mid X_t = i) \simeq \mu_i h, \quad
@@ -175,7 +175,7 @@ sections:
 
       {% include components/box-end.html %}
 
-      {% include components/box-start.html type="definition" title='Định nghĩa (Quá trình sinh-tử &mdash; <em>Birth and death process</em>)' %}
+      {% include components/box-start.html type="definition" title='Định nghĩa (Quá trình sinh-tử &mdash; <em>Birth and death process)</em>' %}
         <p>Chuỗi Markov thời gian liên tục \((X_t)_{t\in\mathbb{R}_+}\) với:</p>
         \begin{align*}
           \PP(X_{t+h} - X_t = 1 \mid X_t = i)  &\simeq \lambda_i h, \\
@@ -218,7 +218,7 @@ sections:
       chuỗi Markov liên tục cũng &ldquo;không nhớ&rdquo; &mdash; nhưng bây giờ con kiến di chuyển trong thời gian liên tục.
       Nó ở một ô trong thời gian ngẫu nhiên (phân phối mũ), rồi nhảy sang ô khác.</p>
 
-      {% include components/box-start.html type="definition" title='Định nghĩa (Tính chất Markov liên tục &mdash; <em>Continuous-time Markov property</em>)' %}
+      {% include components/box-start.html type="definition" title='Định nghĩa (Tính chất Markov liên tục &mdash; <em>Continuous-time Markov property)</em>' %}
         <p>Quá trình ngẫu nhiên \((X_t)_{t\in\mathbb{R}_+}\) nhận giá trị trong \(\mathbb{Z}\) có <strong>tính chất Markov</strong> nếu với mọi
         \(0 &lt; s_1 &lt; \cdots &lt; s_{n-1} &lt; s &lt; t\):</p>
         \[
@@ -270,7 +270,7 @@ sections:
       \]
       <p>trong đó:</p>
 
-      {% include components/box-start.html type="definition" title='Định nghĩa (Ma trận sinh &mdash; <em>Infinitesimal generator</em>)' %}
+      {% include components/box-start.html type="definition" title='Định nghĩa (Ma trận sinh &mdash; <em>Infinitesimal generator)</em>' %}
         \[
           Q := P'(0) = \lim_{s \to 0} \frac{P(s) - P(0)}{s}
         \]
@@ -491,7 +491,7 @@ sections:
       sẽ ổn định &mdash; không phụ thuộc vào lúc mở cửa có bao nhiêu khách.
       Đây chính là phân phối dừng: &ldquo;dân số ổn định&rdquo; sau thời gian dài.</p>
 
-      {% include components/box-start.html type="definition" title='Định nghĩa (Phân phối dừng liên tục &mdash; <em>Stationary distribution, continuous-time</em>)' %}
+      {% include components/box-start.html type="definition" title='Định nghĩa (Phân phối dừng liên tục &mdash; <em>Stationary distribution, continuous-time)</em>' %}
         <p>Phân phối \(\pi = (\pi_i)_{i\in S}\) được gọi là <strong>dừng</strong> <em>(stationary)</em> nếu \(\pi P(t) = \pi\) với mọi \(t \in \mathbb{R}_+\).</p>
 
 
@@ -586,7 +586,7 @@ sections:
 
       <p>Chuỗi nhúng &ldquo;bỏ qua thời gian&rdquo;, chỉ ghi lại <em>trạng thái nào</em> xuất hiện, không quan tâm <em>bao lâu</em> ở mỗi trạng thái.</p>
 
-      {% include components/box-start.html type="definition" title='Định nghĩa (Chuỗi nhúng &mdash; <em>Embedded chain</em>)' %}
+      {% include components/box-start.html type="definition" title='Định nghĩa (Chuỗi nhúng &mdash; <em>Embedded chain)</em>' %}
         <p>Xét dãy \((T_n)_{n\in\mathbb{N}}\) các thời điểm nhảy của quá trình Markov liên tục \((X_t)_{t\in\mathbb{R}_+}\):</p>
         \[
           T_1 = \inf\{t &gt; 0 : X_t \neq X_0\}, \qquad

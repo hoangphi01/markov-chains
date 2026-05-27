@@ -52,7 +52,7 @@ sections:
       <p>Cho chuỗi Markov \((Z_n)_{n \in \N}\) nhận giá trị trong không gian trạng thái hữu hạn
       \(S = \{0, 1, \ldots, N\}\) với ma trận chuyển \(P = [P_{k,l}]_{k,l \in S}\).</p>
 
-      {% include components/box-start.html type="definition" title='Định nghĩa (Thời gian chạm -- <em>(Hitting time)</em>)' %}
+      {% include components/box-start.html type="definition" title='Định nghĩa (Thời gian chạm -- <em>Hitting time)</em>' %}
         <p>Cho \(A \subseteq S\). <strong>Thời gian chạm</strong> <em>(hitting time)</em> tập \(A\) được định nghĩa là:</p>
         \[
           T_A := \inf\{n \geq 0 : Z_n \in A\},
@@ -62,7 +62,7 @@ sections:
 
       {% include components/box-end.html %}
 
-      {% include components/box-start.html type="definition" title='Định nghĩa (Xác suất chạm -- <em>(Hitting probability)</em>)' %}
+      {% include components/box-start.html type="definition" title='Định nghĩa (Xác suất chạm -- <em>Hitting probability)</em>' %}
         <p><strong>Xác suất chạm</strong> <em>(hitting probability)</em> trạng thái \(l \in A\) xuất phát từ \(k \in S\) là:</p>
         \[
           g_l(k) := \PP(Z_{T_A} = l \mid Z_0 = k), \qquad k \in S, \quad l \in A.
@@ -73,7 +73,7 @@ sections:
 
       {% include components/box-end.html %}
 
-      {% include components/box-start.html type="definition" title='Định nghĩa (Thời gian chạm trung bình -- <em>(Mean hitting time)</em>)' %}
+      {% include components/box-start.html type="definition" title='Định nghĩa (Thời gian chạm trung bình -- <em>Mean hitting time)</em>' %}
         <p><strong>Thời gian chạm trung bình</strong> <em>(mean hitting time)</em> tập \(A\) xuất phát từ \(k\) là:</p>
         \[
           h_A(k) := \E[T_A \mid Z_0 = k], \qquad k \in S.
@@ -215,7 +215,7 @@ sections:
       <!-- ================================================================ -->
       <h2 id="sec-mean-hitting">2. Thời gian chạm và hấp thụ trung bình <small>(Mean Hitting and Absorption Times)</small></h2>
 
-      {% include components/box-start.html type="definition" title='Định nghĩa (Thời gian chạm trung bình -- <em>(Mean hitting time)</em>)' %}
+      {% include components/box-start.html type="definition" title='Định nghĩa (Thời gian chạm trung bình -- <em>Mean hitting time)</em>' %}
         <p>Cho \(A \subseteq S\). <strong>Thời gian chạm trung bình</strong> tập \(A\) xuất phát từ \(k\) là:</p>
         \[
           h_A(k) := \E[T_A \mid Z_0 = k], \qquad k \in S.
@@ -344,7 +344,7 @@ sections:
       thời gian chạm cho phép \(n = 0\) (tức nếu đã ở \(j\) thì \(T_{\{j\}} = 0\)),
       còn thời gian quay lại yêu cầu \(n \geq 1\) (phải rời khỏi rồi quay lại).</p>
 
-      {% include components/box-start.html type="definition" title='Định nghĩa (Thời gian quay lại lần đầu -- <em>(First return time)</em>)' %}
+      {% include components/box-start.html type="definition" title='Định nghĩa (Thời gian quay lại lần đầu -- <em>First return time)</em>' %}
         <p><strong>Thời gian quay lại lần đầu</strong> trạng thái \(j\) là:</p>
         \[
           \tau_j := \inf\{n \geq 1 : X_n = j\}.
@@ -354,7 +354,7 @@ sections:
 
       {% include components/box-end.html %}
 
-      {% include components/box-start.html type="definition" title='Định nghĩa (Xác suất quay lại -- <em>(Return probability)</em>)' %}
+      {% include components/box-start.html type="definition" title='Định nghĩa (Xác suất quay lại -- <em>Return probability)</em>' %}
         <p><strong>Xác suất quay lại</strong> trạng thái \(j\) từ trạng thái \(i\) là:</p>
         \[
           p_{ij} := \PP(\tau_j < \infty \mid X_0 = i).
@@ -364,7 +364,7 @@ sections:
 
       {% include components/box-end.html %}
 
-      {% include components/box-start.html type="definition" title='Định nghĩa (Phân phối thời gian quay lại -- <em>(First return distribution)</em>)' %}
+      {% include components/box-start.html type="definition" title='Định nghĩa (Phân phối thời gian quay lại -- <em>First return distribution)</em>' %}
         <p>Xác suất quay lại trạng thái \(j\) sau đúng \(n\) bước là:</p>
         \[
           f_{ij}^{(n)} := \PP(\tau_j = n \mid X_0 = i), \qquad n \geq 1.
@@ -396,7 +396,7 @@ sections:
 
       <h3 id="sec-mean-return">3.1 Thời gian quay lại trung bình <small>(Mean Return Time)</small></h3>
 
-      {% include components/box-start.html type="definition" title='Định nghĩa (Thời gian quay lại trung bình -- <em>(Mean return time)</em>)' %}
+      {% include components/box-start.html type="definition" title='Định nghĩa (Thời gian quay lại trung bình -- <em>Mean return time)</em>' %}
         \[
           \mu_j(i) := \E[\tau_j \mid X_0 = i].
         \]
@@ -461,7 +461,7 @@ sections:
       <!-- ================================================================ -->
       <h2 id="sec-number-returns">4. Số lần quay lại <small>(Number of Returns)</small></h2>
 
-      {% include components/box-start.html type="definition" title='Định nghĩa (Số lần thăm -- <em>(Number of visits)</em>)' %}
+      {% include components/box-start.html type="definition" title='Định nghĩa (Số lần thăm -- <em>Number of visits)</em>' %}
         <p>Số lần chuỗi Markov thăm trạng thái \(i\) (không kể thời điểm \(n=0\)) là:</p>
         \[
           R_i := \sum_{n=1}^{\infty} \ind_{\{X_n = i\}}.

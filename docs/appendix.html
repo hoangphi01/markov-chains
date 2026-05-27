@@ -30,7 +30,7 @@ sections:
       <!-- ================================================================ -->
       <h2 id="prob-spaces">A.1 Không gian xác suất <em>(Probability Spaces)</em></h2>
 
-      {% include components/box-start.html type="definition" title='Định nghĩa (Không gian xác suất &mdash; <em>Probability space</em>)' %}
+      {% include components/box-start.html type="definition" title='Định nghĩa (Không gian xác suất &mdash; <em>Probability space)</em>' %}
         <p><strong>Không gian xác suất</strong> là bộ ba \((\Omega, \mathcal{F}, \mathbb{P})\) trong đó:</p>
         <ul>
           <li>\(\Omega\): <strong>không gian mẫu</strong> <em>(sample space)</em> &mdash; tập hợp tất cả các kết quả có thể.</li>
@@ -63,7 +63,7 @@ sections:
       <!-- ================================================================ -->
       <h2 id="conditional">A.2 Xác suất có điều kiện và tính độc lập <em>(Conditional Probability and Independence)</em></h2>
 
-      {% include components/box-start.html type="definition" title='Định nghĩa (Xác suất có điều kiện &mdash; <em>Conditional probability</em>)' %}
+      {% include components/box-start.html type="definition" title='Định nghĩa (Xác suất có điều kiện &mdash; <em>Conditional probability)</em>' %}
         <p>Với hai biến cố \(A, B \subset \Omega\) và \(\mathbb{P}(B) \neq 0\):</p>
         \[
           \mathbb{P}(A \mid B) := \frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}.
@@ -82,7 +82,7 @@ sections:
         \mathbb{P}(A_k \mid B) = \frac{\mathbb{P}(B \mid A_k)\,\mathbb{P}(A_k)}{\sum_{n} \mathbb{P}(B \mid A_n)\,\mathbb{P}(A_n)}.
       \]
 
-      {% include components/box-start.html type="definition" title='Định nghĩa (Tính độc lập &mdash; <em>Independence</em>)' %}
+      {% include components/box-start.html type="definition" title='Định nghĩa (Tính độc lập &mdash; <em>Independence)</em>' %}
         <p>Hai biến cố \(A\) và \(B\) được gọi là <strong>độc lập</strong> <em>(independent)</em> nếu:</p>
         \[
           \mathbb{P}(A \cap B) = \mathbb{P}(A)\,\mathbb{P}(B).
@@ -100,7 +100,7 @@ sections:
       <!-- ================================================================ -->
       <h2 id="random-variables">A.3 Biến ngẫu nhiên <em>(Random Variables)</em></h2>
 
-      {% include components/box-start.html type="definition" title='Định nghĩa (Biến ngẫu nhiên &mdash; <em>Random variable</em>)' %}
+      {% include components/box-start.html type="definition" title='Định nghĩa (Biến ngẫu nhiên &mdash; <em>Random variable)</em>' %}
         <p><strong>Biến ngẫu nhiên</strong> là ánh xạ \(X: \Omega \to \mathbb{R}\) xác định trên không gian xác suất \((\Omega, \mathcal{F}, \mathbb{P})\).</p>
 
 
@@ -170,7 +170,7 @@ sections:
       <!-- ================================================================ -->
       <h2 id="expectation">A.5 Kỳ vọng toán học <em>(Mathematical Expectation)</em></h2>
 
-      {% include components/box-start.html type="definition" title='Định nghĩa (Kỳ vọng &mdash; <em>Expectation</em>)' %}
+      {% include components/box-start.html type="definition" title='Định nghĩa (Kỳ vọng &mdash; <em>Expectation)</em>' %}
         <p><strong>Kỳ vọng</strong> <em>(expected value)</em> của biến ngẫu nhiên \(X\):</p>
         <ul>
           <li>Trường hợp rời rạc: \(\mathbb{E}[X] = \sum_{k} k \cdot \mathbb{P}(X = k)\).</li>
@@ -198,7 +198,7 @@ sections:
       <!-- ================================================================ -->
       <h2 id="inequalities">A.6 Bất đẳng thức quan trọng <em>(Important Inequalities)</em></h2>
 
-      {% include components/box-start.html type="theorem" title='Định lý (Bất đẳng thức Markov &mdash; <em>Markov&#39;s inequality</em>)' %}
+      {% include components/box-start.html type="theorem" title='Định lý (Bất đẳng thức Markov &mdash; <em>Markov&#39;s inequality)</em>' %}
         <p>Nếu \(X \geq 0\) và \(a > 0\):</p>
         \[
           \mathbb{P}(X \geq a) \leq \frac{\mathbb{E}[X]}{a}.
@@ -207,7 +207,7 @@ sections:
 
       {% include components/box-end.html %}
 
-      {% include components/box-start.html type="theorem" title='Định lý (Bất đẳng thức Chebyshev &mdash; <em>Chebyshev&#39;s inequality</em>)' %}
+      {% include components/box-start.html type="theorem" title='Định lý (Bất đẳng thức Chebyshev &mdash; <em>Chebyshev&#39;s inequality)</em>' %}
         <p>Với mọi \(k > 0\):</p>
         \[
           \mathbb{P}(|X - \mathbb{E}[X]| \geq k) \leq \frac{\text{Var}(X)}{k^2}.
@@ -221,7 +221,7 @@ sections:
       <!-- ================================================================ -->
       <h2 id="pgf">A.7 Hàm sinh xác suất <em>(Probability Generating Functions)</em></h2>
 
-      {% include components/box-start.html type="definition" title='Định nghĩa (Hàm sinh xác suất &mdash; <em>Probability generating function</em>)' %}
+      {% include components/box-start.html type="definition" title='Định nghĩa (Hàm sinh xác suất &mdash; <em>Probability generating function)</em>' %}
         <p>Cho biến ngẫu nhiên \(X\) nhận giá trị trong \(\mathbb{N}\). <strong>Hàm sinh xác suất</strong> <em>(p.g.f.)</em> của \(X\) là:</p>
         \[
           G_X(s) = \mathbb{E}[s^X] = \sum_{k=0}^{\infty} \mathbb{P}(X = k)\, s^k, \qquad |s| \leq 1.
@@ -259,7 +259,7 @@ sections:
       <!-- ================================================================ -->
       <h2 id="cond-expectation">A.8 Kỳ vọng có điều kiện <em>(Conditional Expectation)</em></h2>
 
-      {% include components/box-start.html type="definition" title='Định nghĩa (Kỳ vọng có điều kiện &mdash; <em>Conditional expectation</em>)' %}
+      {% include components/box-start.html type="definition" title='Định nghĩa (Kỳ vọng có điều kiện &mdash; <em>Conditional expectation)</em>' %}
         \[
           \mathbb{E}[X \mid B] = \sum_k k\,\mathbb{P}(X = k \mid B), \qquad \text{khi } \mathbb{P}(B) > 0.
         \]
@@ -288,7 +288,7 @@ sections:
       <!-- ================================================================ -->
       <h2 id="joint">A.9 Phân phối đồng thời và mật độ có điều kiện</h2>
 
-      {% include components/box-start.html type="definition" title='Định nghĩa (Phân phối đồng thời &mdash; <em>Joint distribution</em>)' %}
+      {% include components/box-start.html type="definition" title='Định nghĩa (Phân phối đồng thời &mdash; <em>Joint distribution)</em>' %}
         <p><strong>Phân phối đồng thời</strong> của \((X, Y)\) rời rạc:</p>
         \[
           p_{X,Y}(x, y) = \mathbb{P}(X = x,\; Y = y).
