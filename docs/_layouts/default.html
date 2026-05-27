@@ -25,10 +25,15 @@
 <body>
   {{ content }}
 
-  <!-- Settings floating button -->
-  <button id="settings-btn" class="settings-btn" aria-label="Cài đặt giao diện" aria-expanded="false" aria-controls="settings-panel">
-    <span class="material-icons-outlined" style="font-size:22px">text_fields</span>
-  </button>
+  <!-- Floating buttons (bottom-right) -->
+  <div class="floating-buttons">
+    <button id="back-to-top" class="floating-btn back-to-top" aria-label="Quay lên đầu trang">
+      <span class="material-icons-outlined" style="font-size:22px">vertical_align_top</span>
+    </button>
+    <button id="settings-btn" class="floating-btn" aria-label="Cài đặt giao diện" aria-expanded="false" aria-controls="settings-panel">
+      <span class="material-icons-outlined" style="font-size:22px">text_fields</span>
+    </button>
+  </div>
 
   <!-- Settings panel -->
   <div id="settings-panel" class="settings-panel" role="dialog" aria-label="Giao diện đọc">

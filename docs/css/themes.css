@@ -252,12 +252,19 @@ html[data-theme="dark"] mjx-container {
   color: var(--text-body);
 }
 
-/* === Settings Panel Styles === */
-.settings-btn {
+/* === Floating Buttons (bottom-right) === */
+.floating-buttons {
   position: fixed;
-  top: 16px;
-  right: 16px;
+  bottom: 20px;
+  right: 20px;
   z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.floating-btn {
   width: 42px;
   height: 42px;
   border-radius: 50%;
@@ -269,18 +276,29 @@ html[data-theme="dark"] mjx-container {
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition: transform 0.15s, box-shadow 0.15s, opacity 0.2s;
 }
 
-.settings-btn:hover {
+.floating-btn:hover {
   transform: scale(1.08);
   box-shadow: 0 3px 12px rgba(0,0,0,0.18);
 }
 
+/* Back to top: hidden until scrolled */
+.back-to-top {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .settings-panel {
   position: fixed;
-  top: 66px;
-  right: 16px;
+  bottom: 80px;
+  right: 20px;
   z-index: 999;
   width: 300px;
   background: var(--bg-card, #faf6ed);
@@ -290,7 +308,7 @@ html[data-theme="dark"] mjx-container {
   padding: 20px;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(-8px);
+  transform: translateY(8px);
   transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
 }
 
@@ -299,6 +317,8 @@ html[data-theme="dark"] mjx-container {
   visibility: visible;
   transform: translateY(0);
 }
+
+/* Panel opens upward from bottom-right buttons */
 
 .settings-panel h3 {
   font-size: 15px;
@@ -419,21 +439,19 @@ html[data-theme="dark"] mjx-container {
 
 /* === Responsive: bottom sheet on mobile === */
 @media (max-width: 900px) {
-  .settings-btn {
-    top: auto;
+  .floating-buttons {
     bottom: 16px;
     right: 16px;
   }
 
   .settings-panel {
-    top: auto;
     bottom: 70px;
     right: 8px;
     left: 8px;
     width: auto;
     max-height: 70vh;
     overflow-y: auto;
-    border-radius: 20px 20px 20px 20px;
+    border-radius: 20px;
   }
 
   .settings-overlay {

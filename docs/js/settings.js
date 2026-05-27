@@ -57,9 +57,10 @@
     togglePanel();
   });
 
-  // Close on outside click
+  // Close on outside click (ignore clicks inside floating-buttons container)
+  var floatingBtns = document.querySelector('.floating-buttons');
   document.addEventListener('click', function(e) {
-    if (panel.classList.contains('open') && !panel.contains(e.target) && e.target !== btn) {
+    if (panel.classList.contains('open') && !panel.contains(e.target) && !floatingBtns.contains(e.target)) {
       closePanel();
     }
   });
@@ -114,7 +115,25 @@
     btnPlus.disabled = currentFontLevel >= 5;
   }
 
+  // --- Back to top button ---
+  var backToTop = document.getElementById('back-to-top');
+
+  function updateBackToTop() {
+    if (window.scrollY > 300) {
+      backToTop.classList.add('visible');
+    } else {
+      backToTop.classList.remove('visible');
+    }
+  }
+
+  backToTop.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  window.addEventListener('scroll', updateBackToTop);
+
   // --- Init ---
   updateThemeCards();
   updateFontUI();
+  updateBackToTop();
 })();
