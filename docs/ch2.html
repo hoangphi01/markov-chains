@@ -39,7 +39,7 @@ sections:
       <p>Kỹ thuật <strong>phân tích bước đầu tiên</strong> trả lời cả hai câu hỏi bằng cách:
       "Nhìn bước đầu tiên --- bạn đi lên hay xuống? --- rồi từ vị trí mới, bài toán giống hệt nhưng nhỏ hơn."</p>
 
-      {% include components/box-start.html type="summary" title='Tom tat' %}
+      {% include components/box-start.html type="summary" title='Tóm tắt' %}
         <p><strong>Ý tưởng cốt lõi:</strong> Điều kiện hóa theo bước đầu tiên \(Z_1\), rồi dùng tính Markov
         để quy về bài toán cùng dạng. Kết quả: hệ phương trình tuyến tính --- giải là xong!</p>
 
@@ -111,7 +111,7 @@ sections:
 
       {% include components/box-end.html %}
 
-      {% include components/box-start.html type="summary" title='Tom tat' %}
+      {% include components/box-start.html type="summary" title='Tóm tắt' %}
         <p>Phân tích bước đầu tiên biến bài toán tính xác suất chạm thành một hệ phương trình tuyến tính.
         Ta "mở ra" bước đầu tiên \(Z_0 \to Z_1\), sau đó sử dụng tính Markov để quy bài toán
         về cùng dạng nhưng xuất phát từ trạng thái \(Z_1\).</p>
@@ -260,7 +260,7 @@ sections:
       \end{equation}
       <p>trong đó \(\mathbf{1}\) là vectơ toàn \(1\).</p>
 
-      {% include components/box-start.html type="summary" title='Tom tat' %}
+      {% include components/box-start.html type="summary" title='Tóm tắt' %}
         <p>Thời gian chạm trung bình thỏa mãn hệ phương trình tuyến tính tương tự xác suất chạm,
         chỉ khác ở vế phải: thêm \(+1\) (đếm một bước) và điều kiện biên bằng \(0\) tại \(A\).
         Ma trận \((I - Q)^{-1}\) được gọi là <strong>ma trận cơ bản</strong> <em>(fundamental matrix)</em> của chuỗi Markov hấp thụ.</p>
@@ -443,7 +443,7 @@ sections:
           \mu_0(1) = \frac{1}{b}.
         \]
 
-        {% include components/box-start.html type="summary" title='Tom tat' %}
+        {% include components/box-start.html type="summary" title='Tóm tắt' %}
           <p>Lưu ý mối liên hệ với phân phối giới hạn (Chương 1):</p>
           \[
             \pi_0 = \frac{b}{a+b} = \frac{1}{\mu_0(0)}, \qquad
@@ -530,7 +530,7 @@ sections:
       \end{align*}
       \(\square\)
 
-      {% include components/box-start.html type="summary" title='Tom tat' %}
+      {% include components/box-start.html type="summary" title='Tóm tắt' %}
         <p>Nếu trạng thái \(j\) là <strong>thoáng qua</strong> <em>(transient)</em>, tức \(p_{jj} < 1\), thì số lần thăm
         \(R_j\) là hữu hạn hầu chắc chắn và có phân phối hình học.
         Nếu \(j\) là <strong>hồi quy</strong> <em>(recurrent)</em>, tức \(p_{jj} = 1\), thì chuỗi quay lại \(j\) vô hạn lần.</p>
@@ -559,7 +559,7 @@ sections:
       <!-- ================================================================ -->
       <h2 id="sec-summary">5. Tổng kết chương <small>(Chapter Summary)</small></h2>
 
-      {% include components/box-start.html type="summary" title='Tom tat' %}
+      {% include components/box-start.html type="summary" title='Tóm tắt' %}
         <p><strong>Phân tích bước đầu tiên</strong> <em>(first step analysis)</em> là kỹ thuật quan trọng nhất
         để giải các bài toán về chuỗi Markov hữu hạn. Ý tưởng cốt lõi:
         <em>điều kiện hóa theo bước đầu tiên \(Z_1\), rồi dùng tính Markov để quy về bài toán cùng dạng.</em></p>
@@ -685,7 +685,7 @@ sections:
 
       {% include components/example-end.html %}
 
-      {% include components/box-start.html type="summary" title='Tom tat' %}
+      {% include components/box-start.html type="summary" title='Tóm tắt' %}
         <p>Bài toán con bạc cho thấy sức mạnh của phân tích bước đầu tiên:</p>
         <ul>
           <li>Xác suất thắng phụ thuộc vào \(\rho = q/p\) và vị trí ban đầu.</li>

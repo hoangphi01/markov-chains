@@ -297,7 +297,7 @@ html[data-theme="dark"] mjx-container {
 
 .settings-panel {
   position: fixed;
-  bottom: 80px;
+  bottom: 76px;
   right: 20px;
   z-index: 999;
   width: 300px;

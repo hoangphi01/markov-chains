@@ -32,16 +32,20 @@
   var overlay = document.getElementById('settings-overlay');
   var btn = document.getElementById('settings-btn');
 
+  var backToTop = document.getElementById('back-to-top');
+
   function openPanel() {
     panel.classList.add('open');
     if (overlay) overlay.classList.add('open');
     btn.setAttribute('aria-expanded', 'true');
+    backToTop.classList.remove('visible');
   }
 
   function closePanel() {
     panel.classList.remove('open');
     if (overlay) overlay.classList.remove('open');
     btn.setAttribute('aria-expanded', 'false');
+    updateBackToTop();
   }
 
   function togglePanel() {
@@ -116,9 +120,8 @@
   }
 
   // --- Back to top button ---
-  var backToTop = document.getElementById('back-to-top');
-
   function updateBackToTop() {
+    if (panel.classList.contains('open')) return;
     if (window.scrollY > 300) {
       backToTop.classList.add('visible');
     } else {
