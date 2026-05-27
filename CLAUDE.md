@@ -31,7 +31,7 @@ markov_chains_bilingual/
       nav.html                # Data-driven chapter navigation
       mathjax.html            # MathJax v3 config
       components/             # 6 reusable includes (box, example, exercise start/end)
-      sidebars/               # Per-chapter sidebar content
+      sidebars/               # Per-chapter sidebar (.sidebar-card + .sidebar-tip)
     css/framework.css         # Reusable grid, box structure, nav (any book)
     css/book.css              # Literata font, sepia palette, box colors (this book)
     js/nav.js                 # TOC active state tracking
@@ -61,10 +61,11 @@ xelatex main.tex && xelatex main.tex  # 2 passes for TOC
 
 - Jekyll framework with data-driven navigation (`_data/chapters.yml`)
 - MathJax v3 for LaTeX math rendering
-- 3-column layout: left TOC | center content | right sidebar
+- 3-column layout: left TOC (220px) | center content | right sidebar (280px)
 - CSS split: `framework.css` (reusable) + `book.css` (this book's theme)
 - Global `--box-radius: 20px` CSS variable for all boxes
 - 6 component includes: box-start/end, example-start/end, exercise-start/end
+- Sidebar uses `.sidebar-card` (visual grouping) + `.sidebar-tip` (Vietnamese explanations)
 - Add new chapter: 1 YAML entry + 1 HTML file (nav/prev/next auto-update)
 - GitHub Pages compatible
 - See WEB_PLAN.md for .tex -> HTML mapping and component usage

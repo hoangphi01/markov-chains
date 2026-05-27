@@ -8,12 +8,12 @@ Jekyll-based framework with data-driven navigation. Add a chapter by creating on
 
 ```
 +------------------+------------------------+------------------+
-|  LEFT (220px)    |  CENTER (flex)         |  RIGHT (240px)   |
+|  LEFT (220px)    |  CENTER (flex)         |  RIGHT (280px)   |
 |  Table of        |  Main content          |  Sidebar:        |
-|  Contents        |  (chapter text,        |  - Key symbols   |
-|  (auto from      |   formulas, examples)  |  - Quick refs    |
-|   chapters.yml)  |                        |  - Vietnamese-   |
-|                  |                        |    English terms |
+|  Contents        |  (chapter text,        |  - .sidebar-card |
+|  (auto from      |   formulas, examples)  |    grouped boxes |
+|   chapters.yml)  |                        |  - .sidebar-tip  |
+|                  |                        |    explanations  |
 +------------------+------------------------+------------------+
 ```
 
@@ -192,7 +192,18 @@ Write content using component includes (see `_chapter_template.html` for full ex
 
 ### Step 3 (optional): Create sidebar
 
-Create `_includes/sidebars/ch6.html` and add a case in `_layouts/chapter.html`:
+Create `_includes/sidebars/ch6.html` using `.sidebar-card` / `.sidebar-tip` structure:
+
+```html
+<div class="sidebar-card">
+  <h4><span class="material-icons-outlined" style="font-size:16px">icon_name</span> Tiêu đề</h4>
+  <h5>Công thức</h5>
+  <p>\( formula \)</p>
+  <p class="sidebar-tip">Giải thích ngắn gọn bằng tiếng Việt.</p>
+</div>
+```
+
+Then add a case in `_layouts/chapter.html`:
 
 ```liquid
 {% when 'ch6' %}{% include sidebars/ch6.html %}
@@ -204,15 +215,31 @@ No need to edit `nav.html`, `index.html`, or any other chapter's front matter.
 
 ## Right Sidebar Content (per chapter)
 
-| Chapter | Sidebar Content |
+Sidebars use `.sidebar-card` for visual grouping and `.sidebar-tip` for plain Vietnamese explanations.
+Each formula gets a one-line explanation so students can understand at a glance.
+Icons use Material Icons Outlined (already loaded in `default.html`).
+
+| Chapter | Cards |
 |---|---|
-| All | Key symbols: \(\PP\), \(\E\), \(\pi\), \(\lambda\), \(\mu\) |
-| Ch 1 | P_{i,j} notation, row-sum=1, eigenvalues, \(\lambda_2 = 1-a-b\) |
-| Ch 2 | FSA formula template, boundary conditions table, (I-Q)^{-1} |
-| Ch 3 | Recurrent vs Transient comparison table, period definition |
-| Ch 4 | \(\pi = \pi P\), convergence conditions checklist, detailed balance |
-| Ch 5 | Q vs P comparison table, Exp distribution properties, \(\pi Q = 0\) |
-| Appendix | Distribution table (name, PMF/PDF, E, Var) |
+| Intro | "Ký hiệu cơ bản" (notation), "Bước đi Bernoulli" (mean/var/distribution), "Quay lại gốc" (return probability) |
+| Ch 1 | "Ma trận chuyển P" (transition matrix, row-sum, Chapman-Kolmogorov), "Chuỗi 2 trạng thái" (eigenvalues, limit) |
+| Ch 2 | "Phương pháp FSA" (hitting prob, hitting time, matrix form), "Bài toán con bạc" (gambler's ruin), "Liên hệ π↔μ" |
+| Ch 3 | "Hồi quy vs Tạm thời" (comparison table), "Định lý Polya" (with intuition), "Checklist hội tụ" (3-step checklist) |
+| Ch 4 | "Phân phối dừng π" (solve πP=π), "Cân bằng chi tiết" (when to use), "Tốc độ hội tụ" (spectral gap) |
+| Ch 5 | "P vs Q" (comparison table), "Phân phối mũ" (memoryless, min, competition), "Công thức chính" (P(t)=e^tQ, Kolmogorov, embedding) |
+| Appendix | "Bảng phân phối" (E/Var table), "Tính chất quan trọng" (Exp, expectation, inequalities with when-to-use) |
+| Default | "Ký hiệu chính" (symbol table with brief explanations) |
+
+### Sidebar card structure for new chapters
+
+```html
+<div class="sidebar-card">
+  <h4><span class="material-icons-outlined" style="font-size:16px">icon_name</span> Tiêu đề</h4>
+  <h5>Phần con</h5>
+  <p>\( formula \)</p>
+  <p class="sidebar-tip">Giải thích bằng tiếng Việt — một dòng ngắn gọn.</p>
+</div>
+```
 
 ## .tex to HTML Conversion Workflow
 
@@ -235,7 +262,7 @@ When converting a new `.tex` chapter to HTML:
 8. Convert `\begin{itemize}` to `<ul>`, `\begin{enumerate}` to `<ol>`
 9. Convert `\begin{tabular}` to HTML `<table>`
 10. Keep `\begin{align*}`, `\begin{equation}`, `\begin{bmatrix}` as-is for MathJax
-11. Create sidebar `_includes/sidebars/chN.html` and add case in layout
+11. Create sidebar `_includes/sidebars/chN.html` using `.sidebar-card` + `.sidebar-tip` pattern and add case in layout
 
 ## Local Development
 
