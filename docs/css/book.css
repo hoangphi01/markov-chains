@@ -2,7 +2,7 @@
 
 body {
   font-family: 'Literata', Georgia, 'Times New Roman', serif;
-  font-size: 18px;
+  font-size: 1rem;
   line-height: 1.8;
   color: var(--text-body, #3b3530);
   background: var(--bg-body, #f4ecd8);
